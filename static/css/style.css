@@ -1,0 +1,1107 @@
+/* Importar una fuente similar a la de la imagen */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+:root {
+    /* Colores para el modo oscuro (por defecto) */
+    --main-bg-color: #121212;
+    --primary-text-color: #FFFFFF;
+    --secondary-text-color: #a0a0a0;
+    --accent-color: #AFFF00;
+    --border-color: #333;
+    --font-family: 'Poppins', sans-serif;
+}
+
+/* --- ARREGLO PARA PÁGINA DE INICIO --- */
+.main-page-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+/* Estilo para el contenedor "Hero" de la página de inicio */
+
+/* --- NUEVO: Estilos para el modo claro --- */
+body.light-mode {
+    --main-bg-color: #F5F5F5;
+    --primary-text-color: #121212;
+    --secondary-text-color: #555;
+    --accent-color: #008f00;
+    /* Un verde más oscuro para contraste */
+    --border-color: #DDDDDD;
+}
+
+body {
+    background-color: var(--main-bg-color);
+    color: var(--primary-text-color);
+    font-family: var(--font-family);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+    /* Transición suave */
+
+    /* --- NUEVO: Evita el scroll horizontal --- */
+    overflow-x: hidden;
+    width: 100%;
+}
+
+a {
+    color: var(--primary-text-color);
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* --- Encabezado --- */
+header {
+    width: 100%;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.nav-links,
+.icon-links {
+    align-items: center;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.icon-links a {
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+/* --- Contenido Principal --- */
+main {
+    flex-grow: 1;
+
+}
+
+.coming-soon h1 {
+    font-size: 4rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.coming-soon p {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+.coming-soon .line {
+    width: 250px;
+    height: 3px;
+    background-color: var(--accent-color);
+    margin: 1rem auto 0;
+}
+
+/* --- Pie de Página --- */
+footer {
+    width: 100%;
+    border-top: 2px solid var(--accent-color);
+    padding: 2rem 5%;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    /* Apila los elementos verticalmente */
+    align-items: left;
+    /* Centra los elementos horizontalmente */
+}
+
+.footer-content {
+    display: flex;
+    /* Mantiene las columnas una al lado de la otra */
+    gap: 5rem;
+    margin-bottom: 2.5rem;
+    width: auto;
+    /* Permite que el contenedor se ajuste al tamaño de su contenido */
+}
+
+.footer-section h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.footer-section ul li a {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-text-color);
+}
+
+.page-home main {
+    display: flex;
+    justify-content: center;
+    /* Centra el bloque horizontalmente */
+    align-items: center;
+    /* Centra el bloque verticalmente */
+}
+
+.footer-bottom {
+    text-align: center;
+    /* Asegura que el texto dentro esté centrado */
+    color: var(--secondary-text-color);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+    width: 100%;
+    /* Le decimos que ocupe todo el ancho del container para la línea divisoria */
+}
+
+/* --- NUEVO: Estilos para páginas de productos --- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 0 5%;
+    margin-bottom: 3rem;
+}
+
+.product-card {
+    background-color: var(--main-bg-color);
+    /* Para que en light-mode se vea el borde */
+    border: 1px solid var(--border-color);
+    text-align: center;
+    padding: 1rem;
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    /* Hace que las imágenes sean cuadradas */
+    object-fit: cover;
+    /* Evita que la imagen se deforme */
+    margin-bottom: 1rem;
+}
+
+.product-card h3 {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.product-card p {
+    font-size: 1.1rem;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* Contenedor principal para la página de productos */
+.product-page-container {
+    width: 100%;
+    /* Usamos el mismo padding que el header para una alineación perfecta */
+    padding: 2rem 5%;
+    /* Evita que el padding cause problemas de tamaño */
+    box-sizing: border-box;
+}
+
+/* El nuevo título de la categoría (más discreto) */
+.category-title {
+    font-size: 1.8rem;
+    /* Más pequeño que antes */
+    font-weight: bold;
+    color: var(--primary-text-color);
+    /* Usa el color de texto principal */
+    margin-bottom: 2rem;
+    /* Espacio antes de la cuadrícula */
+    text-transform: uppercase;
+    /* Estilo limpio y moderno */
+    letter-spacing: 1.5px;
+}
+
+/* Ajustamos el padding de la cuadrícula ya que ahora está dentro de un contenedor */
+.product-grid {
+    padding: 0;
+    /* Eliminamos el padding que tenía antes */
+}
+
+/* --- AJUSTES DE LAYOUT Y NAVEGACIÓN ACTIVA --- */
+
+/* Contenedor para centrar el contenido del header y footer */
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+    /* Usamos 5% en lugar de 2rem para que coincida con el diseño original */
+    box-sizing: border-box;
+}
+
+/* Estilo para el enlace de la categoría activa */
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    /* Solo padding vertical */
+}
+
+.main-nav .nav-links a {
+    transition: transform 0.2s;
+    /* Transición suave */
+}
+
+/* --- AJUSTE DE IMAGEN DE PRODUCTO --- */
+.product-card img {
+    aspect-ratio: 4 / 5;
+    /* Imagen más alta que ancha */
+    object-fit: cover;
+}
+
+a.product-card-link {
+    text-decoration: none;
+    color: var(--primary-text-color);
+}
+
+body.page-home main {
+    display: flex;
+    justify-content: center;
+    /* Centra el contenido horizontalmente */
+    align-items: center;
+    /* Centra el contenido verticalmente */
+}
+
+.coming-soon-block {
+    text-align: center;
+}
+
+.coming-soon-block h1 {
+    font-size: 4rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.coming-soon-block p {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+.coming-soon-block .line {
+    width: 250px;
+    height: 3px;
+    background-color: var(--accent-color);
+    margin: 1rem auto 0;
+}
+
+/* --- ESTILOS PARA BREADCRUMBS --- */
+.breadcrumb-nav ul {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+
+}
+
+/* AÑADE ESTA NUEVA REGLA CONDICIONAL */
+/* Centra la lista SÓLO SI tiene 3 elementos (Icono > Separador > Texto) */
+.breadcrumb-nav {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+    margin-top: -0.5rem;
+    /* <- AÑADE ESTA LÍNEA */
+}
+
+.breadcrumb-nav li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.breadcrumb-nav a {
+    color: var(--secondary-text-color);
+    transition: color 0.2s;
+}
+
+.breadcrumb-nav a:hover {
+    color: var(--accent-color);
+}
+
+.breadcrumb-nav span {
+    color: var(--primary-text-color);
+    font-weight: bold;
+}
+
+.breadcrumb-nav .fa-chevron-right {
+    font-size: 0.7rem;
+    color: var(--secondary-text-color);
+}
+
+/* ============================================= */
+/* == NUEVOS ESTILOS PÁGINA DETALLE PRODUCTO === */
+/* ============================================= */
+
+/* 1. Ajustamos las columnas para dar menos espacio a la galería */
+.product-detail-page {
+    display: grid;
+    /* OLD: grid-template-columns: 4fr 5fr; */
+    /* NEW: Hacemos las columnas casi iguales, dando un poco más de prioridad a la info */
+    grid-template-columns: 1.1fr 1fr;
+    gap: 5%;
+    padding: 0 0 2rem;
+    /* MUY IMPORTANTE: Alinea los elementos al inicio, evitando que la info se estire */
+    align-items: start;
+}
+
+/* --- COLUMNA IZQUIERDA: INFORMACIÓN --- */
+.product-info-column .price {
+    font-size: 2rem;
+    color: var(--accent-color);
+    font-weight: bold;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.product-info-column .meta,
+.product-info-column .description {
+    margin-bottom: 1.5rem;
+}
+
+/* Selectores de color y talla */
+.option-selector {
+    margin-bottom: 1.5rem;
+}
+
+.option-selector label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: bold;
+}
+
+.option-selector .options button {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--primary-text-color);
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.option-selector .options button:hover {
+    border-color: var(--accent-color);
+}
+
+.option-selector .options button.active {
+    background-color: var(--primary-text-color);
+    color: var(--main-bg-color);
+    border-color: var(--primary-text-color);
+}
+
+/* Selector de cantidad y botón de compra */
+.purchase-actions {
+    display: flex;
+    gap: 1rem;
+
+}
+
+.quantity-selector {
+    display: flex;
+    border: 1px solid var(--border-color);
+}
+
+.quantity-selector button {
+    background: transparent;
+    border: none;
+    color: var(--primary-text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 40px;
+}
+
+.quantity-selector input {
+    width: 40px;
+    background: transparent;
+    border: none;
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    text-align: center;
+    color: var(--primary-text-color);
+    font-size: 1.1rem;
+}
+
+/* 3. APLICAMOS LA CORRECCIÓN CLAVE AL WISHLIST */
+.wishlist-link {
+    display: block;
+    /* <-- Lo convierte en un bloque, forzándolo a ir debajo */
+    text-align: center;
+    /* <-- Centra el texto y el ícono */
+    margin-top: 1.5rem;
+    /* <-- Añade un espacio generoso desde el botón de compra */
+    color: var(--secondary-text-color);
+}
+
+.purchase-button {
+    flex-grow: 1;
+    /* Ocupa el espacio restante */
+    padding: 1rem;
+    background-color: var(--accent-color);
+    color: #000;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* --- COLUMNA DERECHA: GALERÍA --- */
+.product-gallery-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.main-product-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 55vh;
+    /* border: 0.5px solid var(--border-color);*/
+}
+
+.product-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* 5 miniaturas por fila */
+    gap: 1rem;
+}
+
+.product-thumbnails img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.product-thumbnails img:hover {
+    opacity: 1;
+}
+
+.username-display {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* =============================== */
+/* === ESTILOS DEL SHOPPING CART === */
+/* =============================== */
+
+/* El overlay que oscurece el fondo */
+#cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Estado oculto por defecto */
+#cart-overlay.hidden,
+#cart-sidebar.hidden {
+    display: none;
+    /* Mejor usar display que visibility para compatibilidad */
+}
+
+/* La barra lateral del carrito */
+#cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -380px;
+    /* Inicia fuera de la pantalla */
+    width: 380px;
+    height: 100%;
+    background-color: var(--main-bg-color);
+    border-left: 1px solid var(--border-color);
+    z-index: 1000;
+    transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Animación suave */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Clase que se añade con JS para mostrar la barra */
+#cart-sidebar.open {
+    right: 0;
+}
+
+/* --- ESTILOS INTERNOS DEL CARRITO --- */
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cart-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+#close-cart-btn {
+    background: none;
+    border: none;
+    color: var(--primary-text-color);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+#cart-items {
+    flex-grow: 1;
+    /* Ocupa todo el espacio disponible */
+    overflow-y: auto;
+    /* Scroll si hay muchos productos */
+    padding: 1rem;
+}
+
+.empty-cart-msg {
+    text-align: center;
+    margin-top: 3rem;
+    color: var(--secondary-text-color);
+}
+
+.cart-footer {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Centra verticalmente "Subtotal" y el precio */
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    /* Añade un espacio de seguridad entre los elementos */
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--accent-color);
+    color: #000;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* --- ESTILOS ADICIONALES PARA ITEMS EN EL CARRITO --- */
+
+.cart-item-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cart-item-row:last-child {
+    border-bottom: none;
+}
+
+.cart-item-row img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+}
+
+.cart-item-row .item-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-item-row .item-name {
+    font-weight: bold;
+}
+
+.cart-item-row .item-price {
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+}
+
+.cart-item-row .remove-item-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: var(--secondary-text-color);
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    font-size: 1rem;
+    line-height: 20px;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.cart-item-row .remove-item-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: var(--secondary-text-color);
+    cursor: pointer;
+    width: 30px;
+    /* Un poco más grande para el tacto */
+    height: 30px;
+    font-size: 1.2rem;
+    /* La magia para centrar el contenido (la X) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    /* Fin de la magia */
+    transition: all 0.2s;
+}
+
+/* ========================================= */
+/* === ESTILOS PARA EL CONTADOR DEL CARRITO === */
+/* ========================================= */
+
+/* El contenedor del ícono y el contador */
+.cart-icon-container {
+    position: relative;
+    /* Clave para el posicionamiento del hijo absoluto */
+    display: inline-block;
+    /* Se ajusta al tamaño del contenido */
+}
+
+/* El contador numérico (la "insignia") */
+#cart-item-count {
+    position: absolute;
+    top: -8px;
+    /* Lo sube un poco */
+    right: -10px;
+    /* Lo mueve un poco a la derecha */
+
+    background-color: var(--accent-color);
+    color: #000;
+    /* Texto negro para contraste con el verde */
+    border-radius: 50%;
+    /* Lo hace un círculo perfecto */
+
+    width: 22px;
+    height: 22px;
+    font-size: 0.8rem;
+    font-weight: bold;
+
+    /* La mejor manera de centrar el número dentro del círculo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Transición suave al aparecer/desaparecer */
+    transition: transform 0.2s ease-out;
+}
+
+/* Regla para ocultar el contador (usaremos esta clase en JS) */
+#cart-item-count.hidden {
+    transform: scale(0);
+}
+
+/* ======================================= */
+/* === ESTILOS DE LA PÁGINA DE CHECKOUT === */
+/* ======================================= */
+
+.checkout-page {
+    padding: 1rem 0 3rem;
+}
+
+/* === 2. AÑADIR EL BORDE VERDE === */
+/* Añade esta nueva regla */
+.checkout-container {
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
+    padding: 2.5rem;
+}
+
+.checkout-header {
+    text-align: center;
+}
+
+.checkout-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.info-bar {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 3rem;
+}
+
+.info-bar i {
+    color: var(--accent-color);
+    margin-right: 0.5rem;
+}
+
+/* Barra de progreso */
+.progress-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.step {
+    display: flex;
+    align-items: center;
+    color: var(--secondary-text-color); /* Color por defecto para texto e ícono inactivos */
+    font-size: 0.9rem;
+}
+
+.step i {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+/* Las líneas de conexión entre los pasos */
+.step:not(:last-child)::after {
+    content: '';
+    display: block;
+    width: 100px; /* Ancho de la línea */
+    height: 2px;
+    background-color: var(--border-color); /* Color por defecto de la línea */
+    margin: 0 1.5rem;
+}
+/* --- Estilos para los diferentes estados --- */
+
+/* Estado: COMPLETADO */
+.step.checked {
+    color: var(--primary-text-color); /* Texto en color primario */
+}
+.step.checked i {
+    color: var(--accent-color); /* Ícono en color verde */
+}
+.step.checked::after {
+    background-color: var(--accent-color); /* Línea siguiente en verde */
+}
+
+/* Estado: ACTIVO (dónde estamos ahora) */
+.step.active {
+    color: var(--accent-color); /* Texto e ícono en verde */
+    font-weight: bold;
+}
+
+/* Línea divisoria debajo de la barra de progreso */
+.progress-divider {
+    border: none;
+    height: 1px;
+    background-color: var(--border-color);
+    margin-bottom: 2rem;
+}
+
+/* Layout de 2 columnas */
+.checkout-main-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+    /* Espacio después de la barra de progreso */
+}
+
+/* ============================================================= */
+/* === ESTILOS FINALES Y GARANTIZADOS PARA LA FILA DEL FORMULARIO === */
+/* ============================================================= */
+
+.checkout-main-content .form-row {
+    display: flex;
+    /* Pone los dos .form-group uno al lado del otro */
+    gap: 1.5rem;
+    /* Crea el espacio de separación entre las cajas */
+}
+
+/* Le decimos al primer .form-group (First Name) que ocupe el 40% del espacio */
+.checkout-main-content .form-row .form-group:first-child {
+    width: 40%;
+}
+
+/* Le decimos al segundo .form-group (Last Name) que ocupe el 60% del espacio */
+.checkout-main-content .form-row .form-group:last-child {
+    width: 60%;
+    padding-left: 20px;
+}
+
+
+
+/* Regla crucial para asegurar que el input llene su contenedor padre (.form-group) */
+.checkout-main-content .form-group input {
+    width: 100%;
+}
+
+/* ======================================================= */
+/* === LÓGICA FINAL Y ÚNICA PARA EL FORMULARIO CHECKOUT === */
+/* ======================================================= */
+
+/* Regla general para TODOS los grupos de formulario */
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+/* Regla general para TODOS los inputs y textareas */
+.form-column input[type="text"],
+.form-column textarea {
+    width: 100%;
+    /* Hacemos que ocupen el 100% de su contenedor padre */
+    background-color: #2a2a2a;
+    border: 1px solid var(--border-color);
+    color: var(--primary-text-color);
+    padding: 1.2rem 0.8rem 0.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* Regla general para TODAS las etiquetas */
+.form-column label {
+    position: absolute;
+    top: 1rem;
+    left: 0.9rem;
+    color: var(--secondary-text-color);
+    pointer-events: none;
+    transition: all 0.2s ease-out;
+}
+
+/* Animación de la etiqueta flotante (sin cambios) */
+.form-column input:focus+label,
+.form-column input:not(:placeholder-shown)+label,
+.form-column textarea:focus+label,
+.form-column textarea:not(:placeholder-shown)+label {
+    top: 0.3rem;
+    left: 0.8rem;
+    font-size: 0.75rem;
+    color: var(--accent-color);
+}
+
+/* Sección de pago */
+.payment-method {
+    background-color: #2a2a2a;
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: not-allowed;
+}
+
+.privacy-policy {
+    font-size: 0.8rem;
+    color: var(--secondary-text-color);
+    margin-top: 1rem;
+}
+
+.place-order-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--accent-color);
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.place-order-btn i {
+    margin-right: 0.5rem;
+}
+
+/* Columna de resumen de pedido */
+.order-summary {
+    background-color: #1a1a1a;
+    padding: 2rem;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+}
+
+.order-summary h3 {
+    margin-top: 0;
+}
+
+.order-table .order-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.order-table .order-row.header {
+    font-weight: bold;
+    color: var(--secondary-text-color);
+    font-size: 0.9rem;
+}
+
+.product-info-checkout {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+}
+
+.product-info-checkout img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.order-table .order-row.total {
+    font-size: 1.3rem;
+}
+
+.coupon-section {
+    display: flex;
+    margin-top: 1.5rem;
+}
+
+.coupon-section input {
+    flex-grow: 1;
+    background-color: #2a2a2a;
+    border: 1px solid var(--border-color);
+    padding: 0.8rem;
+    color: var(--primary-text-color);
+    border-radius: 4px 0 0 4px;
+    border-right: none;
+}
+
+.coupon-section button {
+    background-color: var(--accent-color);
+    border: none;
+    color: #000;
+    padding: 0 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+}
+
+.form-column input:focus+label,
+.form-column input:not(:placeholder-shown)+label,
+.form-column textarea:focus+label,
+.form-column textarea:not(:placeholder-shown)+label {
+    top: 0.3rem;
+    left: 0.8rem;
+    font-size: 0.75rem;
+    color: var(--accent-color);
+}
+
+/* ======================================= */
+/* === ESTILOS PÁGINA DE ORDEN COMPLETADA === */
+/* ======================================= */
+
+.order-success-page {
+    padding: 3rem 0;
+}
+
+.thank-you-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.thank-you-header h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+.thank-you-header p {
+    font-size: 1.2rem;
+    color: var(--secondary-text-color);
+}
+
+.order-confirmation-box {
+    background-color: #1a1a1a;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 2.5rem;
+}
+
+.order-summary-bar {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.summary-item {
+    display: flex;
+    flex-direction: column;
+}
+.summary-item span {
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+}
+.summary-item strong {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.order-details-section h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.order-details-section .order-table {
+    margin-bottom: 1.5rem;
+}
+
+.order-again-link {
+    color: var(--accent-color);
+    text-decoration: underline;
+    font-weight: bold;
+}
+/* ========================================================== */
+/* === ESTILOS PARA LA SECCIÓN DE DIRECCIÓN DE FACTURACIÓN === */
+/* ========================================================== */
+
+.billing-address-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.billing-address-section h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.billing-address-section address {
+    font-style: normal; /* Quita la cursiva por defecto de la etiqueta <address> */
+    line-height: 1.6;
+    color: var(--secondary-text-color);
+}

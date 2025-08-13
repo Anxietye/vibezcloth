@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="checkout-page">
+    <div class="container">
+        <header class="checkout-header">
+            <h1>You are almost there</h1>
+            <div class="info-bar">
+                <span><i class="fa-solid fa-lock"></i> SSL secured checkout</span>
+                <span><i class="fa-solid fa-headset"></i> 24/7 support available</span>
+                <span><i class="fa-solid fa-credit-card"></i> Payment option</span>
+            </div>
+        </header>
+
+        <!-- CAMBIO 1: Nuevo contenedor para el borde verde -->
+        <div class="checkout-container">
+            <!-- BARRA DE PROGRESO -->
+            <div class="progress-bar">
+                <!-- Paso 1: Carrito (Completado) -->
+                <div class="step checked">
+                    <i class="fa-solid fa-check-circle"></i>
+                    <span>Cart</span>
+                </div>
+
+                <!-- Paso 2: Información (Activo) -->
+                <div class="step active">
+                    <i class="fa-solid fa-circle-dot"></i>
+                    <span>Information</span>
+                </div>
+
+                <!-- Paso 3: Finalizar (Inactivo) -->
+                <div class="step">
+                    <i class="fa-regular fa-circle"></i>
+                    <span>Finish</span>
+                </div>
+            </div>
+            <hr class="progress-divider">
+            <!-- CONTENIDO PRINCIPAL: DOS COLUMNAS -->
+            <div class="checkout-main-content">
+                <!-- COLUMNA IZQUIERDA: FORMULARIO -->
+                <div class="form-column">
+                    <form method="POST" action="{{ url_for('checkout') }}">
+                        <section>
+                            <h3>Customer Information</h3>
+                        </section>
+
+                        <section>
+                            <h3>Billing details</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" id="firstname" name="firstname" required placeholder=" ">
+                                    <label for="firstname">First name *</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="lastname" name="lastname" required placeholder=" ">
+                                    <label for="lastname">Last name *</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="apartment" name="apartment" required placeholder=" ">
+                                <label for="apartment">Apartment, suite, unit, etc. *</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="discord" name="discord" required placeholder=" ">
+                                <label for="discord">(( Discord )) *</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="phone" name="phone" required placeholder=" ">
+                                <label for="phone">Phone *</label>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h3>Additional information</h3>
+                            <div class="form-group">
+                                <textarea id="notes" name="notes" rows="4" placeholder=" "></textarea>
+                                <label for="notes">Notes about your order, e.g. special notes for delivery.</label>
+                            </div>
+                        </section>
+
+                        <!-- ... (Sección de pago y botón de orden no cambian) ... -->
+                        <section>
+                            <h3>Payment</h3>
+                            <div class="payment-method">Fleeca Bank</div>
+                            <p class="privacy-policy">Your personal data will be used to process your order...</p>
+                        </section>
+                        <button type="submit" class="place-order-btn">
+                            <i class="fa-solid fa-shield-halved"></i> Place Order €{{ "%.2f"|format(total) }}
+                        </button>
+                    </form>
+                </div>
+
+                <!-- ... (La columna derecha del resumen del pedido no cambia) ... -->
+                <div class="order-summary-column">
+                    <div class="order-summary">
+                        <h3>Your order</h3>
+                        <div class="order-table">
+                            <div class="order-row header">
+                                <span>Product</span><span>Subtotal</span>
+                            </div>
+                            {% for item in cart.values() %}
+                            <div class="order-row">
+                                <div class="product-info-checkout">
+                                    <img src="{{ url_for('static', filename=item.image) }}">
+                                    <span>{{ item.name }} &times; {{ item.quantity }}</span>
+                                </div>
+                                <span>€{{ "%.2f"|format(item.price|replace('€', '')|float * item.quantity) }}</span>
+                            </div>
+                            {% endfor %}
+                            <div class="order-row subtotal">
+                                <span>Subtotal</span><span>€{{ "%.2f"|format(subtotal) }}</span>
+                            </div>
+                            <div class="order-row total">
+                                <strong>Total</strong><strong>€{{ "%.2f"|format(total) }}</strong>
+                            </div>
+                        </div>
+                        <div class="coupon-section">
+                            <input type="text" placeholder="Coupon Code">
+                            <button>Apply</button>
+                        </div>
+                    </div>
+                </div> <!-- Cierre de <div class="order-summary-column"> -->
+
+            </div> <!-- Cierre de <div class="checkout-main-content"> -->
+        </div> <!-- Cierre de <div class="checkout-container"> -->
+    </div> <!-- Cierre de <div class="container"> -->
+</div> <!-- Cierre de <div class="checkout-page"> -->
+{% endblock %}

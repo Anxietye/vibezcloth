@@ -1,0 +1,24 @@
+<!-- ARCHIVO: templates/partials/breadcrumbs.html -->
+
+<nav class="breadcrumb-nav">
+    <ul>
+        <!-- 1. El ícono de Home es el primer elemento -->
+        <li><a href="{{ url_for('home') }}"><i class="fa-solid fa-house"></i></a></li>
+
+        <!-- 2. Recorremos los datos que nos pasa Python, saltándonos el primer elemento 'Home' que ya hemos puesto -->
+        {% for crumb in breadcrumbs %}
+            {% if not loop.first %} 
+                <!-- Añadimos el separador antes de cada nuevo elemento -->
+                <li><i class="fa-solid fa-chevron-right"></i></li>
+                
+                <li>
+                    {% if crumb.url %}
+                        <a href="{{ crumb.url }}">{{ crumb.text }}</a>
+                    {% else %}
+                        <span>{{ crumb.text }}</span>
+                    {% endif %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>

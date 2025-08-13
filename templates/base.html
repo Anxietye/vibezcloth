@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIBEZ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<!-- 1. CLASE DINÁMICA EN EL BODY (esto está correcto) -->
+
+<body class="{{ body_class or '' }}">
+
+    <header>
+        <div class="container">
+            <nav class="main-nav">
+                <div class="logo"><a href="{{ url_for('home') }}">VIBEZ</a></div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('category_page', category_name='woman') }}"
+                            class="{{ 'active' if active_page == 'woman' }}">Woman</a></li>
+                    <li><a href="{{ url_for('category_page', category_name='man') }}"
+                            class="{{ 'active' if active_page == 'man' }}">Man</a></li>
+                    <li><a href="{{ url_for('category_page', category_name='accessories') }}"
+                            class="{{ 'active' if active_page == 'accessories' }}">Accesories</a></li>
+                </ul>
+                <ul class="icon-links">
+                    <li><a href="#" id="theme-toggle"><i id="theme-icon" class="fa-regular fa.sun"></i></a></li>
+                    <li><a href="#"><i class="fa-regular fa-heart"></i></a></li>
+
+                    <!-- ESTE ES EL BLOQUE CORREGIDO Y SEGURO -->
+                    <!-- Comprueba si 'user' existe y no es nulo ANTES de usarlo -->
+                    {% if 'user' in session and session.get('user') %}
+                    <li class="username-display">Hola, {{ session.user.username }}</li>
+                    <li><a href="{{ url_for('logout') }}" title="Logout"><i
+                                class="fa-solid fa-right-from-bracket"></i></a></li>
+                    {% else %}
+                    <!-- Si no, muestra el ícono de login -->
+                    <li><a href="{{ url_for('login') }}" title="Login"><i class="fa-regular fa-user"></i></a></li>
+                    {% endif %}
+
+                    <li>
+                        <a href="#" id="open-cart-btn" class="cart-icon-container">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            <span id="cart-item-count" class="hidden">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>INFORMATION</h4>
+                    <ul>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Facebrowser</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>HELP</h4>
+                    <ul>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Frequent questions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 VIBEZ*. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- OSCURECIMIENTO DE LA PÁGINA (OVERLAY) -->
+    <div id="cart-overlay" class="hidden"></div>
+
+    <!-- BARRA LATERAL DEL CARRITO -->
+    <aside id="cart-sidebar">
+        <header class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button id="close-cart-btn">&times;</button>
+        </header>
+        <div id="cart-items">
+            <!-- Los productos del carrito se insertarán aquí con JavaScript -->
+            <p class="empty-cart-msg">Your cart is empty.</p>
+        </div>
+        <footer class="cart-footer">
+            <div class="cart-total">
+                <strong>Subtotal:</strong>
+                <span id="cart-subtotal">€0.00</span>
+            </div>
+            <button class="checkout-btn">PROCEED TO CHECKOUT</button>
+        </footer>
+    </aside>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>

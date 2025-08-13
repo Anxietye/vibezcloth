@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="order-success-page">
+    <div class="container">
+        <header class="thank-you-header">
+            <h1>Thank you</h1>
+            <p>Your order has been received.</p>
+        </header>
+
+        <div class="order-confirmation-box">
+            <!-- BARRA DE RESUMEN SUPERIOR -->
+            <section class="order-summary-bar">
+                <div class="summary-item">
+                    <span>Order number:</span>
+                    <strong>{{ order.number }}</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Date:</span>
+                    <strong>{{ order.date }}</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Total:</span>
+                    <strong>€{{ order.total }}</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Payment method:</span>
+                    <strong>{{ order.payment_method }}</strong>
+                </div>
+            </section>
+
+            <!-- DETALLES DEL PEDIDO -->
+            <section class="order-details-section">
+                <h2>Order details</h2>
+                <div class="order-table">
+                    <div class="order-row header">
+                        <span>Product</span><span>Total</span>
+                    </div>
+                    {% for item in order.products %}
+                    <div class="order-row">
+                        <span>{{ item.name }} &times; {{ item.quantity }}</span>
+                        <strong>€{{ "%.2f"|format(item.price|replace('€', '')|float * item.quantity) }}</strong>
+                    </div>
+                    {% endfor %}
+                    <div class="order-row subtotal">
+                        <span>Subtotal:</span>
+                        <span>€{{ order.total }}</span>
+                    </div>
+                    <div class="order-row total">
+                        <span>Total:</span>
+                        <strong>€{{ order.total }}</strong>
+                    </div>
+                     <div class="order-row">
+                        <span>Payment method:</span>
+                        <span>{{ order.payment_method }}</span>
+                    </div>
+                </div>
+                <a href="{{ url_for('home') }}" class="order-again-link">Order again</a>
+            </section>
+            <!-- ESTA ES LA NUEVA SECCIÓN A AÑADIR -->
+            <section class="billing-address-section">
+                <h2>Billing address</h2>
+                <address>
+                    {{ order.billing_address.firstname }} {{ order.billing_address.lastname }}<br>
+                    {{ order.billing_address.apartment }}<br>
+                    {{ order.billing_address.discord }}<br>
+                    {{ order.billing_address.phone }}
+                </address>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}

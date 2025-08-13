@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Breadcrumbs -->
+{% include 'partials/breadcrumbs.html' %}
+
+<div class="product-page-container">
+    <div class="product-grid">
+        {% for product in products %}
+        <!-- Ahora toda la tarjeta es un enlace -->
+        <a href="{{ url_for('product_detail', category_name=product.category, product_slug=product.slug) }}" class="product-card-link">
+            <div class="product-card">
+                <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.price }}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
