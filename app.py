@@ -18,7 +18,7 @@ CLIENT_SECRET = "KnChzlbMneQFKL1yMbeUji0juPLQCMKT1h0C4eXE"
 
 # Asegúrate de que esta URL está registrada en el panel de GTA.world
 # Para desarrollo local, debería ser: 'http://127.0.0.1:5000/auth/callback'
-REDIRECT_URI = 'https://vibezclothing.gt.tc/auth/callback'
+REDIRECT_URI = 'https://vibez-clothing.onrender.com/auth/callback'
 
 AUTHORIZATION_URL = 'https://ucp.gta.world/oauth/authorize'
 TOKEN_URL = 'https://ucp.gta.world/oauth/token'
