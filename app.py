@@ -130,7 +130,7 @@ def checkout():
             'successUrl': url_for('order_success', _external=True),
             'cancelUrl': url_for('order_cancel', _external=True)
         }
-        final_gateway_url = payment_path + "?" + urllib.parse.urlencode(return_params)
+        final_gateway_url = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
         
         print("Redirigiendo a:", final_gateway_url)
 
