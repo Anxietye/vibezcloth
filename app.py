@@ -106,7 +106,7 @@ def checkout():
     if not cart:
         return redirect(url_for('home'))
 
-    total = sum(float(item['price'].replace('€', '')) * item['quantity'] for item in cart.values())
+    total = sum(float(item['price'].replace('$', '')) * item['quantity'] for item in cart.values())
     subtotal = total
 
     if request.method == 'POST':
@@ -230,6 +230,7 @@ def get_cart_data():
 @app.route('/order/success')
 def order_success():
     cart = session.get('cart', {})
+    # LEEMOS los datos de la sesión. Si no existen, usamos un dict vacío para evitar errores.
     billing_address = session.get('billing_address', {})
     
     if not cart:
@@ -243,7 +244,7 @@ def order_success():
         'total': "%.2f" % total,
         'payment_method': 'Fleeca Bank',
         'products': list(cart.values()),
-        'billing_address': billing_address
+        'billing_address': billing_address # PASAMOS los datos a la plantilla
     }
     
     session.pop('cart', None)
