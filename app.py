@@ -31,19 +31,19 @@ BANKING_AUTH_KEY = "0EkAqPyV7mx2NVvoni2TV1O3KXIiOVTWZ3dFtR6d5BRSlNbIWZgBSxAzr3Q4
 # --- DATOS DE EJEMPLO DE PRODUCTOS ---
 all_products = [
     {
-        'id': 1, 'category': 'woman', 'name': 'Vestido Floral', 'price': '€49.99',
+        'id': 1, 'category': 'woman', 'name': 'Vestido Floral', 'price': '$49.99',
         'image': 'images/woman1.png', 'slug': 'vestido-floral',
         'sku': 'VF-001', 'description': 'Un vestido ligero y fresco, perfecto para el verano. Estampado floral y tejido suave.',
         'gallery_images': ['images/woman1.png', 'images/1.png', 'images/woman3.jpg'] 
     },
     {
-        'id': 2, 'category': 'woman', 'name': 'Top Moderno', 'price': '€29.99',
+        'id': 2, 'category': 'woman', 'name': 'Top Moderno', 'price': '$29.99',
         'image': 'images/woman2.jpg', 'slug': 'top-moderno',
         'sku': 'TM-002', 'description': 'Top moderno con un corte único, ideal para cualquier ocasión.',
         'gallery_images': ['images/woman2.jpg', 'images/woman1.png', 'images/woman3.jpg']
     },
     {
-        'id': 4, 'category': 'man', 'name': 'Camisa Casual', 'price': '€45.00',
+        'id': 4, 'category': 'man', 'name': 'Camisa Casual', 'price': '$45.00',
         'image': 'images/man1.jpg', 'slug': 'camisa-casual',
         'sku': 'CC-004', 'description': 'Camisa de algodón perfecta para un look casual y elegante.',
         'gallery_images': ['images/man1.jpg', 'images/man2.jpg']
@@ -71,8 +71,13 @@ def get_products_by_category(category_name):
 
 @app.route('/')
 def home():
-    # Esta es la única función para la ruta principal
-    return render_template('index.html', active_page='home', body_class='page-home')
+    # Mostraremos los últimos 8 productos, por ejemplo.
+    latest_products = all_products[:8]
+
+    return render_template('index.html', 
+                           active_page='home', 
+                           body_class='page-home',
+                           products=latest_products)
 
 @app.route('/<category_name>')
 def category_page(category_name):
@@ -236,7 +241,7 @@ def order_success():
     if not cart:
         return redirect(url_for('home'))
 
-    total = sum(float(item['price'].replace('€', '')) * item['quantity'] for item in cart.values())
+    total = sum(float(item['price'].replace('$', '')) * item['quantity'] for item in cart.values())
     
     order_details = {
         'number': random.randint(1000, 9999),

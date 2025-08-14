@@ -88,7 +88,7 @@
                             <p class="privacy-policy">Your personal data will be used to process your order...</p>
                         </section>
                         <button type="submit" class="place-order-btn">
-                            <i class="fa-solid fa-shield-halved"></i> Place Order €{{ "%.2f"|format(total) }}
+                            <i class="fa-solid fa-shield-halved"></i> Place Order ${{ "%.2f"|format(total) }}
                         </button>
                     </form>
                 </div>
@@ -107,14 +107,14 @@
                                     <img src="{{ url_for('static', filename=item.image) }}">
                                     <span>{{ item.name }} &times; {{ item.quantity }}</span>
                                 </div>
-                                <span>€{{ "%.2f"|format(item.price|replace('€', '')|float * item.quantity) }}</span>
+                                <span>${{ "%.2f"|format(item.price|replace('$', '')|float * item.quantity) }}</span>
                             </div>
                             {% endfor %}
                             <div class="order-row subtotal">
-                                <span>Subtotal</span><span>€{{ "%.2f"|format(subtotal) }}</span>
+                                <span>Subtotal</span><span>${{ "%.2f"|format(subtotal) }}</span>
                             </div>
                             <div class="order-row total">
-                                <strong>Total</strong><strong>€{{ "%.2f"|format(total) }}</strong>
+                                <strong>Total</strong><strong>${{ "%.2f"|format(total) }}</strong>
                             </div>
                         </div>
                         <div class="coupon-section">

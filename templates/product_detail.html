@@ -45,15 +45,18 @@
         <!-- COLUMNA DERECHA: GALERÍA DE IMÁGENES -->
         <div class="product-gallery-column">
             <div class="main-product-image">
-                <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}">
+                <!-- CAMBIO 1: Añadimos un ID a la imagen principal -->
+                <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}"
+                    id="main-product-image">
             </div>
             <div class="product-thumbnails">
                 {% for img_path in product.gallery_images %}
-                <img src="{{ url_for('static', filename=img_path) }}" alt="Thumbnail of {{ product.name }}">
+                <!-- CAMBIO 2: Añadimos una clase a cada miniatura y marcamos la primera como activa -->
+                <img class="thumbnail-img {{ 'active' if loop.first }}" src="{{ url_for('static', filename=img_path) }}"
+                    alt="Thumbnail of {{ product.name }}">
                 {% endfor %}
             </div>
         </div>
-
     </div>
 </div>
 {% endblock %}

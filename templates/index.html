@@ -1,10 +1,49 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Este es el único contenido de la página principal -->
-<div class="coming-soon-block">
-    <h1>FEEL THE VIBE</h1>
-    <p>Coming soon ...</p>
-    <div class="line"></div>
+<div class="container">
+
+    <!-- SECCIÓN 1: HERO TEXT -->
+    <div class="home-hero-main">
+        <h1>FEEL THE VIBE</h1>
+        <p>The new collection is now available.</p>
+        <div class="line"></div>
+    </div>
+
+    <!-- SECCIÓN 2: LATEST PRODUCTS (CARRUSEL OSCURO FINAL) -->
+    <div class="product-showcase">
+        <h2 class="section-title">LATEST PRODUCTS</h2>
+
+        <!-- Contenedor del Carrusel -->
+        <div class="carousel-container-final">
+            <!-- Botón Izquierda -->
+            <button class="carousel-arrow-final prev" id="prev-arrow-final">&#10094;</button>
+
+            <div class="carousel-viewport-final">
+                <div class="carousel-track-final" id="carousel-track-final">
+                    {% for product in products %}
+                    <div class="carousel-item-final">
+                        <a href="{{ url_for('product_detail', category_name=product.category, product_slug=product.slug) }}"
+                            class="product-card-link">
+                            <div class="product-card-dark">
+                                <div class="image-wrapper">
+                                    <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}">
+                                </div>
+                                <div class="card-info">
+                                    <span class="category">{{ product.category.upper() }}</span>
+                                    <h3>{{ product.name }}</h3>
+                                    <p class="price">{{ product.price }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Botón Derecha -->
+            <button class="carousel-arrow-final next" id="next-arrow-final">&#10095;</button>
+        </div>
+    </div>
 </div>
 {% endblock %}

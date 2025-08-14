@@ -20,7 +20,38 @@
 }
 
 /* Estilo para el contenedor "Hero" de la página de inicio */
+.home-hero-main {
+    /* 1. Usamos Flexbox para centrar el contenido */
+    display: flex;
+    flex-direction: column;    /* Apila los elementos (h1, p, line) verticalmente */
+    justify-content: center; /* Centra todo verticalmente */
+    align-items: center;     /* Centra todo horizontalmente */
+    text-align: center;      /* Centra el texto dentro de cada elemento */    
+     padding: 3rem 0 0rem;
+}
 
+/* Estilo para el título "FEEL THE VIBE" */
+.home-hero-main h1 {
+    font-size: 4rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+/* Estilo para el subtítulo "The new collection..." */
+.home-hero-main p {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    color: var(--secondary-text-color); /* Un gris suave */
+    margin-top: 0.5rem;
+}
+
+/* Estilo para la línea verde decorativa */
+.home-hero-main .line {
+    width: 250px;
+    height: 3px;
+    background-color: var(--accent-color);
+    margin-top: 1.5rem;
+}
 /* --- NUEVO: Estilos para el modo claro --- */
 body.light-mode {
     --main-bg-color: #F5F5F5;
@@ -68,6 +99,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5%;
+    
 }
 
 .logo {
@@ -81,6 +113,7 @@ header {
     align-items: center;
     display: flex;
     gap: 2rem;
+    
 }
 
 .nav-links a {
@@ -91,8 +124,14 @@ header {
 .icon-links a {
     align-items: center;
     font-size: 1.2rem;
+    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    display: inline-block;
 }
-
+/* AÑADE esta nueva regla para el efecto hover */
+.icon-links a:hover {
+    color: var(--accent-color); /* El icono se pone verde */
+    transform: scale(1.2);      /* Y se agranda un poco */
+}
 /* --- Contenido Principal --- */
 main {
     flex-grow: 1;
@@ -103,6 +142,7 @@ main {
     font-size: 4rem;
     margin: 0;
     font-weight: 700;
+    
 }
 
 .coming-soon p {
@@ -265,15 +305,25 @@ footer {
 }
 
 .main-nav .nav-links a {
-    transition: transform 0.2s;
-    /* Transición suave */
+    font-size: 1rem;
+    font-weight: bold;
+    /* Añadimos una transición suave para los cambios de color y tamaño */
+    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    display: inline-block;
 }
-
+.main-nav .nav-links a.active {
+    color: var(--accent-color); /* <-- LA CLAVE: El texto se pone verde */
+    transform: scale(1.1);      /* Mantenemos el efecto de agrandar */
+}
 /* --- AJUSTE DE IMAGEN DE PRODUCTO --- */
 .product-card img {
     aspect-ratio: 4 / 5;
     /* Imagen más alta que ancha */
     object-fit: cover;
+}
+.main-nav .nav-links a:not(.active):hover {
+    color: var(--accent-color); /* Cambia a verde al pasar el cursor */
+    transform: scale(1.1); 
 }
 
 a.product-card-link {
@@ -470,7 +520,9 @@ body.page-home main {
     border: none;
     font-size: 1rem;
     font-weight: bold;
-    cursor: pointer;
+     cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s ease-in-out; /* <-- AÑADE/MODIFICA ESTA LÍNEA */
+    display: inline-block;
 }
 
 /* --- COLUMNA DERECHA: GALERÍA --- */
@@ -621,8 +673,11 @@ body.page-home main {
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s ease-in-out; /* <-- AÑADE/MODIFICA ESTA LÍNEA */
 }
-
+.checkout-btn:hover {
+    opacity: 0.85; /* El botón se atenúa ligeramente al pasar el cursor */
+}
 /* --- ESTILOS ADICIONALES PARA ITEMS EN EL CARRITO --- */
 
 .cart-item-row {
@@ -781,10 +836,12 @@ body.page-home main {
     align-items: center;
     margin-bottom: 2rem;
 }
+
 .step {
     display: flex;
     align-items: center;
-    color: var(--secondary-text-color); /* Color por defecto para texto e ícono inactivos */
+    color: var(--secondary-text-color);
+    /* Color por defecto para texto e ícono inactivos */
     font-size: 0.9rem;
 }
 
@@ -797,27 +854,36 @@ body.page-home main {
 .step:not(:last-child)::after {
     content: '';
     display: block;
-    width: 100px; /* Ancho de la línea */
+    width: 100px;
+    /* Ancho de la línea */
     height: 2px;
-    background-color: var(--border-color); /* Color por defecto de la línea */
+    background-color: var(--border-color);
+    /* Color por defecto de la línea */
     margin: 0 1.5rem;
 }
+
 /* --- Estilos para los diferentes estados --- */
 
 /* Estado: COMPLETADO */
 .step.checked {
-    color: var(--primary-text-color); /* Texto en color primario */
+    color: var(--primary-text-color);
+    /* Texto en color primario */
 }
+
 .step.checked i {
-    color: var(--accent-color); /* Ícono en color verde */
+    color: var(--accent-color);
+    /* Ícono en color verde */
 }
+
 .step.checked::after {
-    background-color: var(--accent-color); /* Línea siguiente en verde */
+    background-color: var(--accent-color);
+    /* Línea siguiente en verde */
 }
 
 /* Estado: ACTIVO (dónde estamos ahora) */
 .step.active {
-    color: var(--accent-color); /* Texto e ícono en verde */
+    color: var(--accent-color);
+    /* Texto e ícono en verde */
     font-weight: bold;
 }
 
@@ -937,8 +1003,11 @@ body.page-home main {
     font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s ease-in-out; /* <-- AÑADE/MODIFICA ESTA LÍNEA */
 }
-
+.place-order-btn:hover {
+    opacity: 0.85;
+}
 .place-order-btn i {
     margin-right: 0.5rem;
 }
@@ -1033,10 +1102,12 @@ body.page-home main {
     text-align: center;
     margin-bottom: 2rem;
 }
+
 .thank-you-header h1 {
     font-size: 3rem;
     margin: 0;
 }
+
 .thank-you-header p {
     font-size: 1.2rem;
     color: var(--secondary-text-color);
@@ -1056,14 +1127,17 @@ body.page-home main {
     margin-bottom: 2rem;
     border-bottom: 1px solid var(--border-color);
 }
+
 .summary-item {
     display: flex;
     flex-direction: column;
 }
+
 .summary-item span {
     font-size: 0.9rem;
     color: var(--secondary-text-color);
 }
+
 .summary-item strong {
     font-size: 1rem;
     font-weight: bold;
@@ -1084,6 +1158,7 @@ body.page-home main {
     text-decoration: underline;
     font-weight: bold;
 }
+
 /* ========================================================== */
 /* === ESTILOS PARA LA SECCIÓN DE DIRECCIÓN DE FACTURACIÓN === */
 /* ========================================================== */
@@ -1101,7 +1176,159 @@ body.page-home main {
 }
 
 .billing-address-section address {
-    font-style: normal; /* Quita la cursiva por defecto de la etiqueta <address> */
+    font-style: normal;
+    /* Quita la cursiva por defecto de la etiqueta <address> */
     line-height: 1.6;
     color: var(--secondary-text-color);
+}
+
+/* ======================================================= */
+/* === ESTILOS FINALES PARA EL CARRUSEL OSCURO (HOME) ==== */
+/* ======================================================= */
+.section-title {
+    text-align: center; /* <-- La clave para centrar el título */
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 2rem;
+}
+.section-title.left-aligned {
+    text-align: left;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 2rem;
+}
+
+.carousel-container-final {
+    position: relative;
+    /* Añadimos padding a los lados para que las flechas no se superpongan */
+    padding: 0 50px; 
+    box-sizing: border-box;
+}
+
+.carousel-viewport-final {
+    overflow: hidden;
+     padding: 20px 0;
+}
+
+.carousel-track-final {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item-final {
+    /* Hacemos que cada item ocupe el 25% del ancho para mostrar 4 */
+    flex: 0 0 25%; 
+    padding: 0 0.75rem;
+    box-sizing: border-box;
+}
+
+
+.product-card-dark {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-card-dark .image-wrapper {
+    position: relative; /* Clave para el posicionamiento absoluto del hijo */
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    /* Mantenemos las proporciones deseadas */
+}
+
+.product-card-dark img {
+    /* --- ESTA ES LA MAGIA --- */
+    position: absolute; /* La sacamos del flujo normal del documento */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ahora sí o sí recortará la imagen para llenar el espacio */
+}
+
+.product-card-dark .card-info {
+    padding: 1.5rem;
+    text-align: center;
+    background-color: #1a1a1a;
+    /* Hacemos que ocupe el espacio vertical restante */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Centramos el texto verticalmente en su espacio */
+}
+
+.product-card-dark .category {
+    font-size: 0.75rem;
+    color: var(--secondary-text-color);
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.product-card-dark h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+}
+
+.product-card-dark .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+/* Flechas del carrusel */
+.carousel-arrow-final {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    background-color: var(--main-bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--primary-text-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.carousel-arrow-final:hover {
+    background-color: var(--accent-color);
+    color: #000;
+}
+
+.carousel-arrow-final.prev {
+    left: 0;
+}
+
+.carousel-arrow-final.next {
+    right: 0;
+}
+
+.product-showcase {
+    padding: 2rem 0;
+    margin-bottom: 3rem;
+    /* <-- AÑADE ESTA LÍNEA */
+}
+.product-card-dark:hover {
+    transform: scale(1.05);
+}
+
+.purchase-button:hover,
+.checkout-btn:hover,
+.place-order-btn:hover {
+    transform: scale(1.03); /* Un crecimiento sutil del 3% */
+    opacity: 0.9;         /* Mantenemos un ligero efecto de atenuación */
 }

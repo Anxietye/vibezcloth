@@ -18,7 +18,38 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    // --- 6. LÓGICA PARA EL CARRUSEL DE LA PÁGINA PRINCIPAL ---
+    const track = document.getElementById('carousel-track-final');
+    const prevArrow = document.getElementById('prev-arrow-final');
+    const nextArrow = document.getElementById('next-arrow-final');
 
+    // Este código solo se ejecutará si estamos en la página de inicio y el carrusel existe
+    if (track) {
+        let currentIndex = 0;
+        const items = track.querySelectorAll('.carousel-item-final');
+        const totalItems = items.length;
+        const itemsToShow = 4; // Mostramos 4 productos
+
+        function updateCarousel() {
+            const itemWidth = items[0].offsetWidth;
+            const moveAmount = itemWidth * currentIndex;
+            track.style.transform = `translateX(-${moveAmount}px)`;
+        }
+
+        nextArrow.addEventListener('click', () => {
+            if (currentIndex < totalItems - itemsToShow) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        prevArrow.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+    }
     // --- 2. LÓGICA Y ELEMENTOS DEL CARRITO (SIDEBAR) ---
     const openCartBtn = document.getElementById('open-cart-btn');
     const closeCartBtn = document.getElementById('close-cart-btn');
@@ -27,6 +58,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartItemsContainer = document.getElementById('cart-items');
     const cartSubtotalEl = document.getElementById('cart-subtotal');
     const cartCounter = document.getElementById('cart-item-count');
+    const mainImage = document.getElementById('main-product-image');
+    const thumbnails = document.querySelectorAll('.thumbnail-img');
+    // Este código solo se ejecutará si estamos en una página de producto
+    if (mainImage && thumbnails.length > 0) {
+
+        thumbnails.forEach(thumbnail => {
+            // Añadimos un 'escuchador de eventos' a cada miniatura
+            thumbnail.addEventListener('click', () => {
+
+                // 1. Quitamos la clase 'active' de TODAS las miniaturas
+                thumbnails.forEach(thumb => thumb.classList.remove('active'));
+
+                // 2. Añadimos la clase 'active' SOLO a la que hemos hecho clic
+                thumbnail.classList.add('active');
+
+                // 3. Cambiamos la fuente (src) de la imagen principal por la de la miniatura
+                mainImage.src = thumbnail.src;
+            });
+        });
+    }
 
     // Función para ABRIR el carrito
     const openCart = () => {
