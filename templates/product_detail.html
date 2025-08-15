@@ -14,46 +14,40 @@
             <p class="meta">SKU: {{ product.sku }}<br>Category: {{ product.category.capitalize() }}</p>
             <p class="description">{{ product.description }}</p>
 
-            <!-- Selectores de opciones -->
-            <div class="option-selector">
+            <!-- Selector de colores (único selector ahora) -->
+            <div class="option-selector" id="color-selector">
                 <label>Color:</label>
                 <div class="options">
-                    <button class="active">Black</button> <button>White</button> <button>Blue</button>
+                    {% for color, image_path in product.color_variants.items() %}
+                    <button class="color-option" data-color="{{ color }}"
+                        data-image-src="{{ url_for('static', filename=image_path) }}">
+                        {{ color }}
+                    </button>
+                    {% endfor %}
                 </div>
             </div>
-            <div class="option-selector">
-                <label>Size:</label>
-                <div class="options">
-                    <button>S</button> <button class="active">M</button> <button>L</button>
-                </div>
-            </div>
-
             <!-- Selector de cantidad y botón de compra -->
             <div class="purchase-actions">
-                <div class="quantity-selector">
-                    <button>-</button>
-                    <input type="text" value="1">
-                    <button>+</button>
-                </div>
-                <button class="purchase-button" id="add-to-cart-btn" data-product-id="{{ product.id }}">ADD TO
+                <button class="purchase-button" id="add-to-cart-btn" data-product-id="{{ product.id }}" disabled>ADD TO
                     CART</button>
             </div>
-
             <a href="#" class="wishlist-link"><i class="fa-regular fa-heart"></i> Add to Wishlist</a>
         </div>
 
-        <!-- COLUMNA DERECHA: GALERÍA DE IMÁGENES -->
+        <!-- COLUMNA DERECHA: GALERÍA DE IMÁGENES (Con data-attributes) -->
         <div class="product-gallery-column">
             <div class="main-product-image">
-                <!-- CAMBIO 1: Añadimos un ID a la imagen principal -->
-                <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}"
-                    id="main-product-image">
+                <!-- Usamos la imagen del primer color como imagen inicial -->
+                <img src="{{ url_for('static', filename=product.color_variants.values()|first) }}"
+                    alt="{{ product.name }}" id="main-product-image">
             </div>
             <div class="product-thumbnails">
-                {% for img_path in product.gallery_images %}
-                <!-- CAMBIO 2: Añadimos una clase a cada miniatura y marcamos la primera como activa -->
-                <img class="thumbnail-img {{ 'active' if loop.first }}" src="{{ url_for('static', filename=img_path) }}"
-                    alt="Thumbnail of {{ product.name }}">
+                <!-- Hacemos un bucle sobre todas las imágenes de la galería -->
+                {% for color, image_path in product.color_variants.items() %}
+                <img class="thumbnail-img {{ 'active' if loop.first }}"
+                    src="{{ url_for('static', filename=image_path) }}"
+                    data-image-src="{{ url_for('static', filename=image_path) }}" data-color="{{ color }}" {# Le decimos
+                    a la miniatura a qué color pertenece #} alt="Thumbnail of {{ product.name }} in {{ color }}">
                 {% endfor %}
             </div>
         </div>

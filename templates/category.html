@@ -1,21 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Breadcrumbs -->
-{% include 'partials/breadcrumbs.html' %}
+<div class="container">
+    {% include 'partials/breadcrumbs.html' %}
 
-<div class="product-page-container">
-    <div class="product-grid">
-        {% for product in products %}
-        <!-- Ahora toda la tarjeta es un enlace -->
-        <a href="{{ url_for('product_detail', category_name=product.category, product_slug=product.slug) }}" class="product-card-link">
-            <div class="product-card">
-                <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}">
-                <h3>{{ product.name }}</h3>
-                <p>{{ product.price }}</p>
-            </div>
-        </a>
-        {% endfor %}
+    <div class="category-page-container">
+        <!-- La nueva cuadrícula de productos -->
+        <div class="category-product-grid">
+            {% for product in products %}
+            <a href="{{ url_for('product_detail', category_name=product.category, product_slug=product.slug) }}"
+                class="product-card-link">
+                <!-- Reutilizamos el estilo de tarjeta del index -->
+                <div class="product-card-dark">
+                    <div class="image-wrapper">
+                        <!-- Usamos la primera imagen de las variantes de color -->
+                        <img src="{{ url_for('static', filename=product.color_variants.values()|first) }}"
+                            alt="{{ product.name }}">
+                    </div>
+                    <div class="card-info">
+                        <span class="category">{{ product.category.upper() }}</span>
+                        <h3>{{ product.name }}</h3>
+                        <p class="price">{{ product.price }}</p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
+        {% if not products %}
+        <p class="empty-category-msg">There are no products in this category yet.</p>
+        {% endif %}
+
     </div>
 </div>
 {% endblock %}

@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIBEZ</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -16,7 +17,12 @@
     <header>
         <div class="container">
             <nav class="main-nav">
-                <div class="logo"><a href="{{ url_for('home') }}">VIBEZ</a></div>
+                <div class="logo">
+                    <a href="{{ url_for('home') }}">
+                        <img src="{{ url_for('static', filename='images/3.png') }}" alt="VIBEZ Logo"
+                            class="header-logo">
+                    </a>
+                </div>
                 <ul class="nav-links">
                     <li><a href="{{ url_for('category_page', category_name='woman') }}"
                             class="{{ 'active' if active_page == 'woman' }}">Woman</a></li>
@@ -26,7 +32,7 @@
                             class="{{ 'active' if active_page == 'accessories' }}">Accesories</a></li>
                 </ul>
                 <ul class="icon-links">
-                     <!--<li><a href="#" id="theme-toggle"><i id="theme-icon" class="fa-regular fa-sun"></i></a></li>-->
+                    <!--<li><a href="#" id="theme-toggle"><i id="theme-icon" class="fa-regular fa-sun"></i></a></li>-->
                     <li><a href="#"><i class="fa-regular fa-heart"></i></a></li>
 
                     <!-- ESTE ES EL BLOQUE CORREGIDO Y SEGURO -->
@@ -61,15 +67,15 @@
                 <div class="footer-section">
                     <h4>INFORMATION</h4>
                     <ul>
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">Facebrowser</a></li>
+                        <li><a href="https://discord.gg/b3dFcwPnk4">About us (( DISCORD ))</a></li>
+                        <li><a href="https://face.gta.world/pages/vibez">Facebrowser</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>HELP</h4>
                     <ul>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Frequent questions</a></li>
+                        <li><a href="{{ url_for('terms_page') }}">Terms and Conditions</a></li>
+                        <li><a href="{{ url_for('faq_page') }}">Frequent questions</a></li>
                     </ul>
                 </div>
             </div>

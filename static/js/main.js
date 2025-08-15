@@ -1,14 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. LÓGICA PARA EL MODO OSCURO / CLARO ---
+    // --- 1. MODO OSCURO / CLARO ---
     const themeToggleButton = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
-
     if (themeToggleButton && themeIcon) {
         themeToggleButton.addEventListener('click', (event) => {
             event.preventDefault();
             document.body.classList.toggle('light-mode');
-
             if (document.body.classList.contains('light-mode')) {
                 themeIcon.classList.remove('fa-sun');
                 themeIcon.classList.add('fa-moon');
@@ -18,39 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    // --- 6. LÓGICA PARA EL CARRUSEL DE LA PÁGINA PRINCIPAL ---
-    const track = document.getElementById('carousel-track-final');
-    const prevArrow = document.getElementById('prev-arrow-final');
-    const nextArrow = document.getElementById('next-arrow-final');
 
-    // Este código solo se ejecutará si estamos en la página de inicio y el carrusel existe
-    if (track) {
-        let currentIndex = 0;
-        const items = track.querySelectorAll('.carousel-item-final');
-        const totalItems = items.length;
-        const itemsToShow = 4; // Mostramos 4 productos
-
-        function updateCarousel() {
-            const itemWidth = items[0].offsetWidth;
-            const moveAmount = itemWidth * currentIndex;
-            track.style.transform = `translateX(-${moveAmount}px)`;
-        }
-
-        nextArrow.addEventListener('click', () => {
-            if (currentIndex < totalItems - itemsToShow) {
-                currentIndex++;
-                updateCarousel();
-            }
-        });
-
-        prevArrow.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-            }
-        });
-    }
-    // --- 2. LÓGICA Y ELEMENTOS DEL CARRITO (SIDEBAR) ---
+    // --- 2. LÓGICA GENERAL DEL CARRITO (ABRIR/CERRAR/ACTUALIZAR) ---
     const openCartBtn = document.getElementById('open-cart-btn');
     const closeCartBtn = document.getElementById('close-cart-btn');
     const cartSidebar = document.getElementById('cart-sidebar');
@@ -58,40 +25,78 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartItemsContainer = document.getElementById('cart-items');
     const cartSubtotalEl = document.getElementById('cart-subtotal');
     const cartCounter = document.getElementById('cart-item-count');
-    const mainImage = document.getElementById('main-product-image');
-    const thumbnails = document.querySelectorAll('.thumbnail-img');
-    // Este código solo se ejecutará si estamos en una página de producto
-    if (mainImage && thumbnails.length > 0) {
 
-        thumbnails.forEach(thumbnail => {
-            // Añadimos un 'escuchador de eventos' a cada miniatura
-            thumbnail.addEventListener('click', () => {
+    const openCart = () => { if (cartOverlay) cartOverlay.classList.remove('hidden'); if (cartSidebar) cartSidebar.classList.add('open'); };
+    const closeCart = () => { if (cartOverlay) cartOverlay.classList.add('hidden'); if (cartSidebar) cartSidebar.classList.remove('open'); };
 
-                // 1. Quitamos la clase 'active' de TODAS las miniaturas
-                thumbnails.forEach(thumb => thumb.classList.remove('active'));
+    const homeHero = document.querySelector('.home-hero-main');
 
-                // 2. Añadimos la clase 'active' SOLO a la que hemos hecho clic
-                thumbnail.classList.add('active');
+    // Este código solo se ejecutará si estamos en la página de inicio y el elemento existe
+    if (homeHero) {
 
-                // 3. Cambiamos la fuente (src) de la imagen principal por la de la miniatura
-                mainImage.src = thumbnail.src;
-            });
-        });
+        // Función que se ejecuta cada vez que el usuario hace scroll
+        const handleScrollFade = () => {
+            // Obtenemos la posición vertical del scroll
+            const scrollPosition = window.scrollY;
+
+            // Distancia en píxeles sobre la cual se completará el desvanecimiento.
+            // Puedes aumentar o disminuir este número para que el efecto sea más rápido o más lento.
+            const fadeOutDistance = 300;
+
+            // Calculamos la nueva opacidad basándonos en la posición del scroll.
+            // La fórmula asegura que la opacidad vaya de 1 (arriba) a 0 (al llegar a fadeOutDistance).
+            const newOpacity = 1 - (scrollPosition / fadeOutDistance);
+
+            // Nos aseguramos de que la opacidad se mantenga entre 0 y 1.
+            const clampedOpacity = Math.max(0, Math.min(1, newOpacity));
+
+            // Aplicamos el nuevo valor de opacidad al bloque "FEEL THE VIBE"
+            homeHero.style.opacity = clampedOpacity;
+        };
+
+        // Le decimos al navegador que ejecute nuestra función cada vez que detecte un scroll.
+        window.addEventListener('scroll', handleScrollFade);
+    }
+    async function updateCartView() {
+        if (!cartItemsContainer || !cartSubtotalEl) return;
+        try {
+            const response = await fetch('/api/cart');
+            const data = await response.json();
+            const cartData = data.cart;
+            cartItemsContainer.innerHTML = '';
+            let subtotal = 0;
+            if (Object.keys(cartData).length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your cart is empty.</p>';
+            } else {
+                for (const itemId in cartData) {
+                    const item = cartData[itemId];
+                    const itemEl = document.createElement('div');
+                    itemEl.classList.add('cart-item-row');
+                    itemEl.innerHTML = `
+                        <img src="/static/${item.image}" alt="${item.name}">
+                        <div class="item-details">
+                            <span class="item-name">${item.name}</span>
+                            <span class="item-price">${item.price} x ${item.quantity}</span>
+                        </div>
+                        <button class="remove-item-btn" data-product-id="${itemId}">×</button> 
+                    `;
+                    cartItemsContainer.appendChild(itemEl);
+                    const price = parseFloat(item.price.replace('€', ''));
+                    subtotal += price * item.quantity;
+                }
+            }
+            cartSubtotalEl.textContent = `€${subtotal.toFixed(2)}`;
+            const checkoutBtn = document.querySelector('.checkout-btn');
+            if (checkoutBtn) {
+                checkoutBtn.textContent = 'PROCEED TO CHECKOUT';
+                checkoutBtn.onclick = () => { window.location.href = '/checkout'; };
+                checkoutBtn.style.display = Object.keys(cartData).length > 0 ? 'block' : 'none';
+            }
+        } catch (error) {
+            console.error("Error actualizando vista del carrito:", error);
+        }
     }
 
-    // Función para ABRIR el carrito
-    const openCart = () => {
-        if (cartOverlay) cartOverlay.classList.remove('hidden');
-        if (cartSidebar) cartSidebar.classList.add('open');
-    };
-
-    // Función para CERRAR el carrito
-    const closeCart = () => {
-        if (cartOverlay) cartOverlay.classList.add('hidden');
-        if (cartSidebar) cartSidebar.classList.remove('open');
-    };
-
-    // Función para ACTUALIZAR EL CONTADOR DEL ÍCONO
     async function updateCartCounter() {
         if (!cartCounter) return;
         try {
@@ -99,8 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             const cartData = data.cart;
             let totalQuantity = 0;
-            for (const productId in cartData) {
-                totalQuantity += cartData[productId].quantity;
+            for (const itemId in cartData) {
+                totalQuantity += cartData[itemId].quantity;
             }
             if (totalQuantity > 0) {
                 cartCounter.textContent = totalQuantity;
@@ -113,63 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Función para ACTUALIZAR LA VISTA del carrito con datos del servidor
-    async function updateCartView() {
-        if (!cartItemsContainer || !cartSubtotalEl) return;
-        try {
-            const response = await fetch('/api/cart');
-            const data = await response.json();
-            const cartData = data.cart;
-            const isAuthenticated = data.isAuthenticated;
-
-            cartItemsContainer.innerHTML = '';
-            let subtotal = 0;
-
-            if (Object.keys(cartData).length === 0) {
-                cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your cart is empty.</p>';
-            } else {
-                for (const productId in cartData) {
-                    const item = cartData[productId];
-                    const itemEl = document.createElement('div');
-                    itemEl.classList.add('cart-item-row');
-                    itemEl.innerHTML = `
-                        <img src="/static/${item.image}" alt="${item.name}">
-                        <div class="item-details">
-                            <span class="item-name">${item.name}</span>
-                            <span class="item-price">${item.price} x ${item.quantity}</span>
-                        </div>
-                        <button class="remove-item-btn" data-product-id="${productId}">×</button>
-                    `;
-                    cartItemsContainer.appendChild(itemEl);
-                    const price = parseFloat(item.price.replace('€', ''));
-                    subtotal += price * item.quantity;
-                }
-            }
-            cartSubtotalEl.textContent = `€${subtotal.toFixed(2)}`;
-
-            // LÓGICA CORREGIDA PARA EL BOTÓN DE CHECKOUT
-            const checkoutBtn = document.querySelector('.checkout-btn');
-            if (checkoutBtn) {
-                // El botón siempre dice lo mismo y hace lo mismo
-                checkoutBtn.textContent = 'PROCEED TO CHECKOUT';
-                checkoutBtn.onclick = () => {
-                    window.location.href = '/checkout';
-                };
-
-                // Solo se muestra si hay productos en el carrito
-                if (Object.keys(cartData).length > 0) {
-                    checkoutBtn.style.display = 'block';
-                } else {
-                    checkoutBtn.style.display = 'none';
-                }
-            }
-        } catch (error) {
-            console.error("Error actualizando vista del carrito:", error);
-            cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Error loading cart.</p>';
-        }
-    }
-
-    // --- 3. ASIGNACIÓN DE EVENTOS ---
     if (openCartBtn) {
         openCartBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -179,41 +127,88 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (closeCartBtn) closeCartBtn.addEventListener('click', closeCart);
     if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
-
-    const addToCartBtn = document.getElementById('add-to-cart-btn');
-    if (addToCartBtn) {
-        addToCartBtn.addEventListener('click', () => {
-            const productId = addToCartBtn.dataset.productId;
-            fetch(`/add_to_cart/${productId}`, { method: 'POST' })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        updateCartView();
-                        updateCartCounter();
-                        openCart();
-                    }
-                });
-        });
-    }
-
     if (cartItemsContainer) {
         cartItemsContainer.addEventListener('click', (event) => {
             if (event.target.classList.contains('remove-item-btn')) {
-                const productId = event.target.dataset.productId;
-                fetch(`/remove_from_cart/${productId}`, { method: 'POST' })
+                const itemId = event.target.dataset.productId;
+                fetch(`/remove_from_cart/${itemId}`, { method: 'POST' })
                     .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            updateCartView();
-                            updateCartCounter();
-                        }
-                    });
+                    .then(data => { if (data.success) { updateCartView(); updateCartCounter(); } });
             }
         });
     }
 
-    // --- 4. LLAMADA INICIAL ---
-    // Actualiza el contador del ícono del carrito en cuanto carga la página
+    // --- 3. LÓGICA DE LA PÁGINA DE PRODUCTO DETALLADO ---
+    const mainImage = document.getElementById('main-product-image');
+    const thumbnails = document.querySelectorAll('.thumbnail-img');
+    const colorSelector = document.getElementById('color-selector');
+    const addToCartBtn = document.getElementById('add-to-cart-btn');
+
+    if (mainImage && thumbnails.length > 0) {
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', () => {
+                thumbnails.forEach(thumb => thumb.classList.remove('active'));
+                thumbnail.classList.add('active');
+                mainImage.src = thumbnail.src;
+            });
+        });
+    }
+
+    if (colorSelector && addToCartBtn) {
+        const colorOptions = colorSelector.querySelectorAll('.color-option');
+        const checkSelection = () => {
+            const selectedColors = colorSelector.querySelectorAll('.color-option.active');
+            addToCartBtn.disabled = selectedColors.length === 0;
+        };
+        colorOptions.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (mainImage) mainImage.src = button.dataset.imageSrc;
+                button.classList.toggle('active');
+                checkSelection();
+            });
+        });
+        addToCartBtn.addEventListener('click', () => {
+            const productId = addToCartBtn.dataset.productId;
+            const selectedButtons = colorSelector.querySelectorAll('.color-option.active');
+            const selectedColors = Array.from(selectedButtons).map(btn => btn.dataset.color);
+            fetch(`/add_to_cart/${productId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ colors: selectedColors })
+            })
+                .then(response => response.json())
+                .then(data => { if (data.success) { updateCartView(); updateCartCounter(); openCart(); } });
+        });
+        checkSelection();
+    }
+
+    // --- 4. LÓGICA PARA LA VISTA DE CATEGORÍA (NUEVO BLOQUE) ---
+    const featuredImage = document.getElementById('featured-image');
+    const featuredName = document.getElementById('featured-name');
+    const featuredPrice = document.getElementById('featured-price');
+    const productListItems = document.querySelectorAll('.product-list-item');
+
+    if (featuredImage && productListItems.length > 0) {
+        productListItems.forEach(item => {
+            // Evento para cambiar la vista destacada con un solo clic
+            item.addEventListener('click', function () {
+                featuredImage.src = this.dataset.image;
+                featuredName.textContent = this.dataset.name;
+                featuredPrice.textContent = this.dataset.price;
+
+                productListItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+
+            // Evento para ir a la página del producto con doble clic
+            item.addEventListener('dblclick', function () {
+                window.location.href = this.dataset.url;
+            });
+        });
+    }
+
+    // --- 5. LLAMADA INICIAL ---
     updateCartCounter();
 
 });

@@ -56,7 +56,6 @@
     background-color: var(--accent-color);
     margin-top: 1.5rem;
 }
-
 /* --- NUEVO: Estilos para el modo claro --- */
 body.light-mode {
     --main-bg-color: #F5F5F5;
