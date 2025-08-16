@@ -14,7 +14,7 @@
 
         <!-- CAMBIO 1: Nuevo contenedor para el borde verde -->
         <div class="checkout-container">
-            <!-- BARRA DE PROGRESO -->
+            <!-- BARRA DE PROGRESO (VERSIÓN FINAL Y CORRECTA) -->
             <div class="progress-bar">
                 <!-- Paso 1: Carrito (Completado) -->
                 <div class="step checked">
@@ -46,15 +46,20 @@
 
                         <section>
                             <h3>Billing details</h3>
-                            <div class="form-group">
-                                <input type="text" id="firstname" name="firstname" required placeholder=" ">
-                                <!-- name="firstname" -->
-                                <label for="firstname">First name *</label>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="lastname" name="lastname" required placeholder=" ">
-                                <!-- name="lastname" -->
-                                <label for="lastname">Last name *</label>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" id="firstname" name="firstname" required placeholder=" ">
+                                    <label for="firstname">First name *</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="lastname" name="lastname" required placeholder=" ">
+                                    <label for="lastname">Last name *</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" id="phone" name="phone" required placeholder=" " pattern="[0-9]*"
+                                        inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                    <label for="phone">Phone *</label>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <input type="text" id="apartment" name="apartment" required placeholder=" ">
@@ -66,13 +71,9 @@
                                 <!-- name="discord" -->
                                 <label for="discord">(( Discord )) *</label>
                             </div>
-                            <div class="form-group">
-                                <input type="text" id="phone" name="phone" required placeholder=" ">
-                                <!-- name="phone" -->
-                                <label for="phone">Phone *</label>
-                            </div>
-                        </section>
 
+                        </section>
+                        <!--
                         <section>
                             <h3>Additional information</h3>
                             <div class="form-group">
@@ -80,7 +81,7 @@
                                 <label for="notes">Notes about your order, e.g. special notes for delivery.</label>
                             </div>
                         </section>
-
+-->
                         <!-- ... (Sección de pago y botón de orden no cambian) ... -->
                         <section>
                             <h3>Payment</h3>

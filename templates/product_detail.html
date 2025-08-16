@@ -31,7 +31,19 @@
                 <button class="purchase-button" id="add-to-cart-btn" data-product-id="{{ product.id }}" disabled>ADD TO
                     CART</button>
             </div>
-            <a href="#" class="wishlist-link"><i class="fa-regular fa-heart"></i> Add to Wishlist</a>
+            {% if is_in_wishlist %}
+            <!-- Si el producto YA ESTÁ en la wishlist, mostramos el botón deshabilitado -->
+            <a href="#" class="add-to-wishlist-btn disabled" data-product-id="{{ product.id }}">
+                <i class="fa-solid fa-heart"></i>
+                <span>Added to Wishlist</span>
+            </a>
+            {% else %}
+            <!-- Si NO está, mostramos el botón normal para añadirlo -->
+            <a href="#" class="add-to-wishlist-btn" data-product-id="{{ product.id }}">
+                <i class="fa-regular fa-heart"></i>
+                <span>Add to Wishlist</span>
+            </a>
+            {% endif %}
         </div>
 
         <!-- COLUMNA DERECHA: GALERÍA DE IMÁGENES (Con data-attributes) -->

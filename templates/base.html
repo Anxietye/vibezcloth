@@ -33,9 +33,12 @@
                 </ul>
                 <ul class="icon-links">
                     <!--<li><a href="#" id="theme-toggle"><i id="theme-icon" class="fa-regular fa-sun"></i></a></li>-->
-                    <li><a href="#"><i class="fa-regular fa-heart"></i></a></li>
-
-                    <!-- ESTE ES EL BLOQUE CORREGIDO Y SEGURO -->
+                    <a href="{{ url_for('wishlist_page') }}" title="Wishlist"
+                        class="wishlist-icon-container {{ 'active' if active_page == 'wishlist' }}">
+                        <i class="fa-regular fa-heart"></i>
+                        <!-- 2. El <span> del contador, que será posicionado por el CSS -->
+                        <span id="wishlist-item-count" class="hidden">0</span>
+                    </a>
                     <!-- Comprueba si 'user' existe y no es nulo ANTES de usarlo -->
                     {% if 'user' in session and session.get('user') %}
                     <li class="username-display">Hola, {{ session.user.username }}</li>

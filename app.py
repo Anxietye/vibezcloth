@@ -141,6 +141,10 @@ def product_detail(category_name, product_slug):
     product = next((p for p in all_products if p["slug"] == product_slug), None)
     if not product or product["category"] != category_name:
         abort(404)
+
+    wishlist_ids = session.get("wishlist", [])
+    is_in_wishlist = product["id"] in wishlist_ids
+
     breadcrumbs = [
         {"text": "Home", "url": url_for("home")},
         {
@@ -154,6 +158,7 @@ def product_detail(category_name, product_slug):
         product=product,
         active_page=category_name,
         breadcrumbs=breadcrumbs,
+        is_in_wishlist=is_in_wishlist,
     )
 
 
@@ -374,6 +379,76 @@ def order_cancel():
             <a href="/checkout" style="color: #AFFF00;">Volver al Checkout</a>
         </body>
     """
+
+
+# ==============================================================================
+# === BLOQUE DE WISHLIST ==================================================
+# ==============================================================================
+@app.route("/api/wishlist")
+def get_wishlist_data():
+    return jsonify(session.get("wishlist", []))
+
+
+@app.route("/wishlist")
+def wishlist_page():
+    wishlist_ids = session.get("wishlist", [])
+    wishlist_products = [
+        p for p in [find_product_by_id(pid) for pid in wishlist_ids] if p is not None
+    ]
+    breadcrumbs = [
+        {"text": "Home", "url": url_for("home")},
+        {"text": "Wishlist", "url": None},
+    ]
+    return render_template(
+        "wishlist.html",
+        wishlist=wishlist_products,
+        breadcrumbs=breadcrumbs,
+        active_page="wishlist",
+        body_class="page-full-width",
+    )
+
+
+@app.route("/api/toggle_wishlist/<int:product_id>", methods=["POST"])
+def toggle_wishlist(product_id):
+    """
+    Añade un producto a la wishlist si no está, o lo elimina si ya está.
+    Devuelve el estado final.
+    """
+    if "wishlist" not in session:
+        session["wishlist"] = []
+
+    # Comprobamos el estado actual
+    if product_id in session["wishlist"]:
+        # Si ya está, lo eliminamos
+        session["wishlist"].remove(product_id)
+        session.modified = True
+        return jsonify(
+            {
+                "success": True,
+                "added": False,  # Le decimos al frontend que se eliminó
+                "message": "Product removed from wishlist.",
+            }
+        )
+    else:
+        # Si no está, lo añadimos
+        session["wishlist"].append(product_id)
+        session.modified = True
+        return jsonify(
+            {
+                "success": True,
+                "added": True,  # Le decimos al frontend que se añadió
+                "message": "Product added to wishlist.",
+            }
+        )
+
+
+@app.route("/api/remove_from_wishlist/<int:product_id>", methods=["POST"])
+def remove_from_wishlist(product_id):
+    if "wishlist" in session and product_id in session["wishlist"]:
+        session["wishlist"].remove(product_id)
+        session.modified = True
+        return jsonify({"success": True, "message": "Product removed from wishlist."})
+    return jsonify({"success": False, "message": "Product not found in wishlist."}), 404
 
 
 # ==============================================================================

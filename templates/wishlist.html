@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    {% include 'partials/breadcrumbs.html' %}
+
+    <div class="wishlist-page">
+        <h1 class="page-title">My wishlist</h1>
+
+        <div class="wishlist-table-container">
+            <table class="wishlist-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Stock Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in wishlist %}
+                    <tr class="wishlist-item" id="wishlist-item-{{ product.id }}">
+                        <td class="product-info-wishlist">
+                            <button class="remove-wishlist-btn" data-product-id="{{ product.id }}">&times;</button>
+                            <img src="{{ url_for('static', filename=product.color_variants.values()|first) }}"
+                                alt="{{ product.name }}">
+                            <span>{{ product.name }}</span>
+                        </td>
+                        <td class="product-price">{{ product.price }}</td>
+                        <td class="product-stock">In Stock</td>
+                        <td class="product-actions">
+                            <a href="{{ url_for('product_detail', category_name=product.category, product_slug=product.slug) }}"
+                                class="wishlist-action-btn primary">SELECT OPTIONS</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="empty-wishlist-msg">Your wishlist is currently empty.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

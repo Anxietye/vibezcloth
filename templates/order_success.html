@@ -37,26 +37,6 @@
             </div>
             <hr class="progress-divider">
             <div class="order-confirmation-box">
-                <!-- BARRA DE RESUMEN SUPERIOR -->
-                <section class="order-summary-bar">
-                    <div class="summary-item">
-                        <span>Order number:</span>
-                        <strong>{{ order.number }}</strong>
-                    </div>
-                    <div class="summary-item">
-                        <span>Date:</span>
-                        <strong>{{ order.date }}</strong>
-                    </div>
-                    <div class="summary-item">
-                        <span>Total:</span>
-                        <strong>${{ order.total }}</strong>
-                    </div>
-                    <div class="summary-item">
-                        <span>Payment method:</span>
-                        <strong>{{ order.payment_method }}</strong>
-                    </div>
-                </section>
-
                 <!-- DETALLES DEL PEDIDO -->
                 <section class="order-details-section">
                     <h2>Order details</h2>
@@ -83,20 +63,25 @@
                             <span>{{ order.payment_method }}</span>
                         </div>
                     </div>
-                    <a href="{{ url_for('home') }}" class="order-again-link">Order again</a>
+                    <a href="{{ url_for('home') }}" class="order-again-link">ORDER AGAIN</a>
                 </section>
-
                 <!-- DIRECCIÓN DE FACTURACIÓN -->
                 <section class="billing-address-section">
                     <h2>Billing address</h2>
+                    <div class="billing-info-grid"></div>
                     <address>
                         {{ order.billing_address.firstname }} {{ order.billing_address.lastname }}<br>
                         {{ order.billing_address.apartment }}<br>
                         {{ order.billing_address.discord }}<br>
                         {{ order.billing_address.phone }}
                     </address>
-                </section>
+                    <div class="order-meta-info">
+                        <strong>Order number:</strong> {{ order.number }}<br>
+                        <strong>Date:</strong> {{ order.date }}
+                    </div>
             </div>
+            </section>
         </div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
