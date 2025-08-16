@@ -5,7 +5,7 @@
 
     <!-- SECCIÓN 1: HERO TEXT -->
     <div class="home-hero-main">
-         <h1>FEEL THE VIBE</h1> 
+        <h1>FEEL THE VIBE</h1>
         <h1 id="animated-title"></h1>
         <p>The new collection is now available.</p>
         <div class="line"></div>
@@ -29,7 +29,8 @@
                             <div class="product-card-dark">
                                 <div class="image-wrapper">
                                     <!-- Le decimos que tome la primera imagen de la lista de variantes -->
-                                    <img src="{{ url_for('static', filename=product.color_variants.values()|first) }}" alt="{{ product.name }}">
+                                    <img src="{{ url_for('static', filename=(product.color_variants.values()|first)['image']) }}"
+                                        alt="{{ product.name }}">
                                 </div>
                                 <div class="card-info">
                                     <span class="category">{{ product.category.upper() }}</span>

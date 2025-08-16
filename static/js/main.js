@@ -138,40 +138,79 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 3. LÓGICA DE LA PÁGINA DE PRODUCTO DETALLADO ---
+    // --- 3. LÓGICA DE LA PÁGINA DE PRODUCTO DETALLADO (CORREGIDA) ---
     const mainImage = document.getElementById('main-product-image');
     const thumbnails = document.querySelectorAll('.thumbnail-img');
     const colorSelector = document.getElementById('color-selector');
     const addToCartBtn = document.getElementById('add-to-cart-btn');
 
+    // Lógica de la Galería de Miniaturas
     if (mainImage && thumbnails.length > 0) {
         thumbnails.forEach(thumbnail => {
             thumbnail.addEventListener('click', () => {
+                // 1. Cambiamos la imagen principal
+                mainImage.src = thumbnail.dataset.imageSrc;
+
+                // 2. Actualizamos la miniatura activa
                 thumbnails.forEach(thumb => thumb.classList.remove('active'));
                 thumbnail.classList.add('active');
-                mainImage.src = thumbnail.src;
+
+                // 3. SINCRONIZACIÓN: Seleccionamos el botón de color correspondiente
+                const colorOfThumbnail = thumbnail.dataset.color;
+                const colorOptions = colorSelector.querySelectorAll('.color-option');
+                colorOptions.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.color === colorOfThumbnail);
+                });
+
+                // 4. Actualizamos el estado del botón "Add to Cart"
+                if (addToCartBtn) {
+                    const selectedColors = colorSelector.querySelectorAll('.color-option.active');
+                    addToCartBtn.disabled = selectedColors.length === 0;
+                }
             });
         });
     }
 
+    // Lógica de los Botones de Color y "Add to Cart"
     if (colorSelector && addToCartBtn) {
         const colorOptions = colorSelector.querySelectorAll('.color-option');
-        const checkSelection = () => {
+
+        function checkSelection() {
             const selectedColors = colorSelector.querySelectorAll('.color-option.active');
             addToCartBtn.disabled = selectedColors.length === 0;
         };
+
         colorOptions.forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
-                if (mainImage) mainImage.src = button.dataset.imageSrc;
-                button.classList.toggle('active');
+                const wasActive = button.classList.contains('active');
+
+                // Lógica de selección única
+                colorOptions.forEach(btn => btn.classList.remove('active'));
+
+                if (!wasActive) {
+                    button.classList.add('active');
+
+                    // 1. SINCRONIZACIÓN: Actualizamos la imagen principal
+                    if (mainImage) mainImage.src = button.dataset.imageSrc;
+
+                    // 2. SINCRONIZACIÓN: Resaltamos la miniatura correspondiente
+                    thumbnails.forEach(thumb => {
+                        thumb.classList.toggle('active', thumb.dataset.imageSrc === button.dataset.imageSrc);
+                    });
+                }
+
                 checkSelection();
             });
         });
+
         addToCartBtn.addEventListener('click', () => {
             const productId = addToCartBtn.dataset.productId;
-            const selectedButtons = colorSelector.querySelectorAll('.color-option.active');
-            const selectedColors = Array.from(selectedButtons).map(btn => btn.dataset.color);
+            const selectedButton = colorSelector.querySelector('.color-option.active');
+            if (!selectedButton) return;
+
+            const selectedColors = [selectedButton.dataset.color]; // Enviamos solo el color único
+
             fetch(`/add_to_cart/${productId}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -180,7 +219,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => response.json())
                 .then(data => { if (data.success) { updateCartView(); updateCartCounter(); openCart(); } });
         });
-        checkSelection();
+
+        checkSelection(); // Comprobación inicial
     }
 
     // --- 4. LÓGICA PARA LA VISTA DE CATEGORÍA (NUEVO BLOQUE) ---

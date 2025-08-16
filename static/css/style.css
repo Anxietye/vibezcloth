@@ -1008,14 +1008,17 @@ footer {
     display: flex;
     margin-top: 1.5rem;
 }
+
 .order-table .order-row.subtotal,
 .order-table .order-row.total {
     border-bottom: 1px dashed var(--border-color);
 }
+
 .order-details-section h2,
 .billing-address-section h2 {
     margin-top: 0;
 }
+
 .coupon-section input {
     flex-grow: 1;
     background-color: #2a2a2a;
@@ -1394,8 +1397,10 @@ footer {
 /* --- Estilos para el nuevo botón "Order again" --- */
 .order-again-link {
     /* Posicionamiento del botón */
-    align-self: flex-end; /* Lo alinea a la derecha */
-    margin-top: 1.5rem;   /* Espacio para separarlo de la tabla */
+    align-self: flex-end;
+    /* Lo alinea a la derecha */
+    margin-top: 1.5rem;
+    /* Espacio para separarlo de la tabla */
 
     /* Apariencia de botón */
     display: inline-block;
@@ -1408,14 +1413,22 @@ footer {
     border: none;
     cursor: pointer;
     text-align: center;
-    
+
     /* Animación suave al pasar el ratón */
     transition: transform 0.2s ease-in-out, opacity 0.2s;
 }
+
 .order-table .order-row:has(strong) span:first-child {
     font-weight: bold;
-    color: var(--primary-text-color); /* Asegura que el color sea el principal (blanco) */
+    color: var(--primary-text-color);
+    /* Asegura que el color sea el principal (blanco) */
 }
+/* PARA REDUCIR EL CONTAINER DE ORDER SUCCESS */
+.order-success-page .container {
+    max-width: 1100px;
+    /* Puedes ajustar este valor a tu gusto (ej. 800px, 1000px) */
+}
+
 .order-again-link:hover {
     transform: scale(1.03);
     opacity: 0.9;
@@ -1423,7 +1436,8 @@ footer {
 
 .billing-address-section {
     /* Define un ancho máximo más pequeño para esta caja */
-    max-width: 25%; /* Puedes ajustar este valor, ej. 500px o 70% */
+    max-width: 25%;
+    /* Puedes ajustar este valor, ej. 500px o 70% */
     margin-right: auto;
 }
 
@@ -1433,18 +1447,22 @@ footer {
     margin-top: 1rem;
     font-weight: bold;
 }
+
 #coupon-message.error {
     color: #ff5555;
 }
+
 .order-row.discount span:first-child {
     color: var(--accent-color);
 }
+
 #remove-coupon-btn {
     color: #ff5555;
     text-decoration: none;
     font-size: 0.8rem;
     margin-left: 0.5rem;
 }
+
 /* Estilo para el pequeño tag del porcentaje */
 .discount-percentage {
     background-color: var(--border-color);
@@ -1453,4 +1471,128 @@ footer {
     border-radius: 4px;
     font-size: 0.8rem;
     margin-left: 0.5rem;
+}
+
+/* = a========================================================================
+   12. PÁGINA DE CUENTA - SECCIÓN DE DESCARGAS
+   ========================================================================== */
+
+/* --- Estilo para la caja principal de la sección --- */
+.downloads-section {
+    /* Fondo gris semitransparente para diferenciar */
+    background-color: rgba(255, 255, 255, 0.05);
+
+    /* Borde sutil para definir la caja */
+    border: 1px solid var(--border-color);
+
+    /* Espaciado interno para que el contenido no se pegue */
+    padding: 2rem;
+
+    /* Esquinas redondeadas */
+    border-radius: 8px;
+
+    /* Espacio por si hay otros elementos en la página */
+    margin-top: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+/* --- Estilo para el título "Downloads" --- */
+.downloads-section h2 {
+    /* Elimina el margen superior para acercarlo al borde de la caja */
+    margin-top: 0;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+/* --- Estilos para la tabla de descargas --- */
+.downloads-table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Une los bordes de las celdas */
+    text-align: left;
+}
+
+/* Estilo para los encabezados (Product, Expires, Download) */
+.downloads-table th {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--secondary-text-color);
+}
+
+/* Estilo para las celdas de datos */
+.downloads-table td {
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Elimina el borde de la última fila para un acabado limpio */
+.downloads-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Estilo para el enlace de descarga para que resalte */
+.downloads-table a {
+    color: var(--accent-color);
+    font-weight: bold;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.downloads-table a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   13. BARRA DE RESUMEN DEL PEDIDO
+   ========================================================================== */
+
+/* --- Contenedor principal de la barra --- */
+.order-meta-summary {
+    display: flex; /* Pone los elementos en una fila horizontal */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    align-items: center; /* Centra los elementos verticalmente */
+    
+    /* Estilo de la caja */
+    background-color: rgba(255, 255, 255, 0.05); 
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 8px; 
+    
+    /* Espacio para separarla de la sección "Downloads" de abajo */
+    margin-bottom: 2.5rem;
+}
+
+/* --- Cada ítem individual (Número de pedido, Fecha, etc.) --- */
+.meta-item {
+    /* Añade el separador a la izquierda de cada elemento, excepto el primero */
+    border-left: 1px dashed var(--border-color);
+    padding-left: 2rem; /* Espacio entre el separador y el texto */
+    
+    /* Damos un ancho flexible a cada ítem */
+    flex: 1;
+    min-width: 0;
+}
+
+/* Elimina el separador del primer elemento para un borde limpio */
+.meta-item:first-child {
+    border-left: none;
+    padding-left: 0;
+}
+
+/* --- Estilo para las etiquetas (Order number:, Date:, etc.) --- */
+.meta-label {
+    display: block; /* Asegura que ocupe su propia línea */
+    font-size: 0.8rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 0.25rem; /* Pequeño espacio antes del valor */
+}
+
+/* --- Estilo para los valores (7018, August 11, etc.) --- */
+.meta-value {
+    font-weight: bold;
+    color: var(--primary-text-color);
 }

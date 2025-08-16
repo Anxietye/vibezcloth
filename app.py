@@ -7,6 +7,7 @@ from flask import (
     session,
     request,
     jsonify,
+    send_from_directory,
 )
 import requests
 import urllib.parse
@@ -49,9 +50,18 @@ all_products = [
         "description": "Un vestido ligero y fresco...",
         # NUEVA ESTRUCTURA: Un diccionario de variantes de color
         "color_variants": {
-            "Black": "images/1.png",  # Color 'Negro' usa la imagen woman1.png
-            "Red": "images/1.png",  # Color 'Rojo' usa la imagen 1.png
-            "Blue": "images/1.png",  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/woman1.png",
+                "download_file": "vestido-floral-black.zip",
+            },
+            "Red": {  # Color 'Rojo' usa la imagen 1.png
+                "image": "images/1.png",
+                "download_file": "vestido-floral-red.rar",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/3.png",
+                "download_file": "vestido-floral-blue.rar",
+            },
         },
     },
     {
@@ -73,6 +83,7 @@ VALID_COUPONS = {
     "SAVEBIG": {"type": "percent", "value": 25},  # 25% de descuento
     "TAKE10": {"type": "fixed", "value": 10},  # $10 de descuento fijo
 }
+COUPONS_ENABLED = False
 
 
 # --- FUNCIONES AUXILIARES ---
@@ -179,6 +190,9 @@ def checkout():
     if not cart:
         return redirect(url_for("home"))
 
+    # Recuperamos la dirección de facturación guardada, si existe
+    billing_address = session.get("billing_address", {})
+
     subtotal = sum(
         float(item["price"].replace("$", "")) * item["quantity"]
         for item in cart.values()
@@ -209,9 +223,14 @@ def checkout():
         }
         # 2. Guardamos la dirección de facturación en la sesión
         session["billing_address"] = billing_address
-        session.modified = (
-            True  # Crucial para asegurar que se guarde antes de redirigir
-        )
+
+        if coupon:
+            session["order_discount"] = {
+                "code": coupon["code"],
+                "amount": discount_amount,
+            }
+
+        session.modified = True
 
         payment_path = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
 
@@ -234,7 +253,9 @@ def checkout():
         total=total,
         active_page="checkout",
         discount_amount=discount_amount,
+        billing_address=billing_address,
         body_class="page-checkout",
+        coupons_enabled=COUPONS_ENABLED,
     )
 
 
@@ -291,44 +312,58 @@ def logout():
 
 @app.route("/add_to_cart/<int:product_id>", methods=["POST"])
 def add_to_cart(product_id):
-    product = find_product_by_id(product_id)
-    if not product:
-        return jsonify({"success": False, "message": "Producto no encontrado"}), 404
+    try:
+        product = find_product_by_id(product_id)
+        if not product:
+            return jsonify({"success": False, "message": "Producto no encontrado"}), 404
 
-    data = request.get_json()
-    selected_colors = data.get("colors", [])
-    if not selected_colors:
-        return (
-            jsonify(
-                {"success": False, "message": "Se debe seleccionar al menos un color"}
-            ),
-            400,
-        )
+        data = request.get_json()
+        selected_colors = data.get("colors", [])
+        if not selected_colors:
+            return (
+                jsonify(
+                    {
+                        "success": False,
+                        "message": "Se debe seleccionar al menos un color",
+                    }
+                ),
+                400,
+            )
 
-    if "cart" not in session:
-        session["cart"] = {}
+        if "cart" not in session:
+            session["cart"] = {}
 
-    cart = session["cart"]
+        cart = session["cart"]
 
-    # --- LÓGICA CLAVE: Iteramos sobre cada color y lo añadimos como un item separado ---
-    for color in selected_colors:
-        # Creamos un ID único para el item: ej. "1-Black"
-        cart_item_id = f"{product_id}-{color}"
+        for color in selected_colors:
+            cart_item_id = f"{product_id}-{color}"
 
-        # Si el item ya existe, podríamos aumentar su cantidad. Por ahora, lo ignoramos para mantenerlo simple.
-        if cart_item_id not in cart:
-            cart[cart_item_id] = {
-                "id": product["id"],
-                "name": f"{product['name']} ({color})",  # Añadimos el color al nombre
-                "price": product["price"],
-                # Usamos la imagen específica del color
-                "image": product["color_variants"].get(color, ""),
-                "quantity": 1,
-                "color": color,  # Guardamos el color
-            }
+            # --- ESTA ES LA LÓGICA CORREGIDA ---
+            # Comprobamos si el color seleccionado existe en las variantes del producto
+            variant_data = product.get("color_variants", {}).get(color)
 
-    session.modified = True
-    return jsonify({"success": True, "message": "Productos añadidos"})
+            if cart_item_id not in cart and variant_data:
+                cart[cart_item_id] = {
+                    "id": product["id"],
+                    "name": f"{product['name']} ({color})",
+                    "price": product["price"],
+                    "image": variant_data[
+                        "image"
+                    ],  # Accedemos a la imagen de la variante
+                    "quantity": 1,
+                    "color": color,
+                    "download_file": variant_data[
+                        "download_file"
+                    ],  # Guardamos también el archivo de descarga
+                }
+
+        session.modified = True
+        return jsonify({"success": True, "message": "Productos añadidos"})
+
+    except Exception as e:
+        # Si algo falla, lo imprimimos en la terminal para verlo
+        print(f"!!! ERROR EN add_to_cart: {e}")
+        return jsonify({"success": False, "message": "Error interno del servidor"}), 500
 
 
 @app.route("/remove_from_cart/<string:cart_item_id>", methods=["POST"])
@@ -360,28 +395,40 @@ def order_success():
     cart = session.get("cart", {})
     # LEEMOS los datos de la sesión. Si no existen, usamos un dict vacío para evitar errores.
     billing_address = session.get("billing_address", {})
+    # Leemos los datos del descuento de la sesión
+    discount_info = session.get("order_discount", None)
 
-    if not cart:
+    if (
+        not cart and not billing_address
+    ):  # Si no hay ni carrito ni dirección, es un acceso inválido
         return redirect(url_for("home"))
 
-    total = sum(
+    # Calculamos subtotal y total de nuevo para la confirmación
+    subtotal = sum(
         float(item["price"].replace("$", "")) * item["quantity"]
         for item in cart.values()
     )
+    discount_amount = discount_info["amount"] if discount_info else 0
+    total = subtotal - discount_amount
 
     order_details = {
         "number": random.randint(1000, 9999),
         "date": datetime.now().strftime("%B %d, %Y"),
+        "subtotal": "%.2f" % subtotal,
         "total": "%.2f" % total,
+        "discount_info": discount_info,  # Pasamos la info del descuento
         "payment_method": "Fleeca Bank",
         "products": list(cart.values()),
-        "billing_address": billing_address,  # PASAMOS los datos a la plantilla
+        "billing_address": billing_address,
     }
 
     session.pop("cart", None)
     session.pop("billing_address", None)
+    session.pop("order_discount", None)
 
-    return render_template("order_success.html", order=order_details)
+    return render_template(
+        "order_success.html", order=order_details, body_class="order-success-page"
+    )
 
 
 @app.route("/order/cancel")
@@ -470,29 +517,51 @@ def remove_from_wishlist(product_id):
         return jsonify({"success": True, "message": "Product removed from wishlist."})
     return jsonify({"success": False, "message": "Product not found in wishlist."}), 404
 
+
 # ==============================================================================
 # === APLICAR CUPONES         ==================================================
 # ==============================================================================
 
-@app.route('/api/apply_coupon', methods=['POST'])
-def apply_coupon():
-    data = request.get_json()
-    coupon_code = data.get('coupon_code', '').upper() # Convertimos a mayúsculas
-    
-    if coupon_code in VALID_COUPONS:
-        session['coupon'] = VALID_COUPONS[coupon_code]
-        session['coupon']['code'] = coupon_code # Guardamos el código original
-        session.modified = True
-        return jsonify({'success': True, 'message': 'Coupon applied successfully!'})
-    
-    return jsonify({'success': False, 'message': 'Invalid coupon code.'}), 400
 
-@app.route('/api/remove_coupon', methods=['POST'])
-def remove_coupon():
-    if 'coupon' in session:
-        session.pop('coupon', None)
+@app.route("/api/apply_coupon", methods=["POST"])
+def apply_coupon():
+
+    # 1. Comprobamos si el sistema de cupones está activado
+    if not COUPONS_ENABLED:
+        return (
+            jsonify({"success": False, "message": "Coupons are currently disabled."}),
+            403,
+        )
+
+    data = request.get_json()
+    coupon_code = data.get("coupon_code", "").upper()  # Convertimos a mayúsculas
+
+    if coupon_code in VALID_COUPONS:
+        session["coupon"] = VALID_COUPONS[coupon_code]
+        session["coupon"]["code"] = coupon_code  # Guardamos el código original
         session.modified = True
-    return jsonify({'success': True})
+        return jsonify({"success": True, "message": "Coupon applied successfully!"})
+
+    return jsonify({"success": False, "message": "Invalid coupon code."}), 400
+
+
+@app.route("/api/remove_coupon", methods=["POST"])
+def remove_coupon():
+    if "coupon" in session:
+        session.pop("coupon", None)
+        session.modified = True
+    return jsonify({"success": True})
+
+
+@app.route("/download/<filename>")
+def download_file(filename):
+    """Ruta segura para servir archivos desde la carpeta 'downloads'."""
+    # En una aplicación real, aquí comprobarías si el usuario tiene permiso
+    # para descargar este archivo (ej. si lo ha comprado).
+
+    # 'as_attachment=True' fuerza la descarga en lugar de abrir el archivo en el navegador.
+    return send_from_directory("static/downloads", filename, as_attachment=True)
+
 
 # ==============================================================================
 # === INICIO DE LA APLICACIÓN ==================================================

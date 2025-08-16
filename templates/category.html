@@ -14,7 +14,7 @@
                 <div class="product-card-dark">
                     <div class="image-wrapper">
                         <!-- Usamos la primera imagen de las variantes de color -->
-                        <img src="{{ url_for('static', filename=product.color_variants.values()|first) }}"
+                        <img src="{{ url_for('static', filename=(product.color_variants.values()|first).image) }}"
                             alt="{{ product.name }}">
                     </div>
                     <div class="card-info">
