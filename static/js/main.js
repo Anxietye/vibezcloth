@@ -295,7 +295,44 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    // --- LÓGICA DE CUPONES EN LA PÁGINA DE CHECKOUT ---
+    const checkoutPage = document.querySelector('.checkout-page');
+    if (checkoutPage) {
+        const applyBtn = document.getElementById('apply-coupon-btn');
+        const removeBtn = document.getElementById('remove-coupon-btn');
+        const couponInput = document.getElementById('coupon-code-input');
+        const messageEl = document.getElementById('coupon-message');
 
+        if (applyBtn) {
+            applyBtn.addEventListener('click', () => {
+                const code = couponInput.value.trim();
+                if (!code) return;
+
+                fetch('/api/apply_coupon', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ coupon_code: code })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            window.location.reload(); // La forma más simple y robusta de actualizar
+                        } else {
+                            messageEl.textContent = data.message;
+                            messageEl.className = 'error';
+                        }
+                    });
+            });
+        }
+
+        if (removeBtn) {
+            removeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                fetch('/api/remove_coupon', { method: 'POST' })
+                    .then(() => window.location.reload());
+            });
+        }
+    }
     updateCartCounter();
     updateWishlistCounter();
 

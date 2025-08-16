@@ -1384,7 +1384,7 @@ footer {
 .order-details-section {
     margin-bottom: 2.5rem;
     /* Modificar tamaño de ser necesario*/
-    max-width: 65%;
+    max-width: 100%;
     margin-right: auto;
     /* Convertimos la sección en un contenedor flex para posicionar el botón */
     display: flex;
@@ -1425,4 +1425,32 @@ footer {
     /* Define un ancho máximo más pequeño para esta caja */
     max-width: 25%; /* Puedes ajustar este valor, ej. 500px o 70% */
     margin-right: auto;
+}
+
+/* Estilos para el feedback de cupones */
+#coupon-message {
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+#coupon-message.error {
+    color: #ff5555;
+}
+.order-row.discount span:first-child {
+    color: var(--accent-color);
+}
+#remove-coupon-btn {
+    color: #ff5555;
+    text-decoration: none;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}
+/* Estilo para el pequeño tag del porcentaje */
+.discount-percentage {
+    background-color: var(--border-color);
+    color: var(--secondary-text-color);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
 }

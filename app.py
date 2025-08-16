@@ -65,6 +65,14 @@ all_products = [
         "color_variants": {"White": "images/woman2.jpg", "Black": "images/woman1.png"},
     },
 ]
+# --- CUPONES
+VALID_COUPONS = {
+    "VIBE5": {"type": "percent", "value": 5},  # 5% de descuento
+    "CLOTH1": {"type": "percent", "value": 10},  # 10% de descuento
+    "VZ2604": {"type": "fixed", "value": 15},  # $15 de descuento fijo
+    "SAVEBIG": {"type": "percent", "value": 25},  # 25% de descuento
+    "TAKE10": {"type": "fixed", "value": 10},  # $10 de descuento fijo
+}
 
 
 # --- FUNCIONES AUXILIARES ---
@@ -167,16 +175,27 @@ def product_detail(category_name, product_slug):
 
 @app.route("/checkout", methods=["GET", "POST"])
 def checkout():
-    # ... (la parte superior de la función no cambia)
     cart = session.get("cart", {})
     if not cart:
         return redirect(url_for("home"))
 
-    total = sum(
+    subtotal = sum(
         float(item["price"].replace("$", "")) * item["quantity"]
         for item in cart.values()
     )
-    subtotal = total
+
+    # --- LÓGICA DE CUPÓN ---
+    coupon = session.get("coupon")
+    discount_amount = 0
+    if coupon:
+        if coupon["type"] == "percent":
+            discount_amount = (subtotal * coupon["value"]) / 100
+        elif coupon["type"] == "fixed":
+            discount_amount = coupon["value"]
+
+    total = max(
+        0, subtotal - discount_amount
+    )  # Aseguramos que el total no sea negativo
 
     if request.method == "POST":
 
@@ -214,6 +233,7 @@ def checkout():
         subtotal=subtotal,
         total=total,
         active_page="checkout",
+        discount_amount=discount_amount,
         body_class="page-checkout",
     )
 
@@ -450,6 +470,29 @@ def remove_from_wishlist(product_id):
         return jsonify({"success": True, "message": "Product removed from wishlist."})
     return jsonify({"success": False, "message": "Product not found in wishlist."}), 404
 
+# ==============================================================================
+# === APLICAR CUPONES         ==================================================
+# ==============================================================================
+
+@app.route('/api/apply_coupon', methods=['POST'])
+def apply_coupon():
+    data = request.get_json()
+    coupon_code = data.get('coupon_code', '').upper() # Convertimos a mayúsculas
+    
+    if coupon_code in VALID_COUPONS:
+        session['coupon'] = VALID_COUPONS[coupon_code]
+        session['coupon']['code'] = coupon_code # Guardamos el código original
+        session.modified = True
+        return jsonify({'success': True, 'message': 'Coupon applied successfully!'})
+    
+    return jsonify({'success': False, 'message': 'Invalid coupon code.'}), 400
+
+@app.route('/api/remove_coupon', methods=['POST'])
+def remove_coupon():
+    if 'coupon' in session:
+        session.pop('coupon', None)
+        session.modified = True
+    return jsonify({'success': True})
 
 # ==============================================================================
 # === INICIO DE LA APLICACIÓN ==================================================

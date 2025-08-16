@@ -114,14 +114,33 @@
                             <div class="order-row subtotal">
                                 <span>Subtotal</span><span>${{ "%.2f"|format(subtotal) }}</span>
                             </div>
+                            <!-- NUEVA SECCIÓN DE DESCUENTO -->
+                            {% if discount_amount > 0 %}
+                            <div class="order-row discount">
+                                <span>
+                                    Discount ({{ session.coupon.code }})
+
+                                    <!-- Lógica para mostrar el porcentaje si aplica -->
+                                    {% if session.coupon.type == 'percent' %}
+                                    <span class="discount-percentage">{{ session.coupon.value }}%</span>
+                                    {% endif %}
+
+                                    <a href="#" id="remove-coupon-btn">[Remove]</a>
+                                </span>
+                                <span>-${{ "%.2f"|format(discount_amount) }}</span>
+                            </div>
+                            {% endif %}
                             <div class="order-row total">
                                 <strong>Total</strong><strong>${{ "%.2f"|format(total) }}</strong>
                             </div>
                         </div>
+                        {% if not session.get('coupon') %}
                         <div class="coupon-section">
-                            <input type="text" placeholder="Coupon Code">
-                            <button>Apply</button>
+                            <input type="text" placeholder="Coupon Code" id="coupon-code-input">
+                            <button id="apply-coupon-btn">Apply</button>
                         </div>
+                        {% endif %}
+                        <p id="coupon-message"></p> <!-- Para mensajes de feedback -->
                     </div>
                 </div> <!-- Cierre de <div class="order-summary-column"> -->
 
