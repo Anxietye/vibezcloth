@@ -183,18 +183,15 @@ document.addEventListener('DOMContentLoaded', () => {
         colorOptions.forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
-                const wasActive = button.classList.contains('active');
 
-                // Lógica de selección única
-                colorOptions.forEach(btn => btn.classList.remove('active'));
+                // --- CAMBIO 1: Habilitamos la selección múltiple ---
+                // Simplemente alterna la clase 'active' en el botón clickeado.
+                button.classList.toggle('active');
 
-                if (!wasActive) {
-                    button.classList.add('active');
-
-                    // 1. SINCRONIZACIÓN: Actualizamos la imagen principal
+                // Si se acaba de activar un color, actualizamos la imagen principal a ese color.
+                if (button.classList.contains('active')) {
                     if (mainImage) mainImage.src = button.dataset.imageSrc;
-
-                    // 2. SINCRONIZACIÓN: Resaltamos la miniatura correspondiente
+                    // También actualizamos la miniatura correspondiente.
                     thumbnails.forEach(thumb => {
                         thumb.classList.toggle('active', thumb.dataset.imageSrc === button.dataset.imageSrc);
                     });
@@ -206,10 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         addToCartBtn.addEventListener('click', () => {
             const productId = addToCartBtn.dataset.productId;
-            const selectedButton = colorSelector.querySelector('.color-option.active');
-            if (!selectedButton) return;
 
-            const selectedColors = [selectedButton.dataset.color]; // Enviamos solo el color único
+            // --- CAMBIO 2: Recopilamos TODOS los colores seleccionados ---
+            const selectedButtons = colorSelector.querySelectorAll('.color-option.active');
+            const selectedColors = Array.from(selectedButtons).map(btn => btn.dataset.color);
 
             fetch(`/add_to_cart/${productId}`, {
                 method: 'POST',
@@ -217,7 +214,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ colors: selectedColors })
             })
                 .then(response => response.json())
-                .then(data => { if (data.success) { updateCartView(); updateCartCounter(); openCart(); } });
+                .then(data => {
+                    if (data.success) {
+                        updateCartView();
+                        updateCartCounter();
+                        openCart();
+                        // Opcional pero recomendado: Deseleccionamos los colores después de añadir
+                        selectedButtons.forEach(btn => btn.classList.remove('active'));
+                        checkSelection();
+                    }
+                });
         });
 
         checkSelection(); // Comprobación inicial

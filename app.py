@@ -43,36 +43,141 @@ all_products = [
     {
         "id": 1,
         "category": "woman",
-        "name": "Vestido Floral",
-        "price": "$49.99",
-        "slug": "vestido-floral",
+        "name": "Vibez Cozy Tracksuit",
+        "price": "$8500",
+        "slug": "vibez-tracksuit",
         "sku": "VF-001",
-        "description": "Un vestido ligero y fresco...",
         # NUEVA ESTRUCTURA: Un diccionario de variantes de color
         "color_variants": {
-            "Black": {  # Color 'Negro' usa la imagen woman1.png
-                "image": "images/woman1.png",
-                "download_file": "vestido-floral-black.zip",
+            "Red": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/anaranjado.png",
+                "download_file": "Vibez-Tracksuit-Red.zip",
             },
-            "Red": {  # Color 'Rojo' usa la imagen 1.png
-                "image": "images/1.png",
-                "download_file": "vestido-floral-red.rar",
+            "Blue": {  # Color 'Rojo' usa la imagen 1.png
+                "image": "images/azul.png",
+                "download_file": "Vibez-Tracksuit-Blue.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/3.png",
-                "download_file": "vestido-floral-blue.rar",
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/blanco.png",
+                "download_file": "Vibez-Tracksuit-White.zip",
+            },
+            "Brown": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/marron.png",
+                "download_file": "Vibez-Tracksuit-Brown.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/negro.png",
+                "download_file": "Vibez-Tracksuit-Black.zip",
+            },
+            "Purple": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/purpura.png",
+                "download_file": "Vibez-Tracksuit-Purple.zip",
+            },
+            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/rosa.png",
+                "download_file": "Vibez-Tracksuit-Pink.zip",
+            },
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/verde.png",
+                "download_file": "Vibez-Tracksuit-Green.zip",
             },
         },
     },
     {
         "id": 2,
         "category": "woman",
-        "name": "Top Moderno",
-        "price": "$29.99",
-        "slug": "top-moderno",
+        "name": "Grunge T-Shirt",
+        "price": "$6000",
+        "slug": "grunge-t-shirt",
         "sku": "TM-002",
-        "description": "Top moderno...",
-        "color_variants": {"White": "images/woman2.jpg", "Black": "images/woman1.png"},
+        "color_variants": {
+            "Torment": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/tblack9.png",
+                "download_file": "Torment.zip",
+            },
+            "Heaven": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/tblack8.png",
+                "download_file": "Heaven.zip",
+            },
+            "Distorted": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/tblack6.png",
+                "download_file": "Distorted.zip",
+            },
+            "Red": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/Tred.png",
+                "download_file": "Red.zip",
+            },
+            "Distorted Vibez": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/tblack7.png",
+                "download_file": "Distorted-Vibez.zip",
+            },
+            "Dream Big": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/twhite2.png",
+                "download_file": "Dream-Big.zip",
+            },
+            "Stuck-W": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/twhite3.png",
+                "download_file": "Stuck-W.zip",
+            },
+            "Cry Baby": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/twhite4.png",
+                "download_file": "Cry-Baby.zip",
+            },
+            "Western Shirt": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/twhite5.png",
+                "download_file": "Western-Shirt.zip",
+            },
+            "Hell Full": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Tblack2.png",
+                "download_file": "Hell-Full.zip",
+            },
+            "Hell Boring": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/tblack4.png",
+                "download_file": "Hell-Boring.zip",
+            },
+            "Angel & Thoughts": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/tblack5.png",
+                "download_file": "Angel-Thoughts.zip",
+            },
+        },
+    },
+    {
+        "id": 3,
+        "category": "woman",
+        "name": "Cropped Tank Top",
+        "price": "$4500",
+        "slug": "cropped-tank-top",
+        "sku": "CT-047",
+        "color_variants": {
+            "LS Vibez": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/Croptop3.png",
+                "download_file": "LS-Vibez-Cropped-Tank-Top.zip",
+            },
+            "Hell Boring": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Croptop6.png",
+                "download_file": "Hell-Boring-Cropped-Tank-Top.zip",
+            },
+            "Flames": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Croptop1.png",
+                "download_file": "Flames-Cropped-Tank-Top.zip",
+            },
+            "Baked": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Croptop2.png",
+                "download_file": "Baked-Cropped-Tank-Top.zip",
+            },
+            "Bad Things": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Croptop4.png",
+                "download_file": "Bad-Things-Cropped-Tank-Top.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Croptop5.png",
+                "download_file": "White-Cropped-Tank-Top.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Croptop7.png",
+                "download_file": "Black-Cropped-Tank-Top.zip",
+            },
+        },
     },
 ]
 # --- CUPONES
