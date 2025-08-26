@@ -48,8 +48,6 @@
                             <td class="product-actions">
                                 <a href="{{ url_for('product_detail', category_name=product.category, product_slug=product.slug) }}"
                                     class="wishlist-action-btn primary">SELECT OPTIONS</a>
-                                <button class="wishlist-action-btn secondary quick-view-btn"
-                                    data-product-id="{{ product.id }}">Quick view</button>
                             </td>
                         </tr>
                         {% else %}
