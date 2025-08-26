@@ -163,7 +163,7 @@ body>header {
 .username-display {
     font-size: 0.9rem;
     font-weight: bold;
-    display: none!important;
+    /*display: none!important;*/
 }
 
 /* ==========================================================================

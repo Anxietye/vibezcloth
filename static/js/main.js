@@ -86,12 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             cartSubtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-            const checkoutBtn = document.querySelector('.checkout-btn');
-            if (checkoutBtn) {
-                checkoutBtn.textContent = 'PROCEED TO CHECKOUT';
-                checkoutBtn.onclick = () => { window.location.href = '/checkout'; };
-                checkoutBtn.style.display = Object.keys(cartData).length > 0 ? 'block' : 'none';
-            }
+            
         } catch (error) {
             console.error("Error actualizando vista del carrito:", error);
         }

@@ -56,9 +56,12 @@
                         <!-- 2. Lógica para Usuario/Login -->
                         {% if 'user' in session and session.get('user') %}
                         <!-- Si está logueado, muestra enlace al dashboard y logout -->
-                        <li class="username-display">
-                            <a href="{{ url_for('my_account_page') }}">Hi, {{ session.user.username }}</a>
+                        <li>
+                            <a href="{{ url_for('my_account_page') }}" title="My Account">
+                                <i class="fa-solid fa-user"></i> <!-- Usamos el ícono sólido para indicar "logueado" -->
+                            </a>
                         </li>
+                        <!-- Y también mostramos el botón de logout -->
                         <li>
                             <a href="{{ url_for('logout') }}" title="Logout"><i
                                     class="fa-solid fa-right-from-bracket"></i></a>
@@ -66,7 +69,9 @@
                         {% else %}
                         <!-- Si no, muestra el ícono de login -->
                         <li>
-                            <a href="{{ url_for('login') }}" title="Login"><i class="fa-regular fa-user"></i></a>
+                            <a href="{{ url_for('login') }}" title="Login">
+                                <i class="fa-regular fa-user"></i> <!-- Usamos el ícono regular para "invitado" -->
+                            </a>
                         </li>
                         {% endif %}
 
@@ -130,7 +135,7 @@
                 <strong>Subtotal:</strong>
                 <span id="cart-subtotal">$0.00</span>
             </div>
-            <button class="checkout-btn">PROCEED TO CHECKOUT</button>
+            <a href="{{ url_for('checkout') }}" class="checkout-btn">PROCEED TO CHECKOUT</a>
         </footer>
     </aside>
 
