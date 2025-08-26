@@ -412,7 +412,8 @@ def checkout():
         session.modified = True
 
         # 3. Construimos la URL del banco y redirigimos
-        success_url = url_for("order_success", _external=True, order_token=order_token)
+        success_url = url_for("order_success", _external=True)
+        session["last_order_token"] = order_token
         cancel_url = url_for("order_cancel", _external=True)
         payment_path = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
         return_params = {"successUrl": success_url, "cancelUrl": cancel_url}
@@ -572,19 +573,16 @@ def get_cart_data():
 
 @app.route("/order/success")
 def order_success():
-    # --- NUEVA LÓGICA DE SEGURIDAD ---
-    # 1. Obtenemos el token de la URL y el pedido pendiente de la sesión
-    token_from_url = request.args.get("order_token")
+    # Obtenemos el token de esta variable temporal en lugar de la URL
+    token_from_session = session.pop("last_order_token", None)
     pending_order = session.get("pending_order")
 
-    # 2. LA COMPROBACIÓN DE SEGURIDAD
-    # Si no hay token en la URL, o no hay pedido pendiente, o los tokens no coinciden...
+    # La comprobación de seguridad ahora usa el token de la sesión
     if (
-        not token_from_url
+        not token_from_session
         or not pending_order
-        or token_from_url != pending_order.get("token")
+        or token_from_session != pending_order.get("token")
     ):
-        # ...es un acceso no autorizado. ¡Lo mandamos a la home!
         return redirect(url_for("home"))
 
     # --- SI LA VERIFICACIÓN ES EXITOSA, PROCEDEMOS A CREAR EL PEDIDO ---
