@@ -43,7 +43,7 @@
                 <div class="nav-right">
                     <ul class="icon-links">
 
-                        <!-- 1. Icono de Wishlist -->
+                        {% if 'user' in session and session.get('user') %}
                         <li>
                             <a href="{{ url_for('wishlist_page') }}" title="Wishlist"
                                 class="wishlist-icon-container {{ 'active' if active_page == 'wishlist' }}">
@@ -51,6 +51,7 @@
                                 <span id="wishlist-item-count" class="hidden">0</span>
                             </a>
                         </li>
+                        {% endif %}
 
                         <!-- 2. Lógica para Usuario/Login -->
                         {% if 'user' in session and session.get('user') %}

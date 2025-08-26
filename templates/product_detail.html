@@ -5,7 +5,8 @@
     {% include 'partials/breadcrumbs.html' %}
 
     <!-- NUEVO LAYOUT DE PÁGINA DE PRODUCTO -->
-    <div class="product-detail-page">
+    <div class="product-detail-page"
+        data-is-authenticated="{{ 'true' if 'user' in session and session.get('user') else 'false' }}">
         <!-- COLUMNA IZQUIERDA: INFORMACIÓN -->
         <div class="product-info-column" id="product-info-column">
             <h1>{{ product.name }}</h1>
@@ -28,15 +29,30 @@
 
             <button class="purchase-button" id="add-to-cart-btn" data-product-id="{{ product.id }}" disabled>ADD TO
                 CART</button>
+            {% if 'user' in session and session.get('user') %}
 
+            <!-- SI EL USUARIO ESTÁ LOGUEADO: mostramos el botón de añadir/quitar -->
             {% if is_in_wishlist %}
+            <!-- Estado: Ya está en la wishlist -->
             <a href="#" class="add-to-wishlist-btn disabled" data-product-id="{{ product.id }}">
-                <i class="fa-solid fa-heart"></i> <span>Added to Wishlist</span>
+                <i class="fa-solid fa-heart"></i>
+                <span>Added to Wishlist</span>
             </a>
             {% else %}
+            <!-- Estado: No está en la wishlist -->
             <a href="#" class="add-to-wishlist-btn" data-product-id="{{ product.id }}">
-                <i class="fa-regular fa-heart"></i> <span>Add to Wishlist</span>
+                <i class="fa-regular fa-heart"></i>
+                <span>Add to Wishlist</span>
             </a>
+            {% endif %}
+
+            {% else %}
+            <!-- SI EL USUARIO NO ESTÁ LOGUEADO: mostramos un enlace que lleva a la página de login -->
+            <a href="{{ url_for('login') }}" class="add-to-wishlist-btn">
+                <i class="fa-regular fa-heart"></i>
+                <span>Sign in to add to Wishlist</span>
+            </a>
+
             {% endif %}
         </div>
 
