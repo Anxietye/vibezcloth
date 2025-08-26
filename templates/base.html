@@ -57,15 +57,16 @@
                         {% if 'user' in session and session.get('user') %}
                         <!-- Si está logueado, muestra enlace al dashboard y logout -->
                         <li>
-                            <a href="{{ url_for('my_account_page') }}" title="My Account">
-                                <i class="fa-solid fa-user"></i> <!-- Usamos el ícono sólido para indicar "logueado" -->
+                            <a href="{{ url_for('my_account_page') }}" title="My Account"
+                                class="{{ 'active' if active_page == 'my-account' }}">
+                                <i class="fa-solid fa-user"></i>
                             </a>
                         </li>
-                        <!-- Y también mostramos el botón de logout -->
+                        <!-- Y también mostramos el botón de logout 
                         <li>
                             <a href="{{ url_for('logout') }}" title="Logout"><i
                                     class="fa-solid fa-right-from-bracket"></i></a>
-                        </li>
+                        </li>-->
                         {% else %}
                         <!-- Si no, muestra el ícono de login -->
                         <li>
