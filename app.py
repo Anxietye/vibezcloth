@@ -399,7 +399,6 @@ def checkout():
             "discord": request.form.get("discord"),
             "phone": request.form.get("phone"),
         }
-        session["billing_address"] = billing_address
 
         # 2. Generamos el token de seguridad y el pedido pendiente
         order_token = secrets.token_hex(16)
@@ -412,8 +411,7 @@ def checkout():
         session.modified = True
 
         # 3. Construimos la URL del banco y redirigimos
-        success_url = url_for("order_success", _external=True)
-        session["last_order_token"] = order_token
+        success_url = url_for("order_success", _external=True, order_token=order_token)
         cancel_url = url_for("order_cancel", _external=True)
         payment_path = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
         return_params = {"successUrl": success_url, "cancelUrl": cancel_url}
