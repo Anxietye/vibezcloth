@@ -179,6 +179,68 @@ all_products = [
             },
         },
     },
+    {
+        "id": 4,
+        "category": "woman",
+        "name": "Cropped Hoodie",
+        "price": "$4700",
+        "slug": "cropped-hoodie",
+        "sku": "CH-008",
+        "color_variants": {
+            "D. Lettering": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/darklettering.png",
+                "download_file": "Lettering.zip",
+            },
+            "Depravity": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/depravity.png",
+                "download_file": "Depravity.zip",
+            },
+            "Dream Big": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/drambig.png",
+                "download_file": "DreamBig.zip",
+            },
+            "Dystopia": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/dystopia.png",
+                "download_file": "Dystopia.zip",
+            },
+            "Kuromi": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/kuromi.png",
+                "download_file": "Kuromi.zip",
+            },
+            "Red L.": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/lettering.png",
+                "download_file": "Red-L.zip",
+            },
+            "Run Away": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/runaway.png",
+                "download_file": "Run-Away.zip",
+            },
+            "Stucked": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/stucked.png",
+                "download_file": "Stuck.zip",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/azuls.png",
+                "download_file": "Blue.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/blancos.png",
+                "download_file": "White.zip",
+            },
+            "Brown": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/marrons.png",
+                "download_file": "Brown.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/negros.png",
+                "download_file": "Black.zip",
+            },
+            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/rosas.png",
+                "download_file": "Pink.zip",
+            },
+        },
+    },
 ]
 # --- CUPONES
 VALID_COUPONS = {
