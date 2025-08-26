@@ -12,6 +12,7 @@ from flask import (
 import requests
 import urllib.parse
 import random
+import secrets
 from datetime import datetime
 
 app = Flask(__name__)
@@ -274,6 +275,85 @@ def get_products_by_category(category_name):
 # ==============================================================================
 
 
+@app.route("/my-account")
+def my_account_page():
+    """Muestra la página del dashboard del usuario."""
+    # Protección de Ruta: Si no hay un usuario en la sesión, lo redirigimos al login.
+    if "user" not in session or not session.get("user"):
+        return redirect(url_for("login"))
+
+    breadcrumbs = [
+        {"text": "Home", "url": url_for("home")},
+        {"text": "My Account", "url": None},
+    ]
+
+    # Pasamos active_page para que ningún otro enlace del header se resalte.
+    return render_template(
+        "my_account.html", active_page="my-account", breadcrumbs=breadcrumbs
+    )
+
+
+@app.route("/my-account/orders")
+def my_account_orders():
+    """Muestra el historial de pedidos del usuario."""
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    # Obtenemos los pedidos de la sesión. Si no hay, es una lista vacía.
+    orders = session.get("orders", [])
+
+    return render_template("orders.html", orders=orders, active_page="my-account")
+
+
+@app.route("/my-account/details")
+def my_account_details():  # <-- El nombre de la función es 'my_account_details'
+    """Muestra la página de detalles de la cuenta del usuario."""
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    user_data = session.get("user")
+
+    return render_template(
+        "account_details.html", user=user_data, active_page="my-account"
+    )
+
+
+@app.route("/my-account/view-order/<int:order_number>")
+def view_order_page(order_number):
+    """Muestra los detalles de un pedido específico."""
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    orders = session.get("orders", [])
+
+    # Buscamos el pedido en la lista de la sesión por su número
+    order_to_view = next(
+        (order for order in orders if order.get("number") == order_number), None
+    )
+
+    # Si no se encuentra el pedido, redirigimos al historial
+    if not order_to_view:
+        return redirect(url_for("my_account_orders"))
+
+    return render_template(
+        "view_order.html", order=order_to_view, active_page="my-account"
+    )
+
+
+@app.route("/my-account/downloads")
+def my_account_downloads():
+    """Muestra la lista de productos descargables del usuario."""
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    # Obtenemos las descargas de la sesión
+    downloads = session.get("downloads", [])
+
+    return render_template(
+        "downloads.html", downloads=downloads, active_page="my-account"
+    )
+
+
 @app.route("/")
 def home():
     # Mostraremos los últimos 8 productos, por ejemplo.
@@ -353,34 +433,27 @@ def product_detail(category_name, product_slug):
 
 @app.route("/checkout", methods=["GET", "POST"])
 def checkout():
+    # --- Lógica que se ejecuta para AMBAS peticiones (GET y POST) ---
     cart = session.get("cart", {})
     if not cart:
         return redirect(url_for("home"))
-
-    # Recuperamos la dirección de facturación guardada, si existe
-    billing_address = session.get("billing_address", {})
 
     subtotal = sum(
         float(item["price"].replace("$", "")) * item["quantity"]
         for item in cart.values()
     )
-
-    # --- LÓGICA DE CUPÓN ---
     coupon = session.get("coupon")
     discount_amount = 0
     if coupon:
         if coupon["type"] == "percent":
             discount_amount = (subtotal * coupon["value"]) / 100
-        elif coupon["type"] == "fixed":
+        else:
             discount_amount = coupon["value"]
+    total = max(0, subtotal - discount_amount)
 
-    total = max(
-        0, subtotal - discount_amount
-    )  # Aseguramos que el total no sea negativo
-
+    # --- Lógica que se ejecuta SOLO al enviar el formulario (POST) ---
     if request.method == "POST":
-
-        # 1. Recopilamos los datos del cliente del formulario
+        # 1. Recopilamos y guardamos la dirección
         billing_address = {
             "firstname": request.form.get("firstname"),
             "lastname": request.form.get("lastname"),
@@ -388,37 +461,35 @@ def checkout():
             "discord": request.form.get("discord"),
             "phone": request.form.get("phone"),
         }
-        # 2. Guardamos la dirección de facturación en la sesión
-        session["billing_address"] = billing_address
 
-        if coupon:
-            session["order_discount"] = {
-                "code": coupon["code"],
-                "amount": discount_amount,
-            }
-
+        # 2. Generamos el token de seguridad y el pedido pendiente
+        order_token = secrets.token_hex(16)
+        session["pending_order"] = {
+            "token": order_token,
+            "cart": cart,
+            "billing_address": billing_address,
+            "coupon": coupon,
+        }
         session.modified = True
 
+        # 3. Construimos la URL del banco y redirigimos
+        success_url = url_for("order_success", _external=True, order_token=order_token)
+        cancel_url = url_for("order_cancel", _external=True)
         payment_path = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
-
-        # (El resto de la lógica para los parámetros de retorno es opcional pero recomendado)
-        return_params = {
-            "successUrl": url_for("order_success", _external=True),
-            "cancelUrl": url_for("order_cancel", _external=True),
-        }
-        final_gateway_url = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
+        return_params = {"successUrl": success_url, "cancelUrl": cancel_url}
+        final_gateway_url = payment_path + "?" + urllib.parse.urlencode(return_params)
 
         print("Redirigiendo a:", final_gateway_url)
-
         return redirect(final_gateway_url)
 
-    # La parte del GET no cambia
+    # --- Lógica que se ejecuta SOLO al visitar la página (GET) ---
+    # Si la petición no fue un POST, simplemente mostramos la página del formulario.
+    billing_address = session.get("billing_address", {})
     return render_template(
         "checkout.html",
         cart=cart,
         subtotal=subtotal,
         total=total,
-        active_page="checkout",
         discount_amount=discount_amount,
         billing_address=billing_address,
         body_class="page-checkout",
@@ -557,44 +628,99 @@ def get_cart_data():
 # ==============================================================================
 # === CONFIRMACIÓN DE PAGO    ==================================================
 # ==============================================================================
+# ARCHIVO: app.py
+
+
 @app.route("/order/success")
 def order_success():
-    cart = session.get("cart", {})
-    # LEEMOS los datos de la sesión. Si no existen, usamos un dict vacío para evitar errores.
-    billing_address = session.get("billing_address", {})
-    # Leemos los datos del descuento de la sesión
-    discount_info = session.get("order_discount", None)
+    # Obtenemos el token de esta variable temporal en lugar de la URL
+    token_from_session = session.pop("last_order_token", None)
+    pending_order = session.get("pending_order")
 
+    # La comprobación de seguridad ahora usa el token de la sesión
     if (
-        not cart and not billing_address
-    ):  # Si no hay ni carrito ni dirección, es un acceso inválido
+        not token_from_session
+        or not pending_order
+        or token_from_session != pending_order.get("token")
+    ):
         return redirect(url_for("home"))
 
-    # Calculamos subtotal y total de nuevo para la confirmación
+    # --- SI LA VERIFICACIÓN ES EXITOSA, PROCEDEMOS A CREAR EL PEDIDO ---
+
+    # 3. Recuperamos los datos del pedido pendiente (en lugar de la sesión principal)
+    cart = pending_order.get("cart", {})
+    billing_address = pending_order.get("billing_address", {})
+    coupon = pending_order.get(
+        "coupon"
+    )  # Usamos el cupón guardado en el pedido pendiente
+
+    # Esto ya no es necesario, lo reemplazamos con los datos del pending_order
+    # discount_info = session.get('order_discount', None)
+
+    # Verificamos de nuevo que el carrito no esté vacío por si acaso
+    if not cart:
+        return redirect(url_for("home"))
+
+    # --- GUARDAR DESCARGAS (Tu lógica original, ahora usando los datos seguros) ---
+    # 1. Inicializamos la lista de descargas si no existe
+    if "downloads" not in session:
+        session["downloads"] = []
+
+    # 2. Creamos una lista de los nuevos items a descargar de esta compra
+    new_downloads = []
+    for item in cart.values():
+        new_downloads.append(
+            {"name": item["name"], "download_file": item["download_file"]}
+        )
+
+    # 3. Añadimos los nuevos items al PRINCIPIO de la lista de descargas existente
+    current_downloads = session.get("downloads", [])
+    unique_new_downloads = [d for d in new_downloads if d not in current_downloads]
+    session["downloads"] = unique_new_downloads + current_downloads
+
+    # --- LÓGICA PARA CREAR Y GUARDAR EL PEDIDO (Tu lógica original) ---
     subtotal = sum(
         float(item["price"].replace("$", "")) * item["quantity"]
         for item in cart.values()
     )
-    discount_amount = discount_info["amount"] if discount_info else 0
+
+    discount_amount = 0
+    if coupon:
+        if coupon["type"] == "percent":
+            discount_amount = (subtotal * coupon["value"]) / 100
+        else:
+            discount_amount = coupon["value"]
+
     total = subtotal - discount_amount
 
-    order_details = {
+    # 1. Creamos el objeto del pedido
+    new_order = {
         "number": random.randint(1000, 9999),
         "date": datetime.now().strftime("%B %d, %Y"),
-        "subtotal": "%.2f" % subtotal,
-        "total": "%.2f" % total,
-        "discount_info": discount_info,  # Pasamos la info del descuento
-        "payment_method": "Fleeca Bank",
+        "status": "Completed",
+        "total": total,
         "products": list(cart.values()),
         "billing_address": billing_address,
     }
 
-    session.pop("cart", None)
-    session.pop("billing_address", None)
-    session.pop("order_discount", None)
+    # 2. Inicializamos la lista de pedidos en la sesión si no existe
+    if "orders" not in session:
+        session["orders"] = []
 
+    # 3. Añadimos el nuevo pedido al PRINCIPIO de la lista
+    session["orders"].insert(0, new_order)
+
+    # 4. Limpiamos la sesión de los datos de la compra actual
+    session.pop("pending_order", None)
+    session.pop("cart", None)
+    session.pop(
+        "coupon", None
+    )  # Limpiamos el cupón general, ya que 'pending_order' se ha ido
+    session.modified = True
+
+    # 5. Pasamos el pedido recién creado a la página de confirmación
     return render_template(
-        "order_success.html", order=order_details, body_class="order-success-page"
+        "order_success.html", order=new_order, body_class="order-success-page"
     )
 
 

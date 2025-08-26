@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="account-page-layout">
+        <!-- Sidebar (se mantiene igual) -->
+        <aside class="account-sidebar">
+            <h2>DASHBOARD</h2>
+            <nav class="account-nav">
+                <ul>
+                    <li><a href="{{ url_for('my_account_page') }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('my_account_orders') }}" class="active">Orders</a></li>
+                    <li><a href="{{ url_for('my_account_downloads') }}">Downloads</a></li>
+                    <li><a href="{{ url_for('wishlist_page') }}">Wishlist</a></li>
+                    <li><a href="{{ url_for('logout') }}">Log out</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Contenido Principal: Detalles del Pedido -->
+        <main class="account-content">
+            <header class="view-order-header">
+                <i class="fa-solid fa-box"></i>
+                <h2>Order #{{ order.number }}</h2>
+            </header>
+
+            <section class="order-summary-bar">
+                <div class="summary-item">
+                    <span>Order Number</span>
+                    <strong>{{ order.number }}</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Status</span>
+                    <strong class="status-{{ order.status|lower }}">{{ order.status }}</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Date</span>
+                    <strong>{{ order.date }}</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Total</span>
+                    <strong>${{ "%.2f"|format(order.total) }}</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Payment method</span>
+                    <strong>{{ order.payment_method }}</strong>
+                </div>
+            </section>
+
+            <div class="order-details-box">
+                <h3>Your order</h3>
+                <div class="order-table">
+                    <div class="order-row header"><span>Product</span><span>Total</span></div>
+                    {% for item in order.products %}
+                    <div class="order-row">
+                        <span>{{ item.name }} &times; {{ item.quantity }}</span>
+                        <strong>${{ "%.2f"|format(item.price|replace('$', '')|float * item.quantity) }}</strong>
+                    </div>
+                    {% endfor %}
+                    <!-- Aquí podrías añadir Subtotal y Descuento si los tuvieras guardados -->
+                    <div class="order-row total">
+                        <strong>Total:</strong>
+                        <strong>${{ "%.2f"|format(order.total) }}</strong>
+                    </div>
+                    <div class="order-row">
+                        <span>Payment method:</span>
+                        <span>{{ order.payment_method }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="billing-address-details">
+                <h3>Billing Address</h3>
+                <address>
+                    {{ order.billing_address.firstname }} {{ order.billing_address.lastname }}<br>
+                    {{ order.billing_address.apartment }}<br>
+                    {{ order.billing_address.discord }}<br>
+                    {{ order.billing_address.phone }}
+                </address>
+            </div>
+
+            <div class="back-link-container">
+                <a href="{{ url_for('my_account_orders') }}" class="back-to-list-btn">
+                    <i class="fa-solid fa-arrow-left"></i> Back to list
+                </a>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}

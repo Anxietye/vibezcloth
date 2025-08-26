@@ -138,11 +138,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 3. LÓGICA DE LA PÁGINA DE PRODUCTO DETALLADO (CORREGIDA) ---
+    // --- 3. LÓGICA DE LA PÁGINA DE PRODUCTO DETALLADO (CON AUTENTICACIÓN) ---
     const mainImage = document.getElementById('main-product-image');
     const thumbnails = document.querySelectorAll('.thumbnail-img');
     const colorSelector = document.getElementById('color-selector');
     const addToCartBtn = document.getElementById('add-to-cart-btn');
+    const productDetailPage = document.querySelector('.product-detail-page'); // <-- Necesario
+
+    // Obtenemos el estado de login desde el HTML
+    const isAuthenticated = productDetailPage && productDetailPage.dataset.isAuthenticated === 'true';
 
     // Lógica de la Galería de Miniaturas
     if (mainImage && thumbnails.length > 0) {
@@ -157,13 +161,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // 3. SINCRONIZACIÓN: Seleccionamos el botón de color correspondiente
                 const colorOfThumbnail = thumbnail.dataset.color;
-                const colorOptions = colorSelector.querySelectorAll('.color-option');
-                colorOptions.forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.color === colorOfThumbnail);
-                });
+                if (colorSelector) { // Comprobamos si existe el selector de color
+                    const colorOptions = colorSelector.querySelectorAll('.color-option');
+                    colorOptions.forEach(btn => {
+                        btn.classList.toggle('active', btn.dataset.color === colorOfThumbnail);
+                    });
+                }
 
                 // 4. Actualizamos el estado del botón "Add to Cart"
-                if (addToCartBtn) {
+                if (addToCartBtn && colorSelector) {
                     const selectedColors = colorSelector.querySelectorAll('.color-option.active');
                     addToCartBtn.disabled = selectedColors.length === 0;
                 }
@@ -183,48 +189,53 @@ document.addEventListener('DOMContentLoaded', () => {
         colorOptions.forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
-
-                // --- CAMBIO 1: Habilitamos la selección múltiple ---
-                // Simplemente alterna la clase 'active' en el botón clickeado.
                 button.classList.toggle('active');
 
-                // Si se acaba de activar un color, actualizamos la imagen principal a ese color.
                 if (button.classList.contains('active')) {
                     if (mainImage) mainImage.src = button.dataset.imageSrc;
-                    // También actualizamos la miniatura correspondiente.
                     thumbnails.forEach(thumb => {
                         thumb.classList.toggle('active', thumb.dataset.imageSrc === button.dataset.imageSrc);
                     });
                 }
-
                 checkSelection();
             });
         });
 
-        addToCartBtn.addEventListener('click', () => {
-            const productId = addToCartBtn.dataset.productId;
+        // --- LÓGICA CONDICIONAL PARA EL BOTÓN "ADD TO CART" ---
+        if (isAuthenticated) {
+            // --- Si el usuario ESTÁ logueado, funciona normal ---
+            addToCartBtn.addEventListener('click', () => {
+                const productId = addToCartBtn.dataset.productId;
+                const selectedButtons = colorSelector.querySelectorAll('.color-option.active');
+                const selectedColors = Array.from(selectedButtons).map(btn => btn.dataset.color);
 
-            // --- CAMBIO 2: Recopilamos TODOS los colores seleccionados ---
-            const selectedButtons = colorSelector.querySelectorAll('.color-option.active');
-            const selectedColors = Array.from(selectedButtons).map(btn => btn.dataset.color);
+                fetch(`/add_to_cart/${productId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ colors: selectedColors })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            updateCartView();
+                            updateCartCounter();
+                            openCart();
+                            selectedButtons.forEach(btn => btn.classList.remove('active'));
+                            checkSelection();
+                        }
+                    });
+            });
+        } else {
+            // --- Si el usuario NO está logueado, redirige al login ---
+            // Habilitamos el botón para que sea clicable
+            addToCartBtn.disabled = false;
+            addToCartBtn.textContent = 'Sign in to purchase';
 
-            fetch(`/add_to_cart/${productId}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ colors: selectedColors })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        updateCartView();
-                        updateCartCounter();
-                        openCart();
-                        // Opcional pero recomendado: Deseleccionamos los colores después de añadir
-                        selectedButtons.forEach(btn => btn.classList.remove('active'));
-                        checkSelection();
-                    }
-                });
-        });
+            addToCartBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = '/login';
+            });
+        }
 
         checkSelection(); // Comprobación inicial
     }

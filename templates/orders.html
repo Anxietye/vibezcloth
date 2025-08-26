@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="account-page-layout">
+        <!-- Sidebar (igual que en my_account.html) -->
+        <aside class="account-sidebar">
+            <h2>DASHBOARD</h2>
+            <nav class="account-nav">
+                <ul>
+                    <li><a href="{{ url_for('my_account_page') }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('my_account_orders') }}" class="active">Orders</a></li>
+                    <li><a href="{{ url_for('my_account_downloads') }}">Downloads</a></li>
+                    <li><a href="{{ url_for('wishlist_page') }}">Wishlist</a></li>
+                    <li><a href="{{ url_for('logout') }}">Log out</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Contenido Principal: Tabla de Pedidos -->
+        <main class="account-content">
+            <h2>Orders</h2>
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>Order</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>#{{ order.number }}</td>
+                        <td>{{ order.date }}</td>
+                        <td>{{ order.status }}</td>
+                        <td>${{ "%.2f"|format(order.total) }} for {{ order.products|length }} item(s)</td>
+                        <td>
+                            <a href="{{ url_for('view_order_page', order_number=order.number) }}"
+                                class="orders-action-btn">View</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="no-orders-msg">
+                            No order has been made yet. <a href="{{ url_for('home') }}" class="accent-link">Go
+                                shopping</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+    </div>
+</div>
+{% endblock %}

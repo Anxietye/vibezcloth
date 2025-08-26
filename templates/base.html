@@ -15,47 +15,77 @@
 <body class="{{ body_class or '' }}">
 
     <header>
+        <!-- ARCHIVO: templates/base.html (dentro de <header>) -->
+
         <div class="container">
             <nav class="main-nav">
-                <div class="logo">
+                <!-- Columna Izquierda: Logo -->
+                <div class="nav-left">
                     <a href="{{ url_for('home') }}">
                         <img src="{{ url_for('static', filename='images/3.png') }}" alt="VIBEZ Logo"
                             class="header-logo">
                     </a>
                 </div>
-                <ul class="nav-links">
-                    <li><a href="{{ url_for('category_page', category_name='woman') }}"
-                            class="{{ 'active' if active_page == 'woman' }}">Woman</a></li>
-                    <li><a href="{{ url_for('category_page', category_name='man') }}"
-                            class="{{ 'active' if active_page == 'man' }}">Man</a></li>
-                    <li><a href="{{ url_for('category_page', category_name='accessories') }}"
-                            class="{{ 'active' if active_page == 'accessories' }}">Accesories</a></li>
-                </ul>
-                <ul class="icon-links">
-                    <!--<li><a href="#" id="theme-toggle"><i id="theme-icon" class="fa-regular fa-sun"></i></a></li>-->
-                    <a href="{{ url_for('wishlist_page') }}" title="Wishlist"
-                        class="wishlist-icon-container {{ 'active' if active_page == 'wishlist' }}">
-                        <i class="fa-regular fa-heart"></i>
-                        <!-- 2. El <span> del contador, que será posicionado por el CSS -->
-                        <span id="wishlist-item-count" class="hidden">0</span>
-                    </a>
-                    <!-- Comprueba si 'user' existe y no es nulo ANTES de usarlo -->
-                    {% if 'user' in session and session.get('user') %}
-                    <li class="username-display">Hola, {{ session.user.username }}</li>
-                    <li><a href="{{ url_for('logout') }}" title="Logout"><i
-                                class="fa-solid fa-right-from-bracket"></i></a></li>
-                    {% else %}
-                    <!-- Si no, muestra el ícono de login -->
-                    <li><a href="{{ url_for('login') }}" title="Login"><i class="fa-regular fa-user"></i></a></li>
-                    {% endif %}
 
-                    <li>
-                        <a href="#" id="open-cart-btn" class="cart-icon-container">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                            <span id="cart-item-count" class="hidden">0</span>
-                        </a>
-                    </li>
-                </ul>
+                <!-- Columna Central: Enlaces de Navegación -->
+                <div class="nav-center">
+                    <ul class="nav-links">
+                        <li><a href="{{ url_for('category_page', category_name='woman') }}"
+                                class="{{ 'active' if active_page == 'woman' }}">Woman</a></li>
+                        <li><a href="{{ url_for('category_page', category_name='man') }}"
+                                class="{{ 'active' if active_page == 'man' }}">Man</a></li>
+                        <li><a href="{{ url_for('category_page', category_name='accessories') }}"
+                                class="{{ 'active' if active_page == 'accessories' }}">Accesories</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna Derecha: Iconos y Usuario -->
+                <div class="nav-right">
+                    <ul class="icon-links">
+
+                        {% if 'user' in session and session.get('user') %}
+                        <li>
+                            <a href="{{ url_for('wishlist_page') }}" title="Wishlist"
+                                class="wishlist-icon-container {{ 'active' if active_page == 'wishlist' }}">
+                                <i class="fa-regular fa-heart"></i>
+                                <span id="wishlist-item-count" class="hidden">0</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        <!-- 2. Lógica para Usuario/Login -->
+                        {% if 'user' in session and session.get('user') %}
+                        <!-- Si está logueado, muestra enlace al dashboard y logout -->
+                        <li>
+                            <a href="{{ url_for('my_account_page') }}" title="My Account"
+                                class="{{ 'active' if active_page == 'my-account' }}">
+                                <i class="fa-solid fa-user"></i>
+                            </a>
+                        </li>
+                        <!-- Y también mostramos el botón de logout 
+                        <li>
+                            <a href="{{ url_for('logout') }}" title="Logout"><i
+                                    class="fa-solid fa-right-from-bracket"></i></a>
+                        </li>-->
+                        {% else %}
+                        <!-- Si no, muestra el ícono de login -->
+                        <li>
+                            <a href="{{ url_for('login') }}" title="Login">
+                                <i class="fa-regular fa-user"></i> <!-- Usamos el ícono regular para "invitado" -->
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        <!-- 3. Icono del Carrito de Compras -->
+                        <li>
+                            <a href="#" id="open-cart-btn" class="cart-icon-container">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                <span id="cart-item-count" class="hidden">0</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
             </nav>
         </div>
     </header>
@@ -106,7 +136,7 @@
                 <strong>Subtotal:</strong>
                 <span id="cart-subtotal">$0.00</span>
             </div>
-            <button class="checkout-btn">PROCEED TO CHECKOUT</button>
+            <a href="{{ url_for('checkout') }}" class="checkout-btn">PROCEED TO CHECKOUT</a>
         </footer>
     </aside>
 

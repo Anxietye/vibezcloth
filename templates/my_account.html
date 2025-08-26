@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+    <div class="account-page-layout">
+        <!-- COLUMNA IZQUIERDA: NAVEGACIÓN DEL DASHBOARD -->
+        <aside class="account-sidebar">
+            <h2>MY ACCOUNT</h2>
+            <nav class="account-nav">
+                <ul>
+                    <li><a href="{{ url_for('my_account_page') }}" class="active">Dashboard</a></li>
+                    <li><a href="{{ url_for('my_account_orders') }}">Orders</a></li>
+                    <li><a href="{{ url_for('my_account_downloads') }}">Downloads</a></li>
+                    <li><a href="{{ url_for('wishlist_page') }}">Wishlist</a></li>
+                    <li><a href="{{ url_for('logout') }}">Log out</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- COLUMNA DERECHA: CONTENIDO PRINCIPAL -->
+        <main class="account-content">
+            {% if session.user %}
+            <p>Hello <strong>{{ session.user.username }}</strong> (not {{ session.user.username }}? <a
+                    href="{{ url_for('logout') }}" class="logout-link">Log out</a>)</p>
+            {% endif %}
+            <p>From your account dashboard you can view your recent orders, manage your shipping and billing addresses,
+                and edit your password and account details.</p>
+        </main>
+    </div>
+</div>
+{% endblock %}

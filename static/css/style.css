@@ -163,6 +163,7 @@ body>header {
 .username-display {
     font-size: 0.9rem;
     font-weight: bold;
+    /*display: none!important;*/
 }
 
 /* ==========================================================================
@@ -1145,6 +1146,12 @@ footer {
     opacity: 0.9;
 }
 
+.checkout-btn {
+    display: flex;
+    justify-content: center; /* Centra el texto horizontalmente */
+    align-items: center;     /* Centra el texto verticalmente */
+}
+
 .purchase-button:disabled {
     background-color: #555;
     color: #999;
@@ -1595,4 +1602,248 @@ footer {
 .meta-value {
     font-weight: bold;
     color: var(--primary-text-color);
+}
+
+/* ==========================================================================
+   11. PÁGINA DE MI CUENTA (DASHBOARD)
+   ========================================================================== */
+
+.account-page-layout {
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* Sidebar ocupa 1/4, contenido 3/4 */
+    gap: 3rem;
+    padding: 2rem 0;
+}
+
+/* --- Barra Lateral --- */
+.account-sidebar h2 {
+    margin-top: 0;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+}
+
+.account-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.account-nav a {
+    display: block;
+    padding: 0.8rem 0;
+    color: var(--secondary-text-color);
+    font-weight: bold;
+    border-bottom: 1px solid var(--border-color);
+    transition: color 0.2s;
+}
+
+.account-nav a:hover {
+    color: var(--accent-color);
+}
+
+.account-nav a.active {
+    color: var(--accent-color);
+}
+
+/* --- Contenido Principal --- */
+.account-content p {
+    line-height: 1.8;
+    color: var(--secondary-text-color);
+}
+
+.account-content p strong {
+    color: var(--primary-text-color);
+}
+
+.account-content .logout-link, .account-footer .accent-link {
+    color: var(--accent-color);
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.account-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.account-footer h4 {
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+}
+
+/* --- Estilos para la Tabla de Historial de Pedidos --- */
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+.orders-table thead {
+    border-bottom: 2px solid var(--border-color);
+}
+.orders-table th {
+    padding: 1rem;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: var(--secondary-text-color);
+}
+.orders-table td {
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--secondary-text-color);
+    font-weight: bold;
+}
+.orders-table td:first-child {
+    color: var(--primary-text-color);
+}
+.orders-table tbody tr:last-child td {
+    border-bottom: none;
+}
+.orders-action-btn {
+    background-color: var(--border-color);
+    color: var(--primary-text-color);
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+.orders-action-btn:hover {
+    background-color: var(--accent-color);
+    color: #000;
+}
+.no-orders-msg {
+    text-align: center;
+    padding: 3rem;
+}
+
+/* --- Estilos para la Tabla de Descargas en Mi Cuenta --- */
+.account-content h2 i {
+    margin-right: 0.75rem;
+}
+.downloads-table-account {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+.downloads-table-account thead {
+    border-bottom: 2px solid var(--border-color);
+}
+.downloads-table-account th {
+    padding: 1rem;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: var(--secondary-text-color);
+}
+.downloads-table-account td {
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--secondary-text-color);
+    font-weight: bold;
+}
+.downloads-table-account tbody tr:last-child td {
+    border-bottom: none;
+}
+.download-btn {
+    background-color: var(--border-color);
+    color: var(--primary-text-color);
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: all 0.2s;
+    display: inline-block;
+}
+.download-btn:hover {
+    background-color: var(--accent-color);
+    color: #000;
+}
+
+/* --- Estilos para la página de Ver Pedido --- */
+.view-order-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+.view-order-header i {
+    font-size: 2rem;
+    color: var(--secondary-text-color);
+}
+.view-order-header h2 {
+    margin: 0;
+}
+
+/* Reutilizamos el estilo de la barra de resumen de order_success */
+.order-summary-bar {
+    display: flex; /* La clave: pone los items en una fila */
+    justify-content: space-between; /* Distribuye el espacio entre ellos */
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--card-bg-color); /* Fondo consistente */
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+.summary-item {
+    display: flex;
+    flex-direction: column; /* Apila la etiqueta y el valor */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.summary-item span {
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+}
+
+.summary-item strong {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.status-completed { color: var(--accent-color); }
+.status-cancelled { color: #ff5555; }
+
+.order-details-box, .billing-address-details {
+    margin-top: 2rem;
+    padding: 2rem;
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+.order-details-box h3, .billing-address-details h3 {
+    margin-top: 0;
+}
+
+.back-to-list-btn {
+    display: inline-block;
+    margin-top: 2rem;
+    background-color: var(--border-color);
+    color: var(--primary-text-color);
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+.back-to-list-btn:hover {
+    background-color: var(--accent-color);
+    color: #000;
+}
+.back-to-list-btn i {
+    margin-right: 0.5rem;
+}
+
+/* ARCHIVO: static/css/style.css */
+
+/* AÑADE ESTA NUEVA REGLA */
+
+.back-link-container {
+    display: flex;
+    justify-content: flex-end; /* La clave: empuja el contenido al final (derecha) */
+    margin-top: 0.2rem;
+}
+
+/* Modificamos ligeramente el botón para que no ocupe todo el ancho */
+.back-to-list-btn {
+    display: inline-block; /* Le permite tener un ancho definido por su contenido */
+    width: auto; /* Ancho automático */
+    /* ... (el resto de tus estilos para el botón se quedan igual) ... */
 }
