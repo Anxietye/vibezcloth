@@ -65,13 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const cartData = data.cart;
             cartItemsContainer.innerHTML = '';
             let subtotal = 0;
-            const cartFooter = document.querySelector('.cart-footer');
-
             if (Object.keys(cartData).length === 0) {
                 cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your cart is empty.</p>';
-                if (cartFooter) cartFooter.classList.add('is-empty');
             } else {
-                if (cartFooter) cartFooter.classList.remove('is-empty');
                 for (const itemId in cartData) {
                     const item = cartData[itemId];
                     const itemEl = document.createElement('div');
@@ -82,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="item-name">${item.name}</span>
                             <span class="item-price">${item.price} x ${item.quantity}</span>
                         </div>
-                        <button class="remove-item-btn" data-item-id="${itemId}">×</button> 
+                        <button class="remove-item-btn" data-product-id="${itemId}">×</button> 
                     `;
                     cartItemsContainer.appendChild(itemEl);
                     const price = parseFloat(item.price.replace('$', ''));
@@ -90,12 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             cartSubtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-
-            // <-- SOLUCIÓN: Este bloque completo ha sido ELIMINADO para arreglar el botón 'Proceed to Checkout'.
-            // La navegación ahora la controla 100% el href del <a> en base.html.
-            // const checkoutBtn = document.querySelector('.checkout-btn');
-            // if (checkoutBtn) { ... }
-
+            const checkoutBtn = document.querySelector('.checkout-btn');
+            if (checkoutBtn) {
+                checkoutBtn.textContent = 'PROCEED TO CHECKOUT';
+                checkoutBtn.onclick = () => { window.location.href = '/checkout'; };
+                checkoutBtn.style.display = Object.keys(cartData).length > 0 ? 'block' : 'none';
+            }
         } catch (error) {
             console.error("Error actualizando vista del carrito:", error);
         }
@@ -133,9 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
     if (cartItemsContainer) {
         cartItemsContainer.addEventListener('click', (event) => {
-            const removeBtn = event.target.closest('.remove-item-btn'); // <-- SOLUCIÓN: Usamos .closest() para más robustez.
-            if (removeBtn) {
-                const itemId = removeBtn.dataset.itemId; // <-- SOLUCIÓN: Usamos el data-attribute correcto.
+            if (event.target.classList.contains('remove-item-btn')) {
+                const itemId = event.target.dataset.productId;
                 fetch(`/remove_from_cart/${itemId}`, { method: 'POST' })
                     .then(response => response.json())
                     .then(data => { if (data.success) { updateCartView(); updateCartCounter(); } });

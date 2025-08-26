@@ -371,33 +371,27 @@ def product_detail(category_name, product_slug):
 
 @app.route("/checkout", methods=["GET", "POST"])
 def checkout():
+    # --- Lógica que se ejecuta para AMBAS peticiones (GET y POST) ---
     cart = session.get("cart", {})
     if not cart:
         return redirect(url_for("home"))
-
-    # Recuperamos la dirección de facturación guardada, si existe
-    billing_address = session.get("billing_address", {})
 
     subtotal = sum(
         float(item["price"].replace("$", "")) * item["quantity"]
         for item in cart.values()
     )
-
-    # --- LÓGICA DE CUPÓN ---
     coupon = session.get("coupon")
     discount_amount = 0
     if coupon:
         if coupon["type"] == "percent":
             discount_amount = (subtotal * coupon["value"]) / 100
-        elif coupon["type"] == "fixed":
+        else:
             discount_amount = coupon["value"]
+    total = max(0, subtotal - discount_amount)
 
-    total = max(
-        0, subtotal - discount_amount
-    )  # Aseguramos que el total no sea negativo
-
+    # --- Lógica que se ejecuta SOLO al enviar el formulario (POST) ---
     if request.method == "POST":
-        # 1. Recopilamos los datos del cliente del formulario
+        # 1. Recopilamos y guardamos la dirección
         billing_address = {
             "firstname": request.form.get("firstname"),
             "lastname": request.form.get("lastname"),
@@ -405,51 +399,36 @@ def checkout():
             "discord": request.form.get("discord"),
             "phone": request.form.get("phone"),
         }
+        session["billing_address"] = billing_address
 
-    # 2. Obtenemos el carrito y el cupón actual para guardarlos temporalmente
-    cart_snapshot = session.get("cart", {})
-    coupon_snapshot = session.get("coupon")
+        # 2. Generamos el token de seguridad y el pedido pendiente
+        order_token = secrets.token_hex(16)
+        session["pending_order"] = {
+            "token": order_token,
+            "cart": cart,
+            "billing_address": billing_address,
+            "coupon": coupon,
+        }
+        session.modified = True
 
-    # --- NUEVA LÓGICA DE SEGURIDAD ---
-    # 3. Generamos un token de pedido único y seguro
-    order_token = secrets.token_hex(16)
+        # 3. Construimos la URL del banco y redirigimos
+        success_url = url_for("order_success", _external=True, order_token=order_token)
+        cancel_url = url_for("order_cancel", _external=True)
+        payment_path = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
+        return_params = {"successUrl": success_url, "cancelUrl": cancel_url}
+        final_gateway_url = payment_path + "?" + urllib.parse.urlencode(return_params)
 
-    # 4. Guardamos un "pedido pendiente" en la sesión.
-    #    Esto contiene toda la información necesaria para crear el pedido DESPUÉS de que el pago sea verificado.
-    session["pending_order"] = {
-        "token": order_token,
-        "cart": cart_snapshot,
-        "billing_address": billing_address,
-        "coupon": coupon_snapshot,
-    }
+        print("Redirigiendo a:", final_gateway_url)
+        return redirect(final_gateway_url)
 
-    # 5. Forzamos el guardado de la sesión antes de la redirección
-    session.modified = True
-
-    # 6. Construimos las URLs de retorno INCLUYENDO el token de seguridad
-    success_url = url_for("order_success", _external=True, order_token=order_token)
-    cancel_url = url_for("order_cancel", _external=True)
-
-    # 7. Construimos la URL de la pasarela de pago final
-    payment_path = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
-    return_params = {
-        "successUrl": success_url,
-        "cancelUrl": cancel_url,
-    }
-    final_gateway_url = payment_path + "?" + urllib.parse.urlencode(return_params)
-
-    # (Opcional) Imprimimos para verificar
-    print("Redirigiendo a:", final_gateway_url)
-
-    return redirect(final_gateway_url)
-
-    # La parte del GET no cambia
+    # --- Lógica que se ejecuta SOLO al visitar la página (GET) ---
+    # Si la petición no fue un POST, simplemente mostramos la página del formulario.
+    billing_address = session.get("billing_address", {})
     return render_template(
         "checkout.html",
         cart=cart,
         subtotal=subtotal,
         total=total,
-        active_page="checkout",
         discount_amount=discount_amount,
         billing_address=billing_address,
         body_class="page-checkout",
