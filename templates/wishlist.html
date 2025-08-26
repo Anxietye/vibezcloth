@@ -2,45 +2,66 @@
 
 {% block content %}
 <div class="container">
-    {% include 'partials/breadcrumbs.html' %}
 
-    <div class="wishlist-page">
-        <h1 class="page-title">My wishlist</h1>
+    <!-- Usamos el mismo layout que las otras páginas de la cuenta -->
+    <div class="account-page-layout">
 
-        <div class="wishlist-table-container">
-            <table class="wishlist-table">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Stock Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for product in wishlist %}
-                    <tr class="wishlist-item" id="wishlist-item-{{ product.id }}">
-                        <td class="product-info-wishlist">
-                            <button class="remove-wishlist-btn" data-product-id="{{ product.id }}">&times;</button>
-                            <img src="{{ url_for('static', filename=(product.color_variants.values()|first)['image']) }}"
-                                alt="{{ product.name }}">
-                            <span>{{ product.name }}</span>
-                        </td>
-                        <td class="product-price">{{ product.price }}</td>
-                        <td class="product-stock">In Stock</td>
-                        <td class="product-actions">
-                            <a href="{{ url_for('product_detail', category_name=product.category, product_slug=product.slug) }}"
-                                class="wishlist-action-btn primary">SELECT OPTIONS</a>
-                        </td>
-                    </tr>
-                    {% else %}
-                    <tr>
-                        <td colspan="4" class="empty-wishlist-msg">Your wishlist is currently empty.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+        <!-- COLUMNA IZQUIERDA: NAVEGACIÓN DEL DASHBOARD -->
+        <aside class="account-sidebar">
+            <h2>MY ACCOUNT</h2>
+            <nav class="account-nav">
+                <ul>
+                    <li><a href="{{ url_for('my_account_page') }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('my_account_orders') }}">Orders</a></li>
+                    <li><a href="{{ url_for('my_account_downloads') }}">Downloads</a></li>
+                    <li><a href="{{ url_for('wishlist_page') }}" class="active">Wishlist</a></li>
+                    <li><a href="{{ url_for('logout') }}">Log out</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- COLUMNA DERECHA: CONTENIDO PRINCIPAL (Tu tabla de Wishlist) -->
+        <main class="account-content">
+            <h2>My wishlist</h2>
+
+            <div class="wishlist-table-container">
+                <table class="wishlist-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Stock Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in wishlist %}
+                        <tr class="wishlist-item" id="wishlist-item-{{ product.id }}">
+                            <td class="product-info-wishlist">
+                                <button class="remove-wishlist-btn" data-product-id="{{ product.id }}">&times;</button>
+                                <img src="{{ url_for('static', filename=(product.color_variants.values()|first)['image']) }}"
+                                    alt="{{ product.name }}">
+                                <span>{{ product.name }}</span>
+                            </td>
+                            <td class="product-price">{{ product.price }}</td>
+                            <td class="product-stock">In Stock</td>
+                            <td class="product-actions">
+                                <a href="{{ url_for('product_detail', category_name=product.category, product_slug=product.slug) }}"
+                                    class="wishlist-action-btn primary">SELECT OPTIONS</a>
+                                <button class="wishlist-action-btn secondary quick-view-btn"
+                                    data-product-id="{{ product.id }}">Quick view</button>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4" class="empty-wishlist-msg">Your wishlist is currently empty.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
     </div>
 </div>
 {% endblock %}

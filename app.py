@@ -211,6 +211,73 @@ def get_products_by_category(category_name):
 # === RUTAS DE LA TIENDA =======================================================
 # ==============================================================================
 
+@app.route('/my-account')
+def my_account_page():
+    """Muestra la página del dashboard del usuario."""
+    # Protección de Ruta: Si no hay un usuario en la sesión, lo redirigimos al login.
+    if 'user' not in session or not session.get('user'):
+        return redirect(url_for('login'))
+    
+    breadcrumbs = [
+        {'text': 'Home', 'url': url_for('home')},
+        {'text': 'My Account', 'url': None}
+    ]
+    
+    # Pasamos active_page para que ningún otro enlace del header se resalte.
+    return render_template('my_account.html', 
+                           active_page='my-account', 
+                           breadcrumbs=breadcrumbs)
+
+@app.route('/my-account/orders')
+def my_account_orders():
+    """Muestra el historial de pedidos del usuario."""
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    
+    # Obtenemos los pedidos de la sesión. Si no hay, es una lista vacía.
+    orders = session.get('orders', [])
+    
+    return render_template('orders.html', orders=orders, active_page='my-account')
+
+@app.route('/my-account/details')
+def my_account_details(): # <-- El nombre de la función es 'my_account_details'
+    """Muestra la página de detalles de la cuenta del usuario."""
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    
+    user_data = session.get('user')
+    
+    return render_template('account_details.html', user=user_data, active_page='my-account')
+
+@app.route('/my-account/view-order/<int:order_number>')
+def view_order_page(order_number):
+    """Muestra los detalles de un pedido específico."""
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    
+    orders = session.get('orders', [])
+    
+    # Buscamos el pedido en la lista de la sesión por su número
+    order_to_view = next((order for order in orders if order.get('number') == order_number), None)
+    
+    # Si no se encuentra el pedido, redirigimos al historial
+    if not order_to_view:
+        return redirect(url_for('my_account_orders'))
+    
+    return render_template('view_order.html', 
+                           order=order_to_view,
+                           active_page='my-account')
+
+@app.route('/my-account/downloads')
+def my_account_downloads():
+    """Muestra la lista de productos descargables del usuario."""
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    
+    # Obtenemos las descargas de la sesión
+    downloads = session.get('downloads', [])
+    
+    return render_template('downloads.html', downloads=downloads, active_page='my-account')
 
 @app.route("/")
 def home():
@@ -495,45 +562,66 @@ def get_cart_data():
 # ==============================================================================
 # === CONFIRMACIÓN DE PAGO    ==================================================
 # ==============================================================================
-@app.route("/order/success")
+# ARCHIVO: app.py
+
+@app.route('/order/success')
 def order_success():
-    cart = session.get("cart", {})
-    # LEEMOS los datos de la sesión. Si no existen, usamos un dict vacío para evitar errores.
-    billing_address = session.get("billing_address", {})
-    # Leemos los datos del descuento de la sesión
-    discount_info = session.get("order_discount", None)
+    cart = session.get('cart', {})
+    billing_address = session.get('billing_address', {})
+    discount_info = session.get('order_discount', None)
+    
+    if not cart: return redirect(url_for('home'))
 
-    if (
-        not cart and not billing_address
-    ):  # Si no hay ni carrito ni dirección, es un acceso inválido
-        return redirect(url_for("home"))
+    # --- GUARDAR DESCARGAS ---
+    # 1. Inicializamos la lista de descargas si no existe
+    if 'downloads' not in session:
+        session['downloads'] = []
 
-    # Calculamos subtotal y total de nuevo para la confirmación
-    subtotal = sum(
-        float(item["price"].replace("$", "")) * item["quantity"]
-        for item in cart.values()
-    )
-    discount_amount = discount_info["amount"] if discount_info else 0
+         # 2. Creamos una lista de los nuevos items a descargar de esta compra
+    new_downloads = []
+    for item in cart.values():
+        new_downloads.append({
+            'name': item['name'],
+            'download_file': item['download_file']
+        })
+
+        # 3. Añadimos los nuevos items al PRINCIPIO de la lista de descargas existente
+    #    Usamos un truco para evitar duplicados si compran lo mismo otra vez
+    current_downloads = session['downloads']
+    # Filtramos los items nuevos que ya podrían estar en la lista
+    unique_new_downloads = [d for d in new_downloads if d not in current_downloads]
+    session['downloads'] = unique_new_downloads + current_downloads
+
+    # --- LÓGICA PARA CREAR Y GUARDAR EL PEDIDO ---
+    subtotal = sum(float(item["price"].replace("$", "")) * item["quantity"] for item in cart.values())
+    discount_amount = discount_info['amount'] if discount_info else 0
     total = subtotal - discount_amount
 
-    order_details = {
+    # 1. Creamos el objeto del pedido
+    new_order = {
         "number": random.randint(1000, 9999),
         "date": datetime.now().strftime("%B %d, %Y"),
-        "subtotal": "%.2f" % subtotal,
-        "total": "%.2f" % total,
-        "discount_info": discount_info,  # Pasamos la info del descuento
-        "payment_method": "Fleeca Bank",
+        "status": "Completed", # O podrías poner "Processing"
+        "total": total,
         "products": list(cart.values()),
-        "billing_address": billing_address,
+        "billing_address": billing_address
     }
 
-    session.pop("cart", None)
-    session.pop("billing_address", None)
-    session.pop("order_discount", None)
-
-    return render_template(
-        "order_success.html", order=order_details, body_class="order-success-page"
-    )
+    # 2. Inicializamos la lista de pedidos en la sesión si no existe
+    if 'orders' not in session:
+        session['orders'] = []
+    
+    # 3. Añadimos el nuevo pedido al PRINCIPIO de la lista
+    session['orders'].insert(0, new_order)
+    
+    # Guardamos la sesión y luego limpiamos los datos de la compra actual
+    session.modified = True
+    session.pop('cart', None)
+    session.pop('billing_address', None)
+    session.pop('order_discount', None)
+    
+    # Pasamos solo el último pedido a la página de confirmación
+    return render_template("order_success.html", order=new_order, body_class='order-success-page')
 
 
 @app.route("/order/cancel")
