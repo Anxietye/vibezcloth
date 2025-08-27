@@ -242,6 +242,24 @@ all_products = [
             },
         },
     },
+    {
+        "id": 5,
+        "category": "woman",
+        "name": "Vibez Jeans",
+        "price": "$3000",
+        "slug": "vibez-jeans",
+        "sku": "VJ-004",
+        "color_variants": {
+            "Blue": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/pantazul.png",
+                "download_file": "blue-jeans.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/pantnegro.png",
+                "download_file": "black-jeans.zip",
+            },
+        },
+    },
 ]
 # --- CUPONES
 VALID_COUPONS = {
@@ -363,7 +381,7 @@ def home():
         "index.html",
         active_page="home",
         body_class="page-home",
-        products=latest_products,
+        products=all_products 
     )
 
 

@@ -352,6 +352,62 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    // --- LÓGICA FINAL Y FUNCIONAL PARA EL CARRUSEL DE LA HOME ---
+    const track = document.getElementById('carousel-track-final');
+    const prevArrow = document.getElementById('prev-arrow-final');
+    const nextArrow = document.getElementById('next-arrow-final');
+
+    // Este código solo se ejecutará si los elementos del carrusel existen en la página
+    if (track && prevArrow && nextArrow) {
+
+        let currentIndex = 0;
+        const items = track.querySelectorAll('.carousel-item-final');
+        const totalItems = items.length;
+        const itemsToShow = 4; // El número de items que muestras a la vez
+
+        // Función para actualizar la visibilidad de las flechas
+        function updateArrows() {
+            // La flecha izquierda se deshabilita si estamos al principio
+            prevArrow.disabled = currentIndex === 0;
+            // La flecha derecha se deshabilita si ya no hay más items que mostrar
+            nextArrow.disabled = currentIndex >= totalItems - itemsToShow;
+        }
+
+        // Función para mover la tira de productos
+        function updateCarouselPosition() {
+            const itemWidth = items[0].offsetWidth; // Calculamos el ancho de un item
+            const newTransformValue = -currentIndex * itemWidth;
+            track.style.transform = `translateX(${newTransformValue}px)`;
+            updateArrows(); // Actualizamos las flechas después de cada movimiento
+        }
+
+        // Event listener para la flecha DERECHA
+        nextArrow.addEventListener('click', () => {
+            // Solo nos movemos si no hemos llegado al final
+            if (currentIndex < totalItems - itemsToShow) {
+                currentIndex++;
+                updateCarouselPosition();
+            }
+        });
+
+        // Event listener para la flecha IZQUIERDA
+        prevArrow.addEventListener('click', () => {
+            // Solo nos movemos si no estamos al principio
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarouselPosition();
+            }
+        });
+
+        // Ocultamos las flechas si no hay suficientes productos para desplazar
+        if (totalItems <= itemsToShow) {
+            prevArrow.style.display = 'none';
+            nextArrow.style.display = 'none';
+        }
+
+        // Establecemos el estado inicial de las flechas al cargar la página
+        updateArrows();
+    }
     // --- LÓGICA DE CUPONES EN LA PÁGINA DE CHECKOUT ---
     const checkoutPage = document.querySelector('.checkout-page');
     if (checkoutPage) {
