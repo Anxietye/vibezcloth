@@ -246,7 +246,7 @@ all_products = [
         "id": 5,
         "category": "woman",
         "name": "Vibez Jeans",
-        "price": "$3000",
+        "price": "$3500",
         "slug": "vibez-jeans",
         "sku": "VJ-004",
         "color_variants": {
@@ -257,6 +257,32 @@ all_products = [
             "Black": {  # Color 'Azul' usa la imagen woman3.jpg
                 "image": "images/pantnegro.png",
                 "download_file": "black-jeans.zip",
+            },
+        },
+    },
+    {
+        "id": 6,
+        "category": "woman",
+        "name": "Sports pants",
+        "price": "$3200",
+        "slug": "sports-pants",
+        "sku": "SP-040",
+        "color_variants": {
+            "Blue": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/bluepant.png",
+                "download_file": "sp-blue.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/blackpant.png",
+                "download_file": "sp-black.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/redpant.png",
+                "download_file": "sp-red.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/whitepant.png",
+                "download_file": "sp-white.zip",
             },
         },
     },
@@ -378,10 +404,7 @@ def home():
     latest_products = all_products[:8]
 
     return render_template(
-        "index.html",
-        active_page="home",
-        body_class="page-home",
-        products=all_products 
+        "index.html", active_page="home", body_class="page-home", products=all_products
     )
 
 
