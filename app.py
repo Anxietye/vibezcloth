@@ -22,20 +22,19 @@ app = Flask(__name__)
 # ==============================================================================
 
 # --- CONFIGURACIÓN DE LA APP Y OAUTH ---
-# Tu Client Secret debe ser privado. Idealmente, se carga desde variables de entorno.
 app.secret_key = "KnChzlbMneQFKL1yMbeUji0juPLQCMKT1h0C4eXE"
 CLIENT_ID = "62"
 CLIENT_SECRET = "KnChzlbMneQFKL1yMbeUji0juPLQCMKT1h0C4eXE"
 
-# Asegúrate de que esta URL está registrada en el panel de GTA.world
-# Para desarrollo local, debería ser: 'http://127.0.0.1:5000/auth/callback'
-REDIRECT_URI = "https://vibezp.onrender.com/auth/callback"
+# ESTA ES LA LÍNEA MÁS IMPORTANTE - DEBE COINCIDIR CON TU PANEL
+# Basado en tus datos, esta es la configuración correcta.
+REDIRECT_URI = "https://vibezcloth.onrender.com/auth/callback"
 
 AUTHORIZATION_URL = "https://ucp.gta.world/oauth/authorize"
 TOKEN_URL = "https://ucp.gta.world/oauth/token"
 USER_API_URL = "https://ucp.gta.world/api/user"
 
-#### API KEY DE BANKING
+# --- API KEY DE BANKING ---
 BANKING_GATEWAY_URL = "https://banking.gta.world/gateway/"
 BANKING_AUTH_KEY = "0EkAqPyV7mx2NVvoni2TV1O3KXIiOVTWZ3dFtR6d5BRSlNbIWZgBSxAzr3Q4ExPQ"
 
@@ -263,7 +262,7 @@ all_products = [
     {
         "id": 6,
         "category": "woman",
-        "name": "Sports pants",
+        "name": "Sports Pants",
         "price": "$3200",
         "slug": "sports-pants",
         "sku": "SP-040",
