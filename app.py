@@ -285,6 +285,32 @@ all_products = [
             },
         },
     },
+        {
+        "id": 7,
+        "category": "woman",
+        "name": "Oversized Band T-Shirts",
+        "price": "$4000",
+        "slug": "oversized-band-shirts",
+        "sku": "OS-001",
+        "color_variants": {
+            "Metallica": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/metallica.png",
+                "download_file": "Metallica.zip",
+            },
+            "Iron Maiden": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/ironmaiden.png",
+                "download_file": "Iron-Maiden.zip",
+            },
+            "Black Sabbath": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/blacksabbath.png",
+                "download_file": "Black-Sabbath.zip",
+            },
+            "Skulls": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/skulls.png",
+                "download_file": "Skulls.zip",
+            },
+        },
+    },
 ]
 # --- CUPONES
 VALID_COUPONS = {
