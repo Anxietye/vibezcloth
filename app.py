@@ -285,7 +285,7 @@ all_products = [
             },
         },
     },
-        {
+    {
         "id": 7,
         "category": "woman",
         "name": "Oversized Band T-Shirts",
@@ -311,14 +311,77 @@ all_products = [
             },
         },
     },
+    {
+        "id": 8,
+        "category": "woman",
+        "name": "Custom Sneaker",
+        "price": "$15000",
+        "slug": "custom-sneaker",
+        "sku": "CS-101",
+        "color_variants": {
+            "Billie Eilish": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/Billie.png",
+                "download_file": "Billie-Eilish.zip",
+            },
+            "Blue Flowers": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-Flowers.png",
+                "download_file": "Blue-Flowers.zip",
+            },
+            "Butterflies": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Butterflies.png",
+                "download_file": "Butterflies.zip",
+            },
+            "BW Cartoon": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/BW-Cartoon.png",
+                "download_file": "BW-Cartoon.zip",
+            },
+            "Cherry Flowers": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Cherry.png",
+                "download_file": "Cherry-Flowers.zip",
+            },
+            "Classic": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Classic.png",
+                "download_file": "Classic.zip",
+            },
+            "Melted": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Melted.png",
+                "download_file": "Melted.zip",
+            },
+            "Pikachu": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Pikachu.png",
+                "download_file": "Pikachu.zip",
+            },
+            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Pinky.png",
+                "download_file": "Pinky.zip",
+            },
+            "Stitch": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Stitch.png",
+                "download_file": "Stitch.zip",
+            },
+            "Sunflower": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Sunflower.png",
+                "download_file": "Sunflower.zip",
+            },
+            "White Cartoon": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-Cartoon.png",
+                "download_file": "White-Cartoon.zip",
+            },
+            "All-White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/All-White.png",
+                "download_file": "All-White.zip",
+            },
+        },
+    },
 ]
 # --- CUPONES
 VALID_COUPONS = {
     "VIBE5": {"type": "percent", "value": 5},  # 5% de descuento
     "CLOTH1": {"type": "percent", "value": 10},  # 10% de descuento
-    "VZ2604": {"type": "fixed", "value": 15},  # $15 de descuento fijo
+    "VZ2604": {"type": "percent", "value": 15},  # $15 de descuento fijo
     "SAVEBIG": {"type": "percent", "value": 25},  # 25% de descuento
-    "TAKE10": {"type": "fixed", "value": 10},  # $10 de descuento fijo
+    "TAKE10": {"type": "percent", "value": 10},  # $10 de descuento fijo
+    "LAUNCH40": {"type": "percent", "value": 40},  # $40 de descuento fijo
 }
 COUPONS_ENABLED = False
 
