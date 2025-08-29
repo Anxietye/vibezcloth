@@ -367,7 +367,7 @@ all_products = [
                 "image": "images/White-Cartoon.png",
                 "download_file": "White-Cartoon.zip",
             },
-            "All-White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "All-White Cartoon": {  # Color 'Azul' usa la imagen woman3.jpg
                 "image": "images/All-White.png",
                 "download_file": "All-White.zip",
             },
