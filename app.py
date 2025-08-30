@@ -383,23 +383,23 @@ all_products = [
         "color_variants": {
             "Dark Star": {  # Color 'Negro' usa la imagen woman1.png
                 "image": "images/DarkStar.png",
-                "download_file": "Metallica.zip",
+                "download_file": "DarkStar.zip",
             },
             "Santa Cruz": {  # Color 'Azul' usa la imagen woman3.jpg
                 "image": "images/SantaCruz.png",
-                "download_file": "Iron-Maiden.zip",
+                "download_file": "SantaCruz.zip",
             },
             "Seven Inch Girl": {  # Color 'Azul' usa la imagen woman3.jpg
                 "image": "images/SevenInch.png",
-                "download_file": "Black-Sabbath.zip",
+                "download_file": "SevenInch-Girl.zip",
             },
             "Seven Inch Blue": {  # Color 'Azul' usa la imagen woman3.jpg
                 "image": "images/SevenInch2.png",
-                "download_file": "Skulls.zip",
+                "download_file": "SevenInch-Blue.zip",
             },
             "American": {  # Color 'Azul' usa la imagen woman3.jpg
                 "image": "images/USA.png",
-                "download_file": "Skulls.zip",
+                "download_file": "American.zip",
             },
         },
     },
@@ -799,7 +799,7 @@ def get_cart_data():
 # ARCHIVO: app.py
 
 
-@app.route("/order/success", methods=["GET", "POST"])
+@app.route("/order/success", methods=['GET', 'POST'])
 def order_success():
     # --- VERIFICACIÓN DE SEGURIDAD ---
     # Comprobamos si existe un pedido pendiente. Si no, es un acceso no autorizado.
@@ -807,12 +807,14 @@ def order_success():
     if not pending_order:
         return redirect(url_for("home"))
 
-    # --- PROCESAMIENTO DEL PEDIDO (SOLO SI LA VERIFICACIÓN ES EXITOSA) ---
+    # --- PROCESAMIENTO DEL PEDIDO ---
     cart = pending_order.get("cart", {})
     billing_address = pending_order.get("billing_address", {})
     coupon = pending_order.get("coupon")
+    
+    if not cart:
+        return redirect(url_for("home"))
 
-    # Calculamos el total final a partir de los datos seguros del pedido pendiente
     subtotal = sum(
         float(item["price"].replace("$", "")) * item["quantity"]
         for item in cart.values()
@@ -825,13 +827,12 @@ def order_success():
             discount_amount = coupon["value"]
     total = subtotal - discount_amount
 
-    # Construimos el objeto del pedido final para mostrarlo
     order_details = {
         "number": random.randint(1000, 9999),
         "date": datetime.now().strftime("%B %d, %Y"),
         "status": "Completed",
         "total": total,
-        "subtotal": subtotal,  # Pasamos el subtotal para el desglose
+        "subtotal": subtotal,
         "discount_info": (
             {"code": coupon["code"], "amount": discount_amount} if coupon else None
         ),
@@ -840,12 +841,10 @@ def order_success():
         "payment_method": "Fleeca Bank",
     }
 
-    # Guardamos el pedido en el historial de 'orders'
     if "orders" not in session:
         session["orders"] = []
     session["orders"].insert(0, order_details)
 
-    # Guardamos los archivos en la lista de 'downloads'
     if "downloads" not in session:
         session["downloads"] = []
     new_downloads = [
@@ -856,13 +855,11 @@ def order_success():
     unique_new_downloads = [d for d in new_downloads if d not in current_downloads]
     session["downloads"] = unique_new_downloads + current_downloads
 
-    # Limpiamos la sesión de la compra actual
     session.pop("pending_order", None)
     session.pop("cart", None)
     session.pop("coupon", None)
     session.modified = True
 
-    # Renderizamos la página de éxito
     return render_template(
         "order_success.html", order=order_details, body_class="order-success-page"
     )
