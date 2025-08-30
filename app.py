@@ -601,15 +601,24 @@ def checkout():
         }
         session.modified = True
 
-        # 3. Construimos la URL del banco y redirigimos
-        success_url = url_for("order_success", _external=True, order_token=order_token)
-        cancel_url = url_for("order_cancel", _external=True)
-        payment_path = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
-        return_params = {"successUrl": success_url, "cancelUrl": cancel_url}
-        final_gateway_url = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
+        # --- ESTA ES LA CONSTRUCCIÓN DE URL FINAL Y CORRECTA ---
+    # 3. Preparamos TODOS los datos como un diccionario de parámetros
+    payment_params = {
+        "apiKey": BANKING_AUTH_KEY,  # Usamos 'apiKey' como nombre estándar
+        "amount": f"{total:.2f}",
+        "description": "VIBEZ Clothing Order",  # Una descripción
+        "successUrl": url_for("order_success", _external=True, order_token=order_token),
+        "cancelUrl": url_for("order_cancel", _external=True),
+    }
 
-        print("Redirigiendo a:", final_gateway_url)
-        return redirect(final_gateway_url)
+    # 4. Construimos la URL final añadiendo los parámetros después de un '?'
+    #    La URL base es simplemente la URL del gateway.
+    final_gateway_url = (
+        BANKING_GATEWAY_URL + "?" + urllib.parse.urlencode(payment_params)
+    )
+
+    print("Redirigiendo a:", final_gateway_url)
+    return redirect(final_gateway_url)
 
     # --- Lógica que se ejecuta SOLO al visitar la página (GET) ---
     # Si la petición no fue un POST, simplemente mostramos la página del formulario.
