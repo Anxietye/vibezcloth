@@ -373,6 +373,36 @@ all_products = [
             },
         },
     },
+    {
+        "id": 9,
+        "category": "accesories",
+        "name": "Skateboards",
+        "price": "$10",
+        "slug": "skateboards",
+        "sku": "SB-001",
+        "color_variants": {
+            "Dark Star": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/DarkStar.png",
+                "download_file": "Metallica.zip",
+            },
+            "Santa Cruz": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/SantaCruz.png",
+                "download_file": "Iron-Maiden.zip",
+            },
+            "Seven Inch Girl": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/SevenInch.png",
+                "download_file": "Black-Sabbath.zip",
+            },
+            "Seven Inch Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/SevenInch2.png",
+                "download_file": "Skulls.zip",
+            },
+            "American": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/USA.png",
+                "download_file": "Skulls.zip",
+            },
+        },
+    },
 ]
 # --- CUPONES
 VALID_COUPONS = {
@@ -562,27 +592,53 @@ def product_detail(category_name, product_slug):
 
 @app.route("/checkout", methods=["GET", "POST"])
 def checkout():
-    # --- Lógica que se ejecuta para AMBAS peticiones (GET y POST) ---
-    cart = session.get("cart", {})
-    if not cart:
-        return redirect(url_for("home"))
+    # --- Lógica GET (se ejecuta al visitar la página) ---
+    if request.method == "GET":
+        cart = session.get("cart", {})
+        if not cart:
+            return redirect(url_for("home"))
 
-    subtotal = sum(
-        float(item["price"].replace("$", "")) * item["quantity"]
-        for item in cart.values()
-    )
-    coupon = session.get("coupon")
-    discount_amount = 0
-    if coupon:
-        if coupon["type"] == "percent":
-            discount_amount = (subtotal * coupon["value"]) / 100
-        else:
-            discount_amount = coupon["value"]
-    total = max(0, subtotal - discount_amount)
+        billing_address = session.get("billing_address", {})
+        subtotal = sum(
+            float(item["price"].replace("$", "")) * item["quantity"]
+            for item in cart.values()
+        )
+        coupon = session.get("coupon")
+        discount_amount = 0
+        if coupon:
+            if coupon["type"] == "percent":
+                discount_amount = (subtotal * coupon["value"]) / 100
+            else:
+                discount_amount = coupon["value"]
+        total = max(0, subtotal - discount_amount)
 
-    # --- Lógica que se ejecuta SOLO al enviar el formulario (POST) ---
+        return render_template(
+            "checkout.html",
+            cart=cart,
+            subtotal=subtotal,
+            total=total,
+            discount_amount=discount_amount,
+            billing_address=billing_address,
+            body_class="page-checkout",
+            coupons_enabled=COUPONS_ENABLED,
+        )
+
+    # --- Lógica POST (se ejecuta al hacer clic en "Place Order") ---
     if request.method == "POST":
-        # 1. Recopilamos y guardamos la dirección
+        cart = session.get("cart", {})
+        subtotal = sum(
+            float(item["price"].replace("$", "")) * item["quantity"]
+            for item in cart.values()
+        )
+        coupon = session.get("coupon")
+        discount_amount = 0
+        if coupon:
+            if coupon["type"] == "percent":
+                discount_amount = (subtotal * coupon["value"]) / 100
+            else:
+                discount_amount = coupon["value"]
+        total = max(0, subtotal - discount_amount)
+
         billing_address = {
             "firstname": request.form.get("firstname"),
             "lastname": request.form.get("lastname"),
@@ -591,6 +647,7 @@ def checkout():
             "phone": request.form.get("phone"),
         }
 
+        # Guardamos un "pedido pendiente" en la sesión. Esta es la clave de seguridad.
         session["pending_order"] = {
             "cart": cart,
             "billing_address": billing_address,
@@ -598,30 +655,14 @@ def checkout():
         }
         session.modified = True
 
-        # --- ESTA ES LA CONSTRUCCIÓN DE URL FINAL Y CORRECTA ---
-        # Construimos la URL LIMPIA, sin parámetros de consulta
-        success_url = url_for("order_success", _external=True)  # <-- SIN order_token
+        # Construimos la URL del banco con las URLs de retorno LIMPIAS
+        success_url = url_for("order_success", _external=True)
         cancel_url = url_for("order_cancel", _external=True)
         payment_path = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
         return_params = {"successUrl": success_url, "cancelUrl": cancel_url}
         final_gateway_url = payment_path + "?" + urllib.parse.urlencode(return_params)
 
-        print("Redirigiendo a:", final_gateway_url)
         return redirect(final_gateway_url)
-
-    # --- Lógica que se ejecuta SOLO al visitar la página (GET) ---
-    # Si la petición no fue un POST, simplemente mostramos la página del formulario.
-    billing_address = session.get("billing_address", {})
-    return render_template(
-        "checkout.html",
-        cart=cart,
-        subtotal=subtotal,
-        total=total,
-        discount_amount=discount_amount,
-        billing_address=billing_address,
-        body_class="page-checkout",
-        coupons_enabled=COUPONS_ENABLED,
-    )
 
 
 # ==============================================================================
@@ -758,93 +799,72 @@ def get_cart_data():
 # ARCHIVO: app.py
 
 
-@app.route("/order/success")
+@app.route("/order/success", methods=["GET", "POST"])
 def order_success():
-    # --- NUEVA LÓGICA DE SEGURIDAD (MÁS SIMPLE Y ROBUSTA) ---
-    # 1. Comprobamos si existe un "pedido pendiente" en la sesión.
+    # --- VERIFICACIÓN DE SEGURIDAD ---
+    # Comprobamos si existe un pedido pendiente. Si no, es un acceso no autorizado.
     pending_order = session.get("pending_order")
-
-    # 2. Si NO hay un pedido pendiente, significa que el usuario no viene
-    #    de nuestro checkout. Es un acceso no autorizado.
     if not pending_order:
         return redirect(url_for("home"))
 
-    # --- SI LA VERIFICACIÓN ES EXITOSA, CREAMOS EL PEDIDO ---
-
-    # 3. Recuperamos los datos del pedido pendiente (en lugar de la sesión principal)
+    # --- PROCESAMIENTO DEL PEDIDO (SOLO SI LA VERIFICACIÓN ES EXITOSA) ---
     cart = pending_order.get("cart", {})
     billing_address = pending_order.get("billing_address", {})
-    coupon = pending_order.get(
-        "coupon"
-    )  # Usamos el cupón guardado en el pedido pendiente
+    coupon = pending_order.get("coupon")
 
-    # Esto ya no es necesario, lo reemplazamos con los datos del pending_order
-    # discount_info = session.get('order_discount', None)
-
-    # Verificamos de nuevo que el carrito no esté vacío por si acaso
-    if not cart:
-        return redirect(url_for("home"))
-
-    # --- GUARDAR DESCARGAS (Tu lógica original, ahora usando los datos seguros) ---
-    # 1. Inicializamos la lista de descargas si no existe
-    if "downloads" not in session:
-        session["downloads"] = []
-
-    # 2. Creamos una lista de los nuevos items a descargar de esta compra
-    new_downloads = []
-    for item in cart.values():
-        new_downloads.append(
-            {"name": item["name"], "download_file": item["download_file"]}
-        )
-
-    # 3. Añadimos los nuevos items al PRINCIPIO de la lista de descargas existente
-    current_downloads = session.get("downloads", [])
-    unique_new_downloads = [d for d in new_downloads if d not in current_downloads]
-    session["downloads"] = unique_new_downloads + current_downloads
-
-    # --- LÓGICA PARA CREAR Y GUARDAR EL PEDIDO (Tu lógica original) ---
+    # Calculamos el total final a partir de los datos seguros del pedido pendiente
     subtotal = sum(
         float(item["price"].replace("$", "")) * item["quantity"]
         for item in cart.values()
     )
-
     discount_amount = 0
     if coupon:
         if coupon["type"] == "percent":
             discount_amount = (subtotal * coupon["value"]) / 100
         else:
             discount_amount = coupon["value"]
-
     total = subtotal - discount_amount
 
-    # 1. Creamos el objeto del pedido
-    new_order = {
+    # Construimos el objeto del pedido final para mostrarlo
+    order_details = {
         "number": random.randint(1000, 9999),
         "date": datetime.now().strftime("%B %d, %Y"),
         "status": "Completed",
         "total": total,
+        "subtotal": subtotal,  # Pasamos el subtotal para el desglose
+        "discount_info": (
+            {"code": coupon["code"], "amount": discount_amount} if coupon else None
+        ),
         "products": list(cart.values()),
         "billing_address": billing_address,
+        "payment_method": "Fleeca Bank",
     }
 
-    # 2. Inicializamos la lista de pedidos en la sesión si no existe
+    # Guardamos el pedido en el historial de 'orders'
     if "orders" not in session:
         session["orders"] = []
+    session["orders"].insert(0, order_details)
 
-    # 3. Añadimos el nuevo pedido al PRINCIPIO de la lista
-    session["orders"].insert(0, new_order)
+    # Guardamos los archivos en la lista de 'downloads'
+    if "downloads" not in session:
+        session["downloads"] = []
+    new_downloads = [
+        {"name": item["name"], "download_file": item["download_file"]}
+        for item in cart.values()
+    ]
+    current_downloads = session.get("downloads", [])
+    unique_new_downloads = [d for d in new_downloads if d not in current_downloads]
+    session["downloads"] = unique_new_downloads + current_downloads
 
-    # 4. Limpiamos la sesión de los datos de la compra actual
+    # Limpiamos la sesión de la compra actual
     session.pop("pending_order", None)
     session.pop("cart", None)
-    session.pop(
-        "coupon", None
-    )  # Limpiamos el cupón general, ya que 'pending_order' se ha ido
+    session.pop("coupon", None)
     session.modified = True
 
-    # 5. Pasamos el pedido recién creado a la página de confirmación
+    # Renderizamos la página de éxito
     return render_template(
-        "order_success.html", order=new_order, body_class="order-success-page"
+        "order_success.html", order=order_details, body_class="order-success-page"
     )
 
 
