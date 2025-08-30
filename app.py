@@ -22,9 +22,9 @@ app = Flask(__name__)
 # ==============================================================================
 
 # --- CONFIGURACIÓN DE LA APP Y OAUTH ---
-app.secret_key = "KnChzlbMneQFKL1yMbeUji0juPLQCMKT1h0C4eXE"
-CLIENT_ID = "62"
-CLIENT_SECRET = "KnChzlbMneQFKL1yMbeUji0juPLQCMKT1h0C4eXE"
+app.secret_key = "y2PRyodNyyzu1mzZa2hTJy8tGP0MKDkJ8GQbuSbR"
+CLIENT_ID = "76"
+CLIENT_SECRET = "y2PRyodNyyzu1mzZa2hTJy8tGP0MKDkJ8GQbuSbR"
 
 # ESTA ES LA LÍNEA MÁS IMPORTANTE - DEBE COINCIDIR CON TU PANEL
 # Basado en tus datos, esta es la configuración correcta.
@@ -36,7 +36,7 @@ USER_API_URL = "https://ucp.gta.world/api/user"
 
 # --- API KEY DE BANKING ---
 BANKING_GATEWAY_URL = "https://banking.gta.world/gateway/"
-BANKING_AUTH_KEY = "0EkAqPyV7mx2NVvoni2TV1O3KXIiOVTWZ3dFtR6d5BRSlNbIWZgBSxAzr3Q4ExPQ"
+BANKING_AUTH_KEY = "xmD0M1OUh2n2scx1VJb8kU2yAwKyaqIVbTXXfwZL90FY51sijBwysY7sLZao3fQu"
 
 # --- DATOS DE EJEMPLO DE PRODUCTOS ---
 all_products = [
