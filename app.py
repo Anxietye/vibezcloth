@@ -588,7 +588,6 @@ def product_detail(category_name, product_slug):
 
 
 # ARCHIVO: app.py
-
 @app.route("/checkout", methods=["GET", "POST"])
 def checkout():
     # --- Lógica GET (se ejecuta al visitar la página) ---
@@ -653,19 +652,12 @@ def checkout():
         }
         session.modified = True
 
-        # --- CONSTRUCCIÓN DE URL SIMPLIFICADA ---
-        # 1. Solo definimos la URL de éxito, tal como lo pediste.
-        success_url = url_for("order_success", _external=True)
-        
-        # 2. Preparamos los parámetros solo con successUrl.
-        return_params = {"successUrl": success_url}
-        
-        # 3. Construimos la URL final.
-        payment_path = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
-        final_gateway_url = payment_path + "?" + urllib.parse.urlencode(return_params)
+        # Construimos la URL LIMPIA, sin parámetros de consulta.
+        final_gateway_url = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
 
+        print("Redirigiendo a:", final_gateway_url)
         return redirect(final_gateway_url)
-
+    
 # ==============================================================================
 # === RUTAS DE AUTENTICACIÓN (OAUTH) ===========================================
 # ==============================================================================
@@ -798,7 +790,7 @@ def get_cart_data():
 # === CONFIRMACIÓN DE PAGO    ==================================================
 # ==============================================================================
 # ARCHIVO: app.py
-@app.route("/order/success", methods=['GET', 'POST'])
+@app.route("/order/success", methods=["GET", "POST"])
 def order_success():
     # --- VERIFICACIÓN DE SEGURIDAD ---
     pending_order = session.get("pending_order")
@@ -809,7 +801,7 @@ def order_success():
     cart = pending_order.get("cart", {})
     billing_address = pending_order.get("billing_address", {})
     coupon = pending_order.get("coupon")
-    
+
     if not cart:
         return redirect(url_for("home"))
 
@@ -861,6 +853,7 @@ def order_success():
     return render_template(
         "order_success.html", order=order_details, body_class="order-success-page"
     )
+
 
 # ==============================================================================
 # === BLOQUE DE WISHLIST ==================================================
