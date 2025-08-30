@@ -602,30 +602,14 @@ def checkout():
         session.modified = True
 
         # --- ESTA ES LA CONSTRUCCIÓN DE URL FINAL Y CORRECTA ---
-        # 3. Preparamos TODOS los datos como un diccionario de parámetros
-        #    *** SOLUCIÓN: ESTE BLOQUE HA SIDO INDENTADO PARA ESTAR DENTRO DEL 'IF' ***
-        payment_params = {
-            "apiKey": BANKING_AUTH_KEY,
-            "amount": f"{total:.2f}",
-            "description": "VIBEZ Clothing Order",
-            "successUrl": url_for(
-                "order_success", _external=True, order_token=order_token
-            ),
-            "cancelUrl": url_for("order_cancel", _external=True),
-        }
-
-        # 4. Construimos la URL final añadiendo los parámetros después de un '?'
-        final_gateway_url = (
-            BANKING_GATEWAY_URL + "?" + urllib.parse.urlencode(payment_params)
-        )
-
-        print("Redirigiendo a:", final_gateway_url)
-        return redirect(
-            final_gateway_url
-        )  # <--- Este 'return' ahora está correctamente dentro del 'if'
+        # Construimos la URL LIMPIA, sin parámetros de consulta
+        final_gateway_url = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
+        
+        print("Redirigiendo a la URL limpia:", final_gateway_url)
+        return redirect(final_gateway_url)
 
     # --- Lógica que se ejecuta SOLO al visitar la página (GET) ---
-    # Si la petición no fue un POST, el código llega hasta aquí y muestra la página.
+    # Si la petición no fue un POST, simplemente mostramos la página del formulario.
     billing_address = session.get("billing_address", {})
     return render_template(
         "checkout.html",
