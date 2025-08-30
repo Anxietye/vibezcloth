@@ -793,7 +793,7 @@ def get_cart_data():
 
 
 @app.route("/order/success/<path:receipt_token>", methods=["GET", "POST"])
-@app.route("/order/success", methods=["GET", "POST"])
+@app.route("/order/success/", methods=["GET", "POST"])
 def order_success(receipt_token=None):
     pending_order = session.get("pending_order")
     if not pending_order:

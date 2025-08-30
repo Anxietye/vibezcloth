@@ -1364,7 +1364,7 @@ footer {
 /* ORDER SUCCESS */
 .order-success-page {
     /* NUEVO: Añadimos un padding superior para despegar el título del header */
-    padding-top: 2rem;
+    padding-top: -3rem;
 
     /* Mantenemos el margen inferior para separar la caja del footer */
     margin-bottom: 4rem;
