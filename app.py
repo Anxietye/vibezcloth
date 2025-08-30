@@ -657,7 +657,8 @@ def checkout():
 
         print("Redirigiendo a:", final_gateway_url)
         return redirect(final_gateway_url)
-    
+
+
 # ==============================================================================
 # === RUTAS DE AUTENTICACIÓN (OAUTH) ===========================================
 # ==============================================================================
@@ -790,19 +791,18 @@ def get_cart_data():
 # === CONFIRMACIÓN DE PAGO    ==================================================
 # ==============================================================================
 
-@app.route("/order/success/<path:ignore>", methods=['GET', 'POST'])
-@app.route("/order/success", methods=['GET', 'POST'])
-def order_success(receipt_token=None): # 2. Aceptamos el token como un parámetro opcional
-    # --- VERIFICACIÓN DE SEGURIDAD (sin cambios, sigue siendo robusta) ---
+
+@app.route("/order/success/<path:receipt_token>", methods=["GET", "POST"])
+@app.route("/order/success", methods=["GET", "POST"])
+def order_success(receipt_token=None):
     pending_order = session.get("pending_order")
     if not pending_order:
         return redirect(url_for("home"))
 
-    # --- PROCESAMIENTO DEL PEDIDO (sin cambios) ---
     cart = pending_order.get("cart", {})
     billing_address = pending_order.get("billing_address", {})
     coupon = pending_order.get("coupon")
-    
+
     if not cart:
         return redirect(url_for("home"))
 
