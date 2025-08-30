@@ -375,7 +375,7 @@ all_products = [
     },
     {
         "id": 9,
-        "category": "accesories",
+        "category": "accessories",
         "name": "Skateboards",
         "price": "$10",
         "slug": "skateboards",
