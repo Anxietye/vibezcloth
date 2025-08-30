@@ -589,7 +589,6 @@ def product_detail(category_name, product_slug):
 
 # ARCHIVO: app.py
 
-
 @app.route("/checkout", methods=["GET", "POST"])
 def checkout():
     # --- Lógica GET (se ejecuta al visitar la página) ---
@@ -647,7 +646,6 @@ def checkout():
             "phone": request.form.get("phone"),
         }
 
-        # Guardamos un "pedido pendiente" en la sesión. Esta es la clave de seguridad.
         session["pending_order"] = {
             "cart": cart,
             "billing_address": billing_address,
@@ -655,15 +653,18 @@ def checkout():
         }
         session.modified = True
 
-        # Construimos la URL del banco con las URLs de retorno LIMPIAS
+        # --- CONSTRUCCIÓN DE URL SIMPLIFICADA ---
+        # 1. Solo definimos la URL de éxito, tal como lo pediste.
         success_url = url_for("order_success", _external=True)
-        cancel_url = url_for("order_cancel", _external=True)
+        
+        # 2. Preparamos los parámetros solo con successUrl.
+        return_params = {"successUrl": success_url}
+        
+        # 3. Construimos la URL final.
         payment_path = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
-        return_params = {"successUrl": success_url, "cancelUrl": cancel_url}
         final_gateway_url = payment_path + "?" + urllib.parse.urlencode(return_params)
 
         return redirect(final_gateway_url)
-
 
 # ==============================================================================
 # === RUTAS DE AUTENTICACIÓN (OAUTH) ===========================================
@@ -797,12 +798,9 @@ def get_cart_data():
 # === CONFIRMACIÓN DE PAGO    ==================================================
 # ==============================================================================
 # ARCHIVO: app.py
-
-
 @app.route("/order/success", methods=['GET', 'POST'])
 def order_success():
     # --- VERIFICACIÓN DE SEGURIDAD ---
-    # Comprobamos si existe un pedido pendiente. Si no, es un acceso no autorizado.
     pending_order = session.get("pending_order")
     if not pending_order:
         return redirect(url_for("home"))
@@ -863,24 +861,6 @@ def order_success():
     return render_template(
         "order_success.html", order=order_details, body_class="order-success-page"
     )
-
-
-@app.route("/order/cancel")
-def order_cancel():
-    """
-    Página a la que el usuario es redirigido si cancela el pago.
-    """
-    # No limpiamos el carrito aquí, porque el usuario puede querer intentarlo de nuevo
-    # En lugar de un string HTML, renderizamos una plantilla para consistencia (puedes crearla después)
-    # Por ahora, un mensaje simple está bien.
-    return """
-        <body style="background-color: #121212; color: #fff; text-align: center; font-family: sans-serif; padding-top: 5rem;">
-            <h1>Pago cancelado</h1>
-            <p>Tu pedido ha sido cancelado. Puedes volver al carrito e intentarlo de nuevo.</p>
-            <a href="/checkout" style="color: #AFFF00;">Volver al Checkout</a>
-        </body>
-    """
-
 
 # ==============================================================================
 # === BLOQUE DE WISHLIST ==================================================
