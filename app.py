@@ -790,7 +790,7 @@ def get_cart_data():
 # === CONFIRMACIÓN DE PAGO    ==================================================
 # ==============================================================================
 
-@app.route("/order/success/<string:receipt_token>", methods=['GET', 'POST'])
+@app.route("/order/success/<path:ignore>", methods=['GET', 'POST'])
 @app.route("/order/success", methods=['GET', 'POST'])
 def order_success(receipt_token=None): # 2. Aceptamos el token como un parámetro opcional
     # --- VERIFICACIÓN DE SEGURIDAD (sin cambios, sigue siendo robusta) ---
