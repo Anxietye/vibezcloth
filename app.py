@@ -591,10 +591,7 @@ def checkout():
             "phone": request.form.get("phone"),
         }
 
-        # 2. Generamos el token de seguridad y el pedido pendiente
-        order_token = secrets.token_hex(16)
         session["pending_order"] = {
-            "token": order_token,
             "cart": cart,
             "billing_address": billing_address,
             "coupon": coupon,
@@ -603,9 +600,13 @@ def checkout():
 
         # --- ESTA ES LA CONSTRUCCIÓN DE URL FINAL Y CORRECTA ---
         # Construimos la URL LIMPIA, sin parámetros de consulta
-        final_gateway_url = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
-        
-        print("Redirigiendo a la URL limpia:", final_gateway_url)
+        success_url = url_for("order_success", _external=True)  # <-- SIN order_token
+        cancel_url = url_for("order_cancel", _external=True)
+        payment_path = f"{BANKING_GATEWAY_URL}{BANKING_AUTH_KEY}/0/{total:.2f}"
+        return_params = {"successUrl": success_url, "cancelUrl": cancel_url}
+        final_gateway_url = payment_path + "?" + urllib.parse.urlencode(return_params)
+
+        print("Redirigiendo a:", final_gateway_url)
         return redirect(final_gateway_url)
 
     # --- Lógica que se ejecuta SOLO al visitar la página (GET) ---
@@ -759,19 +760,16 @@ def get_cart_data():
 
 @app.route("/order/success")
 def order_success():
-    # Obtenemos el token de esta variable temporal en lugar de la URL
-    token_from_session = session.pop("last_order_token", None)
+    # --- NUEVA LÓGICA DE SEGURIDAD (MÁS SIMPLE Y ROBUSTA) ---
+    # 1. Comprobamos si existe un "pedido pendiente" en la sesión.
     pending_order = session.get("pending_order")
 
-    # La comprobación de seguridad ahora usa el token de la sesión
-    if (
-        not token_from_session
-        or not pending_order
-        or token_from_session != pending_order.get("token")
-    ):
+    # 2. Si NO hay un pedido pendiente, significa que el usuario no viene
+    #    de nuestro checkout. Es un acceso no autorizado.
+    if not pending_order:
         return redirect(url_for("home"))
 
-    # --- SI LA VERIFICACIÓN ES EXITOSA, PROCEDEMOS A CREAR EL PEDIDO ---
+    # --- SI LA VERIFICACIÓN ES EXITOSA, CREAMOS EL PEDIDO ---
 
     # 3. Recuperamos los datos del pedido pendiente (en lugar de la sesión principal)
     cart = pending_order.get("cart", {})
