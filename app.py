@@ -789,19 +789,20 @@ def get_cart_data():
 # ==============================================================================
 # === CONFIRMACIÓN DE PAGO    ==================================================
 # ==============================================================================
-# ARCHIVO: app.py
-@app.route("/order/success", methods=["GET", "POST"])
-def order_success():
-    # --- VERIFICACIÓN DE SEGURIDAD ---
+
+@app.route("/order/success/<string:receipt_token>", methods=['GET', 'POST'])
+@app.route("/order/success", methods=['GET', 'POST'])
+def order_success(receipt_token=None): # 2. Aceptamos el token como un parámetro opcional
+    # --- VERIFICACIÓN DE SEGURIDAD (sin cambios, sigue siendo robusta) ---
     pending_order = session.get("pending_order")
     if not pending_order:
         return redirect(url_for("home"))
 
-    # --- PROCESAMIENTO DEL PEDIDO ---
+    # --- PROCESAMIENTO DEL PEDIDO (sin cambios) ---
     cart = pending_order.get("cart", {})
     billing_address = pending_order.get("billing_address", {})
     coupon = pending_order.get("coupon")
-
+    
     if not cart:
         return redirect(url_for("home"))
 
