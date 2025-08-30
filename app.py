@@ -602,26 +602,30 @@ def checkout():
         session.modified = True
 
         # --- ESTA ES LA CONSTRUCCIÓN DE URL FINAL Y CORRECTA ---
-    # 3. Preparamos TODOS los datos como un diccionario de parámetros
-    payment_params = {
-        "apiKey": BANKING_AUTH_KEY,  # Usamos 'apiKey' como nombre estándar
-        "amount": f"{total:.2f}",
-        "description": "VIBEZ Clothing Order",  # Una descripción
-        "successUrl": url_for("order_success", _external=True, order_token=order_token),
-        "cancelUrl": url_for("order_cancel", _external=True),
-    }
+        # 3. Preparamos TODOS los datos como un diccionario de parámetros
+        #    *** SOLUCIÓN: ESTE BLOQUE HA SIDO INDENTADO PARA ESTAR DENTRO DEL 'IF' ***
+        payment_params = {
+            "apiKey": BANKING_AUTH_KEY,
+            "amount": f"{total:.2f}",
+            "description": "VIBEZ Clothing Order",
+            "successUrl": url_for(
+                "order_success", _external=True, order_token=order_token
+            ),
+            "cancelUrl": url_for("order_cancel", _external=True),
+        }
 
-    # 4. Construimos la URL final añadiendo los parámetros después de un '?'
-    #    La URL base es simplemente la URL del gateway.
-    final_gateway_url = (
-        BANKING_GATEWAY_URL + "?" + urllib.parse.urlencode(payment_params)
-    )
+        # 4. Construimos la URL final añadiendo los parámetros después de un '?'
+        final_gateway_url = (
+            BANKING_GATEWAY_URL + "?" + urllib.parse.urlencode(payment_params)
+        )
 
-    print("Redirigiendo a:", final_gateway_url)
-    return redirect(final_gateway_url)
+        print("Redirigiendo a:", final_gateway_url)
+        return redirect(
+            final_gateway_url
+        )  # <--- Este 'return' ahora está correctamente dentro del 'if'
 
     # --- Lógica que se ejecuta SOLO al visitar la página (GET) ---
-    # Si la petición no fue un POST, simplemente mostramos la página del formulario.
+    # Si la petición no fue un POST, el código llega hasta aquí y muestra la página.
     billing_address = session.get("billing_address", {})
     return render_template(
         "checkout.html",
