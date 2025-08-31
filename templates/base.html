@@ -43,12 +43,9 @@
                 <div class="nav-right">
                     <ul class="icon-links">
 
-                        <!-- === ZONA CORREGIDA === -->
-                        <!-- 1. Ahora comprobamos 'user_id' para saber si el usuario está logueado -->
+                        <!-- LÓGICA DE SESIÓN FINAL Y ÚNICA -->
                         {% if 'user_id' in session %}
                         <!-- SI EL USUARIO ESTÁ LOGUEADO -->
-
-                        <!-- Icono de Wishlist -->
                         <li>
                             <a href="{{ url_for('wishlist_page') }}" title="Wishlist"
                                 class="wishlist-icon-container {{ 'active' if active_page == 'wishlist' }}">
@@ -56,22 +53,22 @@
                                 <span id="wishlist-item-count" class="hidden">0</span>
                             </a>
                         </li>
-
-                        <!-- Icono de "Mi Cuenta" -->
                         <li>
                             <a href="{{ url_for('my_account_page') }}" title="My Account"
                                 class="{{ 'active' if active_page == 'my-account' }}">
                                 <i class="fa-solid fa-user"></i>
                             </a>
                         </li>
-
-                        <!-- Icono de Logout -->
                         <li>
                             <a href="{{ url_for('logout') }}" title="Logout"><i
                                     class="fa-solid fa-right-from-bracket"></i></a>
                         </li>
-
                         {% else %}
+                        <!-- SI EL USUARIO NO ESTÁ LOGUEADO -->
+                        <li>
+                            <a href="{{ url_for('login') }}" title="Login"><i class="fa-regular fa-user"></i></a>
+                        </li>
+                        {% endif %}
                         <!-- SI EL USUARIO NO ESTÁ LOGUEADO -->
 
                         <!-- Muestra el ícono de login -->
@@ -81,16 +78,14 @@
                             </a>
                         </li>
                         {% endif %}
-                        <!-- === FIN DE LA ZONA CORREGIDA === -->
 
-                        <!-- 3. Icono del Carrito de Compras (siempre visible) -->
+                        <!-- Icono del Carrito (siempre visible) -->
                         <li>
                             <a href="#" id="open-cart-btn" class="cart-icon-container">
                                 <i class="fa-solid fa-bag-shopping"></i>
                                 <span id="cart-item-count" class="hidden">0</span>
                             </a>
                         </li>
-
                     </ul>
                 </div>
             </nav>

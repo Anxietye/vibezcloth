@@ -36,6 +36,7 @@ BANKING_GATEWAY_URL = "https://banking.gta.world/gateway/"
 BANKING_AUTH_KEY = "xmD0M1OUh2n2scx1VJb8kU2yAwKyaqIVbTXXfwZL90FY51sijBwysY7sLZao3fQu"
 COUPONS_ENABLED = True
 
+
 # --- MODELOS DE DATOS ---
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -838,15 +839,20 @@ def checkout():
 
 @app.route("/login")
 def login():
+    # Eliminamos la lógica de 'next_url' para simplificar
     auth_url = f"{AUTHORIZATION_URL}?client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&response_type=code&scope="
+    print(f"--- Redirigiendo a la autorización de OAuth: {auth_url}")
     return redirect(auth_url)
 
 
 @app.route("/auth/callback")
 def callback():
+    print("--- Entrando en la ruta /auth/callback ---")
     code = request.args.get("code")
     if not code:
+        print("   -> ERROR: No se recibió el código de autorización.")
         return "Error: No se recibió el código de autorización.", 400
+    print(f"   -> Código de autorización recibido: {code[:10]}...")
 
     token_payload = {
         "grant_type": "authorization_code",
@@ -856,35 +862,53 @@ def callback():
         "code": code,
     }
     token_response = requests.post(TOKEN_URL, data=token_payload)
-    token_data = token_response.json()
-    if "access_token" not in token_data:
+
+    if token_response.status_code != 200:
+        print(
+            f"   -> ERROR: Fallo al obtener el token. Status: {token_response.status_code}, Respuesta: {token_response.text}"
+        )
         return "Error: No se pudo obtener el token de acceso.", 400
 
-    access_token = token_data["access_token"]
+    token_data = token_response.json()
+    access_token = token_data.get("access_token")
+    if not access_token:
+        print("   -> ERROR: La respuesta del token no contenía 'access_token'.")
+        return "Error: La respuesta del token no contenía 'access_token'.", 400
+
     headers = {"Authorization": f"Bearer {access_token}"}
     user_response = requests.get(USER_API_URL, headers=headers)
-    user_data = user_response.json()
 
-    user_info = user_data.get("user")
+    if user_response.status_code != 200:
+        print(
+            f"   -> ERROR: Fallo al obtener los datos del usuario. Status: {user_response.status_code}, Respuesta: {user_response.text}"
+        )
+        return "Error: No se pudieron obtener los datos del usuario.", 400
+
+    user_info = user_response.json().get("user")
     if not user_info:
-        return "Error: No se pudo obtener la información del usuario desde la API.", 400
+        print("   -> ERROR: La respuesta de la API no contenía la clave 'user'.")
+        return "Error: La respuesta de la API no contenía la clave 'user'.", 400
 
-    # 1. Buscamos al usuario en nuestra base de datos
+    # Guardado en Base de Datos
     user = User.query.get(user_info["id"])
-
     if not user:
-        # 2. Si no existe, lo creamos
         user = User(id=user_info["id"], username=user_info["username"])
         db.session.add(user)
     else:
-        # 3. Si existe, actualizamos su nombre
         user.username = user_info["username"]
+    db.session.commit()
+    print(
+        f"   -> Usuario '{user.username}' (ID: {user.id}) guardado/actualizado en la DB."
+    )
 
-    db.session.commit()  # Guardamos los cambios
-
-    # 4. LA CLAVE: Guardamos los identificadores correctos en la sesión
+    # Guardado en Sesión
+    session.clear()  # Limpiamos la sesión antigua por si acaso
     session["user_id"] = user.id
     session["user_info"] = user_info
+    session.modified = True
+
+    print(f"--- Sesión creada exitosamente para el usuario {user.id} ---")
+    print("   -> Contenido de la sesión:", session)
 
     return redirect(url_for("home"))
 
