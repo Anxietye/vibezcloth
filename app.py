@@ -181,63 +181,51 @@ all_products = [
     },
     {
         "id": 4,
-        "category": "woman",
-        "name": "Cropped Hoodie",
-        "price": "$4700",
-        "slug": "cropped-hoodie",
-        "sku": "CH-008",
+        "category": "man",
+        "name": "Vibez Jean",
+        "price": "$3500",
+        "slug": "vibez-jean-man",
+        "sku": "VM-047",
         "color_variants": {
-            "D. Lettering": {  # Color 'Negro' usa la imagen woman1.png
-                "image": "images/darklettering.png",
-                "download_file": "Lettering.zip",
+            "Black": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/jeannegro.png",
+                "download_file": "Black-Man.zip",
             },
-            "Depravity": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/depravity.png",
-                "download_file": "Depravity.zip",
+            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/jeangris.png",
+                "download_file": "Gray-Man.zip",
             },
-            "Dream Big": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/drambig.png",
-                "download_file": "DreamBig.zip",
+            "Light Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/azulclaro.png",
+                "download_file": "Light-Blue-Man.zip",
             },
-            "Dystopia": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/dystopia.png",
-                "download_file": "Dystopia.zip",
+            "Normal": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/jean.png",
+                "download_file": "Normal-Man.zip",
             },
-            "Kuromi": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/kuromi.png",
-                "download_file": "Kuromi.zip",
+            "Light Blue 2": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/lightblue2.png",
+                "download_file": "Light-Blue2.zip",
             },
-            "Red L.": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/lettering.png",
-                "download_file": "Red-L.zip",
+            "Light Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/lightblack.png",
+                "download_file": "Light-Black.zip",
             },
-            "Run Away": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/runaway.png",
-                "download_file": "Run-Away.zip",
+            "Black 2": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/jeanblackblack.png",
+                "download_file": "Jean-Black2.zip",
             },
-            "Stucked": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/stucked.png",
-                "download_file": "Stuck.zip",
+            "Dark Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/jeanblue.png",
+                "download_file": "Jean-DarkBlue.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/azuls.png",
-                "download_file": "Blue.zip",
+            "Gray 2": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/jeangray.png",
+                "download_file": "Jean-Gray2.zip",
             },
             "White": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/blancos.png",
-                "download_file": "White.zip",
-            },
-            "Brown": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/marrons.png",
-                "download_file": "Brown.zip",
-            },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/negros.png",
-                "download_file": "Black.zip",
-            },
-            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/rosas.png",
-                "download_file": "Pink.zip",
+                "image": "images/jeanwhite.png",
+                "download_file": "Jean-White.zip",
             },
         },
     },
@@ -377,7 +365,7 @@ all_products = [
         "id": 9,
         "category": "accessories",
         "name": "Skateboards",
-        "price": "$10",
+        "price": "$2000",
         "slug": "skateboards",
         "sku": "SB-001",
         "color_variants": {
@@ -400,6 +388,148 @@ all_products = [
             "American": {  # Color 'Azul' usa la imagen woman3.jpg
                 "image": "images/USA.png",
                 "download_file": "American.zip",
+            },
+        },
+    },
+    {
+        "id": 10,
+        "category": "woman",
+        "name": "Cropped Hoodie",
+        "price": "$4700",
+        "slug": "cropped-hoodie",
+        "sku": "CH-008",
+        "color_variants": {
+            "Depravity": {  # Color 'Azul' uses the image depravity.png
+                "image": "images/depravity.png",
+                "download_file": "Depravity.zip",
+            },
+            "Dream Big": {  # Color 'Azul' uses the image drambig.png
+                "image": "images/drambig.png",
+                "download_file": "DreamBig.zip",
+            },
+            "Dystopia": {  # Color 'Azul' uses the image dystopia.png
+                "image": "images/dystopia.png",
+                "download_file": "Dystopia.zip",
+            },
+            "Kuromi": {  # Color 'Azul' uses the image kuromi.png
+                "image": "images/kuromi.png",
+                "download_file": "Kuromi.zip",
+            },
+            "Red L.": {  # Color 'Azul' uses the image lettering.png
+                "image": "images/lettering.png",
+                "download_file": "Red-L.zip",
+            },
+            "Run Away": {  # Color 'Azul' uses the image runaway.png
+                "image": "images/runaway.png",
+                "download_file": "Run-Away.zip",
+            },
+            "Stucked": {  # Color 'Azul' uses the image stucked.png
+                "image": "images/stucked.png",
+                "download_file": "Stuck.zip",
+            },
+            "Blue": {  # Color 'Azul' uses the image azuls.png
+                "image": "images/azuls.png",
+                "download_file": "Blue.zip",
+            },
+            "White": {  # Color 'Azul' uses the image blancos.png
+                "image": "images/blancos.png",
+                "download_file": "White.zip",
+            },
+            "Brown": {  # Color 'Azul' uses the image marrons.png
+                "image": "images/marrons.png",
+                "download_file": "Brown.zip",
+            },
+            "Black": {  # Color 'Azul' uses the image negros.png
+                "image": "images/negros.png",
+                "download_file": "Black.zip",
+            },
+            "Pink": {  # Color 'Azul' uses the image rosas.png
+                "image": "images/rosas.png",
+                "download_file": "Pink.zip",
+            },
+        },
+    },
+    {
+        "id": 11,
+        "category": "man",
+        "name": "Simple Hoddie",
+        "price": "$4000",
+        "slug": "hoddie",
+        "sku": "SH-001",
+        "color_variants": {
+            "Angel": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/Angel.png",
+                "download_file": "Angel.zip",
+            },
+            "Inferno": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Inferno.png",
+                "download_file": "Inferno.zip",
+            },
+            "Lil Vert": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Lilvert.png",
+                "download_file": "Lil-Vert.zip",
+            },
+            "Maquinary": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/maquinary.png",
+                "download_file": "Maquinary.zip",
+            },
+            "Tyler": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Tyler.png",
+                "download_file": "Tyler.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/blackhoddie.png",
+                "download_file": "Blackhoddie.zip",
+            },
+        },
+    },
+    {
+        "id": 12,
+        "category": "man",
+        "name": "Grunge T-Shirts",
+        "price": "$6000",
+        "slug": "grunge-tshirts-man",
+        "sku": "GS-051",
+        "color_variants": {
+            "Darklight": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/Darklightman.png",
+                "download_file": "Darklight.zip",
+            },
+            "21Savage": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/21Savage.png",
+                "download_file": "21Savage.zip",
+            },
+            "Ghost": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Ghost.png",
+                "download_file": "Ghost.zip",
+            },
+            "Eazy-E": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Eazye.png",
+                "download_file": "Eazy-E.zip",
+            },
+            "Black Sabbath": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/blacksabbathman.png",
+                "download_file": "BlackSabbath.zip",
+            },
+            "Hangxiety": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Hangxiety.png",
+                "download_file": "Hangxiety.zip",
+            },
+            "Marlboro": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Marlboro.png",
+                "download_file": "Marlboro.zip",
+            },
+            "Supra": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Supra.png",
+                "download_file": "Supra.zip",
+            },
+            "Split": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Split.png",
+                "download_file": "Split.zip",
+            },
+            "Zillakami": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Zillakami.png",
+                "download_file": "Zillakami.zip",
             },
         },
     },
