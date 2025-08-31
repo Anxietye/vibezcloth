@@ -13,10 +13,51 @@ import requests
 import urllib.parse
 import random
 import secrets
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from datetime import datetime
 
 app = Flask(__name__)
+# --- CONFIGURACIÓN DE LA BASE DE DATOS ---
+# Le decimos a Flask dónde guardar el archivo de la base de datos
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///vibez.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+# Inicializamos la base de datos y la herramienta de migración
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+# ==============================================================================
+# === MODELOS DE LA BASE DE DATOS ==============================================
+# ==============================================================================
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)  # ID único de GTAW
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    orders = db.relationship("Order", backref="user", lazy=True)
+
+
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)  # ID autoincremental
+    order_number = db.Column(db.String(20), unique=True, nullable=False)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    total = db.Column(db.Float, nullable=False)
+    status = db.Column(db.String(20), nullable=False, default="Completed")
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    # Relación para los items del pedido
+    items = db.relationship(
+        "OrderItem", backref="order", lazy=True, cascade="all, delete-orphan"
+    )
+
+
+class OrderItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    product_name = db.Column(db.String(100), nullable=False)
+    download_file = db.Column(db.String(100), nullable=False)
+    order_id = db.Column(db.Integer, db.ForeignKey("order.id"), nullable=False)
+
+
+# (Aquí podrías añadir un modelo 'Product' en el futuro si quieres gestionar los productos desde una DB)
 # ==============================================================================
 # === CONFIGURACIÓN Y DATOS ====================================================
 # ==============================================================================
@@ -587,14 +628,44 @@ def my_account_page():
 
 @app.route("/my-account/orders")
 def my_account_orders():
-    """Muestra el historial de pedidos del usuario."""
-    if "user" not in session:
+    """Muestra el historial de pedidos del usuario desde la base de datos."""
+    # Usamos 'user_id' para la protección de la ruta
+    if "user_id" not in session:
         return redirect(url_for("login"))
 
-    # Obtenemos los pedidos de la sesión. Si no hay, es una lista vacía.
-    orders = session.get("orders", [])
+    # 1. Buscamos al usuario actual en la base de datos
+    user = User.query.get(session["user_id"])
+
+    # 2. Obtenemos sus pedidos. La relación 'user.orders' nos da la lista.
+    #    Los ordenamos del más reciente al más antiguo.
+    orders = sorted(user.orders, key=lambda x: x.date, reverse=True)
 
     return render_template("orders.html", orders=orders, active_page="my-account")
+
+
+@app.route("/my-account/downloads")
+def my_account_downloads():
+    """Muestra la lista de productos descargables del usuario desde la base de datos."""
+    # Usamos 'user_id' para la protección de la ruta
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    # 1. Buscamos al usuario actual en la base de datos
+    user = User.query.get(session["user_id"])
+
+    # 2. Creamos la lista de descargas recorriendo todos los items de todos los pedidos del usuario
+    downloads = []
+    # Ordenamos los pedidos para que las descargas más recientes aparezcan primero
+    sorted_orders = sorted(user.orders, key=lambda x: x.date, reverse=True)
+    for order in sorted_orders:
+        for item in order.items:
+            downloads.append(
+                {"name": item.product_name, "download_file": item.download_file}
+            )
+
+    return render_template(
+        "downloads.html", downloads=downloads, active_page="my-account"
+    )
 
 
 @app.route("/my-account/details")
@@ -629,20 +700,6 @@ def view_order_page(order_number):
 
     return render_template(
         "view_order.html", order=order_to_view, active_page="my-account"
-    )
-
-
-@app.route("/my-account/downloads")
-def my_account_downloads():
-    """Muestra la lista de productos descargables del usuario."""
-    if "user" not in session:
-        return redirect(url_for("login"))
-
-    # Obtenemos las descargas de la sesión
-    downloads = session.get("downloads", [])
-
-    return render_template(
-        "downloads.html", downloads=downloads, active_page="my-account"
     )
 
 
@@ -823,8 +880,28 @@ def callback():
     user_response = requests.get(USER_API_URL, headers=headers)
     user_data = user_response.json()
 
-    session["user"] = user_data.get("user")
-    session["access_token"] = access_token
+    # --- LÓGICA DE BASE DE DATOS AÑADIDA ---
+    user_info = user_data.get("user")
+    if not user_info:
+        return "Error: No se pudo obtener la información del usuario desde la API.", 400
+
+    # 1. Buscamos si el usuario ya existe en nuestra base de datos por su ID de GTAW
+    user = User.query.get(user_info["id"])
+
+    if not user:
+        # 2. Si no existe, lo creamos y lo añadimos a la base de datos
+        user = User(id=user_info["id"], username=user_info["username"])
+        db.session.add(user)
+    else:
+        # 3. Si ya existe, actualizamos su nombre de usuario por si ha cambiado
+        user.username = user_info["username"]
+
+    # 4. Guardamos los cambios en la base de datos
+    db.session.commit()
+
+    # 5. Guardamos solo el ID del usuario en la sesión. Es más seguro y eficiente.
+    session["user_id"] = user.id
+    session["user_info"] = user_info  # Mantenemos la info original para mostrarla
 
     return redirect(url_for("home"))
 

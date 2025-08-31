@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <div class="account-page-layout">
-        <!-- Sidebar (igual que en my_account.html) -->
+        <!-- Sidebar (se mantiene consistente) -->
         <aside class="account-sidebar">
             <h2>MY ACCOUNT</h2>
             <nav class="account-nav">
@@ -11,6 +11,7 @@
                     <li><a href="{{ url_for('my_account_page') }}">Dashboard</a></li>
                     <li><a href="{{ url_for('my_account_orders') }}">Orders</a></li>
                     <li><a href="{{ url_for('my_account_downloads') }}" class="active">Downloads</a></li>
+                    <li><a href="{{ url_for('my_account_details') }}">Account details</a></li>
                     <li><a href="{{ url_for('wishlist_page') }}">Wishlist</a></li>
                     <li><a href="{{ url_for('logout') }}">Log out</a></li>
                 </ul>
@@ -31,11 +32,13 @@
                 <tbody>
                     {% for item in downloads %}
                     <tr>
-                        <td>{{ item.name }}</td>
+                        <!-- CORRECCIÓN: La variable ahora es 'item.product_name' -->
+                        <td>{{ item.product_name }}</td>
                         <td>Never</td>
                         <td>
+                            <!-- CORRECCIÓN: Usamos 'item.download_file' y 'item.product_name' -->
                             <a href="{{ url_for('download_file', filename=item.download_file) }}" class="download-btn">
-                                {{ item.name.upper() }}
+                                {{ item.product_name.upper() }}
                             </a>
                         </td>
                     </tr>
