@@ -615,12 +615,15 @@ def my_account_orders():
     if "user_id" not in session:
         return redirect(url_for("login"))
 
-    # 1. Buscamos al usuario actual en la base de datos
     user = User.query.get(session["user_id"])
 
-    # 2. Obtenemos sus pedidos a través de la relación, ordenados por fecha
-    orders = sorted(user.orders, key=lambda x: x.date, reverse=True)
+    # --- NUEVA COMPROBACIÓN DE SEGURIDAD ---
+    if user is None:
+        # Si el usuario de la sesión no se encuentra en la DB, la sesión es inválida.
+        session.clear()  # Limpiamos la sesión corrupta
+        return redirect(url_for("login"))  # Forzamos a que inicie sesión de nuevo
 
+    orders = sorted(user.orders, key=lambda x: x.date, reverse=True)
     return render_template("orders.html", orders=orders, active_page="my-account")
 
 
@@ -629,15 +632,20 @@ def my_account_downloads():
     if "user_id" not in session:
         return redirect(url_for("login"))
 
-    # 1. Buscamos al usuario actual en la base de datos
     user = User.query.get(session["user_id"])
 
-    # 2. Creamos la lista de descargas recorriendo los items de cada pedido
+    # --- NUEVA COMPROBACIÓN DE SEGURIDAD ---
+    if user is None:
+        session.clear()
+        return redirect(url_for("login"))
+
     downloads = []
     sorted_orders = sorted(user.orders, key=lambda x: x.date, reverse=True)
     for order in sorted_orders:
         for item in order.items:
-            downloads.append(item)  # Pasamos el objeto completo
+            downloads.append(
+                {"name": item.product_name, "download_file": item.download_file}
+            )
 
     return render_template(
         "downloads.html", downloads=downloads, active_page="my-account"
