@@ -51,9 +51,23 @@ class Order(db.Model):
     total = db.Column(db.Float, nullable=False)
     status = db.Column(db.String(20), nullable=False, default="Completed")
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    billing_address = db.relationship(
+        "BillingAddress", backref="order", uselist=False, cascade="all, delete-orphan"
+    )
     items = db.relationship(
         "OrderItem", backref="order", lazy=True, cascade="all, delete-orphan"
     )
+
+
+# NUEVA TABLA para guardar la dirección
+class BillingAddress(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    firstname = db.Column(db.String(100))
+    lastname = db.Column(db.String(100))
+    apartment = db.Column(db.String(200))
+    discord = db.Column(db.String(100))
+    phone = db.Column(db.String(50))
+    order_id = db.Column(db.Integer, db.ForeignKey("order.id"), nullable=False)
 
 
 class OrderItem(db.Model):
@@ -634,18 +648,16 @@ def my_account_downloads():
 
     user = User.query.get(session["user_id"])
 
-    # --- NUEVA COMPROBACIÓN DE SEGURIDAD ---
     if user is None:
         session.clear()
         return redirect(url_for("login"))
 
-    downloads = []
-    sorted_orders = sorted(user.orders, key=lambda x: x.date, reverse=True)
-    for order in sorted_orders:
-        for item in order.items:
-            downloads.append(
-                {"name": item.product_name, "download_file": item.download_file}
-            )
+    # --- LÓGICA CORREGIDA ---
+    # 1. Obtenemos todos los items de todos los pedidos del usuario
+    downloads = [item for order in user.orders for item in order.items]
+
+    # 2. Ordenamos la lista de items basándonos en la fecha del pedido al que pertenecen
+    downloads.sort(key=lambda item: item.order.date, reverse=True)
 
     return render_template(
         "downloads.html", downloads=downloads, active_page="my-account"
@@ -1005,18 +1017,16 @@ def get_cart_data():
 @app.route("/order/success/<path:receipt_token>", methods=["GET", "POST"])
 @app.route("/order/success/", methods=["GET", "POST"])
 def order_success(receipt_token=None):
-    # --- VERIFICACIÓN DE SEGURIDAD (Sin cambios, es correcta) ---
+    # --- VERIFICACIÓN DE SEGURIDAD ---
     pending_order = session.get("pending_order")
     user_id = session.get("user_id")
-
     if not pending_order or not user_id:
         return redirect(url_for("home"))
 
-    # --- PROCESAMIENTO DE DATOS DEL PEDIDO PENDIENTE ---
+    # --- PROCESAMIENTO DE DATOS ---
     cart = pending_order.get("cart", {})
-    billing_address = pending_order.get("billing_address", {})
+    billing_address_data = pending_order.get("billing_address", {})
     coupon = pending_order.get("coupon")
-
     if not cart:
         return redirect(url_for("home"))
 
@@ -1026,50 +1036,60 @@ def order_success(receipt_token=None):
     )
     discount_amount = 0
     if coupon:
-        if coupon["type"] == "percent":
-            discount_amount = (subtotal * coupon["value"]) / 100
+        if coupon.get("type") == "percent":
+            discount_amount = (subtotal * coupon.get("value", 0)) / 100
         else:
-            discount_amount = coupon["value"]
+            discount_amount = coupon.get("value", 0)
     total = subtotal - discount_amount
 
-    # --- LÓGICA DE GUARDADO EN LA BASE DE DATOS ---
+    # --- GUARDADO EN BASE DE DATOS (CORREGIDO) ---
     try:
-        # 1. Creamos el objeto del pedido principal para la DB
+        # 1. Creamos el objeto Order
         new_order = Order(
             order_number=str(random.randint(10000, 99999)),
             total=total,
             status="Completed",
-            user_id=user_id,  # Asociamos el pedido con el usuario logueado
+            user_id=user_id,
         )
-        db.session.add(new_order)
 
-        # 2. Creamos los objetos de los artículos del pedido para la DB
+        # 2. Creamos el objeto BillingAddress asociado
+        new_address = BillingAddress(
+            firstname=billing_address_data.get("firstname"),
+            lastname=billing_address_data.get("lastname"),
+            apartment=billing_address_data.get("apartment"),
+            discord=billing_address_data.get("discord"),
+            phone=billing_address_data.get("phone"),
+            order=new_order,  # Lo asociamos directamente con el pedido
+        )
+
+        # 3. Creamos los OrderItems
         for item_data in cart.values():
             order_item = OrderItem(
                 product_name=item_data["name"],
                 download_file=item_data["download_file"],
-                order=new_order,  # Asociamos el artículo con el pedido
+                order=new_order,
             )
             db.session.add(order_item)
 
-        # 3. Guardamos todos los cambios en la base de datos
+        # 4. Añadimos todo a la sesión de la base de datos
+        db.session.add(new_order)
+        db.session.add(new_address)
+
+        # 5. Guardamos todos los cambios en un solo paso
         db.session.commit()
 
     except Exception as e:
-        # Si algo falla durante el guardado, lo revertimos y mostramos un error
         db.session.rollback()
         print(f"!!! ERROR AL GUARDAR EL PEDIDO EN LA BASE DE DATOS: {e}")
-        # En una app real, aquí podrías renderizar una página de error
         return "An error occurred while saving your order. Please contact support.", 500
 
-    # --- LÓGICA DE LIMPIEZA DE SESIÓN (MODIFICADA) ---
-    # Ya no guardamos 'orders' ni 'downloads' en la sesión, la base de datos lo hace
+    # --- LIMPIEZA DE SESIÓN ---
     session.pop("pending_order", None)
     session.pop("cart", None)
     session.pop("coupon", None)
     session.modified = True
 
-    # 4. Pasamos el objeto 'new_order' recién creado (desde la DB) a la plantilla
+    # Pasamos el objeto 'new_order' a la plantilla
     return render_template(
         "order_success.html", order=new_order, body_class="order-success-page"
     )
