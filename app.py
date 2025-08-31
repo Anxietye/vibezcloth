@@ -50,8 +50,9 @@ class Order(db.Model):
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     total = db.Column(db.Float, nullable=False)
     status = db.Column(db.String(20), nullable=False, default="Completed")
-    # AÑADIMOS ESTA NUEVA COLUMNA
-    payment_method = db.Column(db.String(50), nullable=False, default="Fleeca Bank")
+    payment_method = db.Column(
+        db.String(50), nullable=False, default="Fleeca Bank"
+    )  # <-- CAMPO AÑADIDO
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     items = db.relationship(
         "OrderItem", backref="order", lazy=True, cascade="all, delete-orphan"
@@ -64,12 +65,15 @@ class Order(db.Model):
 # NUEVA TABLA para guardar la dirección
 class BillingAddress(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(100))
-    lastname = db.Column(db.String(100))
+    firstname = db.Column(db.String(100), nullable=False)
+    lastname = db.Column(db.String(100), nullable=False)
     apartment = db.Column(db.String(200))
     discord = db.Column(db.String(100))
     phone = db.Column(db.String(50))
-    order_id = db.Column(db.Integer, db.ForeignKey("order.id"), nullable=False)
+    # CORRECCIÓN: Le decimos que el order_id debe ser único, ya que cada pedido solo tiene una dirección
+    order_id = db.Column(
+        db.Integer, db.ForeignKey("order.id"), unique=True, nullable=False
+    )
 
 
 class OrderItem(db.Model):

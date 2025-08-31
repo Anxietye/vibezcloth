@@ -94,7 +94,7 @@
                         <div class="order-row header">
                             <span>Product</span><span>Total</span>
                         </div>
-                        {% for item in order.products %}
+                        {% for item in order.items %}
                         <div class="order-row">
                             <span>{{ item.name }} &times; {{ item.quantity }}</span>
                             <strong>${{ "%.2f"|format(item.price|replace('$', '')|float * item.quantity) }}</strong>
