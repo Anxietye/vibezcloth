@@ -1110,6 +1110,28 @@ def remove_from_wishlist(product_id):
     return jsonify({"success": False, "message": "Product not found in wishlist."}), 404
 
 
+@app.route("/wishlist")
+def wishlist_page():  # <-- El nombre de la función es 'wishlist_page'
+    wishlist_ids = session.get("wishlist", [])
+    # Usamos nuestra lógica de base de datos para obtener los productos
+    wishlist_products = [
+        p for p in [find_product_by_id(pid) for pid in wishlist_ids] if p is not None
+    ]
+
+    breadcrumbs = [
+        {"text": "Home", "url": url_for("home")},
+        {"text": "Wishlist", "url": None},
+    ]
+
+    return render_template(
+        "wishlist.html",
+        wishlist=wishlist_products,
+        breadcrumbs=breadcrumbs,
+        active_page="wishlist",
+        body_class="page-full-width",
+    )
+
+
 # ==============================================================================
 # === APLICAR CUPONES         ==================================================
 # ==============================================================================
