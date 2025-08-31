@@ -879,29 +879,28 @@ def callback():
     headers = {"Authorization": f"Bearer {access_token}"}
     user_response = requests.get(USER_API_URL, headers=headers)
     user_data = user_response.json()
-
-    # --- LÓGICA DE BASE DE DATOS AÑADIDA ---
+    
+    # --- LÓGICA DE BASE DE DATOS Y SESIÓN ---
     user_info = user_data.get("user")
     if not user_info:
         return "Error: No se pudo obtener la información del usuario desde la API.", 400
 
-    # 1. Buscamos si el usuario ya existe en nuestra base de datos por su ID de GTAW
+    # 1. Buscamos al usuario en nuestra base de datos
     user = User.query.get(user_info["id"])
-
+    
     if not user:
-        # 2. Si no existe, lo creamos y lo añadimos a la base de datos
+        # 2. Si no existe, lo creamos
         user = User(id=user_info["id"], username=user_info["username"])
         db.session.add(user)
     else:
-        # 3. Si ya existe, actualizamos su nombre de usuario por si ha cambiado
+        # 3. Si existe, actualizamos su nombre
         user.username = user_info["username"]
 
-    # 4. Guardamos los cambios en la base de datos
-    db.session.commit()
-
-    # 5. Guardamos solo el ID del usuario en la sesión. Es más seguro y eficiente.
+    db.session.commit() # Guardamos los cambios
+    
+    # 4. Guardamos los identificadores clave en la sesión
     session["user_id"] = user.id
-    session["user_info"] = user_info  # Mantenemos la info original para mostrarla
+    session["user_info"] = user_info # Guardamos la info para mostrarla, ej. el nombre
 
     return redirect(url_for("home"))
 
