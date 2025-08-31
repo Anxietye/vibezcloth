@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en"> <!-- Cambiado a 'en' por consistencia del contenido -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIBEZ</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
-    <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -34,12 +34,9 @@
                 <div class="nav-right">
                     <ul class="icon-links">
 
-                        <!-- === ZONA CORREGIDA === -->
-                        <!-- 1. Ahora comprobamos 'user_id' para saber si el usuario está logueado -->
+                        <!-- === LÓGICA DE SESIÓN CORREGIDA === -->
                         {% if 'user_id' in session %}
                         <!-- SI EL USUARIO ESTÁ LOGUEADO -->
-
-                        <!-- Icono de Wishlist -->
                         <li>
                             <a href="{{ url_for('wishlist_page') }}" title="Wishlist"
                                 class="wishlist-icon-container {{ 'active' if active_page == 'wishlist' }}">
@@ -47,32 +44,24 @@
                                 <span id="wishlist-item-count" class="hidden">0</span>
                             </a>
                         </li>
-
-                        <!-- Icono de Mi Cuenta -->
                         <li>
                             <a href="{{ url_for('my_account_page') }}" title="My Account"
                                 class="{{ 'active' if active_page == 'my-account' }}">
                                 <i class="fa-solid fa-user"></i>
                             </a>
                         </li>
-
-                        <!-- Icono de Logout -->
                         <li>
                             <a href="{{ url_for('logout') }}" title="Logout"><i
                                     class="fa-solid fa-right-from-bracket"></i></a>
                         </li>
-
                         {% else %}
-                        <!-- SI EL USUARIO NO ESTÁ LOGUEADO -->
-
-                        <!-- Muestra el ícono de login -->
+                        <!-- SI NO ESTÁ LOGUEADO -->
                         <li>
                             <a href="{{ url_for('login') }}" title="Login">
                                 <i class="fa-regular fa-user"></i>
                             </a>
                         </li>
                         {% endif %}
-                        <!-- === FIN DE LA ZONA CORREGIDA === -->
 
                         <!-- Icono del Carrito de Compras (siempre visible) -->
                         <li>
@@ -110,7 +99,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 VIBEZ*. All rights reserved.</p>
+                <p>&copy; 2025 VIBEZ*. All rights reserved.</p> <!-- Usando el símbolo correcto -->
             </div>
         </div>
     </footer>
@@ -127,6 +116,7 @@
         </div>
         <footer class="cart-footer">
             <div class="cart-total"><strong>Subtotal:</strong><span id="cart-subtotal">$0.00</span></div>
+            <!-- Aseguramos que sea un enlace <a> y no un <button> -->
             <a href="{{ url_for('checkout') }}" class="checkout-btn">PROCEED TO CHECKOUT</a>
         </footer>
     </aside>

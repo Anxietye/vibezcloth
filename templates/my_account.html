@@ -20,8 +20,9 @@
 
         <!-- COLUMNA DERECHA: CONTENIDO PRINCIPAL -->
         <main class="account-content">
-            {% if session.user %}
-            <p>Hello <strong>{{ session.user.username }}</strong> (not {{ session.user.username }}? <a
+            <!-- CORRECCIÓN: Usamos 'user_info' que sí existe en la sesión -->
+            {% if session.get('user_info') %}
+            <p>Hello <strong>{{ session.user_info.username }}</strong> (not {{ session.user_info.username }}? <a
                     href="{{ url_for('logout') }}" class="logout-link">Log out</a>)</p>
             {% endif %}
             <p>From your account dashboard you can view your recent orders, manage your shipping and billing addresses,
