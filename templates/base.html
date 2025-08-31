@@ -10,24 +10,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<!-- 1. CLASE DINÁMICA EN EL BODY (esto está correcto) -->
-
 <body class="{{ body_class or '' }}">
 
     <header>
-        <!-- ARCHIVO: templates/base.html (dentro de <header>) -->
-
         <div class="container">
             <nav class="main-nav">
-                <!-- Columna Izquierda: Logo -->
                 <div class="nav-left">
                     <a href="{{ url_for('home') }}">
                         <img src="{{ url_for('static', filename='images/3.png') }}" alt="VIBEZ Logo"
                             class="header-logo">
                     </a>
                 </div>
-
-                <!-- Columna Central: Enlaces de Navegación -->
                 <div class="nav-center">
                     <ul class="nav-links">
                         <li><a href="{{ url_for('category_page', category_name='woman') }}"
@@ -38,14 +31,15 @@
                                 class="{{ 'active' if active_page == 'accessories' }}">Accesories</a></li>
                     </ul>
                 </div>
-
-                <!-- Columna Derecha: Iconos y Usuario -->
                 <div class="nav-right">
                     <ul class="icon-links">
 
-                        <!-- LÓGICA DE SESIÓN FINAL Y ÚNICA -->
+                        <!-- === ZONA CORREGIDA === -->
+                        <!-- 1. Ahora comprobamos 'user_id' para saber si el usuario está logueado -->
                         {% if 'user_id' in session %}
                         <!-- SI EL USUARIO ESTÁ LOGUEADO -->
+
+                        <!-- Icono de Wishlist -->
                         <li>
                             <a href="{{ url_for('wishlist_page') }}" title="Wishlist"
                                 class="wishlist-icon-container {{ 'active' if active_page == 'wishlist' }}">
@@ -53,22 +47,22 @@
                                 <span id="wishlist-item-count" class="hidden">0</span>
                             </a>
                         </li>
+
+                        <!-- Icono de Mi Cuenta -->
                         <li>
                             <a href="{{ url_for('my_account_page') }}" title="My Account"
                                 class="{{ 'active' if active_page == 'my-account' }}">
                                 <i class="fa-solid fa-user"></i>
                             </a>
                         </li>
+
+                        <!-- Icono de Logout -->
                         <li>
                             <a href="{{ url_for('logout') }}" title="Logout"><i
                                     class="fa-solid fa-right-from-bracket"></i></a>
                         </li>
+
                         {% else %}
-                        <!-- SI EL USUARIO NO ESTÁ LOGUEADO -->
-                        <li>
-                            <a href="{{ url_for('login') }}" title="Login"><i class="fa-regular fa-user"></i></a>
-                        </li>
-                        {% endif %}
                         <!-- SI EL USUARIO NO ESTÁ LOGUEADO -->
 
                         <!-- Muestra el ícono de login -->
@@ -78,8 +72,9 @@
                             </a>
                         </li>
                         {% endif %}
+                        <!-- === FIN DE LA ZONA CORREGIDA === -->
 
-                        <!-- Icono del Carrito (siempre visible) -->
+                        <!-- Icono del Carrito de Compras (siempre visible) -->
                         <li>
                             <a href="#" id="open-cart-btn" class="cart-icon-container">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -120,31 +115,24 @@
         </div>
     </footer>
 
-    <!-- OSCURECIMIENTO DE LA PÁGINA (OVERLAY) -->
+    <!-- Contenido del Sidebar del Carrito -->
     <div id="cart-overlay" class="hidden"></div>
-
-    <!-- BARRA LATERAL DEL CARRITO -->
     <aside id="cart-sidebar">
         <header class="cart-header">
             <h3>Shopping Cart</h3>
             <button id="close-cart-btn">&times;</button>
         </header>
         <div id="cart-items">
-            <!-- Los productos del carrito se insertarán aquí con JavaScript -->
             <p class="empty-cart-msg">Your cart is empty.</p>
         </div>
         <footer class="cart-footer">
-            <div class="cart-total">
-                <strong>Subtotal:</strong>
-                <span id="cart-subtotal">$0.00</span>
-            </div>
-            <!-- CORRECCIÓN FINAL: Aseguramos que sea un enlace <a> -->
+            <div class="cart-total"><strong>Subtotal:</strong><span id="cart-subtotal">$0.00</span></div>
             <a href="{{ url_for('checkout') }}" class="checkout-btn">PROCEED TO CHECKOUT</a>
         </footer>
     </aside>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
+    {% block scripts %}{% endblock %}
 </body>
 
 </html>
