@@ -597,16 +597,14 @@ def get_products_by_category(category_name):
 @app.route("/my-account")
 def my_account_page():
     """Muestra la página del dashboard del usuario."""
-    # Protección de Ruta: Si no hay un usuario en la sesión, lo redirigimos al login.
-    if "user" not in session or not session.get("user"):
+    # CORRECCIÓN: Comprobamos 'user_id', la clave correcta de la sesión.
+    if "user_id" not in session:
         return redirect(url_for("login"))
 
     breadcrumbs = [
         {"text": "Home", "url": url_for("home")},
         {"text": "My Account", "url": None},
     ]
-
-    # Pasamos active_page para que ningún otro enlace del header se resalte.
     return render_template(
         "my_account.html", active_page="my-account", breadcrumbs=breadcrumbs
     )
@@ -615,53 +613,43 @@ def my_account_page():
 @app.route("/my-account/orders")
 def my_account_orders():
     """Muestra el historial de pedidos del usuario desde la base de datos."""
-    # Usamos 'user_id' para la protección de la ruta
+    # CORRECCIÓN: Comprobamos 'user_id'.
     if "user_id" not in session:
         return redirect(url_for("login"))
 
-    # 1. Buscamos al usuario actual en la base de datos
     user = User.query.get(session["user_id"])
-
-    # 2. Obtenemos sus pedidos. La relación 'user.orders' nos da la lista.
-    #    Los ordenamos del más reciente al más antiguo.
     orders = sorted(user.orders, key=lambda x: x.date, reverse=True)
-
     return render_template("orders.html", orders=orders, active_page="my-account")
 
 
 @app.route("/my-account/downloads")
 def my_account_downloads():
     """Muestra la lista de productos descargables del usuario desde la base de datos."""
-    # Usamos 'user_id' para la protección de la ruta
+    # CORRECCIÓN: Comprobamos 'user_id'.
     if "user_id" not in session:
         return redirect(url_for("login"))
 
-    # 1. Buscamos al usuario actual en la base de datos
     user = User.query.get(session["user_id"])
-
-    # 2. Creamos la lista de descargas recorriendo todos los items de todos los pedidos del usuario
-    downloads = []
-    # Ordenamos los pedidos para que las descargas más recientes aparezcan primero
     sorted_orders = sorted(user.orders, key=lambda x: x.date, reverse=True)
-    for order in sorted_orders:
-        for item in order.items:
-            downloads.append(
-                {"name": item.product_name, "download_file": item.download_file}
-            )
-
+    downloads = [
+        {"name": item.product_name, "download_file": item.download_file}
+        for order in sorted_orders
+        for item in order.items
+    ]
     return render_template(
         "downloads.html", downloads=downloads, active_page="my-account"
     )
 
 
 @app.route("/my-account/details")
-def my_account_details():  # <-- El nombre de la función es 'my_account_details'
+def my_account_details():
     """Muestra la página de detalles de la cuenta del usuario."""
-    if "user" not in session:
+    # CORRECCIÓN: Comprobamos 'user_id'.
+    if "user_id" not in session:
         return redirect(url_for("login"))
 
-    user_data = session.get("user")
-
+    # Usamos 'user_info' para mostrar el nombre, que es correcto.
+    user_data = session.get("user_info")
     return render_template(
         "account_details.html", user=user_data, active_page="my-account"
     )
@@ -670,17 +658,17 @@ def my_account_details():  # <-- El nombre de la función es 'my_account_details
 @app.route("/my-account/view-order/<int:order_number>")
 def view_order_page(order_number):
     """Muestra los detalles de un pedido específico."""
-    if "user" not in session:
+    # CORRECCIÓN: Comprobamos 'user_id'.
+    if "user_id" not in session:
         return redirect(url_for("login"))
 
-    orders = session.get("orders", [])
-
-    # Buscamos el pedido en la lista de la sesión por su número
+    # La lógica ahora debe leer de la base de datos, no de la sesión.
+    user = User.query.get(session["user_id"])
     order_to_view = next(
-        (order for order in orders if order.get("number") == order_number), None
+        (order for order in user.orders if order.order_number == str(order_number)),
+        None,
     )
 
-    # Si no se encuentra el pedido, redirigimos al historial
     if not order_to_view:
         return redirect(url_for("my_account_orders"))
 
@@ -688,7 +676,7 @@ def view_order_page(order_number):
         "view_order.html", order=order_to_view, active_page="my-account"
     )
 
-"/"
+
 @app.route("/")
 def home():
     return render_template(
