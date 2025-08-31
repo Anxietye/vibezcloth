@@ -11,7 +11,6 @@
                     <li><a href="{{ url_for('my_account_page') }}">Dashboard</a></li>
                     <li><a href="{{ url_for('my_account_orders') }}" class="active">Orders</a></li>
                     <li><a href="{{ url_for('my_account_downloads') }}">Downloads</a></li>
-                    <li><a href="{{ url_for('my_account_details') }}">Account details</a></li>
                     <li><a href="{{ url_for('wishlist_page') }}">Wishlist</a></li>
                     <li><a href="{{ url_for('logout') }}">Log out</a></li>
                 </ul>
@@ -34,15 +33,12 @@
                 <tbody>
                     {% for order in orders %}
                     <tr>
-                        <!-- CORRECCIÓN: Usamos 'order.order_number' en lugar de 'order.number' -->
+                        <!-- CORRECCIÓN: Usamos los nombres de atributo del modelo -->
                         <td>#{{ order.order_number }}</td>
-                        <!-- CORRECCIÓN: Formateamos la fecha desde el objeto datetime -->
                         <td>{{ order.date.strftime('%B %d, %Y') }}</td>
                         <td>{{ order.status }}</td>
-                        <!-- CORRECCIÓN: Usamos 'order.items' para la longitud, ya que 'products' no existe en el modelo Order -->
                         <td>${{ "%.2f"|format(order.total) }} for {{ order.items|length }} item(s)</td>
                         <td>
-                            <!-- CORRECCIÓN: Pasamos el 'order_number' a la ruta de vista -->
                             <a href="{{ url_for('view_order_page', order_number=order.order_number) }}"
                                 class="orders-action-btn">View</a>
                         </td>

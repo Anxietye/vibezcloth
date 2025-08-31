@@ -392,7 +392,7 @@ all_products = [
         "id": 9,
         "category": "accessories",
         "name": "Skateboards",
-        "price": "$2000",
+        "price": "$10",
         "slug": "skateboards",
         "sku": "SB-001",
         "color_variants": {
@@ -612,47 +612,50 @@ def my_account_page():
 
 @app.route("/my-account/orders")
 def my_account_orders():
-    """Muestra el historial de pedidos del usuario desde la base de datos."""
-    # CORRECCIÓN: Comprobamos 'user_id'.
     if "user_id" not in session:
         return redirect(url_for("login"))
 
+    # 1. Buscamos al usuario actual en la base de datos
     user = User.query.get(session["user_id"])
+
+    # 2. Obtenemos sus pedidos a través de la relación, ordenados por fecha
     orders = sorted(user.orders, key=lambda x: x.date, reverse=True)
+
     return render_template("orders.html", orders=orders, active_page="my-account")
 
 
 @app.route("/my-account/downloads")
 def my_account_downloads():
-    """Muestra la lista de productos descargables del usuario desde la base de datos."""
-    # CORRECCIÓN: Comprobamos 'user_id'.
     if "user_id" not in session:
         return redirect(url_for("login"))
 
+    # 1. Buscamos al usuario actual en la base de datos
     user = User.query.get(session["user_id"])
+
+    # 2. Creamos la lista de descargas recorriendo los items de cada pedido
+    downloads = []
     sorted_orders = sorted(user.orders, key=lambda x: x.date, reverse=True)
-    downloads = [
-        {"name": item.product_name, "download_file": item.download_file}
-        for order in sorted_orders
-        for item in order.items
-    ]
+    for order in sorted_orders:
+        for item in order.items:
+            downloads.append(item)  # Pasamos el objeto completo
+
     return render_template(
         "downloads.html", downloads=downloads, active_page="my-account"
     )
 
 
-@app.route("/my-account/details")
-def my_account_details():
-    """Muestra la página de detalles de la cuenta del usuario."""
-    # CORRECCIÓN: Comprobamos 'user_id'.
-    if "user_id" not in session:
-        return redirect(url_for("login"))
-
-    # Usamos 'user_info' para mostrar el nombre, que es correcto.
-    user_data = session.get("user_info")
-    return render_template(
-        "account_details.html", user=user_data, active_page="my-account"
-    )
+# @app.route("/my-account/details")
+# def my_account_details():
+#    """Muestra la página de detalles de la cuenta del usuario."""
+#    # CORRECCIÓN: Comprobamos 'user_id'.
+#    if "user_id" not in session:
+#        return redirect(url_for("login"))
+#
+#    # Usamos 'user_info' para mostrar el nombre, que es correcto.
+#    user_data = session.get("user_info")
+#    return render_template(
+#        "account_details.html", user=user_data, active_page="my-account"
+#    )
 
 
 @app.route("/my-account/view-order/<int:order_number>")
@@ -994,10 +997,14 @@ def get_cart_data():
 @app.route("/order/success/<path:receipt_token>", methods=["GET", "POST"])
 @app.route("/order/success/", methods=["GET", "POST"])
 def order_success(receipt_token=None):
+    # --- VERIFICACIÓN DE SEGURIDAD (Sin cambios, es correcta) ---
     pending_order = session.get("pending_order")
-    if not pending_order:
+    user_id = session.get("user_id")
+
+    if not pending_order or not user_id:
         return redirect(url_for("home"))
 
+    # --- PROCESAMIENTO DE DATOS DEL PEDIDO PENDIENTE ---
     cart = pending_order.get("cart", {})
     billing_address = pending_order.get("billing_address", {})
     coupon = pending_order.get("coupon")
@@ -1017,68 +1024,46 @@ def order_success(receipt_token=None):
             discount_amount = coupon["value"]
     total = subtotal - discount_amount
 
-    order_details = {
-        "number": random.randint(1000, 9999),
-        "date": datetime.now().strftime("%B %d, %Y"),
-        "status": "Completed",
-        "total": total,
-        "subtotal": subtotal,
-        "discount_info": (
-            {"code": coupon["code"], "amount": discount_amount} if coupon else None
-        ),
-        "products": list(cart.values()),
-        "billing_address": billing_address,
-        "payment_method": "Fleeca Bank",
-    }
+    # --- LÓGICA DE GUARDADO EN LA BASE DE DATOS ---
+    try:
+        # 1. Creamos el objeto del pedido principal para la DB
+        new_order = Order(
+            order_number=str(random.randint(10000, 99999)),
+            total=total,
+            status="Completed",
+            user_id=user_id,  # Asociamos el pedido con el usuario logueado
+        )
+        db.session.add(new_order)
 
-    if "orders" not in session:
-        session["orders"] = []
-    session["orders"].insert(0, order_details)
+        # 2. Creamos los objetos de los artículos del pedido para la DB
+        for item_data in cart.values():
+            order_item = OrderItem(
+                product_name=item_data["name"],
+                download_file=item_data["download_file"],
+                order=new_order,  # Asociamos el artículo con el pedido
+            )
+            db.session.add(order_item)
 
-    if "downloads" not in session:
-        session["downloads"] = []
-    new_downloads = [
-        {"name": item["name"], "download_file": item["download_file"]}
-        for item in cart.values()
-    ]
-    current_downloads = session.get("downloads", [])
-    unique_new_downloads = [d for d in new_downloads if d not in current_downloads]
-    session["downloads"] = unique_new_downloads + current_downloads
+        # 3. Guardamos todos los cambios en la base de datos
+        db.session.commit()
 
+    except Exception as e:
+        # Si algo falla durante el guardado, lo revertimos y mostramos un error
+        db.session.rollback()
+        print(f"!!! ERROR AL GUARDAR EL PEDIDO EN LA BASE DE DATOS: {e}")
+        # En una app real, aquí podrías renderizar una página de error
+        return "An error occurred while saving your order. Please contact support.", 500
+
+    # --- LÓGICA DE LIMPIEZA DE SESIÓN (MODIFICADA) ---
+    # Ya no guardamos 'orders' ni 'downloads' en la sesión, la base de datos lo hace
     session.pop("pending_order", None)
     session.pop("cart", None)
     session.pop("coupon", None)
     session.modified = True
 
+    # 4. Pasamos el objeto 'new_order' recién creado (desde la DB) a la plantilla
     return render_template(
-        "order_success.html", order=order_details, body_class="order-success-page"
-    )
-
-
-# ==============================================================================
-# === BLOQUE DE WISHLIST ==================================================
-# ==============================================================================
-@app.route("/api/wishlist")
-def get_wishlist_data():
-    return jsonify(session.get("wishlist", []))
-
-
-@app.route("/wishlist")
-def wishlist_page():
-    wishlist_ids = session.get("wishlist", [])
-    wishlist_products = [
-        p for p in [find_product_by_id(pid) for pid in wishlist_ids] if p is not None
-    ]
-    breadcrumbs = [
-        {"text": "Home", "url": url_for("home")},
-        {"text": "Wishlist", "url": None},
-    ]
-    return render_template(
-        "wishlist.html",
-        wishlist=wishlist_products,
-        breadcrumbs=breadcrumbs,
-        active_page="wishlist",
-        body_class="page-full-width",
+        "order_success.html", order=new_order, body_class="order-success-page"
     )
 
 
