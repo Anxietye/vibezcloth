@@ -688,12 +688,9 @@ def view_order_page(order_number):
         "view_order.html", order=order_to_view, active_page="my-account"
     )
 
-
+"/"
 @app.route("/")
 def home():
-    # Mostraremos los últimos 8 productos, por ejemplo.
-    latest_products = all_products[:8]
-
     return render_template(
         "index.html", active_page="home", body_class="page-home", products=all_products
     )

@@ -1,69 +1,44 @@
 {% extends "base.html" %}
-
 {% block content %}
 <div class="container">
     {% include 'partials/breadcrumbs.html' %}
-
-    <!-- NUEVO LAYOUT DE PÁGINA DE PRODUCTO -->
-    <div class="product-detail-page"
-        data-is-authenticated="{{ 'true' if 'user' in session and session.get('user') else 'false' }}">
-        <!-- COLUMNA IZQUIERDA: INFORMACIÓN -->
+    <!-- CORRECCIÓN: Usamos 'user_id' para determinar el estado de autenticación -->
+    <div class="product-detail-page" data-is-authenticated="{{ 'true' if 'user_id' in session else 'false' }}">
         <div class="product-info-column" id="product-info-column">
             <h1>{{ product.name }}</h1>
             <p class="price">{{ product.price }}</p>
             <p class="meta">SKU: {{ product.sku }}<br>Category: {{ product.category.capitalize() }}</p>
             <p class="description">{{ product.description }}</p>
-
             <div class="option-selector" id="color-selector">
                 <label>Color:</label>
                 <div class="options">
-                    <!-- CORRECCIÓN: Usamos 'variant_data' en el bucle -->
                     {% for color, variant_data in product.color_variants.items() %}
                     <button class="color-option" data-color="{{ color }}"
-                        data-image-src="{{ url_for('static', filename=variant_data['image']) }}">
-                        {{ color }}
-                    </button>
+                        data-image-src="{{ url_for('static', filename=variant_data['image']) }}">{{ color }}</button>
                     {% endfor %}
                 </div>
             </div>
-
-            <button class="purchase-button" id="add-to-cart-btn" data-product-id="{{ product.id }}" disabled>ADD TO
-                CART</button>
-            {% if 'user' in session and session.get('user') %}
-
-            <!-- SI EL USUARIO ESTÁ LOGUEADO: mostramos el botón de añadir/quitar -->
+            <div class="purchase-actions">
+                <button class="purchase-button" id="add-to-cart-btn" data-product-id="{{ product.id }}" disabled>ADD TO
+                    CART</button>
+            </div>
+            <!-- CORRECCIÓN: Usamos 'user_id' para la lógica del botón de wishlist -->
+            {% if 'user_id' in session %}
             {% if is_in_wishlist %}
-            <!-- Estado: Ya está en la wishlist -->
-            <a href="#" class="add-to-wishlist-btn disabled" data-product-id="{{ product.id }}">
-                <i class="fa-solid fa-heart"></i>
-                <span>Added to Wishlist</span>
-            </a>
+            <a href="#" class="add-to-wishlist-btn disabled" data-product-id="{{ product.id }}"><i
+                    class="fa-solid fa-heart"></i><span>Added to Wishlist</span></a>
             {% else %}
-            <!-- Estado: No está en la wishlist -->
-            <a href="#" class="add-to-wishlist-btn" data-product-id="{{ product.id }}">
-                <i class="fa-regular fa-heart"></i>
-                <span>Add to Wishlist</span>
-            </a>
+            <a href="#" class="add-to-wishlist-btn" data-product-id="{{ product.id }}"><i
+                    class="fa-regular fa-heart"></i><span>Add to Wishlist</span></a>
             {% endif %}
-
-            {% else %}
-            <!-- SI EL USUARIO NO ESTÁ LOGUEADO: mostramos un enlace que lleva a la página de login -->
-            <a href="{{ url_for('login') }}" class="add-to-wishlist-btn">
-                <i class="fa-regular fa-heart"></i>
-                <span>Sign in to add to Wishlist</span>
-            </a>
-
             {% endif %}
         </div>
-
-        <!-- COLUMNA DERECHA: GALERÍA DE IMÁGENES -->
         <div class="product-gallery-column" id="product-gallery-column">
             <div class="main-product-image">
                 <img src="{{ url_for('static', filename=(product.color_variants.values()|first)['image']) }}"
                     alt="{{ product.name }}" id="main-product-image">
             </div>
             <div class="product-thumbnails">
-                <!-- CORRECCIÓN: Usamos 'variant_data' en el bucle -->
                 {% for color, variant_data in product.color_variants.items() %}
                 <img class="thumbnail-img {{ 'active' if loop.first }}"
                     src="{{ url_for('static', filename=variant_data['image']) }}"
