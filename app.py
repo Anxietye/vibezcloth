@@ -50,12 +50,14 @@ class Order(db.Model):
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     total = db.Column(db.Float, nullable=False)
     status = db.Column(db.String(20), nullable=False, default="Completed")
+    # AÑADIMOS ESTA NUEVA COLUMNA
+    payment_method = db.Column(db.String(50), nullable=False, default="Fleeca Bank")
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    billing_address = db.relationship(
-        "BillingAddress", backref="order", uselist=False, cascade="all, delete-orphan"
-    )
     items = db.relationship(
         "OrderItem", backref="order", lazy=True, cascade="all, delete-orphan"
+    )
+    billing_address = db.relationship(
+        "BillingAddress", backref="order", uselist=False, cascade="all, delete-orphan"
     )
 
 
@@ -678,25 +680,33 @@ def my_account_downloads():
 #    )
 
 
-@app.route("/my-account/view-order/<int:order_number>")
+@app.route("/my-account/view-order/<string:order_number>")
 def view_order_page(order_number):
-    """Muestra los detalles de un pedido específico."""
-    # CORRECCIÓN: Comprobamos 'user_id'.
+    """Muestra los detalles de un pedido específico desde la base de datos."""
     if "user_id" not in session:
         return redirect(url_for("login"))
 
-    # La lógica ahora debe leer de la base de datos, no de la sesión.
-    user = User.query.get(session["user_id"])
-    order_to_view = next(
-        (order for order in user.orders if order.order_number == str(order_number)),
-        None,
-    )
+    # --- BÚSQUEDA EN LA BASE DE DATOS ---
+    # Buscamos el pedido por su número de orden Y nos aseguramos de que pertenezca al usuario actual
+    order_to_view = Order.query.filter_by(
+        order_number=order_number, user_id=session["user_id"]
+    ).first()
 
     if not order_to_view:
+        # Si no se encuentra el pedido o no pertenece a este usuario, redirigimos
         return redirect(url_for("my_account_orders"))
 
+    # --- CÁLCULO DE SUBTOTAL ---
+    # En un sistema real, el subtotal y descuento se guardarían en la DB.
+    # Por ahora, como no lo hacemos, el subtotal es el total.
+    # En el futuro, podrías recalcular el descuento aquí si fuera necesario.
+    subtotal = order_to_view.total
+
     return render_template(
-        "view_order.html", order=order_to_view, active_page="my-account"
+        "view_order.html",
+        order=order_to_view,
+        subtotal=subtotal,
+        active_page="my-account",
     )
 
 
@@ -1042,27 +1052,25 @@ def order_success(receipt_token=None):
             discount_amount = coupon.get("value", 0)
     total = subtotal - discount_amount
 
-    # --- GUARDADO EN BASE DE DATOS (CORREGIDO) ---
+    # --- GUARDADO EN BASE DE DATOS ---
     try:
-        # 1. Creamos el objeto Order
         new_order = Order(
             order_number=str(random.randint(10000, 99999)),
             total=total,
             status="Completed",
+            payment_method="Fleeca Bank",
             user_id=user_id,
         )
 
-        # 2. Creamos el objeto BillingAddress asociado
         new_address = BillingAddress(
             firstname=billing_address_data.get("firstname"),
             lastname=billing_address_data.get("lastname"),
             apartment=billing_address_data.get("apartment"),
             discord=billing_address_data.get("discord"),
             phone=billing_address_data.get("phone"),
-            order=new_order,  # Lo asociamos directamente con el pedido
+            order=new_order,
         )
 
-        # 3. Creamos los OrderItems
         for item_data in cart.values():
             order_item = OrderItem(
                 product_name=item_data["name"],
@@ -1071,11 +1079,8 @@ def order_success(receipt_token=None):
             )
             db.session.add(order_item)
 
-        # 4. Añadimos todo a la sesión de la base de datos
         db.session.add(new_order)
         db.session.add(new_address)
-
-        # 5. Guardamos todos los cambios en un solo paso
         db.session.commit()
 
     except Exception as e:
@@ -1083,15 +1088,27 @@ def order_success(receipt_token=None):
         print(f"!!! ERROR AL GUARDAR EL PEDIDO EN LA BASE DE DATOS: {e}")
         return "An error occurred while saving your order. Please contact support.", 500
 
+    # --- PREPARAMOS DATOS EXTRA PARA LA PLANTILLA ---
+    # Creamos un diccionario con el subtotal y la info del descuento para pasarlo a la plantilla
+    order_extra_details = {
+        "subtotal": "%.2f" % subtotal,
+        "discount_info": (
+            {"code": coupon["code"], "amount": discount_amount} if coupon else None
+        ),
+    }
+
     # --- LIMPIEZA DE SESIÓN ---
     session.pop("pending_order", None)
     session.pop("cart", None)
     session.pop("coupon", None)
     session.modified = True
 
-    # Pasamos el objeto 'new_order' a la plantilla
+    # Pasamos el objeto 'new_order' y los datos extra a la plantilla
     return render_template(
-        "order_success.html", order=new_order, body_class="order-success-page"
+        "order_success.html",
+        order=new_order,
+        order_extra=order_extra_details,
+        body_class="order-success-page",
     )
 
 

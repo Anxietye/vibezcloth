@@ -51,13 +51,16 @@
                 <h3>Your order</h3>
                 <div class="order-table">
                     <div class="order-row header"><span>Product</span><span>Total</span></div>
-                    {% for item in order.products %}
+                    {% for item in order.items %}
                     <div class="order-row">
-                        <span>{{ item.name }} &times; {{ item.quantity }}</span>
-                        <strong>${{ "%.2f"|format(item.price|replace('$', '')|float * item.quantity) }}</strong>
+                        <span>{{ item.product_name }} &times; 1</span> <!-- Cantidad es siempre 1 -->
+                        <strong>${{ "%.2f"|format(order.total) }}</strong> <!-- Simplificado -->
                     </div>
                     {% endfor %}
-                    <!-- Aquí podrías añadir Subtotal y Descuento si los tuvieras guardados -->
+                    <div class="order-row subtotal">
+                        <span>Subtotal:</span>
+                        <span>${{ "%.2f"|format(subtotal) }}</span> <!-- Usamos la variable pasada -->
+                    </div>
                     <div class="order-row total">
                         <strong>Total:</strong>
                         <strong>${{ "%.2f"|format(order.total) }}</strong>
