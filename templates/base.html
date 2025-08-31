@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -43,11 +43,12 @@
                 <div class="nav-right">
                     <ul class="icon-links">
 
-                        <!-- LÓGICA UNIFICADA Y CORREGIDA PARA USUARIOS -->
-                        {% if 'user_id' in session and session.get('user_info') %}
+                        <!-- === ZONA CORREGIDA === -->
+                        <!-- 1. Ahora comprobamos 'user_id' para saber si el usuario está logueado -->
+                        {% if 'user_id' in session %}
                         <!-- SI EL USUARIO ESTÁ LOGUEADO -->
 
-                        <!-- 1. Icono de Wishlist -->
+                        <!-- Icono de Wishlist -->
                         <li>
                             <a href="{{ url_for('wishlist_page') }}" title="Wishlist"
                                 class="wishlist-icon-container {{ 'active' if active_page == 'wishlist' }}">
@@ -56,7 +57,7 @@
                             </a>
                         </li>
 
-                        <!-- 2. Icono de Mi Cuenta -->
+                        <!-- Icono de "Mi Cuenta" -->
                         <li>
                             <a href="{{ url_for('my_account_page') }}" title="My Account"
                                 class="{{ 'active' if active_page == 'my-account' }}">
@@ -64,7 +65,7 @@
                             </a>
                         </li>
 
-                        <!-- 3. Icono de Logout -->
+                        <!-- Icono de Logout -->
                         <li>
                             <a href="{{ url_for('logout') }}" title="Logout"><i
                                     class="fa-solid fa-right-from-bracket"></i></a>
@@ -73,16 +74,16 @@
                         {% else %}
                         <!-- SI EL USUARIO NO ESTÁ LOGUEADO -->
 
-                        <!-- Icono de Login (único ícono de usuario visible) -->
+                        <!-- Muestra el ícono de login -->
                         <li>
                             <a href="{{ url_for('login') }}" title="Login">
                                 <i class="fa-regular fa-user"></i>
                             </a>
                         </li>
-
                         {% endif %}
+                        <!-- === FIN DE LA ZONA CORREGIDA === -->
 
-                        <!-- Icono del Carrito (siempre visible) -->
+                        <!-- 3. Icono del Carrito de Compras (siempre visible) -->
                         <li>
                             <a href="#" id="open-cart-btn" class="cart-icon-container">
                                 <i class="fa-solid fa-bag-shopping"></i>
@@ -142,7 +143,8 @@
                 <strong>Subtotal:</strong>
                 <span id="cart-subtotal">$0.00</span>
             </div>
-            <button class="checkout-btn">PROCEED TO CHECKOUT</button>
+            <!-- CORRECCIÓN FINAL: Aseguramos que sea un enlace <a> -->
+            <a href="{{ url_for('checkout') }}" class="checkout-btn">PROCEED TO CHECKOUT</a>
         </footer>
     </aside>
 

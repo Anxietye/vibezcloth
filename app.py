@@ -9,42 +9,47 @@ from flask import (
     jsonify,
     send_from_directory,
 )
-import requests
-import urllib.parse
-import random
-import secrets
+import requests, urllib.parse, random, secrets
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
 
 app = Flask(__name__)
-# --- CONFIGURACIÓN DE LA BASE DE DATOS ---
-# Le decimos a Flask dónde guardar el archivo de la base de datos
+# --- CONFIGURACIÓN ---
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///vibez.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-# Inicializamos la base de datos y la herramienta de migración
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
 # ==============================================================================
-# === MODELOS DE LA BASE DE DATOS ==============================================
+# === CONFIGURACIÓN Y DATOS ====================================================
 # ==============================================================================
 
+app.secret_key = "y2PRyodNyyzu1mzZa2hTJy8tGP0MKDkJ8GQbuSbR"
+CLIENT_ID = "76"
+CLIENT_SECRET = "y2PRyodNyyzu1mzZa2hTJy8tGP0MKDkJ8GQbuSbR"
+REDIRECT_URI = "https://vibezcloth.onrender.com/auth/callback"
+AUTHORIZATION_URL = "https://ucp.gta.world/oauth/authorize"
+TOKEN_URL = "https://ucp.gta.world/oauth/token"
+USER_API_URL = "https://ucp.gta.world/api/user"
+BANKING_GATEWAY_URL = "https://banking.gta.world/gateway/"
+BANKING_AUTH_KEY = "xmD0M1OUh2n2scx1VJb8kU2yAwKyaqIVbTXXfwZL90FY51sijBwysY7sLZao3fQu"
+COUPONS_ENABLED = True
 
+# --- MODELOS DE DATOS ---
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)  # ID único de GTAW
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     orders = db.relationship("Order", backref="user", lazy=True)
 
 
 class Order(db.Model):
-    id = db.Column(db.Integer, primary_key=True)  # ID autoincremental
+    id = db.Column(db.Integer, primary_key=True)
     order_number = db.Column(db.String(20), unique=True, nullable=False)
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     total = db.Column(db.Float, nullable=False)
     status = db.Column(db.String(20), nullable=False, default="Completed")
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    # Relación para los items del pedido
     items = db.relationship(
         "OrderItem", backref="order", lazy=True, cascade="all, delete-orphan"
     )
@@ -58,26 +63,6 @@ class OrderItem(db.Model):
 
 
 # (Aquí podrías añadir un modelo 'Product' en el futuro si quieres gestionar los productos desde una DB)
-# ==============================================================================
-# === CONFIGURACIÓN Y DATOS ====================================================
-# ==============================================================================
-
-# --- CONFIGURACIÓN DE LA APP Y OAUTH ---
-app.secret_key = "y2PRyodNyyzu1mzZa2hTJy8tGP0MKDkJ8GQbuSbR"
-CLIENT_ID = "76"
-CLIENT_SECRET = "y2PRyodNyyzu1mzZa2hTJy8tGP0MKDkJ8GQbuSbR"
-
-# ESTA ES LA LÍNEA MÁS IMPORTANTE - DEBE COINCIDIR CON TU PANEL
-# Basado en tus datos, esta es la configuración correcta.
-REDIRECT_URI = "https://vibezcloth.onrender.com/auth/callback"
-
-AUTHORIZATION_URL = "https://ucp.gta.world/oauth/authorize"
-TOKEN_URL = "https://ucp.gta.world/oauth/token"
-USER_API_URL = "https://ucp.gta.world/api/user"
-
-# --- API KEY DE BANKING ---
-BANKING_GATEWAY_URL = "https://banking.gta.world/gateway/"
-BANKING_AUTH_KEY = "xmD0M1OUh2n2scx1VJb8kU2yAwKyaqIVbTXXfwZL90FY51sijBwysY7sLZao3fQu"
 
 # --- DATOS DE EJEMPLO DE PRODUCTOS ---
 all_products = [
