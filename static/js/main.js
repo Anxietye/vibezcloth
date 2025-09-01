@@ -276,17 +276,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Función para actualizar el contador de la Wishlist ---
     async function updateWishlistCounter() {
-        // Solo procedemos si el elemento del contador existe en la página
+        const wishlistCounter = document.getElementById('wishlist-item-count');
         if (!wishlistCounter) {
+            // Si el contador no existe en la página (ej. usuario no logueado), no hacemos nada.
             return;
         }
 
         try {
             const response = await fetch('/api/wishlist');
-            const wishlistData = await response.json(); // wishlistData es una lista de IDs
+
+            // Comprobación de seguridad: nos aseguramos de que la respuesta del servidor fue exitosa
+            if (!response.ok) {
+                console.error(`Error de red al obtener wishlist: ${response.statusText}`);
+                wishlistCounter.classList.add('hidden');
+                return;
+            }
+
+            const wishlistData = await response.json(); // wishlistData debe ser una lista, ej: [1, 2]
+
+            // Comprobación de seguridad: nos aseguramos de que los datos son una lista (Array)
+            if (!Array.isArray(wishlistData)) {
+                console.error('La respuesta de /api/wishlist no es una lista válida.');
+                wishlistCounter.classList.add('hidden');
+                return;
+            }
+
             const totalItems = wishlistData.length;
 
-            // Mostramos el contador si hay items, lo ocultamos si no hay
             if (totalItems > 0) {
                 wishlistCounter.textContent = totalItems;
                 wishlistCounter.classList.remove('hidden');
@@ -294,11 +310,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 wishlistCounter.classList.add('hidden');
             }
         } catch (error) {
-            console.error("Error al actualizar el contador de la wishlist:", error);
-            // Ocultamos el contador si hay un error
-            if (wishlistCounter) {
-                wishlistCounter.classList.add('hidden');
-            }
+            console.error("Error fatal en updateWishlistCounter (probablemente no es un JSON válido):", error);
+            wishlistCounter.classList.add('hidden');
         }
     }
 
