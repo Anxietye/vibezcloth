@@ -35,7 +35,6 @@
                         <td>{{ item.product_name }}</td>
                         <td>Never</td>
                         <td>
-                            <!-- CORRECCIÓN: Usamos 'item.download_file' y 'item.product_name' -->
                             <a href="{{ url_for('download_file', filename=item.download_file) }}" class="download-btn">
                                 {{ item.product_name.upper() }}
                             </a>

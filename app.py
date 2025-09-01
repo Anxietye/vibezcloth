@@ -80,6 +80,7 @@ class OrderItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     product_name = db.Column(db.String(100), nullable=False)
     download_file = db.Column(db.String(100), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False, default=1)  # <-- AÑADE ESTA LÍNEA
     order_id = db.Column(db.Integer, db.ForeignKey("order.id"), nullable=False)
 
 
@@ -663,7 +664,7 @@ def my_account_downloads():
     downloads = [item for order in user.orders for item in order.items]
 
     # 2. Ordenamos la lista de items basándonos en la fecha del pedido al que pertenecen
-    downloads.sort(key=lambda item: item.order.date, reverse=True)
+    downloads.sort(key=lambda x: x.order.date, reverse=True)
 
     return render_template(
         "downloads.html", downloads=downloads, active_page="my-account"
@@ -1079,6 +1080,7 @@ def order_success(receipt_token=None):
             order_item = OrderItem(
                 product_name=item_data["name"],
                 download_file=item_data["download_file"],
+                quantity=item_data["quantity"],
                 order=new_order,
             )
             db.session.add(order_item)

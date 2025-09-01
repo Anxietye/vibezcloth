@@ -21,7 +21,7 @@
         <main class="account-content">
             <header class="view-order-header">
                 <i class="fa-solid fa-box"></i>
-                <h2>Order #{{ order.number }}</h2>
+                <h2>Order #{{ order.order_number }}</h2>
             </header>
 
             <section class="order-summary-bar">
@@ -50,7 +50,7 @@
                     <div class="order-row header"><span>Product</span><span>Total</span></div>
                     {% for item in order.items %}
                     <div class="order-row">
-                        <span>{{ item.product_name }} &times; 1</span> <!-- Cantidad es siempre 1 -->
+                        <span>{{ item.product_name }} &times; {{ item.quantity }}</span>
                         <strong>${{ "%.2f"|format(order.total) }}</strong> <!-- Simplificado -->
                     </div>
                     {% endfor %}
