@@ -73,9 +73,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for item in order.products %}
+                            <!-- El bucle debe ser sobre order.items -->
+                            {% for item in order.items %}
                             <tr>
-                                <strong>{{ order.order_number }}</strong>
+                                <td>{{ item.product_name }}</td> <!-- Mostramos el nombre del producto -->
                                 <td>Never</td>
                                 <td>
                                     <a href="{{ url_for('download_file', filename=item.download_file) }}"

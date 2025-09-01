@@ -311,28 +311,31 @@ document.addEventListener('DOMContentLoaded', () => {
         addToWishlistBtn.addEventListener('click', function (event) {
             event.preventDefault();
 
-            const productId = this.dataset.productId;
-
-            // Llamamos a la nueva ruta "toggle"
-            fetch(`/api/toggle_wishlist/${productId}`, { method: 'POST' })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        // Basado en la respuesta 'added', cambiamos la interfaz
-                        if (data.added) {
-                            // Si se AÑADIÓ
-                            this.innerHTML = '<i class="fa-solid fa-heart"></i> <span>Added to Wishlist</span>';
-                            this.classList.add('disabled');
-                        } else {
-                            // Si se ELIMINÓ
+            // Si el botón ya está deshabilitado (mostrando 'Added...'), llamamos a la API para quitarlo
+            if (this.classList.contains('disabled')) {
+                const productId = this.dataset.productId;
+                fetch(`/api/toggle_wishlist/${productId}`, { method: 'POST' })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success && !data.added) { // Verificamos que se eliminó
                             this.innerHTML = '<i class="fa-regular fa-heart"></i> <span>Add to Wishlist</span>';
                             this.classList.remove('disabled');
+                            updateWishlistCounter(); // <-- Actualizamos el contador
                         }
-
-                        // En cualquier caso, actualizamos el contador
-                        updateWishlistCounter();
-                    }
-                });
+                    });
+            } else {
+                // Si no está deshabilitado, llamamos a la API para añadirlo
+                const productId = this.dataset.productId;
+                fetch(`/api/toggle_wishlist/${productId}`, { method: 'POST' })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success && data.added) { // Verificamos que se añadió
+                            this.innerHTML = '<i class="fa-solid fa-heart"></i> <span>Added to Wishlist</span>';
+                            this.classList.add('disabled');
+                            updateWishlistCounter(); // <-- LA LLAMADA QUE FALTABA
+                        }
+                    });
+            }
         });
     }
 
