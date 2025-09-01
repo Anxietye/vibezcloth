@@ -44,7 +44,9 @@
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Date:</span>
-                        <strong>{{ order.date.strftime('%B %d, %Y') }}</strong>
+                        <strong class="local-date" data-utc-date="{{ order.date.isoformat() }}Z">
+                            Loading date...
+                        </strong>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Address:</span>

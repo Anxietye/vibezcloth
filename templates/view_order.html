@@ -33,7 +33,10 @@
                     <span>Status</span>
                     <strong class="status-{{ order.status|lower }}">{{ order.status }}</strong>
                 </div>
-                <div class="summary-item"><span>Date</span><strong>{{ order.date.strftime('%B %d, %Y') }}</strong></div>
+                <div class="summary-item"><span>Date</span><strong class="local-date"
+                        data-utc-date="{{ order.date.isoformat() }}Z">
+                        Loading date...
+                    </strong></div>
                 <div class="summary-item">
                     <span>Total</span>
                     <strong>${{ "%.2f"|format(order.total) }}</strong>

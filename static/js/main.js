@@ -359,6 +359,38 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    // --- NUEVO BLOQUE: CONVERSIÓN DE FECHAS UTC A FORMATO MM-DD-YYYY ---
+    function convertUtcDatesToLocal() {
+        // 1. Buscamos todos los elementos que marcamos con la clase 'local-date'
+        const dateElements = document.querySelectorAll('.local-date');
+
+        // 2. Recorremos cada elemento encontrado
+        dateElements.forEach(element => {
+            // Obtenemos la fecha en formato ISO desde el atributo data-
+            const utcDateString = element.dataset.utcDate;
+
+            if (utcDateString) {
+                // Creamos un objeto Date de JavaScript.
+                const date = new Date(utcDateString);
+
+                // --- ESTA ES LA PARTE QUE CAMBIA ---
+
+                // a. Obtenemos cada parte de la fecha por separado.
+                //    getMonth() devuelve 0 para Enero, por eso sumamos 1.
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const year = date.getFullYear();
+
+                // b. Construimos el string con el formato exacto que quieres.
+                const formattedDate = `${month}-${day}-${year}`;
+
+                // c. Actualizamos el contenido del elemento.
+                element.textContent = formattedDate;
+            }
+        });
+    }
+
+
     // --- LÓGICA FINAL Y FUNCIONAL PARA EL CARRUSEL DE LA HOME ---
     const track = document.getElementById('carousel-track-final');
     const prevArrow = document.getElementById('prev-arrow-final');
@@ -455,5 +487,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     updateCartCounter();
     updateWishlistCounter();
+    convertUtcDatesToLocal();
 
 });

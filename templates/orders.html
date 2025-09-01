@@ -35,7 +35,9 @@
                     <tr>
                         <!-- CORRECCIÓN: Usamos los nombres de atributo del modelo -->
                         <td>#{{ order.order_number }}</td>
-                        <td>{{ order.date.strftime('%B %d, %Y') }}</td>
+                        <td class="local-date" data-utc-date="{{ order.date.isoformat() }}Z">
+                            ...
+                        </td>
                         <td>{{ order.status }}</td>
                         <td>${{ "%.2f"|format(order.total) }} for {{ order.items|length }} item(s)</td>
                         <td>

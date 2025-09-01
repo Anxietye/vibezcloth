@@ -9,6 +9,8 @@ from flask import (
     jsonify,
     send_from_directory,
 )
+from datetime import datetime
+import pytz 
 import requests, urllib.parse, random, secrets
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -231,7 +233,7 @@ all_products = [
         "id": 4,
         "category": "man",
         "name": "Vibez Jean",
-        "price": "$3500",
+        "price": "$4500",
         "slug": "vibez-jean-man",
         "sku": "VM-047",
         "color_variants": {
@@ -281,7 +283,7 @@ all_products = [
         "id": 5,
         "category": "woman",
         "name": "Vibez Jeans",
-        "price": "$3500",
+        "price": "$4500",
         "slug": "vibez-jeans",
         "sku": "VJ-004",
         "color_variants": {
@@ -299,7 +301,7 @@ all_products = [
         "id": 6,
         "category": "woman",
         "name": "Sports Pants",
-        "price": "$3200",
+        "price": "$4000",
         "slug": "sports-pants",
         "sku": "SP-040",
         "color_variants": {
@@ -325,7 +327,7 @@ all_products = [
         "id": 7,
         "category": "woman",
         "name": "Oversized Band T-Shirts",
-        "price": "$4000",
+        "price": "$7000",
         "slug": "oversized-band-shirts",
         "sku": "OS-001",
         "color_variants": {
@@ -443,7 +445,7 @@ all_products = [
         "id": 10,
         "category": "woman",
         "name": "Cropped Hoodie",
-        "price": "$4700",
+        "price": "$6600",
         "slug": "cropped-hoodie",
         "sku": "CH-008",
         "color_variants": {
@@ -501,7 +503,7 @@ all_products = [
         "id": 11,
         "category": "man",
         "name": "Simple Hoddie",
-        "price": "$4000",
+        "price": "$6600",
         "slug": "hoddie",
         "sku": "SH-001",
         "color_variants": {
@@ -591,7 +593,7 @@ VALID_COUPONS = {
     "TAKE10": {"type": "percent", "value": 10},  # $10 de descuento fijo
     "LAUNCH40": {"type": "percent", "value": 40},  # $40 de descuento fijo
 }
-COUPONS_ENABLED = False
+COUPONS_ENABLED = True
 
 
 # --- FUNCIONES AUXILIARES ---
