@@ -268,88 +268,61 @@ document.addEventListener('DOMContentLoaded', () => {
     // =======================================================
     // === 5. LÓGICA DE LA WISHLIST (VERSIÓN FINAL) ========
     // =======================================================
-
-    const addToWishlistBtn = document.querySelector('.add-to-wishlist-btn');
     const wishlistTable = document.querySelector('.wishlist-table');
     const wishlistCounter = document.getElementById('wishlist-item-count');
 
-    // --- Función para actualizar el contador ---
-    // La definimos aquí para que esté disponible para todo el script
+    // Función para actualizar el contador (movida aquí para claridad)
     async function updateWishlistCounter() {
-        console.log("1. updateWishlistCounter() INICIADA."); // Mensaje 1
-
-        const wishlistCounter = document.getElementById('wishlist-item-count');
-        console.log("2. Elemento del contador encontrado:", wishlistCounter); // Mensaje 2
-
-        if (!wishlistCounter) {
-            console.error("   ERROR: No se encontró el elemento #wishlist-item-count. Fin.");
-            return;
-        }
-
+        if (!wishlistCounter) return;
         try {
             const response = await fetch('/api/wishlist');
             const wishlistData = await response.json();
-            console.log("3. Datos recibidos de /api/wishlist:", wishlistData); // Mensaje 3
-
             const totalItems = wishlistData.length;
-            console.log("4. Número total de items calculado:", totalItems); // Mensaje 4
-
-            if (totalItems > 0) {
-                console.log("5. Hay items. Mostrando contador..."); // Mensaje 5
-                wishlistCounter.textContent = totalItems;
-                wishlistCounter.classList.remove('hidden');
-            } else {
-                console.log("5. No hay items. Ocultando contador..."); // Mensaje 5
-                wishlistCounter.classList.add('hidden');
-            }
+            wishlistCounter.textContent = totalItems;
+            wishlistCounter.classList.toggle('hidden', totalItems === 0);
         } catch (error) {
-            console.error("   ERROR FATAL en la función updateWishlistCounter:", error);
+            console.error("Error al actualizar contador de wishlist:", error);
         }
     }
-    // --- Lógica para AÑADIR a la wishlist ---
-    if (addToWishlistBtn) {
-        addToWishlistBtn.addEventListener('click', function (event) {
+
+    // Lógica para el botón de AÑADIR/QUITAR en la página de producto
+    // Se busca de nuevo para evitar conflictos con la lógica de la página de producto
+    const pageProductAddToWishlistBtn = document.querySelector('.product-detail-page .add-to-wishlist-btn');
+    if (pageProductAddToWishlistBtn) {
+        pageProductAddToWishlistBtn.addEventListener('click', function (event) {
             event.preventDefault();
 
-            // Si el botón ya está deshabilitado (mostrando 'Added...'), llamamos a la API para quitarlo
-            if (this.classList.contains('disabled')) {
-                const productId = this.dataset.productId;
-                fetch(`/api/toggle_wishlist/${productId}`, { method: 'POST' })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success && !data.added) { // Verificamos que se eliminó
-                            this.innerHTML = '<i class="fa-regular fa-heart"></i> <span>Add to Wishlist</span>';
-                            this.classList.remove('disabled');
-                            updateWishlistCounter(); // <-- Actualizamos el contador
-                        }
-                    });
-            } else {
-                // Si no está deshabilitado, llamamos a la API para añadirlo
-                const productId = this.dataset.productId;
-                fetch(`/api/toggle_wishlist/${productId}`, { method: 'POST' })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success && data.added) { // Verificamos que se añadió
+            const productId = this.dataset.productId;
+
+            fetch(`/api/toggle_wishlist/${productId}`, { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        if (data.added) {
                             this.innerHTML = '<i class="fa-solid fa-heart"></i> <span>Added to Wishlist</span>';
                             this.classList.add('disabled');
-                            updateWishlistCounter(); // <-- LA LLAMADA QUE FALTABA
+                        } else {
+                            this.innerHTML = '<i class="fa-regular fa-heart"></i> <span>Add to Wishlist</span>';
+                            this.classList.remove('disabled');
                         }
-                    });
-            }
+                        updateWishlistCounter(); // ¡La llamada crucial!
+                    }
+                });
         });
     }
 
-    // --- Lógica para ELIMINAR de la wishlist ---
+    // Lógica para ELIMINAR desde la tabla de la wishlist
     if (wishlistTable) {
         wishlistTable.addEventListener('click', function (e) {
-            if (e.target.classList.contains('remove-wishlist-btn')) {
-                const productId = e.target.dataset.productId;
+            const removeBtn = e.target.closest('.remove-wishlist-btn');
+            if (removeBtn) {
+                const productId = removeBtn.dataset.productId;
                 fetch(`/api/remove_from_wishlist/${productId}`, { method: 'POST' })
                     .then(res => res.json())
                     .then(data => {
                         if (data.success) {
                             document.getElementById(`wishlist-item-${productId}`).remove();
-                            updateWishlistCounter(); // Llamamos a la función
+                            updateWishlistCounter();
                         }
                     });
             }
