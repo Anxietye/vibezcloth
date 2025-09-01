@@ -40,11 +40,11 @@
                 <section class="order-meta-summary">
                     <div class="meta-item">
                         <span class="meta-label">Order number:</span>
-                        <span class="meta-value">{{ order.number }}</span>
+                        <strong>{{ order.order_number }}</strong>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Date:</span>
-                        <span class="meta-value">{{ order.date }}</span>
+                        <strong>{{ order.order_number }}</strong>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Address:</span>
@@ -75,11 +75,12 @@
                         <tbody>
                             {% for item in order.products %}
                             <tr>
-                                <td>{{ item.name }}</td>
+                                <strong>{{ order.order_number }}</strong>
                                 <td>Never</td>
                                 <td>
-                                    <a href="{{ url_for('download_file', filename=item.download_file) }}">
-                                        {{ item.name }}
+                                    <a href="{{ url_for('download_file', filename=item.download_file) }}"
+                                        class="download-btn">
+                                        {{ item.product_name.upper() }}
                                     </a>
                                 </td>
                             </tr>
@@ -96,24 +97,25 @@
                         </div>
                         {% for item in order.items %}
                         <div class="order-row">
-                            <span>{{ item.name }} &times; {{ item.quantity }}</span>
-                            <strong>${{ "%.2f"|format(item.price|replace('$', '')|float * item.quantity) }}</strong>
+                            <span>{{ item.product_name }} &times; {{ item.quantity }}</span>
+                            <!-- Asumimos que el precio del item no está en la DB, lo calculamos si es necesario o mostramos el total -->
+                            <strong>${{ "%.2f"|format(order.total / order.items|length) }}</strong>
                         </div>
                         {% endfor %}
                         <div class="order-row subtotal">
                             <span>Subtotal:</span>
-                            <span>${{ order.subtotal }}</span> <!-- Usamos el subtotal -->
+                            <!-- Usamos la variable 'order_extra' para el subtotal -->
+                            <span>${{ order_extra.subtotal }}</span>
                         </div>
-                        <!-- Mostramos el descuento solo si existe -->
-                        {% if order.discount_info %}
+                        {% if order_extra.discount_info %}
                         <div class="order-row discount">
-                            <span>Discount ({{ order.discount_info.code }}):</span>
-                            <span>-${{ "%.2f"|format(order.discount_info.amount) }}</span>
+                            <span>Discount ({{ order_extra.discount_info.code }}):</span>
+                            <span>-${{ "%.2f"|format(order_extra.discount_info.amount) }}</span>
                         </div>
                         {% endif %}
                         <div class="order-row total">
                             <span>Total:</span>
-                            <strong>${{ order.total }}</strong>
+                            <strong>${{ "%.2f"|format(order.total) }}</strong>
                         </div>
                         <div class="order-row">
                             <span>Payment method:</span>
