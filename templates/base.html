@@ -44,8 +44,8 @@
                         <li><a href="{{ url_for('my_account_page') }}" title="My Account"
                                 class="{{ 'active' if active_page == 'my-account' }}"><i
                                     class="fa-solid fa-user"></i></a></li>
-                        <li><a href="{{ url_for('logout') }}" title="Logout"><i
-                                    class="fa-solid fa-right-from-bracket"></i></a></li>
+                        <!--<li><a href="{{ url_for('logout') }}" title="Logout"><i
+                                    class="fa-solid fa-right-from-bracket"></i></a></li>-->
                         {% else %}
                         <!-- SI NO ESTÁ LOGUEADO -->
                         <li><a href="{{ url_for('login') }}" title="Login"><i class="fa-regular fa-user"></i></a></li>

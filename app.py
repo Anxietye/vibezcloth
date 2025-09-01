@@ -526,7 +526,7 @@ all_products = [
                 "download_file": "Tyler.zip",
             },
             "Black": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/blackhoddie.png",
+                "image": "images/Blackhoddie.png",
                 "download_file": "Blackhoddie.zip",
             },
         },
@@ -1116,6 +1116,15 @@ def order_success(receipt_token=None):
         order_extra=order_extra_details,
         body_class="order-success-page",
     )
+
+
+@app.route("/api/wishlist")
+def get_wishlist_data():
+    """
+    Devuelve la lista de IDs de productos en la wishlist del usuario.
+    """
+    wishlist_ids = session.get("wishlist", [])
+    return jsonify(wishlist_ids)
 
 
 @app.route("/api/toggle_wishlist/<int:product_id>", methods=["POST"])
