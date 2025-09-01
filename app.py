@@ -415,7 +415,7 @@ all_products = [
         "id": 9,
         "category": "accessories",
         "name": "Skateboards",
-        "price": "$10",
+        "price": "$2000",
         "slug": "skateboards",
         "sku": "SB-001",
         "color_variants": {
