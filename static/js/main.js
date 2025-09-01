@@ -268,36 +268,53 @@ document.addEventListener('DOMContentLoaded', () => {
     // =======================================================
     // === 5. LÓGICA DE LA WISHLIST (VERSIÓN FINAL) ========
     // =======================================================
+
+    // --- Seleccionamos los elementos de la página ---
+    const addToWishlistBtn = document.querySelector('.add-to-wishlist-btn');
     const wishlistTable = document.querySelector('.wishlist-table');
     const wishlistCounter = document.getElementById('wishlist-item-count');
 
-    // Función para actualizar el contador (movida aquí para claridad)
+    // --- Función para actualizar el contador de la Wishlist ---
     async function updateWishlistCounter() {
-        if (!wishlistCounter) return;
+        // Solo procedemos si el elemento del contador existe en la página
+        if (!wishlistCounter) {
+            return;
+        }
+
         try {
             const response = await fetch('/api/wishlist');
-            const wishlistData = await response.json();
+            const wishlistData = await response.json(); // wishlistData es una lista de IDs
             const totalItems = wishlistData.length;
-            wishlistCounter.textContent = totalItems;
-            wishlistCounter.classList.toggle('hidden', totalItems === 0);
+
+            // Mostramos el contador si hay items, lo ocultamos si no hay
+            if (totalItems > 0) {
+                wishlistCounter.textContent = totalItems;
+                wishlistCounter.classList.remove('hidden');
+            } else {
+                wishlistCounter.classList.add('hidden');
+            }
         } catch (error) {
-            console.error("Error al actualizar contador de wishlist:", error);
+            console.error("Error al actualizar el contador de la wishlist:", error);
+            // Ocultamos el contador si hay un error
+            if (wishlistCounter) {
+                wishlistCounter.classList.add('hidden');
+            }
         }
     }
 
-    // Lógica para el botón de AÑADIR/QUITAR en la página de producto
-    // Se busca de nuevo para evitar conflictos con la lógica de la página de producto
-    const pageProductAddToWishlistBtn = document.querySelector('.product-detail-page .add-to-wishlist-btn');
-    if (pageProductAddToWishlistBtn) {
-        pageProductAddToWishlistBtn.addEventListener('click', function (event) {
+    // --- Lógica para AÑADIR/QUITAR desde la página de producto ---
+    if (addToWishlistBtn) {
+        addToWishlistBtn.addEventListener('click', function (event) {
             event.preventDefault();
 
             const productId = this.dataset.productId;
 
+            // Llamamos a la API unificada para añadir o quitar
             fetch(`/api/toggle_wishlist/${productId}`, { method: 'POST' })
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
+                        // Basado en la respuesta 'added', cambiamos el botón
                         if (data.added) {
                             this.innerHTML = '<i class="fa-solid fa-heart"></i> <span>Added to Wishlist</span>';
                             this.classList.add('disabled');
@@ -305,13 +322,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             this.innerHTML = '<i class="fa-regular fa-heart"></i> <span>Add to Wishlist</span>';
                             this.classList.remove('disabled');
                         }
-                        updateWishlistCounter(); // ¡La llamada crucial!
+                        // LA LLAMADA CRUCIAL: Actualizamos el contador después del cambio
+                        updateWishlistCounter();
                     }
                 });
         });
     }
 
-    // Lógica para ELIMINAR desde la tabla de la wishlist
+    // --- Lógica para ELIMINAR desde la tabla de la wishlist ---
     if (wishlistTable) {
         wishlistTable.addEventListener('click', function (e) {
             const removeBtn = e.target.closest('.remove-wishlist-btn');
@@ -322,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(data => {
                         if (data.success) {
                             document.getElementById(`wishlist-item-${productId}`).remove();
-                            updateWishlistCounter();
+                            updateWishlistCounter(); // Actualizamos el contador
                         }
                     });
             }

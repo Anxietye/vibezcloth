@@ -33,10 +33,14 @@
                         <!-- === LÓGICA DE SESIÓN CORREGIDA Y FINAL === -->
                         {% if 'user_id' in session %}
                         <!-- SI EL USUARIO ESTÁ LOGUEADO -->
-                        <li><a href="{{ url_for('wishlist_page') }}" title="Wishlist"
-                                class="wishlist-icon-container {{ 'active' if active_page == 'wishlist' }}"><i
-                                    class="fa-regular fa-heart"></i><span id="wishlist-item-count"
-                                    class="hidden">0</span></a></li>
+                        <li>
+                            <a href="{{ url_for('wishlist_page') }}" title="Wishlist"
+                                class="wishlist-icon-container {{ 'active' if active_page == 'wishlist' }}">
+                                <i class="fa-regular fa-heart"></i>
+                                <!-- CORRECCIÓN: ID único -->
+                                <span id="wishlist-item-count" class="hidden">0</span>
+                            </a>
+                        </li>
                         <li><a href="{{ url_for('my_account_page') }}" title="My Account"
                                 class="{{ 'active' if active_page == 'my-account' }}"><i
                                     class="fa-solid fa-user"></i></a></li>
