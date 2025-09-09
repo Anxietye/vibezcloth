@@ -10,7 +10,7 @@ from flask import (
     send_from_directory,
 )
 from datetime import datetime
-import pytz 
+import pytz
 import requests, urllib.parse, random, secrets
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -580,6 +580,222 @@ all_products = [
             "Zillakami": {  # Color 'Azul' usa la imagen woman3.jpg
                 "image": "images/Zillakami.png",
                 "download_file": "Zillakami.zip",
+            },
+        },
+    },
+    {
+        "id": 13,
+        "category": "accessories",
+        "name": "Phone Cases",
+        "price": "$5000",
+        "slug": "phone-cases",
+        "sku": "PC-050",
+        "color_variants": {
+            "VG Vibe": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/VG Vibe.png",
+                "download_file": "VG Vibe.zip",
+            },
+            "Black Grunge": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black grunge.png",
+                "download_file": "Black grunge.zip",
+            },
+            "Rose Grunge": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Rose Grunge.png",
+                "download_file": "Rose Grunge.zip",
+            },
+            "Noir Script": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Noir Script.png",
+                "download_file": "Noir Script-E.zip",
+            },
+            "Hype Collage": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Hype Collage.png",
+                "download_file": "Hype Collage.zip",
+            },
+            "Lost notes": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Lost notes.png",
+                "download_file": "Lost notes.zip",
+            },
+            "Stare drip": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Stare drip.png",
+                "download_file": "Stare drip.zip",
+            },
+            "Pink Chaos": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Pink Chaos.png",
+                "download_file": "Pink Chaos.zip",
+            },
+        },
+    },
+    {
+        "id": 14,
+        "category": "man",
+        "name": "Oversized T-Shirts",
+        "price": "$5000",
+        "slug": "phone-cases",
+        "sku": "OV-050",
+        "color_variants": {
+            "Download": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/Download.png",
+                "download_file": "Download.zip",
+            },
+            "Metallica": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Metallicaman.png",
+                "download_file": "Metallica-man.zip",
+            },
+            "S.O.C": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/SOC.png",
+                "download_file": "SOC.zip",
+            },
+            "Suffocation": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Suffocationman.png",
+                "download_file": "Suffocation-man.zip",
+            },
+            "Sinner": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Sinner.png",
+                "download_file": "Sinner.zip",
+            },
+        },
+    },
+    {
+        "id": 15,
+        "category": "woman",
+        "name": "Gothic Pearl Cross Choker",
+        "price": "$3700",
+        "slug": "cross-choker",
+        "sku": "CS-050",
+        "color_variants": {
+            "Plate": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/Plate.png",
+                "download_file": "Plate-Cross-Choker.zip",
+            },
+            "Bronze": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Bronze.png",
+                "download_file": "Bronze-Cross-Choker.zip",
+            },
+        },
+    },
+    {
+        "id": 16,
+        "category": "woman",
+        "name": "Gothic Cascade Ear Cuff",
+        "price": "$3700",
+        "slug": "ear-cuff",
+        "sku": "CS-050",
+        "color_variants": {
+            "Gray & Black": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/GB-GCEC.png",
+                "download_file": "GB-GCEC.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-GCEC.png",
+                "download_file": "Black-GCEC.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-GCEC.png",
+                "download_file": "White-GCEC.zip",
+            },
+            "Black & Gold": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/BG-GCEC.png",
+                "download_file": "BG-GCEC.zip",
+            },
+            "White & Gold": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/WG-GCEC.png",
+                "download_file": "WG-GCEC4.zip",
+            },
+        },
+    },
+    {
+        "id": 17,
+        "category": "woman",
+        "name": "Midnight Cross Earrings",
+        "price": "$3700",
+        "slug": "cross-earrings",
+        "sku": "CE-050",
+        "color_variants": {
+            "Black": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/Midnight-Cross-Earrings.png",
+                "download_file": "Midnight-Cross-Earrings.zip",
+            },
+        },
+    },
+    {
+        "id": 18,
+        "category": "woman",
+        "name": "After Dark Vibez Jeans",
+        "price": "$4500",
+        "slug": "after-dark",
+        "sku": "VJ-050",
+        "color_variants": {
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-ADVJ.png",
+                "download_file": "Black-ADVJ.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-ADVJ.png",
+                "download_file": "White-ADVJ.zip",
+            },
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Green-ADVJ.png",
+                "download_file": "Green-ADVJ.zip",
+            },
+            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Pink-ADVJ.png",
+                "download_file": "Pink-ADVJ.zip",
+            },
+        },
+    },
+    {
+        "id": 19,
+        "category": "woman",
+        "name": "Vibez Riot Jeans",
+        "price": "$4500",
+        "slug": "riot-jeans",
+        "sku": "VJ-051",
+        "color_variants": {
+            "Dark": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Dark-VRJ.png",
+                "download_file": "Dark-VRJ.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-VRJ.png",
+                "download_file": "White-VRJ.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-VRJ.png",
+                "download_file": "Red-VRJ.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-VRJ.png",
+                "download_file": "Black-VRJ.zip",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-VRJ.png",
+                "download_file": "Blue-VRJ.zip",
+            },
+        },
+    },
+    {
+        "id": 20,
+        "category": "woman",
+        "name": "Vibez Summer Classic Shorts",
+        "price": "$4500",
+        "slug": "summer-shorts",
+        "sku": "VJ-052",
+        "color_variants": {
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-VSCS.png",
+                "download_file": "Black-VSCS.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-VSCS.png",
+                "download_file": "White-VSCS.zip",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-VSCS.png",
+                "download_file": "Blue-VSCS.zip",
+            },
+            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gray-VSCS.png",
+                "download_file": "Gray-VSCS.zip",
             },
         },
     },
