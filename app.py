@@ -1187,7 +1187,7 @@ all_products = [
                 "image": "images/Military-Cap.png",
                 "download_file": "Military-Cap.zip",
             },
-             "Stars": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Stars": {  # Color 'Azul' usa la imagen woman3.jpg
                 "image": "images/Stars-Cap.png",
                 "download_file": "Stars-Cap.zip",
             },
@@ -1198,6 +1198,166 @@ all_products = [
             "VonDutch": {  # Color 'Azul' usa la imagen woman3.jpg
                 "image": "images/VonDutch-Cap.png",
                 "download_file": "VonDutch-Cap.zip",
+            },
+        },
+    },
+    {
+        "id": 32,
+        "category": "woman",
+        "name": "Vintage Gothic Glam",
+        "price": "$7000",
+        "slug": "vintage-gothic",
+        "sku": "VG-100",
+        "color_variants": {
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-VG.png",
+                "download_file": "White-VG.zip",
+            },
+            "Purple": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Purple-VG.png",
+                "download_file": "Purple-VG.zip",
+            },
+            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gray-VG.png",
+                "download_file": "Gray-VG.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-VG.png",
+                "download_file": "Red-VG.zip",
+            },
+        },
+    },
+    {
+        "id": 33,
+        "category": "woman",
+        "name": "Midnight Vibes Gothic Outfit",
+        "price": "$7000",
+        "slug": "midnight-gothic",
+        "sku": "MG-100",
+        "color_variants": {
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-MG.png",
+                "download_file": "Red-MG.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-MG.png",
+                "download_file": "Black-MG.zip",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-MG.png",
+                "download_file": "Blue-MG.zip",
+            },
+            "Purple": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Purple-MG.png",
+                "download_file": "Purple-MG.zip",
+            },
+            "Turquoise": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Turquoise-MG.png",
+                "download_file": "Turquoise-MG.zip",
+            },
+        },
+    },
+    {
+        "id": 34,
+        "category": "woman",
+        "name": "Cozy Grunge Sweater",
+        "price": "$6000",
+        "slug": "grunge-sweater",
+        "sku": "GS-100",
+        "color_variants": {
+            "Fire-B": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Fire-B-GS.png",
+                "download_file": "Fire-B-GS.zip",
+            },
+            "Bats-B": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Bats-B-GS.png",
+                "download_file": "Bats-B-GS.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-GS.png",
+                "download_file": "Black-GS.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-GS.png",
+                "download_file": "Red-GS.zip",
+            },
+            "Bats-P": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Bats-P-GS.png",
+                "download_file": "Bats-P-GS.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-GS.png",
+                "download_file": "White-GS.zip",
+            },
+            "Fire": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Fire-GS.png",
+                "download_file": "Fire-GS.zip",
+            },
+            "Fire-P": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Fire-P-GS.png",
+                "download_file": "Fire-P-GS.zip",
+            },
+        },
+    },
+    {
+        "id": 35,
+        "category": "woman",
+        "name": "Edgy Punk Studded Corset",
+        "price": "$6000",
+        "slug": "studded-corset",
+        "sku": "SC-100",
+        "color_variants": {
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-SC.png",
+                "download_file": "Black-SC.zip",
+            },
+            "Brown": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Brown-SC.png",
+                "download_file": "Brown-SC.zip",
+            },
+            "Purple": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Purple-SC.png",
+                "download_file": "Purple-SC.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-SC.png",
+                "download_file": "Red-SC.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-SC.png",
+                "download_file": "White-SC.zip",
+            },
+        },
+    },
+    {
+        "id": 36,
+        "category": "woman",
+        "name": "Sweet Cherry Heart Earrings",
+        "price": "$4700",
+        "slug": "cherry-earrings",
+        "sku": "CE-100",
+        "color_variants": {
+            "Cherry": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/CE.png",
+                "download_file": "Cherry-Earrings.zip",
+            },
+        },
+    },
+        {
+        "id": 37,
+        "category": "woman",
+        "name": "Delicate Triple Heart Earrings",
+        "price": "$4700",
+        "slug": "triple-heart",
+        "sku": "TH-100",
+        "color_variants": {
+            "Gold": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gold-TH.png",
+                "download_file": "Gold-TH.zip",
+            },
+            "Plate": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Plate-TH.png",
+                "download_file": "Plate-TH.zip",
             },
         },
     },
@@ -1342,19 +1502,19 @@ def home():
     )
 
 
-@app.route('/<category_name>')
+@app.route("/<category_name>")
 def category_page(category_name):
-    if category_name not in ['woman', 'man', 'accessories']:
+    if category_name not in ["woman", "man", "accessories"]:
         abort(404)
-    
+
     # --- LÓGICA DE PAGINACIÓN ---
     # 1. Obtenemos el número de página de la URL (ej. /woman?page=2). Si no se especifica, es la página 1.
-    page = request.args.get('page', 1, type=int)
-    ITEMS_PER_PAGE = 12 # Definimos el máximo de artículos por página
+    page = request.args.get("page", 1, type=int)
+    ITEMS_PER_PAGE = 12  # Definimos el máximo de artículos por página
 
     # 2. Obtenemos la lista COMPLETA de productos para esta categoría
     all_products_in_category = get_products_by_category(category_name)
-    
+
     # 3. Calculamos el "trozo" de la lista que corresponde a la página actual
     start_index = (page - 1) * ITEMS_PER_PAGE
     end_index = start_index + ITEMS_PER_PAGE
@@ -1364,21 +1524,23 @@ def category_page(category_name):
     total_products = len(all_products_in_category)
     # Usamos una división entera para redondear hacia arriba
     total_pages = (total_products + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE
-    
+
     breadcrumbs = [
-        {'text': 'Home', 'url': url_for('home')},
-        {'text': category_name.upper(), 'url': None}
+        {"text": "Home", "url": url_for("home")},
+        {"text": category_name.upper(), "url": None},
     ]
-    
+
     # 5. Pasamos solo los productos de ESTA PÁGINA y la info de paginación a la plantilla
-    return render_template('category.html', 
-                           title=category_name.capitalize(), 
-                           products=paginated_products, # Solo los 12 (o menos) productos de esta página
-                           active_page=category_name,
-                           breadcrumbs=breadcrumbs,
-                           # Nuevas variables para la paginación:
-                           current_page=page, 
-                           total_pages=total_pages)
+    return render_template(
+        "category.html",
+        title=category_name.capitalize(),
+        products=paginated_products,  # Solo los 12 (o menos) productos de esta página
+        active_page=category_name,
+        breadcrumbs=breadcrumbs,
+        # Nuevas variables para la paginación:
+        current_page=page,
+        total_pages=total_pages,
+    )
 
 
 @app.route("/terms-and-conditions")
