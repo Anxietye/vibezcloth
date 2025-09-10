@@ -272,6 +272,8 @@ footer {
 .carousel-track-final {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    align-items: stretch;
+    /* <-- LA CLAVE: Fuerza a todos los items a tener la misma altura */
 }
 
 .carousel-item-final {
@@ -288,6 +290,7 @@ footer {
     display: flex;
     flex-direction: column;
     height: 100%;
+    /* <-- RESTAURAMOS esta línea */
     transition: transform 0.3s ease-in-out;
 }
 
@@ -314,10 +317,28 @@ footer {
     padding: 1.5rem;
     text-align: center;
     background-color: var(--card-bg-color);
-    flex-grow: 0;
+
+    /* 1. Le decimos que ocupe el espacio vertical restante */
+    flex-grow: 1;
+
+    /* 2. Lo convertimos en un contenedor flex vertical */
     display: flex;
     flex-direction: column;
+}
+
+.product-card-dark .card-info h3 {
+    /* 3. Le decimos al título que NO ocupe espacio extra */
+    flex-grow: 0;
+}
+
+.product-card-dark .card-info .price {
+    /* 4. Le decimos al precio que SÍ ocupe el espacio extra, empujándolo hacia abajo */
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-end;
+    /* Alinea el texto del precio abajo del todo */
     justify-content: center;
+    /* Centra el texto del precio horizontalmente */
 }
 
 .product-card-dark .category {
@@ -1910,4 +1931,62 @@ footer {
     width: auto;
     /* Ancho automático */
     /* ... (el resto de tus estilos para el botón se quedan igual) ... */
+}
+
+/* --- Paginación --- */
+.pagination-nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    /* Espacio sobre la paginación */
+    padding-top: 2rem;
+    /* Espacio y línea superior */
+    border-top: 1px solid var(--border-color);
+}
+
+.pagination-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    /* Espacio entre los botones */
+}
+
+/* === ESTA ES LA REGLA CLAVE QUE DEBES REEMPLAZAR === */
+.pagination-nav a,
+.pagination-nav span {
+    /* 1. Activamos el modo Flexbox en el propio botón */
+    display: flex;
+
+    /* 2. Centramos el contenido (el texto) horizontalmente */
+    justify-content: center;
+
+    /* 3. Centramos el contenido (el texto) verticalmente */
+    align-items: center;
+
+    /* --- El resto de tus estilos se mantienen --- */
+    padding: 0.5rem 1rem;
+    min-width: 40px;
+    /* Ancho mínimo para los números */
+    box-sizing: border-box;
+    text-decoration: none;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--primary-text-color);
+    font-weight: bold;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.pagination-nav a:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #000;
+}
+
+.pagination-nav span.active {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #000;
 }

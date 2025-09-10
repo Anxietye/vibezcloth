@@ -799,6 +799,408 @@ all_products = [
             },
         },
     },
+    {
+        "id": 21,
+        "category": "woman",
+        "name": "Sunset Glow Top",
+        "price": "$5000",
+        "slug": "glow-top",
+        "sku": "ST-052",
+        "color_variants": {
+            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Pink-SGT.png",
+                "download_file": "Pink-SGT.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-SGT.png",
+                "download_file": "Black-SGT.zip",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-SGT.png",
+                "download_file": "Blue-SGT.zip",
+            },
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Green-SGT.png",
+                "download_file": "Green-SGT.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-SGT.png",
+                "download_file": "Red-SGT.zip",
+            },
+            "Yellow": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Yellow-SGT.png",
+                "download_file": "Gray-SGT.zip",
+            },
+        },
+    },
+    {
+        "id": 22,
+        "category": "woman",
+        "name": "Sweet & Slouchy Set",
+        "price": "$5000",
+        "slug": "slouchy-set",
+        "sku": "SS-052",
+        "color_variants": {
+            "Worn-out": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Worn-out-SS.png",
+                "download_file": "Worn-out-SS.zip",
+            },
+            "Black Rose": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Rose-SS.png",
+                "download_file": "Rose-SS.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-SS.png",
+                "download_file": "Black-SS.zip",
+            },
+            "Gray Cross": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/GrayCross-SS.png",
+                "download_file": "GrayCross-SS.zip",
+            },
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Green-SS.png",
+                "download_file": "Green-SS.zip",
+            },
+            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Pink-SS.png",
+                "download_file": "Pink-SS.zip",
+            },
+        },
+    },
+    {
+        "id": 23,
+        "category": "woman",
+        "name": "Striped Sleeve Grunge Top",
+        "price": "$5500",
+        "slug": "stripped-sleeve",
+        "sku": "SS-053",
+        "color_variants": {
+            "Nirvana-Y": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Nirvana-Yellow.png",
+                "download_file": "Nirvana-Yellow.zip",
+            },
+            "Sinner-G": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Sinner-Green.png",
+                "download_file": "Sinner-Green.zip",
+            },
+            "Sinner-W": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Sinner-Black.png",
+                "download_file": "Sinner-Black.zip",
+            },
+            "Sweetheart-P": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Sweetheart-Pink.png",
+                "download_file": "Sweetheart-Pink.zip",
+            },
+            "Sweetheart-W": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Sweetheart-White.png",
+                "download_file": "Sweetheart-White.zip",
+            },
+            "Digital Monster-Y": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Digital-Yellow.png",
+                "download_file": "Digital-Yellow.zip",
+            },
+            "Sweetheart": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Sweetheart.png",
+                "download_file": "Sweetheart.zip",
+            },
+            "Smile": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Smile.png",
+                "download_file": "Smile.zip",
+            },
+            "Sinner-Y": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Sinner-Yellow.png",
+                "download_file": "Sinner-Yellow.zip",
+            },
+            "Nirvana-B": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Nirvana-Black.png",
+                "download_file": "Nirvana-Black.zip",
+            },
+            "Digital Monster-P": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Digital-Pink.png",
+                "download_file": "Digital-Pink.zip",
+            },
+            "Sinner-O": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Sinner-Orange.png",
+                "download_file": "Sinner-Orange.zip",
+            },
+            "Sinner-R": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Sinner-Red.png",
+                "download_file": "Sinner-Red.zip",
+            },
+            "Sinner-B": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Sinner-White.png",
+                "download_file": "Sinner-White.zip",
+            },
+        },
+    },
+    {
+        "id": 24,
+        "category": "woman",
+        "name": "Plaid Punk Mini Skirt",
+        "price": "$4500",
+        "slug": "skirt-punk",
+        "sku": "SP-053",
+        "color_variants": {
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-Skirt.png",
+                "download_file": "Black-Skirt.zip",
+            },
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Green-Skirt.png",
+                "download_file": "Green-Skirt.zip",
+            },
+            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Pink-Skirt.png",
+                "download_file": "Pink-Skirt.zip",
+            },
+            "Purple": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Purple-Skirt.png",
+                "download_file": "Purple-Skirt.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-Skirt.png",
+                "download_file": "Red-Skirt.zip",
+            },
+            "Yellow": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Yellow-Skirt.png",
+                "download_file": "Yellow-Skirt.zip",
+            },
+        },
+    },
+    {
+        "id": 25,
+        "category": "woman",
+        "name": "Cross Pocket Skirt",
+        "price": "$4500",
+        "slug": "pocket-skirt",
+        "sku": "SP-053",
+        "color_variants": {
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-PS.png",
+                "download_file": "Black-PS.zip",
+            },
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Green-PS.png",
+                "download_file": "Green-PS.zip",
+            },
+            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Pink-PS.png",
+                "download_file": "Pink-PS.zip",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-PS.png",
+                "download_file": "Blue-PS.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-PS.png",
+                "download_file": "White-PS.zip",
+            },
+        },
+    },
+    {
+        "id": 26,
+        "category": "woman",
+        "name": "Cropped Denim Jacket",
+        "price": "$4200",
+        "slug": "denim-jacket",
+        "sku": "DJ-053",
+        "color_variants": {
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-DJ.png",
+                "download_file": "Blue-DJ.zip",
+            },
+            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gray-DJ.png",
+                "download_file": "Gray-DJ.zip",
+            },
+            "Light Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/LightBlue-DJ.png",
+                "download_file": "LightBlue-DJ.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-DJ.png",
+                "download_file": "White-DJ.zip",
+            },
+        },
+    },
+    {
+        "id": 27,
+        "category": "woman",
+        "name": "Oversized Sweatshirt",
+        "price": "$5000",
+        "slug": "oversized-sweatshirt",
+        "sku": "OS-050",
+        "color_variants": {
+            "Comic": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Comic-OS.png",
+                "download_file": "Comic-OS.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-OS.png",
+                "download_file": "White-OS.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-OS.png",
+                "download_file": "Black-OS.zip",
+            },
+            "Kenzo": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Kenzo-OS.png",
+                "download_file": "Kenzo-OS.zip",
+            },
+            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Pink-OS.png",
+                "download_file": "Pink-OS.zip",
+            },
+        },
+    },
+    {
+        "id": 28,
+        "category": "woman",
+        "name": "Classic Zip-Up Hoodie",
+        "price": "$4200",
+        "slug": "classic-hoodie",
+        "sku": "CH-053",
+        "color_variants": {
+            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gray-CH.png",
+                "download_file": "Gray-CH.zip",
+            },
+            "Gray Lettering": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Lettering-CH.png",
+                "download_file": "Lettering-CH.zip",
+            },
+            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Pink-CH.png",
+                "download_file": "Pink-CH.zip",
+            },
+            "Brown": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Brown-CH.png",
+                "download_file": "Brown-CH.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-CH.png",
+                "download_file": "Black-CH.zip",
+            },
+        },
+    },
+    {
+        "id": 29,
+        "category": "woman",
+        "name": "Grunge Skirt & Hoodie Jacket Set",
+        "price": "$6500",
+        "slug": "grunge-hoodie",
+        "sku": "GH-050",
+        "color_variants": {
+            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Pink-GH.png",
+                "download_file": "Pink-GH.zip",
+            },
+            "Skeleton-B": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Skeleton-GH.png",
+                "download_file": "Skeleton-GH.zip",
+            },
+            "Clouds-B": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Clouds-B.png",
+                "download_file": "Clouds-B.zip",
+            },
+            "Hello Kitty": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/HelloKitty-GH.png",
+                "download_file": "HelloKitty-GH.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-GH.png",
+                "download_file": "Black-GH.zip",
+            },
+            "Anime": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Anime-GH.png",
+                "download_file": "Anime-GH.zip",
+            },
+            "Himiko": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Himiko-GH.png",
+                "download_file": "Himiko-GH.zip",
+            },
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Green-GH.png",
+                "download_file": "Green-GH.zip",
+            },
+            "Skeleton-R": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-GH.png",
+                "download_file": "Red-GH.zip",
+            },
+            "Clouds-P": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/PinkClouds-GH.png",
+                "download_file": "PinkClouds-GH.zip",
+            },
+            "Anime Eyes": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/AnimeEyes-GH.png",
+                "download_file": "AnimeEyes-GH.zip",
+            },
+        },
+    },
+    {
+        "id": 30,
+        "category": "woman",
+        "name": "Heart & Star Earrings",
+        "price": "$3700",
+        "slug": "heart-earrings",
+        "sku": "CH-053",
+        "color_variants": {
+            "Gold": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gold-HSE.png",
+                "download_file": "Gold-HSE.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-HSE.png",
+                "download_file": "Black-HSE.zip",
+            },
+            "Bronze": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Bronze-HSE.png",
+                "download_file": "Bronze-HSE.zip",
+            },
+            "Plate": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Plate-HSE.png",
+                "download_file": "Plate-HSE.zip",
+            },
+        },
+    },
+    {
+        "id": 31,
+        "category": "woman",
+        "name": "Urban Cap",
+        "price": "$3000",
+        "slug": "urban-cap",
+        "sku": "UC-100",
+        "color_variants": {
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-Cap.png",
+                "download_file": "Black-Cap.zip",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-Cap.png",
+                "download_file": "Blue-Cap.zip",
+            },
+            "God's Favorite": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Favorite-Cap.png",
+                "download_file": "Favorite-Cap.zip",
+            },
+            "Military": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Military-Cap.png",
+                "download_file": "Military-Cap.zip",
+            },
+             "Stars": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Stars-Cap.png",
+                "download_file": "Stars-Cap.zip",
+            },
+            "Sunshine & Whiskey": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Sunshine-Cap.png",
+                "download_file": "Sunshine-Cap.zip",
+            },
+            "VonDutch": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/VonDutch-Cap.png",
+                "download_file": "VonDutch-Cap.zip",
+            },
+        },
+    },
 ]
 # --- CUPONES
 VALID_COUPONS = {
@@ -940,27 +1342,43 @@ def home():
     )
 
 
-@app.route("/<category_name>")
+@app.route('/<category_name>')
 def category_page(category_name):
-    if category_name not in ["woman", "man", "accessories"]:
+    if category_name not in ['woman', 'man', 'accessories']:
         abort(404)
+    
+    # --- LÓGICA DE PAGINACIÓN ---
+    # 1. Obtenemos el número de página de la URL (ej. /woman?page=2). Si no se especifica, es la página 1.
+    page = request.args.get('page', 1, type=int)
+    ITEMS_PER_PAGE = 12 # Definimos el máximo de artículos por página
 
-    # Obtenemos la lista completa de productos para esta categoría
-    products_list = get_products_by_category(category_name)
+    # 2. Obtenemos la lista COMPLETA de productos para esta categoría
+    all_products_in_category = get_products_by_category(category_name)
+    
+    # 3. Calculamos el "trozo" de la lista que corresponde a la página actual
+    start_index = (page - 1) * ITEMS_PER_PAGE
+    end_index = start_index + ITEMS_PER_PAGE
+    paginated_products = all_products_in_category[start_index:end_index]
 
+    # 4. Calculamos el número total de páginas necesarias
+    total_products = len(all_products_in_category)
+    # Usamos una división entera para redondear hacia arriba
+    total_pages = (total_products + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE
+    
     breadcrumbs = [
-        {"text": "Home", "url": url_for("home")},
-        {"text": category_name.upper(), "url": None},
+        {'text': 'Home', 'url': url_for('home')},
+        {'text': category_name.upper(), 'url': None}
     ]
-
-    # Pasamos la lista completa a la plantilla con el nombre 'products'
-    return render_template(
-        "category.html",
-        title=category_name.capitalize(),
-        products=products_list,  # Pasamos la lista completa
-        active_page=category_name,
-        breadcrumbs=breadcrumbs,
-    )
+    
+    # 5. Pasamos solo los productos de ESTA PÁGINA y la info de paginación a la plantilla
+    return render_template('category.html', 
+                           title=category_name.capitalize(), 
+                           products=paginated_products, # Solo los 12 (o menos) productos de esta página
+                           active_page=category_name,
+                           breadcrumbs=breadcrumbs,
+                           # Nuevas variables para la paginación:
+                           current_page=page, 
+                           total_pages=total_pages)
 
 
 @app.route("/terms-and-conditions")
