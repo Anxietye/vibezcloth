@@ -630,7 +630,7 @@ all_products = [
         "category": "man",
         "name": "Oversized T-Shirts",
         "price": "$5000",
-        "slug": "phone-cases",
+        "slug": "oversized-shirts",
         "sku": "OV-050",
         "color_variants": {
             "Download": {  # Color 'Negro' usa la imagen woman1.png
@@ -1343,7 +1343,7 @@ all_products = [
             },
         },
     },
-        {
+    {
         "id": 37,
         "category": "woman",
         "name": "Delicate Triple Heart Earrings",
@@ -1358,6 +1358,96 @@ all_products = [
             "Plate": {  # Color 'Azul' usa la imagen woman3.jpg
                 "image": "images/Plate-TH.png",
                 "download_file": "Plate-TH.zip",
+            },
+        },
+    },
+    {
+        "id": 38,
+        "category": "man",
+        "name": "Urban Cargo Pants",
+        "price": "$4500",
+        "slug": "cargo-pants",
+        "sku": "UP-100",
+        "color_variants": {
+            "Camo": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Camo-UP.png",
+                "download_file": "Camo-UP.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-UP.png",
+                "download_file": "Black-UP.zip",
+            },
+            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gray-UP.png",
+                "download_file": "Gray-UP.zip",
+            },
+            "Light Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/LightBlue-UP.png",
+                "download_file": "LightBlue-UP.zip",
+            },
+        },
+    },
+    {
+        "id": 38,
+        "category": "man",
+        "name": "Cargo Pants with Chain",
+        "price": "$4500",
+        "slug": "cargo-chain",
+        "sku": "PC-100",
+        "color_variants": {
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-PC.png",
+                "download_file": "Black-PC.zip",
+            },
+            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-PC.png",
+                "download_file": "Gray-PC.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-PC.png",
+                "download_file": "Red-PC.zip",
+            },
+        },
+    },
+    {
+        "id": 39,
+        "category": "man",
+        "name": "Custom Sneaker",
+        "price": "$15000",
+        "slug": "custom-sneaker-man",
+        "sku": "CS-102",
+        "color_variants": {
+            "Billie Eilish": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/Billie.png",
+                "download_file": "Billie-Man.zip",
+            },
+            "BW Cartoon": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/BW-Cartoon.png",
+                "download_file": "BW-Cartoon-Man.zip",
+            },
+            "Classic": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Classic.png",
+                "download_file": "Classic-Man.zip",
+            },
+            "Melted": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Melted.png",
+                "download_file": "Melted-Man.zip",
+            },
+            "Pikachu": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Pikachu.png",
+                "download_file": "Pikachu-Man.zip",
+            },
+            "Stitch": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Stitch.png",
+                "download_file": "Stitch-Man.zip",
+            },
+            "White Cartoon": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-Cartoon.png",
+                "download_file": "White-Cartoon-Man.zip",
+            },
+            "All-White Cartoon": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/All-White.png",
+                "download_file": "All-White-Man.zip",
             },
         },
     },
