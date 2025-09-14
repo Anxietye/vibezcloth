@@ -11,7 +11,13 @@
 *::after {
     box-sizing: border-box;
 }
+/* --- ESTILOS PARA MÓVILES --- */
+/* Los estilos aquí dentro solo se aplicarán si el ancho de la pantalla es de 768px o menos */
 
+img {
+    max-width: 100%;
+    height: auto;
+}
 html {
     scrollbar-gutter: stable;
 }
@@ -109,6 +115,13 @@ body>header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
+    flex-wrap: wrap; /* ¡ESTA ES LA PROPIEDAD CLAVE! */
+}
+.nav-center ul {
+    display: flex;
+    flex-wrap: wrap; /* Permitimos que los links también salten de línea */
+    justify-content: center; /* Los centramos si se envuelven */
+    gap: 25px; /* Un pequeño espacio entre ellos */
 }
 
 /* --- Logo --- */
@@ -1989,4 +2002,103 @@ footer {
     background-color: var(--accent-color);
     border-color: var(--accent-color);
     color: #000;
+}
+
+/* ================================================= */
+/* === ESTILOS RESPONSIVOS PARA MÓVILES Y TABLETS === */
+/* ================================================= */
+
+/* Para tablets y móviles grandes (pantallas de hasta 800px de ancho) */
+@media (max-width: 800px) {
+    
+    /* 1. CUADRÍCULA DE PRODUCTOS: Pasa de 4 a 2 columnas. */
+    .category-product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem; /* Reducimos un poco el espacio entre productos */
+    }
+
+    /* 2. CARRUSEL DE LA HOME: Muestra 2 productos en lugar de 4. */
+    .carousel-item-final {
+        flex: 0 0 50%; /* Cada item ocupa el 50% del ancho */
+    }
+
+    /* 3. LAYOUT DE PÁGINA DE PRODUCTO: Las columnas se apilan verticalmente. */
+    .product-detail-page {
+        grid-template-columns: 1fr; /* Una sola columna */
+        gap: 2rem;
+    }
+    
+    .product-gallery-column {
+        width: 100%; /* La galería ocupa todo el ancho */
+    }
+
+    /* 4. LAYOUT PÁGINA DE CUENTA: Las columnas se apilan. */
+    .account-page-layout {
+        grid-template-columns: 1fr;
+    }
+
+    /* 5. FOOTER: Las secciones se apilan y se centran. */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem; /* Reducimos el espacio vertical */
+        align-items: center;
+    }
+
+    /* 6. TABLA DE WISHLIST: Las columnas se apilan para mejor lectura. */
+    .wishlist-table thead {
+        display: none; /* Ocultamos el encabezado de escritorio */
+    }
+
+    .wishlist-item {
+        grid-template-columns: 1fr; /* Todo en una sola columna */
+        gap: 1rem;
+        padding: 1.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+
+    /* Añadimos etiquetas a los datos de la wishlist usando CSS */
+    .wishlist-item .product-price::before {
+        content: "Price: ";
+        font-weight: normal;
+        color: var(--secondary-text-color);
+    }
+    .wishlist-item .product-stock::before {
+        content: "Stock Status: ";
+        font-weight: normal;
+        color: var(--secondary-text-color);
+    }
+}
+
+
+/* Para móviles más pequeños (pantallas de hasta 480px de ancho) */
+@media (max-width: 480px) {
+
+    /* 1. CUADRÍCULA DE PRODUCTOS: Pasa de 2 a 1 sola columna. */
+    .category-product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* 2. TAMAÑO DE TEXTOS: Reducimos los títulos para que no ocupen tanto. */
+    h1 {
+        font-size: 2.2rem;
+    }
+    .section-title {
+        font-size: 1.2rem;
+    }
+
+    /* 3. CARRUSEL DE LA HOME: Pasa a mostrar 1 producto y medio. */
+    .carousel-item-final {
+        flex: 0 0 80%; /* Cada item ocupa el 80% para que se vea parte del siguiente */
+    }
+    .carousel-container-final {
+        padding: 0; /* Quitamos el padding lateral para más espacio */
+    }
+
+    /* 4. CHECKOUT: Las dos columnas principales se apilan. */
+    .checkout-main-content {
+        grid-template-columns: 1fr;
+    }
 }
