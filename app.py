@@ -1451,6 +1451,122 @@ all_products = [
             },
         },
     },
+    {
+        "id": 40,
+        "category": "woman",
+        "name": "Cropped Jacket",
+        "price": "$4500",
+        "slug": "cropped-jacket",
+        "sku": "CJ-100",
+        "color_variants": {
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-CJ.png",
+                "download_file": "Black-CJ.zip",
+            },
+            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gray-CJ.png",
+                "download_file": "Gray-CJ.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-CJ.png",
+                "download_file": "White-CJ.zip",
+            },
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Green-CJ.png",
+                "download_file": "Green-CJ.zip",
+            },
+        },
+    },
+    {
+        "id": 44,
+        "category": "man",
+        "name": "Vibez Zip Hoodie",
+        "price": "$4500",
+        "slug": "zip-hoodie",
+        "sku": "ZH-100",
+        "color_variants": {
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-ZH.png",
+                "download_file": "Black-ZH.zip",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-ZH.png",
+                "download_file": "Blue-ZH.zip",
+            },
+            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gray-ZH.png",
+                "download_file": "Gray-ZH.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-ZH.png",
+                "download_file": "Red-ZH.zip",
+            },
+        },
+    },
+    {
+        "id": 45,
+        "category": "woman",
+        "name": "Off-Shoulder Top",
+        "price": "$3700",
+        "slug": "off-shoulder",
+        "sku": "OS-100",
+        "color_variants": {
+            "Black S": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/BlackS-OS.png",
+                "download_file": "BlackS-OS.zip",
+            },
+            "Ghost": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Ghost-OS.png",
+                "download_file": "Ghost-OS.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/BlackSS-OS.png",
+                "download_file": "BlackSS-OS.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/WhiteSS-OS.png",
+                "download_file": "WhiteSS-OS.zip",
+            },
+            "White S": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/WhiteS-OS.png",
+                "download_file": "WhiteS-OS.zip",
+            },
+        },
+    },
+    {
+        "id": 46,
+        "category": "woman",
+        "name": "Cargo Pants",
+        "price": "$4500",
+        "slug": "cargo-pants-female",
+        "sku": "OS-100",
+        "color_variants": {
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-FCP.png",
+                "download_file": "White-FCP.zip",
+            },
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Green-FCP.png",
+                "download_file": "Green-FCP.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-FCP.png",
+                "download_file": "Black-FCP.zip",
+            },
+            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gray-FCP.png",
+                "download_file": "Gray-FCP.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-FCP.png",
+                "download_file": "Red-FCP.zip",
+            },
+            "Beige": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Beige-FCP.png",
+                "download_file": "Beige-FCP.zip",
+            },
+        },
+    },
 ]
 # --- CUPONES
 VALID_COUPONS = {
