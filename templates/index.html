@@ -1,52 +1,123 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
 
-    <!-- SECCIÓN 1: HERO TEXT -->
-    <div class="home-hero-main">
-        <h1>FEEL THE VIBE</h1>
-        <h1 id="animated-title"></h1>
-        <p>The new collection is now available.</p>
-        <div class="line"></div>
-    </div>
-
-    <!-- SECCIÓN 2: LATEST PRODUCTS (CARRUSEL OSCURO FINAL) -->
-    <div class="product-showcase">
-        <h2 class="section-title">LATEST PRODUCTS</h2>
-
-        <!-- Contenedor del Carrusel -->
-        <div class="carousel-container-final">
-            <!-- Botón Izquierda -->
-            <button class="carousel-arrow-final prev" id="prev-arrow-final">&#10094;</button>
-
-            <div class="carousel-viewport-final">
-                <div class="carousel-track-final" id="carousel-track-final">
-                    {% for product in products %}
-                    <div class="carousel-item-final">
-                        <a href="{{ url_for('product_detail', category_name=product.category, product_slug=product.slug) }}"
-                            class="product-card-link">
-                            <div class="product-card-dark">
-                                <div class="image-wrapper">
-                                    <!-- Le decimos que tome la primera imagen de la lista de variantes -->
-                                    <img src="{{ url_for('static', filename=(product.color_variants.values()|first)['image']) }}"
-                                        alt="{{ product.name }}">
-                                </div>
-                                <div class="card-info">
-                                    <span class="category">{{ product.category.upper() }}</span>
-                                    <h3>{{ product.name }}</h3>
-                                    <p class="price">{{ product.price }}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    {% endfor %}
-                </div>
+<!-- ======================================================= -->
+<!-- === NUEVO BANNER CARRUSEL DE PANTALLA COMPLETA ======== -->
+<!-- ======================================================= -->
+<div class="hero-carousel-container">
+    <div class="hero-slides">
+        <!-- Slide 2 -->
+        <div class="hero-slide"
+            style="background-image: url('{{ url_for('static', filename='images/banner2.jpg') }}');">
+            <div class="slide-content">
+                <h1>NEW SEASON VIBEZ</h1>
+                <p>The latest collection has just dropped.</p>
             </div>
+        </div>
 
-            <!-- Botón Derecha -->
-            <button class="carousel-arrow-final next" id="next-arrow-final">&#10095;</button>
+        <!-- Slide 5 - Custom Designs -->
+        <div class="hero-slide"
+            style="background-image: url('{{ url_for('static', filename='images/banner5.jpg') }}');">
+            <div class="slide-content">
+                <h1>MAKE IT YOURS</h1>
+                <p>Your design on our gear. Customize sneakers and phone cases to match your unique style.</p>
+                <a href="https://discord.com/channels/1348503275472945183/1348503275825004586" class="shop-now-btn"
+                    target="_blank" rel="noopener noreferrer">Design Now</a>
+            </div>
+        </div>
+        <!-- Slide 1 
+        <div class="hero-slide"
+            style="background-image: url('{{ url_for('static', filename='images/banner1.jpg') }}');">
+            <div class="slide-content">
+                <h1>STREETWEAR OUTFITS</h1>
+                <p>Discover styles to wear wherever you go.</p>
+            </div>
+        </div>-->
+
+        <!-- Slide 3 - Phone Cases -->
+        <div class="hero-slide"
+            style="background-image: url('{{ url_for('static', filename='images/banner3.jpg') }}');">
+            <div class="slide-content">
+                <h1>PROTECT YOUR VIBE</h1>
+                <p>Dress your phone in the latest Vibez styles. Ultimate protection meets unique design.</p>
+                <a href="{{ url_for('category_page', category_name='accessories/phone-cases') }}"
+                    class="shop-now-btn">Shop Cases</a>
+            </div>
+        </div>
+
+        <!-- ============================================= -->
+        <!-- === AÑADE ESTE NUEVO SLIDE PARA BMX === -->
+        <!-- ============================================= -->
+        <div class="hero-slide"
+            style="background-image: url('{{ url_for('static', filename='images/banner4.jpg') }}');">
+            <div class="slide-content">
+                <h1>STREET & STUNTS</h1>
+                <p>Get ready for the skatepark with our line of skateboards.</p>
+                <a href="{{ url_for('category_page', category_name='accessories/skateboards') }}"
+                    class="shop-now-btn">Ride On</a>
+            </div>
         </div>
     </div>
+
+    <!-- Controles de Navegación del Carrusel -->
+    <button class="hero-arrow prev" id="hero-prev">&#10094;</button>
+    <button class="hero-arrow next" id="hero-next">&#10095;</button>
+    <div class="hero-dots"></div>
+
+    <!-- ================================================== -->
+    <!-- === AÑADE ESTE NUEVO BOTÓN DE PAUSA/PLAY === -->
+    <!-- ================================================== -->
+    <button class="hero-pause-play" id="hero-pause-play">
+        <!-- SVG para el círculo de progreso -->
+        <svg class="progress-ring" width="50" height="50">
+            <!-- Círculo de fondo (la pista) -->
+            <circle class="progress-ring__track" stroke-width="3" fill="transparent" r="23.5" cx="25" cy="25" />
+            <!-- Círculo de progreso (el que se anima) -->
+            <circle class="progress-ring__indicator" stroke-width="3" fill="transparent" r="23.5" cx="25" cy="25" />
+        </svg>
+        <!-- Icono de Pausa/Play superpuesto -->
+        <i class="fa-solid fa-pause"></i>
+    </button>
+
+</div>
+
+<!-- ======================================================= -->
+<!-- === SECCIÓN DE CATEGORÍAS CON DOBLE ENLACE (FINAL) === -->
+<!-- ======================================================= -->
+<div class="featured-categories-grid">
+
+    <!-- Tarjeta para Hombre -->
+    <div class="featured-category-card">
+        <div class="card-background-image"
+            style="background-image: url('{{ url_for('static', filename='images/fb_cd837ef12e79243d220f3202bf2ab0a2f31de8f3.png') }}');"></div>
+
+        <div class="category-card-content">
+            <span class="category-card-subtitle">Vibez for Man</span>
+            <h2 class="category-card-title">STYLED FOR THE STREETS</h2>
+            <a href="{{ url_for('category_page', category_name='man') }}" class="category-shop-btn">Shop</a>
+        </div>
+
+        <!-- AÑADIMOS EL ENLACE "ESTIRADO" QUE CUBRE TODA LA TARJETA -->
+        <a href="{{ url_for('category_page', category_name='man') }}" class="card-main-link"
+            aria-label="Shop Man Collection"></a>
+    </div>
+
+    <!-- Tarjeta para Mujer -->
+    <div class="featured-category-card">
+        <div class="card-background-image"
+            style="background-image: url('{{ url_for('static', filename='images/fb_cd837ef12e79243d220f3202bf2ab0a2f31de8f3.png') }}');"></div>
+
+        <div class="category-card-content">
+            <span class="category-card-subtitle">Vibez for Woman</span>
+            <h2 class="category-card-title">REBEL THREADS & STREETWEAR</h2>
+            <a href="{{ url_for('category_page', category_name='woman') }}" class="category-shop-btn">Shop</a>
+        </div>
+
+        <!-- AÑADIMOS EL ENLACE "ESTIRADO" QUE CUBRE TODA LA TARJETA -->
+        <a href="{{ url_for('category_page', category_name='woman') }}" class="card-main-link"
+            aria-label="Shop Woman Collection"></a>
+    </div>
+
 </div>
 {% endblock %}

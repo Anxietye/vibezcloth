@@ -16,7 +16,161 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    // --- LÓGICA FINAL Y A PRUEBA DE ERRORES PARA EL FEEDBACK ---
+const feedbackTab = document.getElementById('feedback-tab');
+const feedbackSidebar = document.getElementById('feedback-sidebar');
+const feedbackOverlay = document.getElementById('feedback-overlay');
+const closeFeedbackBtn = document.getElementById('close-feedback-btn');
+const feedbackForm = document.getElementById('feedback-form');
 
+if (feedbackTab && feedbackSidebar && feedbackOverlay && closeFeedbackBtn && feedbackForm) {
+    
+    const openFeedback = () => {
+        feedbackOverlay.classList.remove('hidden');
+        feedbackSidebar.classList.add('open');
+        // AÑADIMOS ESTA LÍNEA: Oculta el botón
+        feedbackTab.classList.add('hidden'); 
+    };
+
+    const closeFeedback = () => {
+        feedbackOverlay.classList.add('hidden');
+        feedbackSidebar.classList.remove('open');
+        // AÑADIMOS ESTA LÍNEA: Muestra el botón de nuevo
+        feedbackTab.classList.remove('hidden'); 
+    };
+
+    // La lógica de los botones no necesita cambiar
+    feedbackTab.addEventListener('click', () => {
+        if (feedbackSidebar.classList.contains('open')) {
+            closeFeedback();
+        } else {
+            openFeedback();
+        }
+    });
+
+    closeFeedbackBtn.addEventListener('click', closeFeedback);
+    feedbackOverlay.addEventListener('click', closeFeedback);
+
+    feedbackForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        alert('Thank you for your feedback!');
+        closeFeedback();
+    });
+}
+
+    // --- BLOQUE FINAL Y A PRUEBA DE ERRORES CON requestAnimationFrame ---
+    const slidesContainer = document.querySelector('.hero-slides');
+    const slides = document.querySelectorAll('.hero-slide');
+    const prevBtn = document.getElementById('hero-prev');
+    const nextBtn = document.getElementById('hero-next');
+    const dotsContainer = document.querySelector('.hero-dots');
+    const pausePlayBtn = document.getElementById('hero-pause-play');
+
+    if (slidesContainer && slides.length > 0) {
+        const pausePlayIcon = pausePlayBtn.querySelector('i');
+        const progressIndicator = document.querySelector('.progress-ring__indicator');
+
+        const radius = progressIndicator.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+        progressIndicator.style.strokeDasharray = `${circumference} ${circumference}`;
+
+        const SLIDE_DURATION_MS = 7000;
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        let isPaused = false;
+        let slideInterval;
+
+        // Variables para controlar la animación de requestAnimationFrame
+        let animationFrameId;
+        let animationStartTime;
+        let timeElapsedWhenPaused = 0;
+
+        // Crear puntos de paginación
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('hero-dot');
+            dot.addEventListener('click', () => {
+                goToSlide(i);
+                if (!isPaused) startAutoSlide(); // Reinicia el intervalo si se hace clic manual
+            });
+            dotsContainer.appendChild(dot);
+        }
+        const dots = document.querySelectorAll('.hero-dot');
+
+        const updateDots = () => {
+            dots.forEach((dot, index) => dot.classList.toggle('active', index === currentSlide));
+        };
+
+        // --- LA NUEVA LÓGICA DE ANIMACIÓN ---
+        const stopProgressAnimation = () => {
+            cancelAnimationFrame(animationFrameId);
+        };
+
+        const animateProgress = (timestamp) => {
+            const elapsedTime = timestamp - animationStartTime;
+            const progress = Math.min(elapsedTime / SLIDE_DURATION_MS, 1);
+            const offset = circumference - progress * circumference;
+            progressIndicator.style.strokeDashoffset = offset;
+
+            if (progress < 1) {
+                animationFrameId = requestAnimationFrame(animateProgress);
+            }
+        };
+
+        const startProgressAnimation = () => {
+            stopProgressAnimation();
+            animationStartTime = performance.now() - timeElapsedWhenPaused;
+            animationFrameId = requestAnimationFrame(animateProgress);
+        };
+
+        const goToSlide = (slideIndex) => {
+            slidesContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+            currentSlide = slideIndex;
+            updateDots();
+            timeElapsedWhenPaused = 0; // Reinicia el tiempo de pausa
+            if (!isPaused) startProgressAnimation(); // Inicia la animación visual
+        };
+
+        const nextSlide = () => goToSlide((currentSlide + 1) % totalSlides);
+
+        const startAutoSlide = () => {
+            stopAutoSlide();
+            slideInterval = setInterval(nextSlide, SLIDE_DURATION_MS);
+        };
+
+        const stopAutoSlide = () => clearInterval(slideInterval);
+
+        // --- Control de Pausa y Play ---
+        pausePlayBtn.addEventListener('click', () => {
+            isPaused = !isPaused;
+            if (isPaused) {
+                stopAutoSlide();
+                stopProgressAnimation();
+                timeElapsedWhenPaused = performance.now() - animationStartTime;
+                pausePlayIcon.classList.replace('fa-pause', 'fa-play');
+            } else {
+                startAutoSlide();
+                startProgressAnimation();
+                pausePlayIcon.classList.replace('fa-play', 'fa-pause');
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            if (!isPaused) startAutoSlide();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            const prevSlideIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+            goToSlide(prevSlideIndex);
+            if (!isPaused) startAutoSlide();
+        });
+
+        // Iniciar todo
+        goToSlide(0);
+        startAutoSlide();
+    }
     // --- 2. LÓGICA GENERAL DEL CARRITO (ABRIR/CERRAR/ACTUALIZAR) ---
     const openCartBtn = document.getElementById('open-cart-btn');
     const closeCartBtn = document.getElementById('close-cart-btn');

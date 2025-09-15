@@ -11,6 +11,7 @@
 *::after {
     box-sizing: border-box;
 }
+
 /* --- ESTILOS PARA MÓVILES --- */
 /* Los estilos aquí dentro solo se aplicarán si el ancho de la pantalla es de 768px o menos */
 
@@ -18,10 +19,11 @@ img {
     max-width: 100%;
     height: auto;
 }
+/*
 html {
     scrollbar-gutter: stable;
 }
-
+*/
 .thank-you-header {
     text-align: center;
     margin-bottom: 2rem;
@@ -69,7 +71,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    overflow-x: hidden;
+
     width: 100%;
     transition: background-color 0.3s, color 0.3s;
 }
@@ -86,6 +88,19 @@ ul {
 
 main {
     flex-grow: 1;
+}
+
+/* ==========================================================================
+   2.1 MARGEN
+   ========================================================================== */
+
+header>.container {
+    /* Anulamos el espaciado horizontal para que ocupe todo el ancho */
+    padding-left: 0;
+    padding-right: 0;
+
+    /* Aumentamos el ancho máximo solo para el header, asegurando que se expanda */
+    max-width: 90%;
 }
 
 .container {
@@ -108,6 +123,8 @@ main {
 body>header {
     width: 100%;
     border-bottom: 2px solid var(--accent-color);
+    position: relative; /* Necesario para que z-index funcione correctamente */
+    z-index: 900;
 }
 
 .main-nav {
@@ -115,13 +132,18 @@ body>header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
-    flex-wrap: wrap; /* ¡ESTA ES LA PROPIEDAD CLAVE! */
+    flex-wrap: wrap;
+    /* ¡ESTA ES LA PROPIEDAD CLAVE! */
 }
+
 .nav-center ul {
     display: flex;
-    flex-wrap: wrap; /* Permitimos que los links también salten de línea */
-    justify-content: center; /* Los centramos si se envuelven */
-    gap: 25px; /* Un pequeño espacio entre ellos */
+    flex-wrap: wrap;
+    /* Permitimos que los links también salten de línea */
+    justify-content: center;
+    /* Los centramos si se envuelven */
+    gap: 25px;
+    /* Un pequeño espacio entre ellos */
 }
 
 /* --- Logo --- */
@@ -2004,32 +2026,63 @@ footer {
     color: #000;
 }
 
+/* ======================================================= */
+/* === AJUSTE PARA CENTRADO PERFECTO DE LA NAVEGACIÓN === */
+/* ======================================================= */
+
+/* 1. Hacemos que la barra de navegación sea un 'contexto de posicionamiento' */
+.main-nav {
+    position: relative;
+}
+
+/* 2. Centramos el menú de forma absoluta */
+.nav-center {
+    position: absolute;
+    /* Mueve el borde izquierdo del menú al centro de la barra de navegación */
+    left: 50%;
+    /* Mueve el menú hacia la izquierda la mitad de su propio ancho para centrarlo perfectamente */
+    transform: translateX(-50%);
+}
+
 /* ================================================= */
 /* === ESTILOS RESPONSIVOS PARA MÓVILES Y TABLETS === */
 /* ================================================= */
 
 /* Para tablets y móviles grandes (pantallas de hasta 800px de ancho) */
 @media (max-width: 800px) {
-    
+
+    .nav-center {
+        position: static;
+        /* Devuelve el menú a su posición normal en el flujo */
+        transform: none;
+        /* Anula la transformación */
+        width: 100%;
+        /* Hace que ocupe todo el ancho para que los links se centren */
+    }
+
     /* 1. CUADRÍCULA DE PRODUCTOS: Pasa de 4 a 2 columnas. */
     .category-product-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem; /* Reducimos un poco el espacio entre productos */
+        gap: 1.5rem;
+        /* Reducimos un poco el espacio entre productos */
     }
 
     /* 2. CARRUSEL DE LA HOME: Muestra 2 productos en lugar de 4. */
     .carousel-item-final {
-        flex: 0 0 50%; /* Cada item ocupa el 50% del ancho */
+        flex: 0 0 50%;
+        /* Cada item ocupa el 50% del ancho */
     }
 
     /* 3. LAYOUT DE PÁGINA DE PRODUCTO: Las columnas se apilan verticalmente. */
     .product-detail-page {
-        grid-template-columns: 1fr; /* Una sola columna */
+        grid-template-columns: 1fr;
+        /* Una sola columna */
         gap: 2rem;
     }
-    
+
     .product-gallery-column {
-        width: 100%; /* La galería ocupa todo el ancho */
+        width: 100%;
+        /* La galería ocupa todo el ancho */
     }
 
     /* 4. LAYOUT PÁGINA DE CUENTA: Las columnas se apilan. */
@@ -2041,17 +2094,20 @@ footer {
     .footer-content {
         flex-direction: column;
         text-align: center;
-        gap: 2rem; /* Reducimos el espacio vertical */
+        gap: 2rem;
+        /* Reducimos el espacio vertical */
         align-items: center;
     }
 
     /* 6. TABLA DE WISHLIST: Las columnas se apilan para mejor lectura. */
     .wishlist-table thead {
-        display: none; /* Ocultamos el encabezado de escritorio */
+        display: none;
+        /* Ocultamos el encabezado de escritorio */
     }
 
     .wishlist-item {
-        grid-template-columns: 1fr; /* Todo en una sola columna */
+        grid-template-columns: 1fr;
+        /* Todo en una sola columna */
         gap: 1rem;
         padding: 1.5rem;
         border: 1px solid var(--border-color);
@@ -2065,6 +2121,7 @@ footer {
         font-weight: normal;
         color: var(--secondary-text-color);
     }
+
     .wishlist-item .product-stock::before {
         content: "Stock Status: ";
         font-weight: normal;
@@ -2085,16 +2142,20 @@ footer {
     h1 {
         font-size: 2.2rem;
     }
+
     .section-title {
         font-size: 1.2rem;
     }
 
     /* 3. CARRUSEL DE LA HOME: Pasa a mostrar 1 producto y medio. */
     .carousel-item-final {
-        flex: 0 0 80%; /* Cada item ocupa el 80% para que se vea parte del siguiente */
+        flex: 0 0 80%;
+        /* Cada item ocupa el 80% para que se vea parte del siguiente */
     }
+
     .carousel-container-final {
-        padding: 0; /* Quitamos el padding lateral para más espacio */
+        padding: 0;
+        /* Quitamos el padding lateral para más espacio */
     }
 
     /* 4. CHECKOUT: Las dos columnas principales se apilan. */
@@ -2102,3 +2163,553 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* ======================================================= */
+/* === ESTILOS PARA EL NUEVO BANNER CARRUSEL DE LA HOME === */
+/* ======================================================= */
+
+.hero-carousel-container {
+    position: relative;
+    width: 100%;
+    /* CAMBIO: Reducimos la altura del 85% al 65% de la pantalla */
+    height: 65vh;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.hero-slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s ease-in-out;
+}
+
+.hero-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.slide-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+
+    /* CAMBIO: Convertimos el contenedor del texto en una columna flexible */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Esto centra todo su contenido (título, párrafo, botón) perfectamente */
+}
+
+.slide-content h1 {
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.slide-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    /* CAMBIO: Limitamos el ancho del párrafo para que no se extienda demasiado */
+    max-width: 600px;
+}
+
+.shop-now-btn {
+    background-color: white;
+    color: black;
+    padding: 12px 35px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.shop-now-btn:hover {
+    transform: scale(1.05);
+}
+
+/* El resto de los estilos para las flechas y los puntos se mantienen igual */
+.hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    padding: 10px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-arrow.prev {
+    left: 20px;
+}
+
+.hero-arrow.next {
+    right: 20px;
+}
+
+.hero-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.hero-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.hero-dot.active {
+    background-color: white;
+}
+
+/* ========================================================== */
+/* === ESTILOS SIMPLIFICADOS PARA EL BOTÓN DE PAUSA/PLAY === */
+/* ========================================================== */
+
+.hero-pause-play {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.hero-pause-play:hover {
+    filter: brightness(1.2);
+}
+
+.hero-pause-play .progress-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(-90deg);
+}
+
+.progress-ring__track {
+    stroke: rgba(255, 255, 255, 0.3);
+}
+
+.progress-ring__indicator {
+    stroke: white;
+    /* La transición es para que el reinicio y la pausa se vean suaves */
+    transition: stroke-dashoffset 0.2s linear;
+}
+
+.hero-pause-play i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+}
+
+/* ==================================================================== */
+/* === ESTILOS CORREGIDOS PARA CATEGORÍAS (TEXTO SUPERPUESTO FINAL) === */
+/* ==================================================================== */
+
+.featured-categories-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /*gap: 1.5rem;
+    padding: 3rem 1.5rem;*/
+    margin-bottom: 3rem;
+    /* O el valor que prefieras (ej. 50px) */
+}
+
+
+/* 1. La tarjeta principal es el 'contexto de posicionamiento' */
+.featured-category-card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 10 / 9;
+    /* Mantenemos la proporción panorámica */
+    color: white;
+    /*border-radius: 8px; /* Opcional: añade esquinas redondeadas */
+}
+
+.card-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.4s ease-out;
+}
+
+.featured-category-card:hover .card-background-image {
+    transform: scale(1.05);
+}
+
+/* 2. El contenido se posiciona en la parte inferior con la sombra */
+.category-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2.5rem;
+    z-index: 2;
+    /* Importante: por encima del enlace fantasma */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.category-card-subtitle {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.category-card-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.category-shop-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    background-color: white;
+    color: black;
+    padding: 10px 30px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: transform 0.2s ease-out;
+    position: relative;
+    /* Necesario para que esté por encima del enlace fantasma */
+    z-index: 3;
+    /* Z-index aún más alto para asegurar que sea clicable */
+}
+
+.category-shop-btn:hover {
+    transform: scale(1.1);
+}
+
+/* 3. El enlace "fantasma" se estira para cubrir toda la tarjeta */
+.card-main-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* Está por debajo del contenido */
+    outline: none;
+    font-size: 0;
+    color: transparent;
+}
+
+/* --- Adaptación para Móviles --- */
+@media (max-width: 768px) {
+    .featured-categories-grid {
+        /* En móvil, las tarjetas se apilan una encima de la otra */
+        grid-template-columns: 1fr;
+        padding: 2rem 1rem;
+    }
+
+    .category-card-title {
+        font-size: 1.8rem;
+    }
+}
+
+/* ======================================================= */
+/* === ESTILOS PARA LOS BOTONES DE CATEGORÍAS DESTACADAS === */
+/* ======================================================= */
+
+/* Ajustamos el contenedor del texto para que posicione bien el botón */
+.category-card-content {
+    /* ... (tus estilos existentes se mantienen) ... */
+
+    /* AÑADIMOS ESTO para usar Flexbox */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Alinea todo a la izquierda */
+    justify-content: flex-end;
+    /* Empuja todo hacia abajo */
+}
+
+/* Estilos para el nuevo botón "Shop" */
+.category-shop-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+
+    background-color: white;
+    color: black;
+
+    padding: 10px 30px;
+    border-radius: 50px;
+
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    text-decoration: none;
+    /* Aseguramos que no tenga subrayado de enlace */
+
+    transition: transform 0.2s ease-out;
+}
+
+/* === AÑADE ESTA NUEVA REGLA PARA EL HOVER === */
+/* Ahora el efecto de agrandar se aplica solo al pasar el cursor sobre el botón */
+.category-shop-btn:hover {
+    transform: scale(1.1);
+    /* Lo hacemos un poco más grande para que se note */
+}
+
+/* El hover del botón se hereda del hover de la tarjeta, pero podemos añadir un extra */
+.featured-category-card:hover .category-shop-btn {
+    transform: scale(1.05);
+}
+
+/* ==================================================================== */
+/* === ESTILOS FINALES Y CORRECTOS PARA LA PESTAÑA DE FEEDBACK === */
+/* ==================================================================== */
+
+#feedback-tab {
+    position: fixed;
+    top: 50%;
+    
+    /* 1. POSICIÓN FIJA Y SIMPLE: A 15px del borde derecho. */
+    right: 35px; 
+    
+    /* 2. Rotación y centrado vertical */
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: bottom right;
+    
+    /* Estilos visuales */
+    background-color: var(--card-bg-color);
+    color: var(--primary-text-color);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    padding: 0.8rem 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    z-index: 1001;
+    
+    /* 3. TRANSICIÓN: Se aplica a la opacidad para un desvanecimiento suave */
+    transition: opacity 0.3s ease-out;
+}
+
+#feedback-tab:hover {
+    background-color: var(--accent-color);
+    color: #000;
+}
+
+#feedback-tab:hover {
+    background-color: var(--accent-color);
+    color: #000;
+}
+
+/* 4. ESTADO ABIERTO: Cuando el sidebar tiene la clase .open... */
+#feedback-sidebar.open ~ #feedback-tab {
+    opacity: 0;
+    pointer-events: none; /* Evita que se pueda hacer clic en el botón invisible */
+}
+
+/* --- El Overlay y el Sidebar de Feedback (Sin cambios) --- */
+#feedback-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#feedback-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 420px;
+    max-width: 90%;
+    height: 100%;
+    background-color: var(--main-bg-color);
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    flex-direction: column;
+}
+
+#feedback-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#feedback-sidebar.open {
+    transform: translateX(0);
+}
+#feedback-tab.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+/* --- Contenido del Formulario de Feedback --- */
+.feedback-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.feedback-header h3 {
+    margin: 0;
+}
+
+#close-feedback-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--primary-text-color);
+    cursor: pointer;
+}
+
+.feedback-content {
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.feedback-content p {
+    margin-top: 0;
+}
+
+.form-group-feedback {
+    margin-bottom: 2rem;
+}
+
+.form-group-feedback label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: bold;
+}
+
+.required {
+    color: #ff5555;
+}
+
+.rating-scale {
+    text-align: center;
+}
+
+.rating-options {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+}
+
+.rating-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rating-option input[type="radio"] {
+    opacity: 0;
+    position: absolute;
+}
+
+.rating-option label {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--primary-text-color);
+    border-radius: 50%;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.rating-option input[type="radio"]:checked+label {
+    background-color: var(--primary-text-color);
+}
+
+.rating-label {
+    font-size: 0.8rem;
+    color: var(--secondary-text-color);
+}
+
+#feedback-text {
+    width: 100%;
+    background-color: #2a2a2a;
+    border: 1px solid var(--border-color);
+    color: var(--primary-text-color);
+    padding: 0.8rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+.feedback-submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-text-color);
+    color: var(--main-bg-color);
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.feedback-submit-btn:hover {
+    opacity: 0.8;
+}   

@@ -10,7 +10,49 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
+<!-- ÚNICA ETIQUETA BODY DE APERTURA -->
 <body class="{{ body_class or '' }}">
+
+    <!-- ======================================================= -->
+    <!-- === SECCIÓN DE FEEDBACK EN EL LUGAR CORRECTO === -->
+    <!-- ======================================================= 
+    <button id="feedback-tab">FEEDBACK</button>
+    <div id="feedback-overlay" class="hidden"></div>
+    <aside id="feedback-sidebar">
+        <header class="feedback-header">
+            <h3>YOUR EXPERIENCE</h3>
+            <button id="close-feedback-btn">&times;</button>
+        </header>
+        <div class="feedback-content">
+            <p><strong>Don't hold back. Good or bad - tell it like it is.</strong></p>
+            <form id="feedback-form">
+                <div class="form-group-feedback">
+                    <label>How likely are you to recommend Vibez to a friend? <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <span class="rating-label">Very unlikely</span>
+                        <div class="rating-options">
+                            {% for i in range(11) %}
+                            <div class="rating-option">
+                                <input type="radio" id="rating-{{ i }}" name="recommend_rating" value="{{ i }}"
+                                    required>
+                                <label for="rating-{{ i }}">{{ i }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <span class="rating-label">Very likely</span>
+                    </div>
+                </div>
+                <div class="form-group-feedback">
+                    <label for="feedback-text">What would you tell your friend or family about Vibez?</label>
+                    <textarea id="feedback-text" name="feedback_text" rows="5"></textarea>
+                </div>
+                <button type="submit" class="feedback-submit-btn">Submit</button>
+            </form>
+        </div>
+    </aside>
+     === FIN DE LA SECCIÓN DE FEEDBACK === -->
+    
+    <!-- CONTENIDO PRINCIPAL DE LA PÁGINA -->
     <header>
         <div class="container">
             <nav class="main-nav">
@@ -30,27 +72,21 @@
                 </div>
                 <div class="nav-right">
                     <ul class="icon-links">
-                        <!-- === LÓGICA DE SESIÓN CORREGIDA Y FINAL === -->
                         {% if 'user_id' in session %}
-                        <!-- SI EL USUARIO ESTÁ LOGUEADO -->
                         <li>
                             <a href="{{ url_for('wishlist_page') }}" title="Wishlist"
                                 class="wishlist-icon-container {{ 'active' if active_page == 'wishlist' }}">
                                 <i class="fa-regular fa-heart"></i>
-                                <!-- CORRECCIÓN: ID único -->
                                 <span id="wishlist-item-count" class="hidden">0</span>
                             </a>
                         </li>
                         <li><a href="{{ url_for('my_account_page') }}" title="My Account"
                                 class="{{ 'active' if active_page == 'my-account' }}"><i
                                     class="fa-solid fa-user"></i></a></li>
-                        <!--<li><a href="{{ url_for('logout') }}" title="Logout"><i
-                                    class="fa-solid fa-right-from-bracket"></i></a></li>-->
                         {% else %}
-                        <!-- SI NO ESTÁ LOGUEADO -->
-                        <li><a href="{{ url_for('login') }}" title="Login"><i class="fa-regular fa-user"></i></a></li>
+                        <li><a href="{{ url_for('login') }}" title="Login"><i class="fa-regular fa-user"></i></a>
+                        </li>
                         {% endif %}
-                        <!-- Icono del Carrito (siempre visible) -->
                         <li><a href="#" id="open-cart-btn" class="cart-icon-container"><i
                                     class="fa-solid fa-bag-shopping"></i><span id="cart-item-count"
                                     class="hidden">0</span></a></li>
@@ -59,14 +95,17 @@
             </nav>
         </div>
     </header>
+
     <main>{% block content %}{% endblock %}</main>
+
     <footer>
         <div class="container footer-container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>INFORMATION</h4>
                     <ul>
-                        <li><a href="https://discord.gg/b3dFcwPnk4" target="_blank" rel="noopener noreferrer">About us
+                        <li><a href="https://discord.gg/b3dFcwPnk4" target="_blank" rel="noopener noreferrer">About
+                                us
                                 (( DISCORD ))</a></li>
                         <li><a href="https://face.gta.world/pages/vibez" target="_blank"
                                 rel="noopener noreferrer">Facebrowser</a></li>
@@ -85,6 +124,7 @@
             </div>
         </div>
     </footer>
+
     <div id="cart-overlay" class="hidden"></div>
     <aside id="cart-sidebar">
         <header class="cart-header">
@@ -98,8 +138,10 @@
             <a href="{{ url_for('checkout') }}" class="checkout-btn">PROCEED TO CHECKOUT</a>
         </footer>
     </aside>
+    
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% block scripts %}{% endblock %}
-</body>
+
+</body> <!-- ÚNICA ETIQUETA BODY DE CIERRE -->
 
 </html>
