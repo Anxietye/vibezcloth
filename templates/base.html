@@ -11,6 +11,7 @@
 </head>
 
 <!-- ÚNICA ETIQUETA BODY DE APERTURA -->
+
 <body class="{{ body_class or '' }}">
 
     <!-- ======================================================= -->
@@ -51,7 +52,7 @@
         </div>
     </aside>
      === FIN DE LA SECCIÓN DE FEEDBACK === -->
-    
+
     <!-- CONTENIDO PRINCIPAL DE LA PÁGINA -->
     <header>
         <div class="container">
@@ -109,13 +110,24 @@
                                 (( DISCORD ))</a></li>
                         <li><a href="https://face.gta.world/pages/vibez" target="_blank"
                                 rel="noopener noreferrer">Facebrowser</a></li>
+                        <li><a href="{{ url_for('terms_page') }}">Terms and Conditions</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>HELP</h4>
                     <ul>
-                        <li><a href="{{ url_for('terms_page') }}">Terms and Conditions</a></li>
+                        <li><a href="https://discord.com/channels/1348503275472945183/1348503275825004587"
+                                target="_blank" rel="noopener noreferrer">Report a Problem</a></li>
                         <li><a href="{{ url_for('faq_page') }}">Frequent questions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>YOUR IDEAS</h4>
+                    <ul>
+                        <li><a href="https://discord.com/channels/1348503275472945183/1348503275825004586"
+                                target="_blank" rel="noopener noreferrer">Make your own design</a></li>
+                        <li><a href="https://discord.com/channels/1348503275472945183/1348503275825004587"
+                                target="_blank" rel="noopener noreferrer">Suggestions</a></li>
                     </ul>
                 </div>
             </div>
@@ -138,7 +150,7 @@
             <a href="{{ url_for('checkout') }}" class="checkout-btn">PROCEED TO CHECKOUT</a>
         </footer>
     </aside>
-    
+
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% block scripts %}{% endblock %}
 
