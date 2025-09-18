@@ -19,6 +19,7 @@ img {
     max-width: 100%;
     height: auto;
 }
+
 /*
 html {
     scrollbar-gutter: stable;
@@ -123,7 +124,8 @@ header>.container {
 body>header {
     width: 100%;
     border-bottom: 2px solid var(--accent-color);
-    position: relative; /* Necesario para que z-index funcione correctamente */
+    position: relative;
+    /* Necesario para que z-index funcione correctamente */
     z-index: 900;
 }
 
@@ -131,7 +133,7 @@ body>header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
+    padding: 0.25rem 0;
     flex-wrap: wrap;
     /* ¡ESTA ES LA PROPIEDAD CLAVE! */
 }
@@ -209,7 +211,7 @@ footer {
     width: 100%;
     border-top: 2px solid var(--accent-color);
     /* ANTES: padding: 3rem 0; */
-    padding: 1rem 0;
+    padding: 0.25rem 0;
     /* Reducimos el espacio vertical general del footer */
 }
 
@@ -2195,6 +2197,7 @@ footer {
     align-items: center;
     text-align: center;
     color: white;
+    position: relative;
 }
 
 .hero-slide::before {
@@ -2204,19 +2207,24 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
+    /* Opacidad ajustada */
+
+    /* LA OTRA CLAVE: La capa está en el nivel inferior (detrás del texto) */
+    z-index: 1;
 }
 
 .slide-content {
+    /* ESTA LÍNEA ES CRUCIAL: Le da su propia capa */
     position: relative;
-    z-index: 2;
-    padding: 20px;
 
-    /* CAMBIO: Convertimos el contenedor del texto en una columna flexible */
+    /* LA OTRA CLAVE: Se posiciona por encima de la capa oscura (::before) */
+    z-index: 2;
+
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Esto centra todo su contenido (título, párrafo, botón) perfectamente */
 }
 
 .slide-content h1 {
@@ -2522,45 +2530,35 @@ footer {
 
 #feedback-tab {
     position: fixed;
-    top: 50%;
-    
-    /* 1. POSICIÓN FIJA Y SIMPLE: A 15px del borde derecho. */
-    right: 35px; 
-    
-    /* 2. Rotación y centrado vertical */
+    top: 60%;
+    right: 33px;
     transform: translateY(-50%) rotate(90deg);
     transform-origin: bottom right;
-    
-    /* Estilos visuales */
     background-color: var(--card-bg-color);
     color: var(--primary-text-color);
-    border: 1px solid var(--border-color);
+    border: 0px solid var(--border-color);
     border-bottom: none;
     padding: 0.8rem 1.5rem;
     font-weight: bold;
     letter-spacing: 1px;
     cursor: pointer;
     z-index: 1001;
-    
-    /* 3. TRANSICIÓN: Se aplica a la opacidad para un desvanecimiento suave */
+    /* TRANSICIÓN para el desvanecimiento */
     transition: opacity 0.3s ease-out;
 }
 
-#feedback-tab:hover {
-    background-color: var(--accent-color);
-    color: #000;
-}
 
 #feedback-tab:hover {
     background-color: var(--accent-color);
     color: #000;
 }
 
-/* 4. ESTADO ABIERTO: Cuando el sidebar tiene la clase .open... */
-#feedback-sidebar.open ~ #feedback-tab {
-    opacity: 0;
-    pointer-events: none; /* Evita que se pueda hacer clic en el botón invisible */
+#feedback-tab:hover {
+    background-color: var(--accent-color);
+    color: #000;
 }
+
+
 
 /* --- El Overlay y el Sidebar de Feedback (Sin cambios) --- */
 #feedback-overlay {
@@ -2597,21 +2595,30 @@ footer {
 #feedback-sidebar.open {
     transform: translateX(0);
 }
-#feedback-tab.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
+
+
 /* --- Contenido del Formulario de Feedback --- */
 .feedback-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    /* Centra verticalmente el logo, título y botón */
+    gap: 1rem;
+    /* Espacio entre los elementos */
     padding: 1rem 1.5rem;
     border-bottom: 1px solid var(--border-color);
 }
 
+/* Nuevo estilo para el logo */
+.feedback-logo {
+    height: 50px;
+    /* Tamaño del logo */
+    width: auto;
+}
+
 .feedback-header h3 {
     margin: 0;
+    flex-grow: 1;
+    /* Empuja el botón de cierre a la derecha */
 }
 
 #close-feedback-btn {
@@ -2623,9 +2630,18 @@ footer {
 }
 
 .feedback-content {
-    padding: 1.5rem;
     overflow-y: auto;
     flex-grow: 1;
+    /* Ocupa todo el espacio vertical disponible */
+
+    /* AÑADIMOS ESTAS LÍNEAS */
+    display: flex;
+    flex-direction: column;
+}
+
+#feedback-form {
+    padding: 1.5rem;
+    /* El padding que antes estaba en el padre */
 }
 
 .feedback-content p {
@@ -2668,17 +2684,35 @@ footer {
 }
 
 .rating-option label {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    /* Un poco más grande para que quepa el número */
+    height: 28px;
     border: 2px solid var(--primary-text-color);
     border-radius: 50%;
     cursor: pointer;
     margin-bottom: 0.5rem;
-    transition: background-color 0.2s;
+    transition: all 0.2s;
+    /* Para centrar el número dentro del círculo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .rating-option input[type="radio"]:checked+label {
     background-color: var(--primary-text-color);
+}
+
+/* 1. HOVER: El borde se pone verde al pasar el cursor */
+.rating-option:hover label {
+    border-color: var(--accent-color);
+}
+
+/* 2. CHECKED: El círculo se rellena de verde y el texto se pone negro */
+.rating-option input[type="radio"]:checked+label {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #000;
+    /* 3. NÚMERO VISIBLE: El texto (número) se vuelve negro */
 }
 
 .rating-label {
@@ -2697,19 +2731,63 @@ footer {
     resize: vertical;
 }
 
+/* ======================================================= */
+/* === ESTILOS PARA EL MENSAJE DE ÉXITO DEL FEEDBACK === */
+/* ======================================================= */
+
+/* Clase genérica para ocultar elementos */
+.hidden {
+    display: none !important;
+}
+
+#feedback-success-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    /* REEMPLAZA 'height: 100%' POR ESTA LÍNEA */
+    flex-grow: 1;
+    /* Le dice que ocupe todo el espacio que dejó libre el formulario */
+    padding: 3.5rem;
+}
+
+#feedback-success-message .feedback-logo {
+    height: 50px;
+    /* Tamaño del logo en el mensaje */
+    margin-bottom: 1.5rem;
+}
+
+#feedback-success-message h2 {
+    font-size: 1.8rem;
+    margin: 0 0 1rem 0;
+}
+
+#feedback-success-message p {
+    color: var(--secondary-text-color);
+    line-height: 1.6;
+    max-width: 300px;
+    /* Ancho del párrafo */
+}
+
+#feedback-success-message p strong {
+    color: var(--primary-text-color);
+}
+
 .feedback-submit-btn {
     width: 100%;
     padding: 1rem;
-    background-color: var(--primary-text-color);
-    color: var(--main-bg-color);
+    background-color: var(--accent-color);
+    color: #000;
     border: none;
     border-radius: 4px;
     font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: transform 0.2s, opacity 0.2s;
 }
 
 .feedback-submit-btn:hover {
-    opacity: 0.8;
-}   
+    transform: scale(1.02);
+    opacity: 0.9;
+}

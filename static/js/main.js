@@ -16,47 +16,74 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    // --- LÓGICA FINAL Y A PRUEBA DE ERRORES PARA EL FEEDBACK ---
-const feedbackTab = document.getElementById('feedback-tab');
-const feedbackSidebar = document.getElementById('feedback-sidebar');
-const feedbackOverlay = document.getElementById('feedback-overlay');
-const closeFeedbackBtn = document.getElementById('close-feedback-btn');
-const feedbackForm = document.getElementById('feedback-form');
+    // --- BLOQUE FINAL Y A PRUEBA DE ERRORES: LÓGICA COMPLETA DE FEEDBACK ---
+    const feedbackTab = document.getElementById('feedback-tab');
+    const feedbackSidebar = document.getElementById('feedback-sidebar');
+    const feedbackOverlay = document.getElementById('feedback-overlay');
+    const closeFeedbackBtn = document.getElementById('close-feedback-btn');
+    const feedbackForm = document.getElementById('feedback-form');
+    const feedbackSuccessMessage = document.getElementById('feedback-success-message');
 
-if (feedbackTab && feedbackSidebar && feedbackOverlay && closeFeedbackBtn && feedbackForm) {
-    
-    const openFeedback = () => {
-        feedbackOverlay.classList.remove('hidden');
-        feedbackSidebar.classList.add('open');
-        // AÑADIMOS ESTA LÍNEA: Oculta el botón
-        feedbackTab.classList.add('hidden'); 
-    };
+    if (feedbackTab && feedbackSidebar && feedbackOverlay && closeFeedbackBtn && feedbackForm && feedbackSuccessMessage) {
 
-    const closeFeedback = () => {
-        feedbackOverlay.classList.add('hidden');
-        feedbackSidebar.classList.remove('open');
-        // AÑADIMOS ESTA LÍNEA: Muestra el botón de nuevo
-        feedbackTab.classList.remove('hidden'); 
-    };
+        const openFeedback = () => {
+            feedbackOverlay.classList.remove('hidden');
+            feedbackSidebar.classList.add('open');
+            // AÑADIDO: Ocultamos la pestaña al abrir el panel
+            feedbackTab.classList.add('hidden');
+        };
 
-    // La lógica de los botones no necesita cambiar
-    feedbackTab.addEventListener('click', () => {
-        if (feedbackSidebar.classList.contains('open')) {
-            closeFeedback();
-        } else {
-            openFeedback();
-        }
-    });
+        const closeFeedback = () => {
+            feedbackOverlay.classList.add('hidden');
+            feedbackSidebar.classList.remove('open');
+            // AÑADIDO: Mostramos la pestaña de nuevo al cerrar el panel
+            feedbackTab.classList.remove('hidden');
 
-    closeFeedbackBtn.addEventListener('click', closeFeedback);
-    feedbackOverlay.addEventListener('click', closeFeedback);
+            // Reseteamos la vista para la próxima vez que se abra
+            setTimeout(() => {
+                feedbackForm.classList.remove('hidden');
+                feedbackSuccessMessage.classList.add('hidden');
+                feedbackForm.reset();
+            }, 400); // Esperamos que la animación de cierre termine
+        };
 
-    feedbackForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        alert('Thank you for your feedback!');
-        closeFeedback();
-    });
-}
+        // La lógica de los event listeners no necesita cambiar
+        feedbackTab.addEventListener('click', () => {
+            if (feedbackSidebar.classList.contains('open')) {
+                closeFeedback();
+            } else {
+                openFeedback();
+            }
+        });
+
+        closeFeedbackBtn.addEventListener('click', closeFeedback);
+        feedbackOverlay.addEventListener('click', closeFeedback);
+
+        feedbackForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = new FormData(feedbackForm);
+            const data = Object.fromEntries(formData.entries());
+
+            fetch('/api/submit_feedback', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        feedbackForm.classList.add('hidden');
+                        feedbackSuccessMessage.classList.remove('hidden');
+                    } else {
+                        alert('Sorry, there was an error sending your feedback.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error submitting feedback:', error);
+                    alert('Sorry, there was a network error.');
+                });
+        });
+    }
 
     // --- BLOQUE FINAL Y A PRUEBA DE ERRORES CON requestAnimationFrame ---
     const slidesContainer = document.querySelector('.hero-slides');

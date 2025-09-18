@@ -16,17 +16,18 @@
 
     <!-- ======================================================= -->
     <!-- === SECCIÓN DE FEEDBACK EN EL LUGAR CORRECTO === -->
-    <!-- ======================================================= 
+    <!-- ======================================================= -->
     <button id="feedback-tab">FEEDBACK</button>
     <div id="feedback-overlay" class="hidden"></div>
     <aside id="feedback-sidebar">
         <header class="feedback-header">
+            <img src="{{ url_for('static', filename='images/3.png') }}" alt="Vibez Logo" class="feedback-logo">
             <h3>YOUR EXPERIENCE</h3>
             <button id="close-feedback-btn">&times;</button>
         </header>
         <div class="feedback-content">
-            <p><strong>Don't hold back. Good or bad - tell it like it is.</strong></p>
             <form id="feedback-form">
+                <p><strong>Don't hold back. Good or bad - tell it like it is.</strong></p>
                 <div class="form-group-feedback">
                     <label>How likely are you to recommend Vibez to a friend? <span class="required">*</span></label>
                     <div class="rating-scale">
@@ -49,9 +50,14 @@
                 </div>
                 <button type="submit" class="feedback-submit-btn">Submit</button>
             </form>
+            <div id="feedback-success-message" class="hidden">
+                <img src="{{ url_for('static', filename='images/3.png') }}" alt="Vibez Logo" class="feedback-logo">
+                <h2>THANKS SO MUCH</h2>
+                <p>Your feedback helps take us to the <strong>next level</strong>. We're really grateful for it.</p>
+            </div>
         </div>
     </aside>
-     === FIN DE LA SECCIÓN DE FEEDBACK === -->
+
 
     <!-- CONTENIDO PRINCIPAL DE LA PÁGINA -->
     <header>

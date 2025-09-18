@@ -20,6 +20,8 @@ app = Flask(__name__)
 # --- CONFIGURACIÓN ---
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///vibez.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+DISCORD_WEBHOOK_URL = "https://discord.com/api/v10/webhooks/1418050508081594531/SaOV_sU29IyJdLHCVkYmNWe50CQKCgK04LcgMDN4gcHl5roTRTLo5uxLfKRzH_L3WmIb"
+DISCORD_SALES_WEBHOOK_URL = "https://discord.com/api/webhooks/1418062058213085204/jdNjaIGtNyjFNwyyIFi9gkarJIy-Gy8RTJXDfEtoIF3JEYBFF20IBRgGR0ftuM6patGg"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
@@ -1702,6 +1704,69 @@ def view_order_page(order_number):
     )
 
 
+# ==============================================================================
+# === RUTA PARA ENVIAR FEEDBACK A DISCORD ======================================
+# ==============================================================================
+
+
+@app.route("/api/submit_feedback", methods=["POST"])
+def submit_feedback():
+    """
+    Recibe el feedback del formulario, lo formatea y lo envía a un webhook de Discord.
+    """
+    # Comprobamos si la URL del webhook está configurada
+    if not DISCORD_WEBHOOK_URL:
+        return jsonify({"success": False, "message": "Webhook not configured."}), 500
+
+    try:
+        # 1. Obtenemos los datos enviados desde JavaScript
+        data = request.get_json()
+        rating = data.get("recommend_rating")
+        text = data.get("feedback_text", "No comment provided.")
+
+        # Validación simple
+        if rating is None:
+            return jsonify({"success": False, "message": "Rating is required."}), 400
+
+        # 2. Creamos un mensaje bonito para Discord usando "embeds"
+        discord_payload = {
+            "embeds": [
+                {
+                    "title": "New User Feedback! ✨",
+                    "color": 1127128,  # Un color púrpura/azulado
+                    "fields": [
+                        {
+                            "name": "How likely to recommend?",
+                            "value": f"**{rating} / 10**",
+                            "inline": True,
+                        },
+                        {"name": "Comment", "value": text},
+                    ],
+                    "footer": {
+                        "text": f"Received at {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}"
+                    },
+                }
+            ]
+        }
+
+        # 3. Enviamos la petición POST al webhook de Discord
+        response = requests.post(DISCORD_WEBHOOK_URL, json=discord_payload)
+        response.raise_for_status()  # Esto generará un error si la petición falla (ej. 404)
+
+        # 4. Devolvemos una respuesta de éxito al navegador
+        return jsonify({"success": True, "message": "Feedback sent successfully!"})
+
+    except requests.exceptions.RequestException as e:
+        print(f"!!! ERROR sending to Discord: {e}")
+        return jsonify({"success": False, "message": "Failed to send feedback."}), 500
+    except Exception as e:
+        print(f"!!! UNEXPECTED ERROR in submit_feedback: {e}")
+        return (
+            jsonify({"success": False, "message": "An internal error occurred."}),
+            500,
+        )
+
+
 @app.route("/")
 def home():
     return render_template(
@@ -2093,7 +2158,65 @@ def order_success(receipt_token=None):
         db.session.add(new_order)
         db.session.add(new_address)
         db.session.commit()
+        # =======================================================
+        # === ¡NUEVA LÓGICA DE NOTIFICACIÓN A DISCORD! ===
+        # =======================================================
+        if DISCORD_SALES_WEBHOOK_URL:
+            try:
+                # 1. Formateamos los detalles de la compra para que se vean bien
+                character_name = f"{billing_address_data.get('firstname')} {billing_address_data.get('lastname')}"
 
+                # Creamos una lista de los productos comprados
+                items_purchased = "\n".join(
+                    [f"- {item['name']} x{item['quantity']}" for item in cart.values()]
+                )
+
+                # 2. Creamos el mensaje "embed" para Discord
+                discord_payload = {
+                    "embeds": [
+                        {
+                            "title": "New Order Received! 💸",
+                            "color": 3066993,  # Color verde
+                            "fields": [
+                                {
+                                    "name": "Order Number",
+                                    "value": f"`{new_order.order_number}`",
+                                    "inline": True,
+                                },
+                                {
+                                    "name": "Character Name",
+                                    "value": character_name,
+                                    "inline": True,
+                                },
+                                {
+                                    "name": "Total Amount",
+                                    "value": f"**${total:.2f}**",
+                                    "inline": True,
+                                },
+                                {
+                                    "name": "Items Purchased",
+                                    "value": items_purchased,
+                                    "inline": False,
+                                },
+                            ],
+                            "footer": {
+                                "text": f"Vibez Sales Bot | {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}"
+                            },
+                        }
+                    ]
+                }
+
+                # 3. Enviamos la notificación al webhook
+                requests.post(DISCORD_SALES_WEBHOOK_URL, json=discord_payload)
+
+            except Exception as e:
+                # Si falla el envío a Discord, solo lo imprimimos en la consola del servidor.
+                # No detenemos la confirmación de la compra para el usuario.
+                print(
+                    f"!!! CRITICAL: Failed to send Discord sales notification. Error: {e}"
+                )
+        # === FIN DE LA LÓGICA DE NOTIFICACIÓN ===
+        # =======================================================
     except Exception as e:
         db.session.rollback()
         print(f"!!! ERROR AL GUARDAR EL PEDIDO EN LA BASE DE DATOS: {e}")
