@@ -1733,7 +1733,7 @@ def submit_feedback():
             "embeds": [
                 {
                     "title": "New User Feedback! ✨",
-                    "color": 1127128,  # Un color púrpura/azulado
+                    "color": 3066993,  # Color verde
                     "fields": [
                         {
                             "name": "How likely to recommend?",
