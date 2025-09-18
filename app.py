@@ -506,7 +506,7 @@ all_products = [
         "category": "man",
         "name": "Simple Hoddie",
         "price": "$6600",
-        "slug": "hoddie",
+        "slug": "simple-hoddie",
         "sku": "SH-001",
         "color_variants": {
             "Angel": {  # Color 'Negro' usa la imagen woman1.png
@@ -1566,6 +1566,228 @@ all_products = [
             "Beige": {  # Color 'Azul' usa la imagen woman3.jpg
                 "image": "images/Beige-FCP.png",
                 "download_file": "Beige-FCP.zip",
+            },
+        },
+    },
+    {
+        "id": 47,
+        "category": "man",
+        "name": "Baggy Pants",
+        "price": "$4500",
+        "slug": "baggy-pants",
+        "sku": "BP-100",
+        "color_variants": {
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-BP.png",
+                "download_file": "Blue-BP.zip",
+            },
+            "Beige": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Beige-BP.png",
+                "download_file": "Beige-BP.zip",
+            },
+            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gray-BP.png",
+                "download_file": "Gray-BP.zip",
+            },
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Green-BP.png",
+                "download_file": "Green-BP.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-BP.png",
+                "download_file": "White-BP.zip",
+            },
+        },
+    },
+    {
+        "id": 48,
+        "category": "man",
+        "name": "Jogger",
+        "price": "$4500",
+        "slug": "jogger",
+        "sku": "JP-100",
+        "color_variants": {
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-Jogger.png",
+                "download_file": "Black-Jogger.zip",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-Jogger.png",
+                "download_file": "Blue-Jogger.zip",
+            },
+            "Dark Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Dark-Gray-Jogger.png",
+                "download_file": "Dark-Gray-Jogger.zip",
+            },
+            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gray-Jogger.png",
+                "download_file": "Gray-Jogger.zip",
+            },
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Green-Jogger.png",
+                "download_file": "Green-Jogger.zip",
+            },
+            "Light Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Light-Blue-Jogger.png",
+                "download_file": "Light-Blue-Jogger.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-Jogger.png",
+                "download_file": "Red-Jogger.zip",
+            },
+        },
+    },
+    {
+        "id": 49,
+        "category": "man",
+        "name": "Hoodie",
+        "price": "$4000",
+        "slug": "hoodie",
+        "sku": "H-100",
+        "color_variants": {
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-Hoodie.png",
+                "download_file": "White-Hoodie.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-Hoodie.png",
+                "download_file": "Black-Hoodie.zip",
+            },
+            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gray-Hoodie.png",
+                "download_file": "Gray-Hoodie.zip",
+            },
+        },
+    },
+    {
+        "id": 50,
+        "category": "man",
+        "name": "Tank Top",
+        "price": "$6000",
+        "slug": "tank-top",
+        "sku": "TT-100",
+        "color_variants": {
+            "Gray A": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gray-A.png",
+                "download_file": "Gray-A.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-TT.png",
+                "download_file": "White-TT.zip",
+            },
+            "Black A": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-A.png",
+                "download_file": "Black-A.zip",
+            },
+            "Black B": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-B.png",
+                "download_file": "Black-B.zip",
+            },
+            "Gray B": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gray-B.png",
+                "download_file": "Gray-B.zip",
+            },
+            "Black C": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-C.png",
+                "download_file": "Black-C.zip",
+            },
+            "Black D": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-D.png",
+                "download_file": "Black-D.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-TT.png",
+                "download_file": "Red-TT.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-TT.png",
+                "download_file": "Black-TT.zip",
+            },
+        },
+    },
+    {
+        "id": 51,
+        "category": "woman",
+        "name": "Retro Runner 90s",
+        "price": "$5500",
+        "slug": "retro-runner",
+        "sku": "RR-100",
+        "color_variants": {
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Green-CS.png",
+                "download_file": "Green-CS.zip",
+            },
+            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Pink-CS.png",
+                "download_file": "Pink-CS.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-CS.png",
+                "download_file": "Red-CS.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-CS.png",
+                "download_file": "White-CS.zip",
+            },
+            "Yellow": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Yellow-CS.png",
+                "download_file": "Yellow-CS.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-CS.png",
+                "download_file": "Black-CS.zip",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-CS.png",
+                "download_file": "Blue-CS.zip",
+            },
+        },
+    },
+    {
+        "id": 52,
+        "category": "man",
+        "name": "Cross Necklace",
+        "price": "$3000",
+        "slug": "cross-necklace",
+        "sku": "CN-100",
+        "color_variants": {
+            "Plate": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Necklace-Cross-Man.png",
+                "download_file": "Necklace-Cross-Man.zip",
+            },
+        },
+    },
+    {
+        "id": 53,
+        "category": "man",
+        "name": "Retro Runner 90s",
+        "price": "$5500",
+        "slug": "retro-runner-man",
+        "sku": "RR-101",
+        "color_variants": {
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-RR-Man.png",
+                "download_file": "Black-RR-Man.zip",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-RR-Man.png",
+                "download_file": "Blue-RR-Man.zip",
+            },
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Green-RR-Man.png",
+                "download_file": "Green-RR-Man.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-RR-Man.png",
+                "download_file": "White-RR-Man.zip",
+            },
+            "Yellow": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Yellow-RR-Man.png",
+                "download_file": "Yellow-RR-Man.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-RR-Man.png",
+                "download_file": "Red-RR-Man.zip",
             },
         },
     },
