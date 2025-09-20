@@ -443,61 +443,99 @@ all_products = [
             },
         },
     },
+    #{
+     #   "id": 10,
+     #   "category": "woman",
+      #  "name": "Cropped Hoodie",
+       # "price": "$6600",
+        #"slug": "cropped-hoodie",
+        #"sku": "CH-008",
+        #"color_variants": {
+        #    "Depravity": {  # Color 'Azul' uses the image depravity.png
+         #       "image": "images/depravity.png",
+          #      "download_file": "Depravity.zip",
+           # },
+           # "Dream Big": {  # Color 'Azul' uses the image drambig.png
+           #     "image": "images/drambig.png",
+           #     "download_file": "DreamBig.zip",
+           # },
+           # "Dystopia": {  # Color 'Azul' uses the image dystopia.png
+           #     "image": "images/dystopia.png",
+           #     "download_file": "Dystopia.zip",
+           # },
+           # "Kuromi": {  # Color 'Azul' uses the image kuromi.png
+            #    "image": "images/kuromi.png",
+            #    "download_file": "Kuromi.zip",
+            #},
+            #"Red L.": {  # Color 'Azul' uses the image lettering.png
+            #    "image": "images/lettering.png",
+            #    "download_file": "Red-L.zip",
+            #},
+            #"Run Away": {  # Color 'Azul' uses the image runaway.png
+            #    "image": "images/runaway.png",
+            #    "download_file": "Run-Away.zip",
+            #},
+            #"Stucked": {  # Color 'Azul' uses the image stucked.png
+            #    "image": "images/stucked.png",
+            #    "download_file": "Stuck.zip",
+            #},
+            #"Blue": {  # Color 'Azul' uses the image azuls.png
+            #    "image": "images/azuls.png",
+            #    "download_file": "Blue.zip",
+            #},
+            #"White": {  # Color 'Azul' uses the image blancos.png
+            #    "image": "images/blancos.png",
+            #    "download_file": "White.zip",
+            #},
+            #"Brown": {  # Color 'Azul' uses the image marrons.png
+            #    "image": "images/marrons.png",
+            #    "download_file": "Brown.zip",
+            #},
+            #"Black": {  # Color 'Azul' uses the image negros.png
+            #    "image": "images/negros.png",
+            #    "download_file": "Black.zip",
+            #},
+            #"Pink": {  # Color 'Azul' uses the image rosas.png
+            #    "image": "images/rosas.png",
+            #    "download_file": "Pink.zip",
+            #},
+        #},
+    #},
     {
         "id": 10,
         "category": "woman",
-        "name": "Cropped Hoodie",
-        "price": "$6600",
-        "slug": "cropped-hoodie",
-        "sku": "CH-008",
+        "name": "Preppy Set",
+        "price": "$5500",
+        "slug": "preppy-set",
+        "sku": "PP-001",
         "color_variants": {
-            "Depravity": {  # Color 'Azul' uses the image depravity.png
-                "image": "images/depravity.png",
-                "download_file": "Depravity.zip",
+            "Blue A": {  # Color 'Negro' usa la imagen woman1.png
+                "image": "images/Blue-PP.png",
+                "download_file": "Blue-PP.zip",
             },
-            "Dream Big": {  # Color 'Azul' uses the image drambig.png
-                "image": "images/drambig.png",
-                "download_file": "DreamBig.zip",
+            "Blue B": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-PP-B.png",
+                "download_file": "Blue-PP-B.zip",
             },
-            "Dystopia": {  # Color 'Azul' uses the image dystopia.png
-                "image": "images/dystopia.png",
-                "download_file": "Dystopia.zip",
+            "Blue C": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-PP-C.png",
+                "download_file": "Blue-PP-C.zip",
             },
-            "Kuromi": {  # Color 'Azul' uses the image kuromi.png
-                "image": "images/kuromi.png",
-                "download_file": "Kuromi.zip",
+            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Gray-PP.png",
+                "download_file": "Gray-PP.zip",
             },
-            "Red L.": {  # Color 'Azul' uses the image lettering.png
-                "image": "images/lettering.png",
-                "download_file": "Red-L.zip",
+            "Red A": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-PP.png",
+                "download_file": "Red-PP.zip",
             },
-            "Run Away": {  # Color 'Azul' uses the image runaway.png
-                "image": "images/runaway.png",
-                "download_file": "Run-Away.zip",
+            "Red B": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-PP-B.png",
+                "download_file": "Red-PP-B.zip",
             },
-            "Stucked": {  # Color 'Azul' uses the image stucked.png
-                "image": "images/stucked.png",
-                "download_file": "Stuck.zip",
-            },
-            "Blue": {  # Color 'Azul' uses the image azuls.png
-                "image": "images/azuls.png",
-                "download_file": "Blue.zip",
-            },
-            "White": {  # Color 'Azul' uses the image blancos.png
-                "image": "images/blancos.png",
-                "download_file": "White.zip",
-            },
-            "Brown": {  # Color 'Azul' uses the image marrons.png
-                "image": "images/marrons.png",
-                "download_file": "Brown.zip",
-            },
-            "Black": {  # Color 'Azul' uses the image negros.png
-                "image": "images/negros.png",
-                "download_file": "Black.zip",
-            },
-            "Pink": {  # Color 'Azul' uses the image rosas.png
-                "image": "images/rosas.png",
-                "download_file": "Pink.zip",
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-PP.png",
+                "download_file": "White-PP.zip",
             },
         },
     },
@@ -1102,8 +1140,8 @@ all_products = [
                 "download_file": "Skeleton-GH.zip",
             },
             "Clouds-B": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/Clouds-B.png",
-                "download_file": "Clouds-B.zip",
+                "image": "images/Clouds-GH.png",
+                "download_file": "Clouds-GH.zip",
             },
             "Hello Kitty": {  # Color 'Azul' usa la imagen woman3.jpg
                 "image": "images/HelloKitty-GH.png",
