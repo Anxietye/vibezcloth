@@ -1836,9 +1836,9 @@ VALID_COUPONS = {
     "CLOTH1": {"type": "percent", "value": 10},  # 10% de descuento
     "VZ2604": {"type": "percent", "value": 15},  # $15 de descuento fijo
     "SAVEBIG": {"type": "percent", "value": 25},  # 25% de descuento
-    "TAKE10": {"type": "percent", "value": 10},  # $10 de descuento fijo
+    "TAKE50": {"type": "percent", "value": 50},  # $10 de descuento fijo
     "LAUNCH40": {"type": "percent", "value": 40},  # $40 de descuento fijo
-    "YANE100": {"type": "percent", "value": 100},  # 100 de descuento fijo
+    "YANE90": {"type": "percent", "value": 90},  # 100 de descuento fijo
 }
 COUPONS_ENABLED = True
 
