@@ -1829,6 +1829,148 @@ all_products = [
             },
         },
     },
+    {
+        "id": 54,
+        "category": "man",
+        "name": "Tank Top",
+        "price": "$6000",
+        "slug": "tank-top2",
+        "sku": "TT-110",
+        "color_variants": {
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-TTM.png",
+                "download_file": "White-TTM.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-TTM.png",
+                "download_file": "Black-TTM.zip",
+            },
+            "Black 2": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black2-TTM.png",
+                "download_file": "Black2-TTM.zip",
+            },
+            "Black 3": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black3-TTM.png",
+                "download_file": "Black3-TTM.zip",
+            },
+            "Black 4": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black4-TTM.png",
+                "download_file": "Black4-TTM.zip",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-TTM.png",
+                "download_file": "Blue-TTM.zip",
+            },
+            "White 2": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White2-TTM.png",
+                "download_file": "White2-TTM.zip",
+            },
+            "White 3": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White3-TTM.png",
+                "download_file": "White3-TTM.zip",
+            },
+            "White 4": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White4-TTM.png",
+                "download_file": "White4-TTM.zip",
+            },
+        },
+    },
+    {
+        "id": 55,
+        "category": "woman",
+        "name": "Classic Sneakers",
+        "price": "$5500",
+        "slug": "classic-sneakers",
+        "sku": "CS-110",
+        "color_variants": {
+            "Beige": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Beige-SP.png",
+                "download_file": "Beige-SP.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-SP.png",
+                "download_file": "Black-SP.zip",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-SP.png",
+                "download_file": "Blue-SP.zip",
+            },
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Green-SP.png",
+                "download_file": "Green-SP.zip",
+            },
+            "Orange": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Orange-SP.png",
+                "download_file": "Orange-SP.zip",
+            },
+            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Pink-SP.png",
+                "download_file": "Pink-SP.zip",
+            },
+            "Purple": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Purple-SP.png",
+                "download_file": "Purple-SP.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-SP.png",
+                "download_file": "Red-SP.zip",
+            },
+            "Salmon": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Salmon-SP.png",
+                "download_file": "Salmon-SP.zip",
+            },
+             "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-SP.png",
+                "download_file": "White-SP.zip",
+            },
+              "Yellow": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Yellow-SP.png",
+                "download_file": "Yellow-SP.zip",
+            },
+        },
+    },
+    {
+        "id": 56,
+        "category": "man",
+        "name": "Classic Sneakers",
+        "price": "$5500",
+        "slug": "classic-sneakers-man",
+        "sku": "CS-111",
+        "color_variants": {
+            "Beige": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Beige-SP.png",
+                "download_file": "Beige-SPM.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Black-SP.png",
+                "download_file": "Black-SPM.zip",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Blue-SP.png",
+                "download_file": "Blue-SPM.zip",
+            },
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Green-SP.png",
+                "download_file": "Green-SPM.zip",
+            },
+            "Orange": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Orange-SP.png",
+                "download_file": "Orange-SPM.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Red-SP.png",
+                "download_file": "Red-SPM.zip",
+            },
+             "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/White-SP.png",
+                "download_file": "White-SPM.zip",
+            },
+              "Yellow": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/Yellow-SP.png",
+                "download_file": "Yellow-SPM.zip",
+            },
+        },
+    },
 ]
 # --- CUPONES
 VALID_COUPONS = {
