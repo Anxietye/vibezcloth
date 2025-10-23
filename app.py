@@ -1971,6 +1971,70 @@ all_products = [
             },
         },
     },
+    {
+        "id": 57,
+        "category": "woman",
+        "name": "Drawstring Neck Crop Top",
+        "price": "$5000",
+        "slug": "neck-crop",
+        "sku": "NCT-100",
+        "color_variants": {
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/NCT-Red.png",
+                "download_file": "NCT-Red.zip",
+            },
+            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/NCT-Green.png",
+                "download_file": "NCT-Green.zip",
+            },
+            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/NCT-Blue.png",
+                "download_file": "NCT-Blue.zip",
+            },
+            "Purple": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/NCT-Purple.png",
+                "download_file": "NCT-Purple.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/NCT-Black.png",
+                "download_file": "NCT-Black.zip",
+            },
+            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/NCT-Pink.png",
+                "download_file": "NCT-Pink.zip",
+            },
+        },
+    },
+    {
+        "id": 58,
+        "category": "woman",
+        "name": "Ribbed Long Sleeve Sweater",
+        "price": "$5000",
+        "slug": "ribbed-sweater",
+        "sku": "RS-100",
+        "color_variants": {
+            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/RS-Pink.png",
+                "download_file": "RS-Pink.zip",
+            },
+            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/RS-Black.png",
+                "download_file": "RS-Black.zip",
+            },
+            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/RS-Red.png",
+                "download_file": "RS-Red.zip",
+            },
+            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/RS-White.png",
+                "download_file": "RS-White.zip",
+            },
+            "Yellow": {  # Color 'Azul' usa la imagen woman3.jpg
+                "image": "images/RS-Yellow.png",
+                "download_file": "RS-Yellow.zip",
+            },
+        },
+    },
 ]
 # --- CUPONES
 VALID_COUPONS = {
