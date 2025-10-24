@@ -2069,6 +2069,120 @@ all_products = [
             },
         },
     },
+    {
+        "id": 60,
+        "category": "men",
+        "name": "Retro Bomber Jacket",
+        "price": "$7000",
+        "slug": "retro-bomber",
+        "sku": "BJ-100",
+        "color_variants": {
+            "Blue": {  
+                "image": "images/BJ-Blue.png",
+                "download_file": "BJ-Blue.zip",
+            },
+            "Black": {  
+                "image": "images/BJ-Black.png",
+                "download_file": "BJ-Black.zip",
+            },
+            "Red": {  
+                "image": "images/BJ-Red.png",
+                "download_file": "BJ-Red.zip",
+            },
+            "All Black": {  
+                "image": "images/BJ-All-Black.png",
+                "download_file": "BJ-All-Black.zip",
+            },
+            "Brown": {  
+                "image": "images/BJ-Brown.png",
+                "download_file": "BJ-Brown.zip",
+            },
+            "Gray": {  
+                "image": "images/BJ-Gray.png",
+                "download_file": "BJ-Gray.zip",
+            },
+        },
+    },
+    {
+        "id": 61,
+        "category": "men",
+        "name": "Bart Collection",
+        "price": "$6000",
+        "slug": "bart-tee",
+        "sku": "LPC-100",
+        "color_variants": {
+            "Hellboy White": {  
+                "image": "images/LPC-HellboyW.png",
+                "download_file": "LPC-HellboyW.zip",
+            },
+            "Hellboy Black": {  
+                "image": "images/LPC-HellboyB.png",
+                "download_file": "LPC-HellboyB.zip",
+            },
+            "Hellboy Pink": {  
+                "image": "images/LPC-HellboyP.png",
+                "download_file": "LPC-HellboyP.zip",
+            },
+            "Hellboy Gray": {  
+                "image": "images/LPC-HellboyG.png",
+                "download_file": "LPC-HellboyG.zip",
+            },
+            "Susboy": {  
+                "image": "images/LPC-Susboy.png",
+                "download_file": "LPC-Susboy.zip",
+            },
+        },
+    },
+    {
+        "id": 62,
+        "category": "men",
+        "name": "Baseball Team Jerseys",
+        "price": "$6300",
+        "slug": "baseball-teams",
+        "sku": "BT-100",
+        "color_variants": {
+            "Milwaukee": {  
+                "image": "images/BT-Milwaukee.png",
+                "download_file": "BT-Milwaukee.zip",
+            },
+            "Milwaukee Black": {  
+                "image": "images/BT-MilwaukeeB.png",
+                "download_file": "BT-MilwaukeeB.zip",
+            },
+            "Detroit": {  
+                "image": "images/BT-Detroit.png",
+                "download_file": "BT-Detroit.zip",
+            },
+            "Astros": {  
+                "image": "images/BT-Astros.png",
+                "download_file": "BT-Astros.zip",
+            },
+            "New York": {  
+                "image": "images/BT-NewYork.png",
+                "download_file": "BT-NewYork.zip",
+            },
+            "Pirates": {  
+                "image": "images/BT-Pirates.png",
+                "download_file": "BT-Pirates.zip",
+            },
+            "Dodgers": {  
+                "image": "images/BT-Dodgers.png",
+                "download_file": "BT-Dodgers.zip",
+            },
+            "Seattle": {  
+                "image": "images/BT-Seattle.png",
+                "download_file": "BT-Seattle.zip",
+            },
+            "RedSox": {  
+                "image": "images/BT-RedSox.png",
+                "download_file": "BT-RedSox.zip",
+            },
+            "Cardinals": {  
+                "image": "images/BT-Cardinals.png",
+                "download_file": "BT-Cardinals.zip",
+            },
+        },
+    },
 ]
 # --- CUPONES
 VALID_COUPONS = {
