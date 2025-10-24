@@ -94,42 +94,42 @@ class OrderItem(db.Model):
 all_products = [
     {
         "id": 1,
-        "category": "woman",
+        "category": "women",
         "name": "Vibez Cozy Tracksuit",
         "price": "$8500",
         "slug": "vibez-tracksuit",
         "sku": "VF-001",
         # NUEVA ESTRUCTURA: Un diccionario de variantes de color
         "color_variants": {
-            "Red": {  # Color 'Negro' usa la imagen woman1.png
+            "Red": {  
                 "image": "images/anaranjado.png",
                 "download_file": "Vibez-Tracksuit-Red.zip",
             },
-            "Blue": {  # Color 'Rojo' usa la imagen 1.png
+            "Blue": {  
                 "image": "images/azul.png",
                 "download_file": "Vibez-Tracksuit-Blue.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": { 
                 "image": "images/blanco.png",
                 "download_file": "Vibez-Tracksuit-White.zip",
             },
-            "Brown": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Brown": {  
                 "image": "images/marron.png",
                 "download_file": "Vibez-Tracksuit-Brown.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/negro.png",
                 "download_file": "Vibez-Tracksuit-Black.zip",
             },
-            "Purple": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Purple": { 
                 "image": "images/purpura.png",
                 "download_file": "Vibez-Tracksuit-Purple.zip",
             },
-            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pink": {  
                 "image": "images/rosa.png",
                 "download_file": "Vibez-Tracksuit-Pink.zip",
             },
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Green": { 
                 "image": "images/verde.png",
                 "download_file": "Vibez-Tracksuit-Green.zip",
             },
@@ -137,57 +137,57 @@ all_products = [
     },
     {
         "id": 2,
-        "category": "woman",
+        "category": "women",
         "name": "Grunge T-Shirt",
         "price": "$6000",
         "slug": "grunge-t-shirt",
         "sku": "TM-002",
         "color_variants": {
-            "Torment": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Torment": {  
                 "image": "images/tblack9.png",
                 "download_file": "Torment.zip",
             },
-            "Heaven": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Heaven": { 
                 "image": "images/tblack8.png",
                 "download_file": "Heaven.zip",
             },
-            "Distorted": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Distorted": { 
                 "image": "images/tblack6.png",
                 "download_file": "Distorted.zip",
             },
-            "Red": {  # Color 'Negro' usa la imagen woman1.png
+            "Red": {
                 "image": "images/Tred.png",
                 "download_file": "Red.zip",
             },
-            "Distorted Vibez": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Distorted Vibez": {
                 "image": "images/tblack7.png",
                 "download_file": "Distorted-Vibez.zip",
             },
-            "Dream Big": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Dream Big": {
                 "image": "images/twhite2.png",
                 "download_file": "Dream-Big.zip",
             },
-            "Stuck-W": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Stuck-W": { 
                 "image": "images/twhite3.png",
                 "download_file": "Stuck-W.zip",
             },
-            "Cry Baby": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Cry Baby": {
                 "image": "images/twhite4.png",
                 "download_file": "Cry-Baby.zip",
             },
-            "Western Shirt": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Western Shirt": { 
                 "image": "images/twhite5.png",
                 "download_file": "Western-Shirt.zip",
             },
-            "Hell Full": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Hell Full": {  
                 "image": "images/Tblack2.png",
                 "download_file": "Hell-Full.zip",
             },
-            "Hell Boring": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Hell Boring": {  
                 "image": "images/tblack4.png",
                 "download_file": "Hell-Boring.zip",
             },
-            "Angel & Thoughts": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Angel & Thoughts": {  
                 "image": "images/tblack5.png",
                 "download_file": "Angel-Thoughts.zip",
             },
@@ -195,37 +195,37 @@ all_products = [
     },
     {
         "id": 3,
-        "category": "woman",
+        "category": "women",
         "name": "Cropped Tank Top",
         "price": "$4500",
         "slug": "cropped-tank-top",
         "sku": "CT-047",
         "color_variants": {
-            "LS Vibez": {  # Color 'Negro' usa la imagen woman1.png
+            "LS Vibez": {  
                 "image": "images/Croptop3.png",
                 "download_file": "LS-Vibez-Cropped-Tank-Top.zip",
             },
-            "Hell Boring": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Hell Boring": {  
                 "image": "images/Croptop6.png",
                 "download_file": "Hell-Boring-Cropped-Tank-Top.zip",
             },
-            "Flames": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Flames": {  
                 "image": "images/Croptop1.png",
                 "download_file": "Flames-Cropped-Tank-Top.zip",
             },
-            "Baked": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Baked": {  
                 "image": "images/Croptop2.png",
                 "download_file": "Baked-Cropped-Tank-Top.zip",
             },
-            "Bad Things": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Bad Things": {  
                 "image": "images/Croptop4.png",
                 "download_file": "Bad-Things-Cropped-Tank-Top.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/Croptop5.png",
                 "download_file": "White-Cropped-Tank-Top.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Croptop7.png",
                 "download_file": "Black-Cropped-Tank-Top.zip",
             },
@@ -233,49 +233,49 @@ all_products = [
     },
     {
         "id": 4,
-        "category": "man",
+        "category": "men",
         "name": "Vibez Jean",
         "price": "$4500",
-        "slug": "vibez-jean-man",
+        "slug": "vibez-jean-men",
         "sku": "VM-047",
         "color_variants": {
-            "Black": {  # Color 'Negro' usa la imagen woman1.png
+            "Black": {  
                 "image": "images/jeannegro.png",
-                "download_file": "Black-Man.zip",
+                "download_file": "Black-men.zip",
             },
-            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray": {  
                 "image": "images/jeangris.png",
-                "download_file": "Gray-Man.zip",
+                "download_file": "Gray-men.zip",
             },
-            "Light Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Light Blue": {  
                 "image": "images/azulclaro.png",
-                "download_file": "Light-Blue-Man.zip",
+                "download_file": "Light-Blue-men.zip",
             },
-            "Normal": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Normal": {  
                 "image": "images/jean.png",
-                "download_file": "Normal-Man.zip",
+                "download_file": "Normal-men.zip",
             },
-            "Light Blue 2": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Light Blue 2": {  
                 "image": "images/lightblue2.png",
                 "download_file": "Light-Blue2.zip",
             },
-            "Light Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Light Black": {  
                 "image": "images/lightblack.png",
                 "download_file": "Light-Black.zip",
             },
-            "Black 2": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black 2": {  
                 "image": "images/jeanblackblack.png",
                 "download_file": "Jean-Black2.zip",
             },
-            "Dark Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Dark Blue": {  
                 "image": "images/jeanblue.png",
                 "download_file": "Jean-DarkBlue.zip",
             },
-            "Gray 2": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray 2": {  
                 "image": "images/jeangray.png",
                 "download_file": "Jean-Gray2.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/jeanwhite.png",
                 "download_file": "Jean-White.zip",
             },
@@ -283,17 +283,17 @@ all_products = [
     },
     {
         "id": 5,
-        "category": "woman",
+        "category": "women",
         "name": "Vibez Jeans",
         "price": "$4500",
         "slug": "vibez-jeans",
         "sku": "VJ-004",
         "color_variants": {
-            "Blue": {  # Color 'Negro' usa la imagen woman1.png
+            "Blue": {  
                 "image": "images/pantazul.png",
                 "download_file": "blue-jeans.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/pantnegro.png",
                 "download_file": "black-jeans.zip",
             },
@@ -301,25 +301,25 @@ all_products = [
     },
     {
         "id": 6,
-        "category": "woman",
+        "category": "women",
         "name": "Sports Pants",
         "price": "$4000",
         "slug": "sports-pants",
         "sku": "SP-040",
         "color_variants": {
-            "Blue": {  # Color 'Negro' usa la imagen woman1.png
+            "Blue": {  
                 "image": "images/bluepant.png",
                 "download_file": "sp-blue.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/blackpant.png",
                 "download_file": "sp-black.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/redpant.png",
                 "download_file": "sp-red.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/whitepant.png",
                 "download_file": "sp-white.zip",
             },
@@ -327,25 +327,25 @@ all_products = [
     },
     {
         "id": 7,
-        "category": "woman",
+        "category": "women",
         "name": "Oversized Band T-Shirts",
         "price": "$7000",
         "slug": "oversized-band-shirts",
         "sku": "OS-001",
         "color_variants": {
-            "Metallica": {  # Color 'Negro' usa la imagen woman1.png
+            "Metallica": {  
                 "image": "images/metallica.png",
                 "download_file": "Metallica.zip",
             },
-            "Iron Maiden": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Iron Maiden": {  
                 "image": "images/ironmaiden.png",
                 "download_file": "Iron-Maiden.zip",
             },
-            "Black Sabbath": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black Sabbath": {  
                 "image": "images/blacksabbath.png",
                 "download_file": "Black-Sabbath.zip",
             },
-            "Skulls": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Skulls": {  
                 "image": "images/skulls.png",
                 "download_file": "Skulls.zip",
             },
@@ -353,61 +353,61 @@ all_products = [
     },
     {
         "id": 8,
-        "category": "woman",
+        "category": "women",
         "name": "Custom Sneaker",
         "price": "$15000",
         "slug": "custom-sneaker",
         "sku": "CS-101",
         "color_variants": {
-            "Billie Eilish": {  # Color 'Negro' usa la imagen woman1.png
+            "Billie Eilish": {  
                 "image": "images/Billie.png",
                 "download_file": "Billie-Eilish.zip",
             },
-            "Blue Flowers": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue Flowers": {  
                 "image": "images/Blue-Flowers.png",
                 "download_file": "Blue-Flowers.zip",
             },
-            "Butterflies": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Butterflies": {  
                 "image": "images/Butterflies.png",
                 "download_file": "Butterflies.zip",
             },
-            "BW Cartoon": {  # Color 'Azul' usa la imagen woman3.jpg
+            "BW Cartoon": {  
                 "image": "images/BW-Cartoon.png",
                 "download_file": "BW-Cartoon.zip",
             },
-            "Cherry Flowers": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Cherry Flowers": {  
                 "image": "images/Cherry.png",
                 "download_file": "Cherry-Flowers.zip",
             },
-            "Classic": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Classic": {  
                 "image": "images/Classic.png",
                 "download_file": "Classic.zip",
             },
-            "Melted": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Melted": {  
                 "image": "images/Melted.png",
                 "download_file": "Melted.zip",
             },
-            "Pikachu": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pikachu": {  
                 "image": "images/Pikachu.png",
                 "download_file": "Pikachu.zip",
             },
-            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pink": {  
                 "image": "images/Pinky.png",
                 "download_file": "Pinky.zip",
             },
-            "Stitch": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Stitch": {  
                 "image": "images/Stitch.png",
                 "download_file": "Stitch.zip",
             },
-            "Sunflower": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Sunflower": {  
                 "image": "images/Sunflower.png",
                 "download_file": "Sunflower.zip",
             },
-            "White Cartoon": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White Cartoon": {  
                 "image": "images/White-Cartoon.png",
                 "download_file": "White-Cartoon.zip",
             },
-            "All-White Cartoon": {  # Color 'Azul' usa la imagen woman3.jpg
+            "All-White Cartoon": {  
                 "image": "images/All-White.png",
                 "download_file": "All-White.zip",
             },
@@ -421,23 +421,23 @@ all_products = [
         "slug": "skateboards",
         "sku": "SB-001",
         "color_variants": {
-            "Dark Star": {  # Color 'Negro' usa la imagen woman1.png
+            "Dark Star": {  
                 "image": "images/DarkStar.png",
                 "download_file": "DarkStar.zip",
             },
-            "Santa Cruz": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Santa Cruz": {  
                 "image": "images/SantaCruz.png",
                 "download_file": "SantaCruz.zip",
             },
-            "Seven Inch Girl": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Seven Inch Girl": {  
                 "image": "images/SevenInch.png",
                 "download_file": "SevenInch-Girl.zip",
             },
-            "Seven Inch Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Seven Inch Blue": {  
                 "image": "images/SevenInch2.png",
                 "download_file": "SevenInch-Blue.zip",
             },
-            "American": {  # Color 'Azul' usa la imagen woman3.jpg
+            "American": {  
                 "image": "images/USA.png",
                 "download_file": "American.zip",
             },
@@ -445,7 +445,7 @@ all_products = [
     },
     #{
      #   "id": 10,
-     #   "category": "woman",
+     #   "category": "women",
       #  "name": "Cropped Hoodie",
        # "price": "$6600",
         #"slug": "cropped-hoodie",
@@ -503,37 +503,37 @@ all_products = [
     #},
     {
         "id": 10,
-        "category": "woman",
+        "category": "women",
         "name": "Preppy Set",
         "price": "$5500",
         "slug": "preppy-set",
         "sku": "PP-001",
         "color_variants": {
-            "Blue A": {  # Color 'Negro' usa la imagen woman1.png
+            "Blue A": {  
                 "image": "images/Blue-PP.png",
                 "download_file": "Blue-PP.zip",
             },
-            "Blue B": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue B": {  
                 "image": "images/Blue-PP-B.png",
                 "download_file": "Blue-PP-B.zip",
             },
-            "Blue C": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue C": {  
                 "image": "images/Blue-PP-C.png",
                 "download_file": "Blue-PP-C.zip",
             },
-            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray": {  
                 "image": "images/Gray-PP.png",
                 "download_file": "Gray-PP.zip",
             },
-            "Red A": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red A": {  
                 "image": "images/Red-PP.png",
                 "download_file": "Red-PP.zip",
             },
-            "Red B": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red B": {  
                 "image": "images/Red-PP-B.png",
                 "download_file": "Red-PP-B.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-PP.png",
                 "download_file": "White-PP.zip",
             },
@@ -541,33 +541,33 @@ all_products = [
     },
     {
         "id": 11,
-        "category": "man",
+        "category": "men",
         "name": "Simple Hoddie",
         "price": "$6600",
         "slug": "simple-hoddie",
         "sku": "SH-001",
         "color_variants": {
-            "Angel": {  # Color 'Negro' usa la imagen woman1.png
+            "Angel": {  
                 "image": "images/Angel.png",
                 "download_file": "Angel.zip",
             },
-            "Inferno": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Inferno": {  
                 "image": "images/Inferno.png",
                 "download_file": "Inferno.zip",
             },
-            "Lil Vert": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Lil Vert": {  
                 "image": "images/Lilvert.png",
                 "download_file": "Lil-Vert.zip",
             },
-            "Maquinary": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Maquinary": {  
                 "image": "images/maquinary.png",
                 "download_file": "Maquinary.zip",
             },
-            "Tyler": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Tyler": {  
                 "image": "images/Tyler.png",
                 "download_file": "Tyler.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Blackhoddie.png",
                 "download_file": "Blackhoddie.zip",
             },
@@ -575,49 +575,49 @@ all_products = [
     },
     {
         "id": 12,
-        "category": "man",
+        "category": "men",
         "name": "Grunge T-Shirts",
         "price": "$6000",
-        "slug": "grunge-tshirts-man",
+        "slug": "grunge-tshirts-men",
         "sku": "GS-051",
         "color_variants": {
-            "Darklight": {  # Color 'Negro' usa la imagen woman1.png
+            "Darklight": {  
                 "image": "images/Darklightman.png",
                 "download_file": "Darklight.zip",
             },
-            "21Savage": {  # Color 'Azul' usa la imagen woman3.jpg
+            "21Savage": {  
                 "image": "images/21Savage.png",
                 "download_file": "21Savage.zip",
             },
-            "Ghost": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Ghost": {  
                 "image": "images/Ghost.png",
                 "download_file": "Ghost.zip",
             },
-            "Eazy-E": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Eazy-E": {  
                 "image": "images/Eazye.png",
                 "download_file": "Eazy-E.zip",
             },
-            "Black Sabbath": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black Sabbath": {  
                 "image": "images/blacksabbathman.png",
                 "download_file": "BlackSabbath.zip",
             },
-            "Hangxiety": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Hangxiety": {  
                 "image": "images/Hangxiety.png",
                 "download_file": "Hangxiety.zip",
             },
-            "Marlboro": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Marlboro": {  
                 "image": "images/Marlboro.png",
                 "download_file": "Marlboro.zip",
             },
-            "Supra": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Supra": {  
                 "image": "images/Supra.png",
                 "download_file": "Supra.zip",
             },
-            "Split": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Split": {  
                 "image": "images/Split.png",
                 "download_file": "Split.zip",
             },
-            "Zillakami": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Zillakami": {  
                 "image": "images/Zillakami.png",
                 "download_file": "Zillakami.zip",
             },
@@ -631,35 +631,35 @@ all_products = [
         "slug": "phone-cases",
         "sku": "PC-050",
         "color_variants": {
-            "VG Vibe": {  # Color 'Negro' usa la imagen woman1.png
+            "VG Vibe": {  
                 "image": "images/VG Vibe.png",
                 "download_file": "VG Vibe.zip",
             },
-            "Black Grunge": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black Grunge": {  
                 "image": "images/Black grunge.png",
                 "download_file": "Black grunge.zip",
             },
-            "Rose Grunge": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Rose Grunge": {  
                 "image": "images/Rose Grunge.png",
                 "download_file": "Rose Grunge.zip",
             },
-            "Noir Script": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Noir Script": {  
                 "image": "images/Noir Script.png",
                 "download_file": "Noir Script-E.zip",
             },
-            "Hype Collage": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Hype Collage": {  
                 "image": "images/Hype Collage.png",
                 "download_file": "Hype Collage.zip",
             },
-            "Lost notes": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Lost notes": {  
                 "image": "images/Lost notes.png",
                 "download_file": "Lost notes.zip",
             },
-            "Stare drip": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Stare drip": {  
                 "image": "images/Stare drip.png",
                 "download_file": "Stare drip.zip",
             },
-            "Pink Chaos": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pink Chaos": {  
                 "image": "images/Pink Chaos.png",
                 "download_file": "Pink Chaos.zip",
             },
@@ -667,29 +667,29 @@ all_products = [
     },
     {
         "id": 14,
-        "category": "man",
+        "category": "men",
         "name": "Oversized T-Shirts",
         "price": "$5000",
         "slug": "oversized-shirts",
         "sku": "OV-050",
         "color_variants": {
-            "Download": {  # Color 'Negro' usa la imagen woman1.png
+            "Download": {  
                 "image": "images/Download.png",
                 "download_file": "Download.zip",
             },
-            "Metallica": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Metallica": {  
                 "image": "images/Metallicaman.png",
-                "download_file": "Metallica-man.zip",
+                "download_file": "Metallica-men.zip",
             },
-            "S.O.C": {  # Color 'Azul' usa la imagen woman3.jpg
+            "S.O.C": {  
                 "image": "images/SOC.png",
                 "download_file": "SOC.zip",
             },
-            "Suffocation": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Suffocation": {  
                 "image": "images/Suffocationman.png",
-                "download_file": "Suffocation-man.zip",
+                "download_file": "Suffocation-men.zip",
             },
-            "Sinner": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Sinner": {  
                 "image": "images/Sinner.png",
                 "download_file": "Sinner.zip",
             },
@@ -697,17 +697,17 @@ all_products = [
     },
     {
         "id": 15,
-        "category": "woman",
+        "category": "women",
         "name": "Gothic Pearl Cross Choker",
         "price": "$3700",
         "slug": "cross-choker",
         "sku": "CS-050",
         "color_variants": {
-            "Plate": {  # Color 'Negro' usa la imagen woman1.png
+            "Plate": {  
                 "image": "images/Plate.png",
                 "download_file": "Plate-Cross-Choker.zip",
             },
-            "Bronze": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Bronze": {  
                 "image": "images/Bronze.png",
                 "download_file": "Bronze-Cross-Choker.zip",
             },
@@ -715,29 +715,29 @@ all_products = [
     },
     {
         "id": 16,
-        "category": "woman",
+        "category": "women",
         "name": "Gothic Cascade Ear Cuff",
         "price": "$3700",
         "slug": "ear-cuff",
         "sku": "CS-050",
         "color_variants": {
-            "Gray & Black": {  # Color 'Negro' usa la imagen woman1.png
+            "Gray & Black": {  
                 "image": "images/GB-GCEC.png",
                 "download_file": "GB-GCEC.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-GCEC.png",
                 "download_file": "Black-GCEC.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-GCEC.png",
                 "download_file": "White-GCEC.zip",
             },
-            "Black & Gold": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black & Gold": {  
                 "image": "images/BG-GCEC.png",
                 "download_file": "BG-GCEC.zip",
             },
-            "White & Gold": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White & Gold": {  
                 "image": "images/WG-GCEC.png",
                 "download_file": "WG-GCEC.zip",
             },
@@ -745,13 +745,13 @@ all_products = [
     },
     {
         "id": 17,
-        "category": "woman",
+        "category": "women",
         "name": "Midnight Cross Earrings",
         "price": "$3700",
         "slug": "cross-earrings",
         "sku": "CE-050",
         "color_variants": {
-            "Black": {  # Color 'Negro' usa la imagen woman1.png
+            "Black": {  
                 "image": "images/Midnight-Cross-Earrings.png",
                 "download_file": "Midnight-Cross-Earrings.zip",
             },
@@ -759,25 +759,25 @@ all_products = [
     },
     {
         "id": 18,
-        "category": "woman",
+        "category": "women",
         "name": "After Dark Vibez Jeans",
         "price": "$4500",
         "slug": "after-dark",
         "sku": "VJ-050",
         "color_variants": {
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-ADVJ.png",
                 "download_file": "Black-ADVJ.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-ADVJ.png",
                 "download_file": "White-ADVJ.zip",
             },
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Green": {  
                 "image": "images/Green-ADVJ.png",
                 "download_file": "Green-ADVJ.zip",
             },
-            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pink": {  
                 "image": "images/Pink-ADVJ.png",
                 "download_file": "Pink-ADVJ.zip",
             },
@@ -785,29 +785,29 @@ all_products = [
     },
     {
         "id": 19,
-        "category": "woman",
+        "category": "women",
         "name": "Vibez Riot Jeans",
         "price": "$4500",
         "slug": "riot-jeans",
         "sku": "VJ-051",
         "color_variants": {
-            "Dark": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Dark": {  
                 "image": "images/Dark-VRJ.png",
                 "download_file": "Dark-VRJ.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-VRJ.png",
                 "download_file": "White-VRJ.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/Red-VRJ.png",
                 "download_file": "Red-VRJ.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-VRJ.png",
                 "download_file": "Black-VRJ.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue": {  
                 "image": "images/Blue-VRJ.png",
                 "download_file": "Blue-VRJ.zip",
             },
@@ -815,25 +815,25 @@ all_products = [
     },
     {
         "id": 20,
-        "category": "woman",
+        "category": "women",
         "name": "Vibez Summer Classic Shorts",
         "price": "$4500",
         "slug": "summer-shorts",
         "sku": "VJ-052",
         "color_variants": {
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-VSCS.png",
                 "download_file": "Black-VSCS.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-VSCS.png",
                 "download_file": "White-VSCS.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue": {  
                 "image": "images/Blue-VSCS.png",
                 "download_file": "Blue-VSCS.zip",
             },
-            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray": {  
                 "image": "images/Gray-VSCS.png",
                 "download_file": "Gray-VSCS.zip",
             },
@@ -841,33 +841,33 @@ all_products = [
     },
     {
         "id": 21,
-        "category": "woman",
+        "category": "women",
         "name": "Sunset Glow Top",
         "price": "$5000",
         "slug": "glow-top",
         "sku": "ST-052",
         "color_variants": {
-            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pink": {  
                 "image": "images/Pink-SGT.png",
                 "download_file": "Pink-SGT.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-SGT.png",
                 "download_file": "Black-SGT.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue": {  
                 "image": "images/Blue-SGT.png",
                 "download_file": "Blue-SGT.zip",
             },
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Green": {  
                 "image": "images/Green-SGT.png",
                 "download_file": "Green-SGT.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/Red-SGT.png",
                 "download_file": "Red-SGT.zip",
             },
-            "Yellow": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Yellow": {  
                 "image": "images/Yellow-SGT.png",
                 "download_file": "Gray-SGT.zip",
             },
@@ -875,33 +875,33 @@ all_products = [
     },
     {
         "id": 22,
-        "category": "woman",
+        "category": "women",
         "name": "Sweet & Slouchy Set",
         "price": "$5000",
         "slug": "slouchy-set",
         "sku": "SS-052",
         "color_variants": {
-            "Worn-out": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Worn-out": {  
                 "image": "images/Worn-out-SS.png",
                 "download_file": "Worn-out-SS.zip",
             },
-            "Black Rose": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black Rose": {  
                 "image": "images/Rose-SS.png",
                 "download_file": "Rose-SS.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-SS.png",
                 "download_file": "Black-SS.zip",
             },
-            "Gray Cross": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray Cross": {  
                 "image": "images/GrayCross-SS.png",
                 "download_file": "GrayCross-SS.zip",
             },
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Green": {  
                 "image": "images/Green-SS.png",
                 "download_file": "Green-SS.zip",
             },
-            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pink": {  
                 "image": "images/Pink-SS.png",
                 "download_file": "Pink-SS.zip",
             },
@@ -909,65 +909,65 @@ all_products = [
     },
     {
         "id": 23,
-        "category": "woman",
+        "category": "women",
         "name": "Striped Sleeve Grunge Top",
         "price": "$5500",
         "slug": "stripped-sleeve",
         "sku": "SS-053",
         "color_variants": {
-            "Nirvana-Y": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Nirvana-Y": {  
                 "image": "images/Nirvana-Yellow.png",
                 "download_file": "Nirvana-Yellow.zip",
             },
-            "Sinner-G": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Sinner-G": {  
                 "image": "images/Sinner-Green.png",
                 "download_file": "Sinner-Green.zip",
             },
-            "Sinner-W": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Sinner-W": {  
                 "image": "images/Sinner-Black.png",
                 "download_file": "Sinner-Black.zip",
             },
-            "Sweetheart-P": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Sweetheart-P": {  
                 "image": "images/Sweetheart-Pink.png",
                 "download_file": "Sweetheart-Pink.zip",
             },
-            "Sweetheart-W": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Sweetheart-W": {  
                 "image": "images/Sweetheart-White.png",
                 "download_file": "Sweetheart-White.zip",
             },
-            "Digital Monster-Y": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Digital Monster-Y": {  
                 "image": "images/Digital-Yellow.png",
                 "download_file": "Digital-Yellow.zip",
             },
-            "Sweetheart": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Sweetheart": {  
                 "image": "images/Sweetheart.png",
                 "download_file": "Sweetheart.zip",
             },
-            "Smile": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Smile": {  
                 "image": "images/Smile.png",
                 "download_file": "Smile.zip",
             },
-            "Sinner-Y": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Sinner-Y": {  
                 "image": "images/Sinner-Yellow.png",
                 "download_file": "Sinner-Yellow.zip",
             },
-            "Nirvana-B": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Nirvana-B": {  
                 "image": "images/Nirvana-Black.png",
                 "download_file": "Nirvana-Black.zip",
             },
-            "Digital Monster-P": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Digital Monster-P": {  
                 "image": "images/Digital-Pink.png",
                 "download_file": "Digital-Pink.zip",
             },
-            "Sinner-O": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Sinner-O": {  
                 "image": "images/Sinner-Orange.png",
                 "download_file": "Sinner-Orange.zip",
             },
-            "Sinner-R": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Sinner-R": {  
                 "image": "images/Sinner-Red.png",
                 "download_file": "Sinner-Red.zip",
             },
-            "Sinner-B": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Sinner-B": {  
                 "image": "images/Sinner-White.png",
                 "download_file": "Sinner-White.zip",
             },
@@ -975,33 +975,33 @@ all_products = [
     },
     {
         "id": 24,
-        "category": "woman",
+        "category": "women",
         "name": "Plaid Punk Mini Skirt",
         "price": "$4500",
         "slug": "skirt-punk",
         "sku": "SP-053",
         "color_variants": {
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-Skirt.png",
                 "download_file": "Black-Skirt.zip",
             },
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Green": {  
                 "image": "images/Green-Skirt.png",
                 "download_file": "Green-Skirt.zip",
             },
-            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pink": {  
                 "image": "images/Pink-Skirt.png",
                 "download_file": "Pink-Skirt.zip",
             },
-            "Purple": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Purple": {  
                 "image": "images/Purple-Skirt.png",
                 "download_file": "Purple-Skirt.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/Red-Skirt.png",
                 "download_file": "Red-Skirt.zip",
             },
-            "Yellow": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Yellow": {  
                 "image": "images/Yellow-Skirt.png",
                 "download_file": "Yellow-Skirt.zip",
             },
@@ -1009,29 +1009,29 @@ all_products = [
     },
     {
         "id": 25,
-        "category": "woman",
+        "category": "women",
         "name": "Cross Pocket Skirt",
         "price": "$4500",
         "slug": "pocket-skirt",
         "sku": "SP-053",
         "color_variants": {
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-PS.png",
                 "download_file": "Black-PS.zip",
             },
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Green": {  
                 "image": "images/Green-PS.png",
                 "download_file": "Green-PS.zip",
             },
-            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pink": {  
                 "image": "images/Pink-PS.png",
                 "download_file": "Pink-PS.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue": {  
                 "image": "images/Blue-PS.png",
                 "download_file": "Blue-PS.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-PS.png",
                 "download_file": "White-PS.zip",
             },
@@ -1039,25 +1039,25 @@ all_products = [
     },
     {
         "id": 26,
-        "category": "woman",
+        "category": "women",
         "name": "Cropped Denim Jacket",
         "price": "$4200",
         "slug": "denim-jacket",
         "sku": "DJ-053",
         "color_variants": {
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue": {  
                 "image": "images/Blue-DJ.png",
                 "download_file": "Blue-DJ.zip",
             },
-            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray": {  
                 "image": "images/Gray-DJ.png",
                 "download_file": "Gray-DJ.zip",
             },
-            "Light Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Light Blue": {  
                 "image": "images/LightBlue-DJ.png",
                 "download_file": "LightBlue-DJ.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-DJ.png",
                 "download_file": "White-DJ.zip",
             },
@@ -1065,29 +1065,29 @@ all_products = [
     },
     {
         "id": 27,
-        "category": "woman",
+        "category": "women",
         "name": "Oversized Sweatshirt",
         "price": "$5000",
         "slug": "oversized-sweatshirt",
         "sku": "OS-050",
         "color_variants": {
-            "Comic": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Comic": {  
                 "image": "images/Comic-OS.png",
                 "download_file": "Comic-OS.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-OS.png",
                 "download_file": "White-OS.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-OS.png",
                 "download_file": "Black-OS.zip",
             },
-            "Kenzo": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Kenzo": {  
                 "image": "images/Kenzo-OS.png",
                 "download_file": "Kenzo-OS.zip",
             },
-            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pink": {  
                 "image": "images/Pink-OS.png",
                 "download_file": "Pink-OS.zip",
             },
@@ -1095,29 +1095,29 @@ all_products = [
     },
     {
         "id": 28,
-        "category": "woman",
+        "category": "women",
         "name": "Classic Zip-Up Hoodie",
         "price": "$4200",
         "slug": "classic-hoodie",
         "sku": "CH-053",
         "color_variants": {
-            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray": {  
                 "image": "images/Gray-CH.png",
                 "download_file": "Gray-CH.zip",
             },
-            "Gray Lettering": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray Lettering": {  
                 "image": "images/Lettering-CH.png",
                 "download_file": "Lettering-CH.zip",
             },
-            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pink": {  
                 "image": "images/Pink-CH.png",
                 "download_file": "Pink-CH.zip",
             },
-            "Brown": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Brown": {  
                 "image": "images/Brown-CH.png",
                 "download_file": "Brown-CH.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-CH.png",
                 "download_file": "Black-CH.zip",
             },
@@ -1125,53 +1125,53 @@ all_products = [
     },
     {
         "id": 29,
-        "category": "woman",
+        "category": "women",
         "name": "Grunge Skirt & Hoodie Jacket Set",
         "price": "$6500",
         "slug": "grunge-hoodie",
         "sku": "GH-050",
         "color_variants": {
-            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pink": {  
                 "image": "images/Pink-GH.png",
                 "download_file": "Pink-GH.zip",
             },
-            "Skeleton-B": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Skeleton-B": {  
                 "image": "images/Skeleton-GH.png",
                 "download_file": "Skeleton-GH.zip",
             },
-            "Clouds-B": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Clouds-B": {  
                 "image": "images/Clouds-GH.png",
                 "download_file": "Clouds-GH.zip",
             },
-            "Hello Kitty": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Hello Kitty": {  
                 "image": "images/HelloKitty-GH.png",
                 "download_file": "HelloKitty-GH.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-GH.png",
                 "download_file": "Black-GH.zip",
             },
-            "Anime": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Anime": {  
                 "image": "images/Anime-GH.png",
                 "download_file": "Anime-GH.zip",
             },
-            "Himiko": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Himiko": {  
                 "image": "images/Himiko-GH.png",
                 "download_file": "Himiko-GH.zip",
             },
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Green": {  
                 "image": "images/Green-GH.png",
                 "download_file": "Green-GH.zip",
             },
-            "Skeleton-R": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Skeleton-R": {  
                 "image": "images/Red-GH.png",
                 "download_file": "Red-GH.zip",
             },
-            "Clouds-P": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Clouds-P": {  
                 "image": "images/PinkClouds-GH.png",
                 "download_file": "PinkClouds-GH.zip",
             },
-            "Anime Eyes": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Anime Eyes": {  
                 "image": "images/AnimeEyes-GH.png",
                 "download_file": "AnimeEyes-GH.zip",
             },
@@ -1179,25 +1179,25 @@ all_products = [
     },
     {
         "id": 30,
-        "category": "woman",
+        "category": "women",
         "name": "Heart & Star Earrings",
         "price": "$3700",
         "slug": "heart-earrings",
         "sku": "CH-053",
         "color_variants": {
-            "Gold": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gold": {  
                 "image": "images/Gold-HSE.png",
                 "download_file": "Gold-HSE.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-HSE.png",
                 "download_file": "Black-HSE.zip",
             },
-            "Bronze": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Bronze": {  
                 "image": "images/Bronze-HSE.png",
                 "download_file": "Bronze-HSE.zip",
             },
-            "Plate": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Plate": {  
                 "image": "images/Plate-HSE.png",
                 "download_file": "Plate-HSE.zip",
             },
@@ -1205,37 +1205,37 @@ all_products = [
     },
     {
         "id": 31,
-        "category": "woman",
+        "category": "women",
         "name": "Urban Cap",
         "price": "$3000",
         "slug": "urban-cap",
         "sku": "UC-100",
         "color_variants": {
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-Cap.png",
                 "download_file": "Black-Cap.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue": {  
                 "image": "images/Blue-Cap.png",
                 "download_file": "Blue-Cap.zip",
             },
-            "God's Favorite": {  # Color 'Azul' usa la imagen woman3.jpg
+            "God's Favorite": {  
                 "image": "images/Favorite-Cap.png",
                 "download_file": "Favorite-Cap.zip",
             },
-            "Military": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Military": {  
                 "image": "images/Military-Cap.png",
                 "download_file": "Military-Cap.zip",
             },
-            "Stars": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Stars": {  
                 "image": "images/Stars-Cap.png",
                 "download_file": "Stars-Cap.zip",
             },
-            "Sunshine & Whiskey": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Sunshine & Whiskey": {  
                 "image": "images/Sunshine-Cap.png",
                 "download_file": "Sunshine-Cap.zip",
             },
-            "VonDutch": {  # Color 'Azul' usa la imagen woman3.jpg
+            "VonDutch": {  
                 "image": "images/VonDutch-Cap.png",
                 "download_file": "VonDutch-Cap.zip",
             },
@@ -1243,25 +1243,25 @@ all_products = [
     },
     {
         "id": 32,
-        "category": "woman",
+        "category": "women",
         "name": "Vintage Gothic Glam",
         "price": "$7000",
         "slug": "vintage-gothic",
         "sku": "VG-100",
         "color_variants": {
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-VG.png",
                 "download_file": "White-VG.zip",
             },
-            "Purple": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Purple": {  
                 "image": "images/Purple-VG.png",
                 "download_file": "Purple-VG.zip",
             },
-            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray": {  
                 "image": "images/Gray-VG.png",
                 "download_file": "Gray-VG.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/Red-VG.png",
                 "download_file": "Red-VG.zip",
             },
@@ -1269,29 +1269,29 @@ all_products = [
     },
     {
         "id": 33,
-        "category": "woman",
+        "category": "women",
         "name": "Midnight Vibes Gothic Outfit",
         "price": "$7000",
         "slug": "midnight-gothic",
         "sku": "MG-100",
         "color_variants": {
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/Red-MG.png",
                 "download_file": "Red-MG.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-MG.png",
                 "download_file": "Black-MG.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue": {  
                 "image": "images/Blue-MG.png",
                 "download_file": "Blue-MG.zip",
             },
-            "Purple": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Purple": {  
                 "image": "images/Purple-MG.png",
                 "download_file": "Purple-MG.zip",
             },
-            "Turquoise": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Turquoise": {  
                 "image": "images/Turquoise-MG.png",
                 "download_file": "Turquoise-MG.zip",
             },
@@ -1299,41 +1299,41 @@ all_products = [
     },
     {
         "id": 34,
-        "category": "woman",
+        "category": "women",
         "name": "Cozy Grunge Sweater",
         "price": "$6000",
         "slug": "grunge-sweater",
         "sku": "GS-100",
         "color_variants": {
-            "Fire-B": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Fire-B": {  
                 "image": "images/Fire-B-GS.png",
                 "download_file": "Fire-B-GS.zip",
             },
-            "Bats-B": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Bats-B": {  
                 "image": "images/Bats-B-GS.png",
                 "download_file": "Bats-B-GS.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-GS.png",
                 "download_file": "Black-GS.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/Red-GS.png",
                 "download_file": "Red-GS.zip",
             },
-            "Bats-P": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Bats-P": {  
                 "image": "images/Bats-P-GS.png",
                 "download_file": "Bats-P-GS.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-GS.png",
                 "download_file": "White-GS.zip",
             },
-            "Fire": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Fire": {  
                 "image": "images/Fire-GS.png",
                 "download_file": "Fire-GS.zip",
             },
-            "Fire-P": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Fire-P": {  
                 "image": "images/Fire-P-GS.png",
                 "download_file": "Fire-P-GS.zip",
             },
@@ -1341,29 +1341,29 @@ all_products = [
     },
     {
         "id": 35,
-        "category": "woman",
+        "category": "women",
         "name": "Edgy Punk Studded Corset",
         "price": "$6000",
         "slug": "studded-corset",
         "sku": "SC-100",
         "color_variants": {
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-SC.png",
                 "download_file": "Black-SC.zip",
             },
-            "Brown": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Brown": {  
                 "image": "images/Brown-SC.png",
                 "download_file": "Brown-SC.zip",
             },
-            "Purple": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Purple": {  
                 "image": "images/Purple-SC.png",
                 "download_file": "Purple-SC.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/Red-SC.png",
                 "download_file": "Red-SC.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-SC.png",
                 "download_file": "White-SC.zip",
             },
@@ -1371,13 +1371,13 @@ all_products = [
     },
     {
         "id": 36,
-        "category": "woman",
+        "category": "women",
         "name": "Sweet Cherry Heart Earrings",
         "price": "$4700",
         "slug": "cherry-earrings",
         "sku": "CE-100",
         "color_variants": {
-            "Cherry": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Cherry": {  
                 "image": "images/CE.png",
                 "download_file": "Cherry-Earrings.zip",
             },
@@ -1385,17 +1385,17 @@ all_products = [
     },
     {
         "id": 37,
-        "category": "woman",
+        "category": "women",
         "name": "Delicate Triple Heart Earrings",
         "price": "$4700",
         "slug": "triple-heart",
         "sku": "TH-100",
         "color_variants": {
-            "Gold": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gold": {  
                 "image": "images/Gold-TH.png",
                 "download_file": "Gold-TH.zip",
             },
-            "Plate": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Plate": {  
                 "image": "images/Plate-TH.png",
                 "download_file": "Plate-TH.zip",
             },
@@ -1403,25 +1403,25 @@ all_products = [
     },
     {
         "id": 38,
-        "category": "man",
+        "category": "men",
         "name": "Urban Cargo Pants",
         "price": "$4500",
         "slug": "cargo-pants",
         "sku": "UP-100",
         "color_variants": {
-            "Camo": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Camo": {  
                 "image": "images/Camo-UP.png",
                 "download_file": "Camo-UP.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-UP.png",
                 "download_file": "Black-UP.zip",
             },
-            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray": {  
                 "image": "images/Gray-UP.png",
                 "download_file": "Gray-UP.zip",
             },
-            "Light Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Light Blue": {  
                 "image": "images/LightBlue-UP.png",
                 "download_file": "LightBlue-UP.zip",
             },
@@ -1429,21 +1429,21 @@ all_products = [
     },
     {
         "id": 38,
-        "category": "man",
+        "category": "men",
         "name": "Cargo Pants with Chain",
         "price": "$4500",
         "slug": "cargo-chain",
         "sku": "PC-100",
         "color_variants": {
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-PC.png",
                 "download_file": "Black-PC.zip",
             },
-            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray": {  
                 "image": "images/White-PC.png",
                 "download_file": "Gray-PC.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/Red-PC.png",
                 "download_file": "Red-PC.zip",
             },
@@ -1451,67 +1451,67 @@ all_products = [
     },
     {
         "id": 39,
-        "category": "man",
+        "category": "men",
         "name": "Custom Sneaker",
         "price": "$15000",
-        "slug": "custom-sneaker-man",
+        "slug": "custom-sneaker-men",
         "sku": "CS-102",
         "color_variants": {
-            "Billie Eilish": {  # Color 'Negro' usa la imagen woman1.png
+            "Billie Eilish": {  
                 "image": "images/Billie.png",
-                "download_file": "Billie-Man.zip",
+                "download_file": "Billie-men.zip",
             },
-            "BW Cartoon": {  # Color 'Azul' usa la imagen woman3.jpg
+            "BW Cartoon": {  
                 "image": "images/BW-Cartoon.png",
-                "download_file": "BW-Cartoon-Man.zip",
+                "download_file": "BW-Cartoon-men.zip",
             },
-            "Classic": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Classic": {  
                 "image": "images/Classic.png",
-                "download_file": "Classic-Man.zip",
+                "download_file": "Classic-men.zip",
             },
-            "Melted": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Melted": {  
                 "image": "images/Melted.png",
-                "download_file": "Melted-Man.zip",
+                "download_file": "Melted-men.zip",
             },
-            "Pikachu": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pikachu": {  
                 "image": "images/Pikachu.png",
-                "download_file": "Pikachu-Man.zip",
+                "download_file": "Pikachu-men.zip",
             },
-            "Stitch": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Stitch": {  
                 "image": "images/Stitch.png",
-                "download_file": "Stitch-Man.zip",
+                "download_file": "Stitch-men.zip",
             },
-            "White Cartoon": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White Cartoon": {  
                 "image": "images/White-Cartoon.png",
-                "download_file": "White-Cartoon-Man.zip",
+                "download_file": "White-Cartoon-men.zip",
             },
-            "All-White Cartoon": {  # Color 'Azul' usa la imagen woman3.jpg
+            "All-White Cartoon": {  
                 "image": "images/All-White.png",
-                "download_file": "All-White-Man.zip",
+                "download_file": "All-White-men.zip",
             },
         },
     },
     {
         "id": 40,
-        "category": "woman",
+        "category": "women",
         "name": "Cropped Jacket",
         "price": "$4500",
         "slug": "cropped-jacket",
         "sku": "CJ-100",
         "color_variants": {
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-CJ.png",
                 "download_file": "Black-CJ.zip",
             },
-            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray": {  
                 "image": "images/Gray-CJ.png",
                 "download_file": "Gray-CJ.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-CJ.png",
                 "download_file": "White-CJ.zip",
             },
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Green": {  
                 "image": "images/Green-CJ.png",
                 "download_file": "Green-CJ.zip",
             },
@@ -1519,25 +1519,25 @@ all_products = [
     },
     {
         "id": 44,
-        "category": "man",
+        "category": "men",
         "name": "Vibez Zip Hoodie",
         "price": "$4500",
         "slug": "zip-hoodie",
         "sku": "ZH-100",
         "color_variants": {
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-ZH.png",
                 "download_file": "Black-ZH.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue": {  
                 "image": "images/Blue-ZH.png",
                 "download_file": "Blue-ZH.zip",
             },
-            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray": {  
                 "image": "images/Gray-ZH.png",
                 "download_file": "Gray-ZH.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/Red-ZH.png",
                 "download_file": "Red-ZH.zip",
             },
@@ -1545,29 +1545,29 @@ all_products = [
     },
     {
         "id": 45,
-        "category": "woman",
+        "category": "women",
         "name": "Off-Shoulder Top",
         "price": "$3700",
         "slug": "off-shoulder",
         "sku": "OS-100",
         "color_variants": {
-            "Black S": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black S": {  
                 "image": "images/BlackS-OS.png",
                 "download_file": "BlackS-OS.zip",
             },
-            "Ghost": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Ghost": {  
                 "image": "images/Ghost-OS.png",
                 "download_file": "Ghost-OS.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/BlackSS-OS.png",
                 "download_file": "BlackSS-OS.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/WhiteSS-OS.png",
                 "download_file": "WhiteSS-OS.zip",
             },
-            "White S": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White S": {  
                 "image": "images/WhiteS-OS.png",
                 "download_file": "WhiteS-OS.zip",
             },
@@ -1575,33 +1575,33 @@ all_products = [
     },
     {
         "id": 46,
-        "category": "woman",
+        "category": "women",
         "name": "Cargo Pants",
         "price": "$4500",
         "slug": "cargo-pants-female",
         "sku": "OS-100",
         "color_variants": {
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-FCP.png",
                 "download_file": "White-FCP.zip",
             },
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Green": {  
                 "image": "images/Green-FCP.png",
                 "download_file": "Green-FCP.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-FCP.png",
                 "download_file": "Black-FCP.zip",
             },
-            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray": {  
                 "image": "images/Gray-FCP.png",
                 "download_file": "Gray-FCP.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/Red-FCP.png",
                 "download_file": "Red-FCP.zip",
             },
-            "Beige": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Beige": {  
                 "image": "images/Beige-FCP.png",
                 "download_file": "Beige-FCP.zip",
             },
@@ -1609,29 +1609,29 @@ all_products = [
     },
     {
         "id": 47,
-        "category": "man",
+        "category": "men",
         "name": "Baggy Pants",
         "price": "$4500",
         "slug": "baggy-pants",
         "sku": "BP-100",
         "color_variants": {
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue": {  
                 "image": "images/Blue-BP.png",
                 "download_file": "Blue-BP.zip",
             },
-            "Beige": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Beige": {  
                 "image": "images/Beige-BP.png",
                 "download_file": "Beige-BP.zip",
             },
-            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray": {  
                 "image": "images/Gray-BP.png",
                 "download_file": "Gray-BP.zip",
             },
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Green": {  
                 "image": "images/Green-BP.png",
                 "download_file": "Green-BP.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-BP.png",
                 "download_file": "White-BP.zip",
             },
@@ -1639,37 +1639,37 @@ all_products = [
     },
     {
         "id": 48,
-        "category": "man",
+        "category": "men",
         "name": "Jogger",
         "price": "$4500",
         "slug": "jogger",
         "sku": "JP-100",
         "color_variants": {
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-Jogger.png",
                 "download_file": "Black-Jogger.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue": {  
                 "image": "images/Blue-Jogger.png",
                 "download_file": "Blue-Jogger.zip",
             },
-            "Dark Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Dark Gray": {  
                 "image": "images/Dark-Gray-Jogger.png",
                 "download_file": "Dark-Gray-Jogger.zip",
             },
-            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray": {  
                 "image": "images/Gray-Jogger.png",
                 "download_file": "Gray-Jogger.zip",
             },
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Green": {  
                 "image": "images/Green-Jogger.png",
                 "download_file": "Green-Jogger.zip",
             },
-            "Light Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Light Blue": {  
                 "image": "images/Light-Blue-Jogger.png",
                 "download_file": "Light-Blue-Jogger.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/Red-Jogger.png",
                 "download_file": "Red-Jogger.zip",
             },
@@ -1677,21 +1677,21 @@ all_products = [
     },
     {
         "id": 49,
-        "category": "man",
+        "category": "men",
         "name": "Hoodie",
         "price": "$4000",
         "slug": "hoodie",
         "sku": "H-100",
         "color_variants": {
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-Hoodie.png",
                 "download_file": "White-Hoodie.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-Hoodie.png",
                 "download_file": "Black-Hoodie.zip",
             },
-            "Gray": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray": {  
                 "image": "images/Gray-Hoodie.png",
                 "download_file": "Gray-Hoodie.zip",
             },
@@ -1699,45 +1699,45 @@ all_products = [
     },
     {
         "id": 50,
-        "category": "man",
+        "category": "men",
         "name": "Tank Top",
         "price": "$6000",
         "slug": "tank-top",
         "sku": "TT-100",
         "color_variants": {
-            "Gray A": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray A": {  
                 "image": "images/Gray-A.png",
                 "download_file": "Gray-A.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-TT.png",
                 "download_file": "White-TT.zip",
             },
-            "Black A": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black A": {  
                 "image": "images/Black-A.png",
                 "download_file": "Black-A.zip",
             },
-            "Black B": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black B": {  
                 "image": "images/Black-B.png",
                 "download_file": "Black-B.zip",
             },
-            "Gray B": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Gray B": {  
                 "image": "images/Gray-B.png",
                 "download_file": "Gray-B.zip",
             },
-            "Black C": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black C": {  
                 "image": "images/Black-C.png",
                 "download_file": "Black-C.zip",
             },
-            "Black D": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black D": {  
                 "image": "images/Black-D.png",
                 "download_file": "Black-D.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/Red-TT.png",
                 "download_file": "Red-TT.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-TT.png",
                 "download_file": "Black-TT.zip",
             },
@@ -1745,37 +1745,37 @@ all_products = [
     },
     {
         "id": 51,
-        "category": "woman",
+        "category": "women",
         "name": "Retro Runner 90s",
         "price": "$5500",
         "slug": "retro-runner",
         "sku": "RR-100",
         "color_variants": {
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Green": {  
                 "image": "images/Green-CS.png",
                 "download_file": "Green-CS.zip",
             },
-            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pink": {  
                 "image": "images/Pink-CS.png",
                 "download_file": "Pink-CS.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/Red-CS.png",
                 "download_file": "Red-CS.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-CS.png",
                 "download_file": "White-CS.zip",
             },
-            "Yellow": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Yellow": {  
                 "image": "images/Yellow-CS.png",
                 "download_file": "Yellow-CS.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-CS.png",
                 "download_file": "Black-CS.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue": {  
                 "image": "images/Blue-CS.png",
                 "download_file": "Blue-CS.zip",
             },
@@ -1783,93 +1783,93 @@ all_products = [
     },
     {
         "id": 52,
-        "category": "man",
+        "category": "men",
         "name": "Cross Necklace",
         "price": "$3000",
         "slug": "cross-necklace",
         "sku": "CN-100",
         "color_variants": {
-            "Plate": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/Necklace-Cross-Man.png",
-                "download_file": "Necklace-Cross-Man.zip",
+            "Plate": {  
+                "image": "images/Necklace-Cross-man.png",
+                "download_file": "Necklace-Cross-men.zip",
             },
         },
     },
     {
         "id": 53,
-        "category": "man",
+        "category": "men",
         "name": "Retro Runner 90s",
         "price": "$5500",
-        "slug": "retro-runner-man",
+        "slug": "retro-runner-men",
         "sku": "RR-101",
         "color_variants": {
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/Black-RR-Man.png",
-                "download_file": "Black-RR-Man.zip",
+            "Black": {  
+                "image": "images/Black-RR-man.png",
+                "download_file": "Black-RR-men.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/Blue-RR-Man.png",
-                "download_file": "Blue-RR-Man.zip",
+            "Blue": {  
+                "image": "images/Blue-RR-man.png",
+                "download_file": "Blue-RR-men.zip",
             },
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/Green-RR-Man.png",
-                "download_file": "Green-RR-Man.zip",
+            "Green": {  
+                "image": "images/Green-RR-man.png",
+                "download_file": "Green-RR-men.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/White-RR-Man.png",
-                "download_file": "White-RR-Man.zip",
+            "White": {  
+                "image": "images/White-RR-man.png",
+                "download_file": "White-RR-men.zip",
             },
-            "Yellow": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/Yellow-RR-Man.png",
-                "download_file": "Yellow-RR-Man.zip",
+            "Yellow": {  
+                "image": "images/Yellow-RR-man.png",
+                "download_file": "Yellow-RR-men.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
-                "image": "images/Red-RR-Man.png",
-                "download_file": "Red-RR-Man.zip",
+            "Red": {  
+                "image": "images/Red-RR-man.png",
+                "download_file": "Red-RR-men.zip",
             },
         },
     },
     {
         "id": 54,
-        "category": "man",
+        "category": "men",
         "name": "Tank Top",
         "price": "$6000",
         "slug": "tank-top2",
         "sku": "TT-110",
         "color_variants": {
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/White-TTM.png",
                 "download_file": "White-TTM.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-TTM.png",
                 "download_file": "Black-TTM.zip",
             },
-            "Black 2": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black 2": {  
                 "image": "images/Black2-TTM.png",
                 "download_file": "Black2-TTM.zip",
             },
-            "Black 3": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black 3": {  
                 "image": "images/Black3-TTM.png",
                 "download_file": "Black3-TTM.zip",
             },
-            "Black 4": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black 4": {  
                 "image": "images/Black4-TTM.png",
                 "download_file": "Black4-TTM.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue": {  
                 "image": "images/Blue-TTM.png",
                 "download_file": "Blue-TTM.zip",
             },
-            "White 2": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White 2": {  
                 "image": "images/White2-TTM.png",
                 "download_file": "White2-TTM.zip",
             },
-            "White 3": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White 3": {  
                 "image": "images/White3-TTM.png",
                 "download_file": "White3-TTM.zip",
             },
-            "White 4": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White 4": {  
                 "image": "images/White4-TTM.png",
                 "download_file": "White4-TTM.zip",
             },
@@ -1877,53 +1877,53 @@ all_products = [
     },
     {
         "id": 55,
-        "category": "woman",
+        "category": "women",
         "name": "Classic Sneakers",
         "price": "$5500",
         "slug": "classic-sneakers",
         "sku": "CS-110",
         "color_variants": {
-            "Beige": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Beige": {  
                 "image": "images/Beige-SP.png",
                 "download_file": "Beige-SP.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-SP.png",
                 "download_file": "Black-SP.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue": {  
                 "image": "images/Blue-SP.png",
                 "download_file": "Blue-SP.zip",
             },
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Green": {  
                 "image": "images/Green-SP.png",
                 "download_file": "Green-SP.zip",
             },
-            "Orange": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Orange": {  
                 "image": "images/Orange-SP.png",
                 "download_file": "Orange-SP.zip",
             },
-            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pink": {  
                 "image": "images/Pink-SP.png",
                 "download_file": "Pink-SP.zip",
             },
-            "Purple": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Purple": {  
                 "image": "images/Purple-SP.png",
                 "download_file": "Purple-SP.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/Red-SP.png",
                 "download_file": "Red-SP.zip",
             },
-            "Salmon": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Salmon": {  
                 "image": "images/Salmon-SP.png",
                 "download_file": "Salmon-SP.zip",
             },
-             "White": {  # Color 'Azul' usa la imagen woman3.jpg
+             "White": {  
                 "image": "images/White-SP.png",
                 "download_file": "White-SP.zip",
             },
-              "Yellow": {  # Color 'Azul' usa la imagen woman3.jpg
+              "Yellow": {  
                 "image": "images/Yellow-SP.png",
                 "download_file": "Yellow-SP.zip",
             },
@@ -1931,41 +1931,41 @@ all_products = [
     },
     {
         "id": 56,
-        "category": "man",
+        "category": "men",
         "name": "Classic Sneakers",
         "price": "$5500",
-        "slug": "classic-sneakers-man",
+        "slug": "classic-sneakers-men",
         "sku": "CS-111",
         "color_variants": {
-            "Beige": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Beige": {  
                 "image": "images/Beige-SP.png",
                 "download_file": "Beige-SPM.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/Black-SP.png",
                 "download_file": "Black-SPM.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue": {  
                 "image": "images/Blue-SP.png",
                 "download_file": "Blue-SPM.zip",
             },
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Green": {  
                 "image": "images/Green-SP.png",
                 "download_file": "Green-SPM.zip",
             },
-            "Orange": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Orange": {  
                 "image": "images/Orange-SP.png",
                 "download_file": "Orange-SPM.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/Red-SP.png",
                 "download_file": "Red-SPM.zip",
             },
-             "White": {  # Color 'Azul' usa la imagen woman3.jpg
+             "White": {  
                 "image": "images/White-SP.png",
                 "download_file": "White-SPM.zip",
             },
-              "Yellow": {  # Color 'Azul' usa la imagen woman3.jpg
+              "Yellow": {  
                 "image": "images/Yellow-SP.png",
                 "download_file": "Yellow-SPM.zip",
             },
@@ -1973,33 +1973,33 @@ all_products = [
     },
     {
         "id": 57,
-        "category": "woman",
+        "category": "women",
         "name": "Drawstring Neck Crop Top",
         "price": "$5000",
         "slug": "neck-crop",
         "sku": "NCT-100",
         "color_variants": {
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/NCT-Red.png",
                 "download_file": "NCT-Red.zip",
             },
-            "Green": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Green": {  
                 "image": "images/NCT-Green.png",
                 "download_file": "NCT-Green.zip",
             },
-            "Blue": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Blue": {  
                 "image": "images/NCT-Blue.png",
                 "download_file": "NCT-Blue.zip",
             },
-            "Purple": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Purple": {  
                 "image": "images/NCT-Purple.png",
                 "download_file": "NCT-Purple.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/NCT-Black.png",
                 "download_file": "NCT-Black.zip",
             },
-            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pink": {  
                 "image": "images/NCT-Pink.png",
                 "download_file": "NCT-Pink.zip",
             },
@@ -2007,31 +2007,65 @@ all_products = [
     },
     {
         "id": 58,
-        "category": "woman",
+        "category": "women",
         "name": "Ribbed Long Sleeve Sweater",
         "price": "$5000",
         "slug": "ribbed-sweater",
         "sku": "RS-100",
         "color_variants": {
-            "Pink": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Pink": {  
                 "image": "images/RS-Pink.png",
                 "download_file": "RS-Pink.zip",
             },
-            "Black": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Black": {  
                 "image": "images/RS-Black.png",
                 "download_file": "RS-Black.zip",
             },
-            "Red": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Red": {  
                 "image": "images/RS-Red.png",
                 "download_file": "RS-Red.zip",
             },
-            "White": {  # Color 'Azul' usa la imagen woman3.jpg
+            "White": {  
                 "image": "images/RS-White.png",
                 "download_file": "RS-White.zip",
             },
-            "Yellow": {  # Color 'Azul' usa la imagen woman3.jpg
+            "Yellow": {  
                 "image": "images/RS-Yellow.png",
                 "download_file": "RS-Yellow.zip",
+            },
+        },
+    },
+    {
+        "id": 59,
+        "category": "women",
+        "name": "Stretch Fit Active Shorts",
+        "price": "$4000",
+        "slug": "stretch-shorts",
+        "sku": "SS-100",
+        "color_variants": {
+            "Gray": {  
+                "image": "images/SS-Gray.png",
+                "download_file": "SS-Gray.zip",
+            },
+            "White": {  
+                "image": "images/SS-White.png",
+                "download_file": "SS-White.zip",
+            },
+            "Purple": {  
+                "image": "images/SS-Purple.png",
+                "download_file": "SS-Purple.zip",
+            },
+            "Blue": {  
+                "image": "images/SS-Blue.png",
+                "download_file": "SS-Blue.zip",
+            },
+            "Orange": {  
+                "image": "images/SS-Orange.png",
+                "download_file": "SS-Orange.zip",
+            },
+            "Brown": {  
+                "image": "images/SS-Brown.png",
+                "download_file": "SS-Brown.zip",
             },
         },
     },
@@ -2242,11 +2276,11 @@ def home():
 
 @app.route("/<category_name>")
 def category_page(category_name):
-    if category_name not in ["woman", "man", "accessories"]:
+    if category_name not in ["women", "men", "accessories"]:
         abort(404)
 
     # --- LÓGICA DE PAGINACIÓN ---
-    # 1. Obtenemos el número de página de la URL (ej. /woman?page=2). Si no se especifica, es la página 1.
+    # 1. Obtenemos el número de página de la URL (ej. /women?page=2). Si no se especifica, es la página 1.
     page = request.args.get("page", 1, type=int)
     ITEMS_PER_PAGE = 12  # Definimos el máximo de artículos por página
 

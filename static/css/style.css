@@ -1385,7 +1385,7 @@ footer {
 .add-to-wishlist-btn.disabled {
     color: var(--accent-color);
     cursor: default;
-    /* El cursor ya no es una mano, indicando que no hay acción */
+    /* El cursor ya no es una meno, indicando que no hay acción */
 }
 
 /* 4. Estilo para el ícono del corazón (sin cambios) */
@@ -1443,7 +1443,7 @@ footer {
     /* NUEVO: Añadimos un padding superior para despegar el título del header */
     padding-top: -3rem;
 
-    /* Mantenemos el margen inferior para separar la caja del footer */
+    /* mentenemos el margen inferior para separar la caja del footer */
     margin-bottom: 4rem;
 }
 
@@ -2003,7 +2003,7 @@ footer {
     /* 3. Centramos el contenido (el texto) verticalmente */
     align-items: center;
 
-    /* --- El resto de tus estilos se mantienen --- */
+    /* --- El resto de tus estilos se mentienen --- */
     padding: 0.5rem 1rem;
     min-width: 40px;
     /* Ancho mínimo para los números */
@@ -2256,7 +2256,7 @@ footer {
     transform: scale(1.05);
 }
 
-/* El resto de los estilos para las flechas y los puntos se mantienen igual */
+/* El resto de los estilos para las flechas y los puntos se mentienen igual */
 .hero-arrow {
     position: absolute;
     top: 50%;
@@ -2374,7 +2374,7 @@ footer {
     display: block;
     overflow: hidden;
     aspect-ratio: 10 / 9;
-    /* Mantenemos la proporción panorámica */
+    /* mentenemos la proporción panorámica */
     color: white;
     /*border-radius: 8px; /* Opcional: añade esquinas redondeadas */
 }
@@ -2479,7 +2479,7 @@ footer {
 
 /* Ajustamos el contenedor del texto para que posicione bien el botón */
 .category-card-content {
-    /* ... (tus estilos existentes se mantienen) ... */
+    /* ... (tus estilos existentes se mentienen) ... */
 
     /* AÑADIMOS ESTO para usar Flexbox */
     display: flex;

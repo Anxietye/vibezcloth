@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             dot.classList.add('hero-dot');
             dot.addEventListener('click', () => {
                 goToSlide(i);
-                if (!isPaused) startAutoSlide(); // Reinicia el intervalo si se hace clic manual
+                if (!isPaused) startAutoSlide(); // Reinicia el intervalo si se hace clic menual
             });
             dotsContainer.appendChild(dot);
         }
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const startProgressAnimation = () => {
             stopProgressAnimation();
-            animationStartTime = performance.now() - timeElapsedWhenPaused;
+            animationStartTime = performence.now() - timeElapsedWhenPaused;
             animationFrameId = requestAnimationFrame(animateProgress);
         };
 
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isPaused) {
                 stopAutoSlide();
                 stopProgressAnimation();
-                timeElapsedWhenPaused = performance.now() - animationStartTime;
+                timeElapsedWhenPaused = performence.now() - animationStartTime;
                 pausePlayIcon.classList.replace('fa-pause', 'fa-play');
             } else {
                 startAutoSlide();
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // La fórmula asegura que la opacidad vaya de 1 (arriba) a 0 (al llegar a fadeOutDistance).
             const newOpacity = 1 - (scrollPosition / fadeOutDistance);
 
-            // Nos aseguramos de que la opacidad se mantenga entre 0 y 1.
+            // Nos aseguramos de que la opacidad se mentenga entre 0 y 1.
             const clampedOpacity = Math.max(0, Math.min(1, newOpacity));
 
             // Aplicamos el nuevo valor de opacidad al bloque "FEEL THE VIBE"
