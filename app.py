@@ -739,7 +739,7 @@ all_products = [
             },
             "White & Gold": {  # Color 'Azul' usa la imagen woman3.jpg
                 "image": "images/WG-GCEC.png",
-                "download_file": "WG-GCEC4.zip",
+                "download_file": "WG-GCEC.zip",
             },
         },
     },
