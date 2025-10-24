@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const startProgressAnimation = () => {
             stopProgressAnimation();
-            animationStartTime = performence.now() - timeElapsedWhenPaused;
+            animationStartTime = performance.now() - timeElapsedWhenPaused;
             animationFrameId = requestAnimationFrame(animateProgress);
         };
 
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isPaused) {
                 stopAutoSlide();
                 stopProgressAnimation();
-                timeElapsedWhenPaused = performence.now() - animationStartTime;
+                timeElapsedWhenPaused = performance.now() - animationStartTime;
                 pausePlayIcon.classList.replace('fa-pause', 'fa-play');
             } else {
                 startAutoSlide();
