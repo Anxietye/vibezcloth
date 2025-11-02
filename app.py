@@ -1790,7 +1790,7 @@ all_products = [
         "sku": "CN-100",
         "color_variants": {
             "Plate": {  
-                "image": "images/Necklace-Cross-man.png",
+                "image": "images/Necklace-Cross-Man.png",
                 "download_file": "Necklace-Cross-men.zip",
             },
         },
@@ -1804,27 +1804,27 @@ all_products = [
         "sku": "RR-101",
         "color_variants": {
             "Black": {  
-                "image": "images/Black-RR-man.png",
+                "image": "images/Black-RR-Man.png",
                 "download_file": "Black-RR-men.zip",
             },
             "Blue": {  
-                "image": "images/Blue-RR-man.png",
+                "image": "images/Blue-RR-Man.png",
                 "download_file": "Blue-RR-men.zip",
             },
             "Green": {  
-                "image": "images/Green-RR-man.png",
+                "image": "images/Green-RR-Man.png",
                 "download_file": "Green-RR-men.zip",
             },
             "White": {  
-                "image": "images/White-RR-man.png",
+                "image": "images/White-RR-Man.png",
                 "download_file": "White-RR-men.zip",
             },
             "Yellow": {  
-                "image": "images/Yellow-RR-man.png",
+                "image": "images/Yellow-RR-Man.png",
                 "download_file": "Yellow-RR-men.zip",
             },
             "Red": {  
-                "image": "images/Red-RR-man.png",
+                "image": "images/Red-RR-Man.png",
                 "download_file": "Red-RR-men.zip",
             },
         },
@@ -2180,6 +2180,44 @@ all_products = [
             "Cardinals": {  
                 "image": "images/BT-Cardinals.png",
                 "download_file": "BT-Cardinals.zip",
+            },
+        },
+    },
+    {
+        "id": 63,
+        "category": "women",
+        "name": "Checkered Sleeves Crop Top",
+        "price": "$5000",
+        "slug": "sleeve-ct",
+        "sku": "SCT-100",
+        "color_variants": {
+            "Rainbow": {  
+                "image": "images/SCT-Rainbow.png",
+                "download_file": "SCT-Rainbow.zip",
+            },
+            "Orange": {  
+                "image": "images/SCT-Orange.png",
+                "download_file": "SCT-Orange.zip",
+            },
+            "Pink": {  
+                "image": "images/SCT-Pink.png",
+                "download_file": "SCT-Pink.zip",
+            },
+            "Pink 2": {  
+                "image": "images/SCT-Pink2.png",
+                "download_file": "SCT-Pink2.zip",
+            },
+            "Purple": {  
+                "image": "images/SCT-Purple.png",
+                "download_file": "SCT-Purple.zip",
+            },
+            "White": {  
+                "image": "images/SCT-White.png",
+                "download_file": "SCT-White.zip",
+            },
+            "Yellow": {  
+                "image": "images/SCT-Yellow.png",
+                "download_file": "SCT-Yellow.zip",
             },
         },
     },
