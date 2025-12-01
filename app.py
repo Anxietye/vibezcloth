@@ -2383,6 +2383,66 @@ all_products = [
             },
         },
     },
+    {
+        "id": 69,
+        "category": "dollscraft",
+        "name": "High-Waist Jeans",
+        "price": "$3000",
+        "slug": "highwaist-jeans",
+        "sku": "HWJ-100",
+        "color_variants": {
+            "Black": {  
+                "image": "images/Black-HWJ.png",
+                "download_file": "Black-HWJ.zip",
+            },
+            "White": {  
+                "image": "images/White-HWJ.png",
+                "download_file": "White-HWJ.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-HWJ.png",
+                "download_file": "Blue-HWJ.zip",
+            },
+            "Dark Blue": {  
+                "image": "images/DarkBlue-HWJ.png",
+                "download_file": "DarkBlue-HWJ.zip",
+            },
+            "Gray": {  
+                "image": "images/Gray-HWJ.png",
+                "download_file": "Gray-HWJ.zip",
+            },
+        },
+    },
+    {
+        "id": 70,
+        "category": "dollscraft",
+        "name": "High-Waist Leggings",
+        "price": "$3000",
+        "slug": "leggins",
+        "sku": "HWL-100",
+        "color_variants": {
+            "Black and White": {  
+                "image": "images/B&W-HWL.png",
+                "download_file": "B&W-HWL.zip",
+            },
+            "Black": {  
+                "image": "images/Black-HWL.png",
+                "download_file": "Black-HWL.zip",
+            },
+            "White": {  
+                "image": "images/White-HWL.png",
+                "download_file": "White-HWL.zip",
+            },
+            "Red": {  
+                "image": "images/Red-HWL.png",
+                "download_file": "Red-HWL.zip",
+            },
+            "Gray": {  
+                "image": "images/Gray-HWL.png",
+                "download_file": "Gray-HWL.zip",
+            },
+        },
+    },
 ]
 # --- CUPONES
 VALID_COUPONS = {
@@ -2393,6 +2453,7 @@ VALID_COUPONS = {
     "TAKE50": {"type": "percent", "value": 50},  # 50% de descuento fijo
     #"LAUNCH40": {"type": "percent", "value": 40},  # $40 de descuento fijo
     "YANE90": {"type": "percent", "value": 90},  # 100 de descuento fijo
+    "XMAS25": {"type": "percent", "value": 30},  # 100 de descuento fijo
 }
 COUPONS_ENABLED = True
 
