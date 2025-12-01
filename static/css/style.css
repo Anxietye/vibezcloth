@@ -4,7 +4,7 @@
 
 
 /* --- FUENTES Y VARIABLES (ROOT) --- */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Merriweather:wght@400;700&display=swap');
 
 *,
 *::before,
@@ -43,14 +43,20 @@ html {
 
 
 :root {
-    /* Modo Oscuro (por defecto) */
-    --main-bg-color: #121212;
-    --primary-text-color: #FFFFFF;
-    --secondary-text-color: #a0a0a0;
-    --accent-color: #AFFF00;
+    /* Modo Gótico (por defecto) */
+    --main-bg-color: #000000;
+    /* Fondo negro puro */
+    --primary-text-color: #e0e0e0;
+    /* Un blanco ligeramente grisáceo, más suave a la vista */
+    --secondary-text-color: #888888;
+    --accent-color: #a50000;
+    /* Rojo oscuro y potente, extraído del logo */
     --border-color: #333;
     --card-bg-color: #1a1a1a;
-    --font-family: 'Poppins', sans-serif;
+
+    /* Variables de tipografía que cambiaremos en el siguiente paso */
+    --font-family-body: 'Merriweather', serif;
+    --font-family-headings: 'Cinzel Decorative', serif;
 }
 
 /* Modo Claro */
@@ -67,7 +73,8 @@ body.light-mode {
 body {
     background-color: var(--main-bg-color);
     color: var(--primary-text-color);
-    font-family: var(--font-family);
+    font-family: var(--font-family-body);
+    /* Usamos la nueva fuente para el cuerpo */
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -222,10 +229,30 @@ footer {
 
 .footer-content {
     display: flex;
-    gap: 5rem;
+    gap: 8rem;
     margin-bottom: 2rem;
     width: auto;
-    align-items: left;
+    align-items: flex-start; /* Alinea todos los elementos en la parte superior */
+}
+
+.footer-logo-section {
+    margin-left: auto;
+    /* Esto empuja el elemento al extremo derecho del contenedor flex */
+}
+
+/* 3. Le damos un tamaño y estilo al logo */
+.footer-logo {
+    width: 250px;
+    /* Puedes ajustar el tamaño a tu gusto (ej. 150px, 250px) */
+    height: auto;
+    opacity: 20;
+    /* Le damos una opacidad sutil para que no sea demasiado llamativo */
+    transition: opacity 0.3s ease;
+}
+
+.footer-logo:hover {
+    opacity: 1;
+    /* El logo se ilumina al pasar el cursor */
 }
 
 .footer-section h4 {
@@ -395,7 +422,7 @@ footer {
 .product-card-dark .price {
     font-size: 1.2rem;
     font-weight: bold;
-    color: var(--accent-color);
+    color: var(--primary-text-color);
 }
 
 .carousel-arrow-final {
@@ -2101,6 +2128,13 @@ footer {
         align-items: center;
     }
 
+    .footer-logo-section {
+        margin-left: 0;
+        /* Anulamos el margen en móvil */
+        margin-top: 2rem;
+        /* Añadimos espacio arriba en la vista de móvil */
+    }
+
     /* 6. TABLA DE WISHLIST: Las columnas se apilan para mejor lectura. */
     .wishlist-table thead {
         display: none;
@@ -2143,6 +2177,20 @@ footer {
     /* 2. TAMAÑO DE TEXTOS: Reducimos los títulos para que no ocupen tanto. */
     h1 {
         font-size: 2.2rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .section-title,
+    .category-card-title {
+        font-family: var(--font-family-headings);
+        /* Usamos la nueva fuente para títulos */
+        text-transform: uppercase;
+        /* Mayúsculas para un estilo más imponente */
+        letter-spacing: 2px;
+        /* Un poco más de espacio entre letras */
     }
 
     .section-title {
@@ -2790,4 +2838,246 @@ footer {
 .feedback-submit-btn:hover {
     transform: scale(1.02);
     opacity: 0.9;
+}
+
+/* ======================================================= */
+/* === EFECTOS ADICIONALES PARA LA TEMÁTICA GÓTICA === */
+/* ======================================================= */
+
+/* Sutil brillo rojo para los textos con el color de acento */
+.nav-links a.active,
+.icon-links a:hover,
+.footer-section h4,
+.product-card-dark .price,
+.pagination-nav span.active,
+.pagination-nav a:hover,
+.feedback-submit-btn,
+.checkout-btn,
+#feedback-tab:hover {
+    /* Sombra de texto que simula un resplandor rojo */
+    text-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+}
+
+/* Aseguramos que los botones principales usen el color correcto */
+.feedback-submit-btn,
+.checkout-btn,
+.purchase-button,
+.place-order-btn,
+.coupon-section button {
+    background-color: var(--accent-color);
+    /* Fondo rojo oscuro */
+    color: var(--primary-text-color);
+    /* Texto blanco/grisáceo */
+    border: 1px solid #ff0000;
+    /* Borde rojo brillante */
+    text-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+}
+
+/* Efecto hover para los botones principales */
+.feedback-submit-btn:hover,
+.checkout-btn:hover,
+.purchase-button:hover,
+.place-order-btn:hover,
+.coupon-section button:hover {
+    background-color: #ff0000;
+    /* Rojo brillante al pasar el cursor */
+    border-color: #ff4d4d;
+    transform: scale(1.03);
+    opacity: 1;
+}
+
+/* Ajuste para el logo del feedback para que sea visible */
+#feedback-success-message .feedback-logo,
+.feedback-header .feedback-logo {
+    /* Si el logo es oscuro, este filtro lo hará blanco para que contraste */
+    filter: brightness(0) invert(1);
+}
+
+/* ======================================================= */
+/* === ESTILOS PARA LA NUEVA TARJETA DESTACADA GRANDE === */
+/* ======================================================= */
+
+.large-featured-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 202%;
+
+    /* 1. LA CLAVE: Usamos 'min-height' para darle una altura similar a la del banner */
+    min-height: 60vh;
+    /* 60% de la altura de la ventana (puedes ajustar este valor) */
+
+    background-color: var(--card-bg-color);
+    color: var(--primary-text-color);
+    text-decoration: none;
+    padding: 7rem;
+    transition: background-color 0.3s ease;
+}
+
+.large-featured-card:hover {
+    background-color: #2a2a2a;
+    /* Un gris un poco más claro al pasar el cursor */
+}
+
+.large-card-content {
+    max-width: 600px;
+    /* Limita el ancho del texto para que sea legible */
+}
+
+.large-card-title {
+    font-family: var(--font-family-headings);
+    /* 2. Aumentamos el tamaño del título para que llene mejor el espacio */
+    font-size: 4rem;
+    margin: 0 0 1rem 0;
+}
+
+
+.large-card-subtitle {
+    font-size: 1.1rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 2rem;
+    display: block;
+}
+
+.large-card-btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    /* Usa tu color de acento (rojo) */
+    color: var(--primary-text-color);
+    /* O #000 si el contraste es mejor */
+
+    padding: 12px 35px;
+    border-radius: 50px;
+
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    transition: transform 0.2s ease-out;
+}
+
+.large-featured-card:hover .large-card-btn {
+    transform: scale(1.05);
+}
+
+/* --- Adaptación para Móviles --- */
+@media (max-width: 768px) {
+    .large-featured-card {
+        /* En móvil, la hacemos más alta para que el texto quepa bien */
+        aspect-ratio: 4 / 3;
+    }
+
+    .large-card-title {
+        font-size: 2.2rem;
+    }
+}
+
+.header-logo-link {
+    text-decoration: none;
+}
+
+.header-logo-text {
+    /* 1. Aplicamos la nueva fuente */
+    font-family: 'Maytorm', sans-serif;
+
+    /* 2. Le damos el color rojo oscuro del logo */
+    color: #8B0000;
+    /* DarkRed */
+
+    /* 3. Ajustamos el tamaño y la apariencia */
+    font-size: 1.7rem;
+    /* Tamaño de la fuente */
+    text-transform: capitalize;
+    /* Asegura que la 'V' y 'C' sean mayúsculas */
+    letter-spacing: 1px;
+
+    /* 4. Sutil sombra para darle profundidad, como en la imagen */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+
+    /* 5. Efecto de brillo al pasar el cursor */
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.header-logo-text:hover {
+    color: #ff0000;
+    /* Rojo más brillante al pasar el cursor */
+    text-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+}
+
+@font-face {
+    font-family: 'Maytorm';
+    /* El nombre que le damos para usarla en el CSS */
+    src: url('../fonts/Maytorm-Regular.ttf') format('truetype');
+    /* Ruta al archivo de la fuente */
+}
+
+/* ======================================================= */
+/* === ESTILOS CORREGIDOS PARA EL POPUP PROMOCIONAL === */
+/* ======================================================= */
+
+/* --- El Overlay y el Contenedor del Popup --- */
+#promo-popup-overlay,
+#promo-popup {
+    position: fixed;
+    z-index: 1050;
+    opacity: 0; /* Por defecto están invisibles */
+    visibility: hidden; /* Y completamente ocultos */
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+#promo-popup-overlay {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+#promo-popup {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Solo para centrar, ya no animamos la escala */
+    background-color: var(--main-bg-color);
+    border: 2px solid var(--accent-color);
+    max-width: 1100px;
+    width: 90%;
+    z-index: 1051;
+}
+
+/* --- Clases para MOSTRAR el popup --- */
+#promo-popup-overlay.visible,
+#promo-popup.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- Contenido del Popup (sin cambios) --- */
+#promo-popup img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.close-popup-btn {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    border: 2px solid white;
+    color: white;
+    font-size: 2rem;
+    line-height: 36px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1052;
+    transition: transform 0.2s ease;
+}
+
+.close-popup-btn:hover {
+    transform: scale(1.1) rotate(90deg);
 }

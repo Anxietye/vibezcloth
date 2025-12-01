@@ -18,7 +18,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 # --- CONFIGURACIÓN ---
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///vibez.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///voidcraft.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 DISCORD_WEBHOOK_URL = "https://discord.com/api/v10/webhooks/1418050508081594531/SaOV_sU29IyJdLHCVkYmNWe50CQKCgK04LcgMDN4gcHl5roTRTLo5uxLfKRzH_L3WmIb"
 DISCORD_SALES_WEBHOOK_URL = "https://discord.com/api/webhooks/1418062058213085204/jdNjaIGtNyjFNwyyIFi9gkarJIy-Gy8RTJXDfEtoIF3JEYBFF20IBRgGR0ftuM6patGg"
@@ -32,7 +32,7 @@ migrate = Migrate(app, db)
 app.secret_key = "y2PRyodNyyzu1mzZa2hTJy8tGP0MKDkJ8GQbuSbR"
 CLIENT_ID = "76"
 CLIENT_SECRET = "y2PRyodNyyzu1mzZa2hTJy8tGP0MKDkJ8GQbuSbR"
-REDIRECT_URI = "https://vibezcloth.onrender.com/auth/callback"
+REDIRECT_URI = "https://voidcraft.onrender.com/auth/callback"
 AUTHORIZATION_URL = "https://ucp.gta.world/oauth/authorize"
 TOKEN_URL = "https://ucp.gta.world/oauth/token"
 USER_API_URL = "https://ucp.gta.world/api/user"
@@ -94,7 +94,7 @@ class OrderItem(db.Model):
 all_products = [
     {
         "id": 1,
-        "category": "women",
+        "category": "dollscraft",
         "name": "Vibez Cozy Tracksuit",
         "price": "$8500",
         "slug": "vibez-tracksuit",
@@ -503,7 +503,7 @@ all_products = [
     #},
     {
         "id": 10,
-        "category": "women",
+        "category": "dollscraft",
         "name": "Preppy Set",
         "price": "$5500",
         "slug": "preppy-set",
@@ -760,7 +760,7 @@ all_products = [
     {
         "id": 18,
         "category": "women",
-        "name": "After Dark Vibez Jeans",
+        "name": "After Dark Jeans",
         "price": "$4500",
         "slug": "after-dark",
         "sku": "VJ-050",
@@ -841,7 +841,7 @@ all_products = [
     },
     {
         "id": 21,
-        "category": "women",
+        "category": "dollscraft",
         "name": "Sunset Glow Top",
         "price": "$5000",
         "slug": "glow-top",
@@ -875,7 +875,7 @@ all_products = [
     },
     {
         "id": 22,
-        "category": "women",
+        "category": "dollscraft",
         "name": "Sweet & Slouchy Set",
         "price": "$5000",
         "slug": "slouchy-set",
@@ -1039,7 +1039,7 @@ all_products = [
     },
     {
         "id": 26,
-        "category": "women",
+        "category": "dollscraft",
         "name": "Cropped Denim Jacket",
         "price": "$4200",
         "slug": "denim-jacket",
@@ -1095,7 +1095,7 @@ all_products = [
     },
     {
         "id": 28,
-        "category": "women",
+        "category": "dollscraft",
         "name": "Classic Zip-Up Hoodie",
         "price": "$4200",
         "slug": "classic-hoodie",
@@ -1125,7 +1125,7 @@ all_products = [
     },
     {
         "id": 29,
-        "category": "women",
+        "category": "dollscraft",
         "name": "Grunge Skirt & Hoodie Jacket Set",
         "price": "$6500",
         "slug": "grunge-hoodie",
@@ -1179,7 +1179,7 @@ all_products = [
     },
     {
         "id": 30,
-        "category": "women",
+        "category": "dollscraft",
         "name": "Heart & Star Earrings",
         "price": "$3700",
         "slug": "heart-earrings",
@@ -1371,7 +1371,7 @@ all_products = [
     },
     {
         "id": 36,
-        "category": "women",
+        "category": "dollscraft",
         "name": "Sweet Cherry Heart Earrings",
         "price": "$4700",
         "slug": "cherry-earrings",
@@ -1385,7 +1385,7 @@ all_products = [
     },
     {
         "id": 37,
-        "category": "women",
+        "category": "dollscraft",
         "name": "Delicate Triple Heart Earrings",
         "price": "$4700",
         "slug": "triple-heart",
@@ -1973,7 +1973,7 @@ all_products = [
     },
     {
         "id": 57,
-        "category": "women",
+        "category": "dollscraft",
         "name": "Drawstring Neck Crop Top",
         "price": "$5000",
         "slug": "neck-crop",
@@ -2007,7 +2007,7 @@ all_products = [
     },
     {
         "id": 58,
-        "category": "women",
+        "category": "dollscraft",
         "name": "Ribbed Long Sleeve Sweater",
         "price": "$5000",
         "slug": "ribbed-sweater",
@@ -2037,7 +2037,7 @@ all_products = [
     },
     {
         "id": 59,
-        "category": "women",
+        "category": "dollscraft",
         "name": "Stretch Fit Active Shorts",
         "price": "$4000",
         "slug": "stretch-shorts",
@@ -2221,6 +2221,168 @@ all_products = [
             },
         },
     },
+     {
+        "id": 64,
+        "category": "dollscraft",
+        "name": "Hoodie Mini Skirt Outfit",
+        "price": "$6000",
+        "slug": "sport-kit",
+        "sku": "SK-100",
+        "color_variants": {
+            "Blue": {  
+                "image": "images/Blue-SK.png",
+                "download_file": "Blue-SK.zip",
+            },
+            "Gray": {  
+                "image": "images/Gray-SK.png",
+                "download_file": "Gray-SK.zip",
+            },
+            "Black": {  
+                "image": "images/Black-SK.png",
+                "download_file": "Black-SK.zip",
+            },
+            "Brown": {  
+                "image": "images/Brown-SK.png",
+                "download_file": "Brown-SK.zip",
+            },
+            "Red": {  
+                "image": "images/Red-SK.png",
+                "download_file": "Red-SK.zip",
+            },
+        },
+    },
+    {
+        "id": 65,
+        "category": "dollscraft",
+        "name": "Fancy Dress",
+        "price": "$5000",
+        "slug": "fancy-dress",
+        "sku": "FD-100",
+        "color_variants": {
+            "Black": {  
+                "image": "images/Black-FD.png",
+                "download_file": "Black-FD.zip",
+            },
+            "Red": {  
+                "image": "images/Red-FD.png",
+                "download_file": "Red-FD.zip",
+            },
+            "White": {  
+                "image": "images/White-FD.png",
+                "download_file": "White-FD.zip",
+            },
+            "Brown": {  
+                "image": "images/Brown-FD.png",
+                "download_file": "Brown-FD.zip",
+            },
+             "Orange": {  
+                "image": "images/Orange-FD.png",
+                "download_file": "Orange-FD.zip",
+            },
+              "Pink": {  
+                "image": "images/Pink-FD.png",
+                "download_file": "Pink-FD.zip",
+            },
+              "Blue": {  
+                "image": "images/Blue-FD.png",
+                "download_file": "Blue-FD.zip",
+            },
+        },
+    },
+    {
+        "id": 66,
+        "category": "dollscraft",
+        "name": "Fancy Mini-Dress",
+        "price": "$5000",
+        "slug": "fancy-mini-dress",
+        "sku": "FMD-100",
+        "color_variants": {
+            "Cream": {  
+                "image": "images/Cream-FMD.png",
+                "download_file": "Cream-FMD.zip",
+            },
+            "Beige": {  
+                "image": "images/Beige-FMD.png",
+                "download_file": "Beige-FMD.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-FMD.png",
+                "download_file": "Blue-FMD.zip",
+            },
+            "White": {  
+                "image": "images/White-FMD.png",
+                "download_file": "White-FMD.zip",
+            },
+             "Brown": {  
+                "image": "images/Brown-FMD.png",
+                "download_file": "Brown-FMD.zip",
+            },
+              "Gray": {  
+                "image": "images/Gray-FMD.png",
+                "download_file": "Gray-FMD.zip",
+            },
+              "Pink": {  
+                "image": "images/Pink-FMD.png",
+                "download_file": "Pink-FMD.zip",
+            },
+        },
+    },
+    {
+        "id": 67,
+        "category": "women",
+        "name": "Zip-Up Bomber Jacket (Includes T-shirt)",
+        "price": "$6000",
+        "slug": "bomber-jacket",
+        "sku": "BJ-100",
+        "color_variants": {
+            "Red": {  
+                "image": "images/Red-BJ.png",
+                "download_file": "Red-BJ.zip",
+            },
+            "Black": {  
+                "image": "images/Black-BJ.png",
+                "download_file": "Black-BJ.zip",
+            },
+            "Green": {  
+                "image": "images/Green-BJ.png",
+                "download_file": "Green-BJ.zip",
+            },
+            "Beige": {  
+                "image": "images/Beige-BJ.png",
+                "download_file": "Beige-BJ.zip",
+            },
+        },
+    },
+    {
+        "id": 68,
+        "category": "women",
+        "name": "High-Waist Jeans",
+        "price": "$4500",
+        "slug": "highwaist-jeans",
+        "sku": "HWJ-100",
+        "color_variants": {
+            "Black": {  
+                "image": "images/Black-HWJ.png",
+                "download_file": "Black-HWJ.zip",
+            },
+            "White": {  
+                "image": "images/White-HWJ.png",
+                "download_file": "White-HWJ.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-HWJ.png",
+                "download_file": "Blue-HWJ.zip",
+            },
+            "Dark Blue": {  
+                "image": "images/DarkBlue-HWJ.png",
+                "download_file": "DarkBlue-HWJ.zip",
+            },
+            "Gray": {  
+                "image": "images/Gray-HWJ.png",
+                "download_file": "Gray-HWJ.zip",
+            },
+        },
+    },
 ]
 # --- CUPONES
 VALID_COUPONS = {
@@ -2228,7 +2390,7 @@ VALID_COUPONS = {
     "CLOTH1": {"type": "percent", "value": 10},  # 10% de descuento
     "VZ2604": {"type": "percent", "value": 15},  # $15 de descuento fijo
     "SAVEBIG": {"type": "percent", "value": 25},  # 25% de descuento
-    "TAKE50": {"type": "percent", "value": 50},  # $10 de descuento fijo
+    "TAKE50": {"type": "percent", "value": 50},  # 50% de descuento fijo
     #"LAUNCH40": {"type": "percent", "value": 40},  # $40 de descuento fijo
     "YANE90": {"type": "percent", "value": 90},  # 100 de descuento fijo
 }
@@ -2428,7 +2590,7 @@ def home():
 
 @app.route("/<category_name>")
 def category_page(category_name):
-    if category_name not in ["women", "men", "accessories"]:
+    if category_name not in ["voidcraft", "women", "men", "exclusive", "dollscraft","accessories"]:
         abort(404)
 
     # --- LÓGICA DE PAGINACIÓN ---
@@ -2852,7 +3014,7 @@ def order_success(receipt_token=None):
                                 },
                             ],
                             "footer": {
-                                "text": f"Vibez Sales Bot | {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}"
+                                "text": f"VOIDCRAFT Sales Bot | {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}"
                             },
                         }
                     ]

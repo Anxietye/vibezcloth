@@ -4,13 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIBEZ</title>
+    <title>VOIDCRAFT</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-
-<!-- ÚNICA ETIQUETA BODY DE APERTURA -->
 
 <body class="{{ body_class or '' }}">
 
@@ -21,7 +19,8 @@
     <div id="feedback-overlay" class="hidden"></div>
     <aside id="feedback-sidebar">
         <header class="feedback-header">
-            <img src="{{ url_for('static', filename='images/3.png') }}" alt="Vibez Logo" class="feedback-logo">
+            <img src="{{ url_for('static', filename='images/voidcraft.png') }}" alt="Voidcraft Logo"
+                class="feedback-logo">
             <h3>YOUR EXPERIENCE</h3>
             <button id="close-feedback-btn">&times;</button>
         </header>
@@ -29,7 +28,8 @@
             <form id="feedback-form">
                 <p><strong>Don't hold back. Good or bad - tell it like it is.</strong></p>
                 <div class="form-group-feedback">
-                    <label>How likely are you to recommend Vibez to a friend? <span class="required">*</span></label>
+                    <label>How likely are you to recommend Voidcraft to a friend? <span
+                            class="required">*</span></label>
                     <div class="rating-scale">
                         <span class="rating-label">Very unlikely</span>
                         <div class="rating-options">
@@ -45,27 +45,28 @@
                     </div>
                 </div>
                 <div class="form-group-feedback">
-                    <label for="feedback-text">What would you tell your friend or family about Vibez?</label>
+                    <label for="feedback-text">What would you tell your friend or family about Voidcraft?</label>
                     <textarea id="feedback-text" name="feedback_text" rows="5"></textarea>
                 </div>
                 <button type="submit" class="feedback-submit-btn">Submit</button>
             </form>
             <div id="feedback-success-message" class="hidden">
-                <img src="{{ url_for('static', filename='images/3.png') }}" alt="Vibez Logo" class="feedback-logo">
+                <img src="{{ url_for('static', filename='images/voidcraft.png') }}" alt="Voidcraft Logo"
+                    class="feedback-logo">
                 <h2>THANKS SO MUCH</h2>
                 <p>Your feedback helps take us to the <strong>next level</strong>. We're really grateful for it.</p>
             </div>
         </div>
     </aside>
 
-
     <!-- CONTENIDO PRINCIPAL DE LA PÁGINA -->
     <header>
         <div class="container">
             <nav class="main-nav">
                 <div class="nav-left">
-                    <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/3.png') }}"
-                            alt="VIBEZ Logo" class="header-logo"></a>
+                    <a href="{{ url_for('home') }}" class="header-logo-link">
+                        <span class="header-logo-text">VOIDCRAFT</span>
+                    </a>
                 </div>
                 <div class="nav-center">
                     <ul class="nav-links">
@@ -73,6 +74,10 @@
                                 class="{{ 'active' if active_page == 'women' }}">Women</a></li>
                         <li><a href="{{ url_for('category_page', category_name='men') }}"
                                 class="{{ 'active' if active_page == 'men' }}">Men</a></li>
+                        <li><a href="{{ url_for('category_page', category_name='dollscraft') }}"
+                                class="{{ 'active' if active_page == 'dollscraft' }}">Dollscraft</a></li>
+                        <li><a href="{{ url_for('category_page', category_name='exclusive') }}"
+                                class="{{ 'active' if active_page == 'exclusive' }}">Exclusive</a></li>
                         <li><a href="{{ url_for('category_page', category_name='accessories') }}"
                                 class="{{ 'active' if active_page == 'accessories' }}">Accesories</a></li>
                     </ul>
@@ -135,10 +140,19 @@
                         <li><a href="https://discord.com/channels/1348503275472945183/1348503275825004587"
                                 target="_blank" rel="noopener noreferrer">Suggestions</a></li>
                     </ul>
+                </div> <!-- CIERRE CORRECTO DE LA TERCERA COLUMNA -->
+
+                <!-- ============================================= -->
+                <!-- === BLOQUE DEL LOGO EN LA POSICIÓN CORRECTA === -->
+                <!-- ============================================= -->
+                <div class="footer-logo-section">
+                    <img src="{{ url_for('static', filename='images/logo-voidcraft.png') }}" alt="Voidcraft Logo"
+                        class="footer-logo">
                 </div>
+
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 VIBEZ*. All rights reserved.</p>
+                <p>&copy; 2025 VOIDCRAFT — All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -157,9 +171,18 @@
         </footer>
     </aside>
 
+<!-- ======================================================= -->
+    <!-- === POPUP PROMOCIONAL CON IDs CORREGIDOS === -->
+    <!-- ======================================================= -->
+    <div id="promo-popup-overlay" class="popup-hidden"></div>
+    <div id="promo-popup" class="popup-hidden">
+        <button id="close-promo-popup" class="close-popup-btn">&times;</button>
+        <img src="{{ url_for('static', filename='images/december-promo.png') }}" alt="December Savings: 30% Off Sitewide">
+    </div>
+    
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% block scripts %}{% endblock %}
 
-</body> <!-- ÚNICA ETIQUETA BODY DE CIERRE -->
+</body>
 
 </html>

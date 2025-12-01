@@ -7,18 +7,27 @@
 <!-- ======================================================= -->
 <div class="hero-carousel-container">
     <div class="hero-slides">
-        <!-- Slide 2 -->
-        <div class="hero-slide"
-            style="background-image: url('{{ url_for('static', filename='images/grupo.png') }}');">
+        <!-- ============================================= -->
+        <!-- === BANNER DE DESCUENTO O INFORMACION LIMITADA === -->
+        <!-- ============================================= -->
+        <div class="hero-slide" style="background-image: url('{{ url_for('static', filename='images/1.png') }}');">
             <div class="slide-content">
-                <h1>NEW SEASON VIBEZ</h1>
+                <h1>STREET & STUNTS</h1>
+                <p>Get ready for the skatepark with our line of skateboards.</p>
+                <a href="{{ url_for('category_page', category_name='accessories/skateboards') }}"
+                    class="shop-now-btn">Ride On</a>
+            </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="hero-slide" style="background-image: url('{{ url_for('static', filename='images/grupoo.png') }}');">
+            <div class="slide-content">
+                <h1>WELCOME TO VOIDCRAFT</h1>
                 <p>The latest collection has just dropped.</p>
             </div>
         </div>
 
         <!-- Slide 5 - Custom Designs -->
-        <div class="hero-slide"
-            style="background-image: url('{{ url_for('static', filename='images/Shoes.png') }}');">
+        <div class="hero-slide" style="background-image: url('{{ url_for('static', filename='images/Shoes.png') }}');">
             <div class="slide-content">
                 <h1>MAKE IT YOURS</h1>
                 <p>Your design on our gear. Customize sneakers and phone cases to match your unique style.</p>
@@ -36,26 +45,12 @@
         </div>-->
 
         <!-- Slide 3 - Phone Cases -->
-        <div class="hero-slide"
-            style="background-image: url('{{ url_for('static', filename='images/Cases.png') }}');">
+        <div class="hero-slide" style="background-image: url('{{ url_for('static', filename='images/Cases.png') }}');">
             <div class="slide-content">
-                <h1>PROTECT YOUR VIBE</h1>
-                <p>Dress your phone in the latest Vibez styles. Ultimate protection meets unique design.</p>
+                <h1>PROTECT YOUR PHONE</h1>
+                <p>Dress your phone in the latest styles. Ultimate protection meets unique design.</p>
                 <a href="{{ url_for('category_page', category_name='accessories/phone-cases') }}"
                     class="shop-now-btn">Shop Cases</a>
-            </div>
-        </div>
-
-        <!-- ============================================= -->
-        <!-- === AÑADE ESTE NUEVO SLIDE PARA BMX === -->
-        <!-- ============================================= -->
-        <div class="hero-slide"
-            style="background-image: url('{{ url_for('static', filename='images/1.png') }}');">
-            <div class="slide-content">
-                <h1>STREET & STUNTS</h1>
-                <p>Get ready for the skatepark with our line of skateboards.</p>
-                <a href="{{ url_for('category_page', category_name='accessories/skateboards') }}"
-                    class="shop-now-btn">Ride On</a>
             </div>
         </div>
     </div>
@@ -90,10 +85,10 @@
     <!-- Tarjeta para Hombre -->
     <div class="featured-category-card">
         <div class="card-background-image"
-            style="background-image: url('{{ url_for('static', filename='images/man-category.png') }}');"></div>
+            style="background-image: url('{{ url_for('static', filename='images/man-categoryy.png') }}');"></div>
 
         <div class="category-card-content">
-            <span class="category-card-subtitle">Vibez for Men</span>
+            <span class="category-card-subtitle">Voidcraft for Men</span>
             <h2 class="category-card-title">STYLED FOR THE STREETS</h2>
             <a href="{{ url_for('category_page', category_name='men') }}" class="category-shop-btn">Shop</a>
         </div>
@@ -106,10 +101,10 @@
     <!-- Tarjeta para Mujer -->
     <div class="featured-category-card">
         <div class="card-background-image"
-            style="background-image: url('{{ url_for('static', filename='images/category-woman.png') }}');"></div>
+            style="background-image: url('{{ url_for('static', filename='images/categoryy-woman.png') }}');"></div>
 
         <div class="category-card-content">
-            <span class="category-card-subtitle">Vibez for Women</span>
+            <span class="category-card-subtitle">Voidcraft for Women</span>
             <h2 class="category-card-title">REBEL THREADS & STREETWEAR</h2>
             <a href="{{ url_for('category_page', category_name='women') }}" class="category-shop-btn">Shop</a>
         </div>
@@ -118,6 +113,18 @@
         <a href="{{ url_for('category_page', category_name='women') }}" class="card-main-link"
             aria-label="Shop Women Collection"></a>
     </div>
-
+    <!-- ======================================================= -->
+    <!-- === NUEVA TARJETA DESTACADA PARA DOLLSCRAFT === -->
+    <!-- ======================================================= -->
+    <div class="large-featured-card-container">
+        <a href="{{ url_for('category_page', category_name='dollscraft') }}" class="large-featured-card">
+            <div class="large-card-content">
+                <h2 class="large-card-title">INTRODUCING DOLLSCRAFT</h2>
+                <p class="large-card-subtitle">A new vibe has arrived. Explore a collection where soft aesthetics meet
+                    street style.</p>
+                <span class="large-card-btn">Explore the Collection</span>
+            </div>
+        </a>
+    </div>
 </div>
 {% endblock %}

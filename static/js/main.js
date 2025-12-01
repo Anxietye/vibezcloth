@@ -84,6 +84,44 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
         });
     }
+// --- LÓGICA FINAL Y CORREGIDA PARA EL POPUP PROMOCIONAL (CON FECHA DE CADUCIDAD) ---
+const promoPopup = document.getElementById('promo-popup');
+const promoOverlay = document.getElementById('promo-popup-overlay');
+const closePromoBtn = document.getElementById('close-promo-popup');
+
+if (promoPopup && promoOverlay && closePromoBtn) {
+    
+    const openPromoPopup = () => {
+        promoOverlay.classList.add('visible');
+        promoPopup.classList.add('visible');
+    };
+
+    const closePromoPopup = () => {
+        promoOverlay.classList.remove('visible');
+        promoPopup.classList.remove('visible');
+    };
+
+    // --- NUEVA LÓGICA DE COMPROBACIÓN DE FECHA ---
+    const expirationDate = new Date('2026-01-01T00:00:00'); // 1 de Enero de 2026
+    const currentDate = new Date();
+
+    // 1. Primero, comprueba si la promoción ha expirado
+    if (currentDate < expirationDate) {
+        
+        // 2. Si no ha expirado, entonces comprueba si ya se ha mostrado en esta sesión
+        if (!sessionStorage.getItem('promoPopupShown')) {
+            setTimeout(() => {
+                openPromoPopup();
+                sessionStorage.setItem('promoPopupShown', 'true');
+            }, 1000);
+        }
+    }
+    // Si la fecha ya ha pasado, el código simplemente no hace nada.
+
+    // Eventos para cerrar el popup (sin cambios)
+    closePromoBtn.addEventListener('click', closePromoPopup);
+    promoOverlay.addEventListener('click', closePromoPopup);
+}
 
     // --- BLOQUE FINAL Y A PRUEBA DE ERRORES CON requestAnimationFrame ---
     const slidesContainer = document.querySelector('.hero-slides');
