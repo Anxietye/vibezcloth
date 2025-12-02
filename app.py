@@ -32,7 +32,7 @@ migrate = Migrate(app, db)
 app.secret_key = "y2PRyodNyyzu1mzZa2hTJy8tGP0MKDkJ8GQbuSbR"
 CLIENT_ID = "76"
 CLIENT_SECRET = "y2PRyodNyyzu1mzZa2hTJy8tGP0MKDkJ8GQbuSbR"
-REDIRECT_URI = "https://voidcraft.onrender.com/auth/callback"
+REDIRECT_URI = "https://voidcraft.shop/auth/callback"
 AUTHORIZATION_URL = "https://ucp.gta.world/oauth/authorize"
 TOKEN_URL = "https://ucp.gta.world/oauth/token"
 USER_API_URL = "https://ucp.gta.world/api/user"
@@ -353,8 +353,8 @@ all_products = [
     },
     {
         "id": 8,
-        "category": "women",
-        "name": "Custom Sneaker",
+        "category": "shoes",
+        "name": "Custom Sneaker (Women)",
         "price": "$15000",
         "slug": "custom-sneaker",
         "sku": "CS-101",
@@ -1451,8 +1451,8 @@ all_products = [
     },
     {
         "id": 39,
-        "category": "men",
-        "name": "Custom Sneaker",
+        "category": "shoes",
+        "name": "Custom Sneaker (Men)",
         "price": "$15000",
         "slug": "custom-sneaker-men",
         "sku": "CS-102",
@@ -1745,8 +1745,8 @@ all_products = [
     },
     {
         "id": 51,
-        "category": "women",
-        "name": "Retro Runner 90s",
+        "category": "shoes",
+        "name": "Retro Runner 90s (Women)",
         "price": "$5500",
         "slug": "retro-runner",
         "sku": "RR-100",
@@ -1797,8 +1797,8 @@ all_products = [
     },
     {
         "id": 53,
-        "category": "men",
-        "name": "Retro Runner 90s",
+        "category": "shoes",
+        "name": "Retro Runner 90s (Men)",
         "price": "$5500",
         "slug": "retro-runner-men",
         "sku": "RR-101",
@@ -1877,8 +1877,8 @@ all_products = [
     },
     {
         "id": 55,
-        "category": "women",
-        "name": "Classic Sneakers",
+        "category": "shoes",
+        "name": "Classic Sneakers (Women)",
         "price": "$5500",
         "slug": "classic-sneakers",
         "sku": "CS-110",
@@ -1931,8 +1931,8 @@ all_products = [
     },
     {
         "id": 56,
-        "category": "men",
-        "name": "Classic Sneakers",
+        "category": "shoes",
+        "name": "Classic Sneakers (Men)",
         "price": "$5500",
         "slug": "classic-sneakers-men",
         "sku": "CS-111",
@@ -2386,36 +2386,6 @@ all_products = [
     {
         "id": 69,
         "category": "dollscraft",
-        "name": "High-Waist Jeans",
-        "price": "$3000",
-        "slug": "highwaist-jeans",
-        "sku": "HWJ-100",
-        "color_variants": {
-            "Black": {  
-                "image": "images/Black-HWJ.png",
-                "download_file": "Black-HWJ.zip",
-            },
-            "White": {  
-                "image": "images/White-HWJ.png",
-                "download_file": "White-HWJ.zip",
-            },
-            "Blue": {  
-                "image": "images/Blue-HWJ.png",
-                "download_file": "Blue-HWJ.zip",
-            },
-            "Dark Blue": {  
-                "image": "images/DarkBlue-HWJ.png",
-                "download_file": "DarkBlue-HWJ.zip",
-            },
-            "Gray": {  
-                "image": "images/Gray-HWJ.png",
-                "download_file": "Gray-HWJ.zip",
-            },
-        },
-    },
-    {
-        "id": 70,
-        "category": "dollscraft",
         "name": "High-Waist Leggings",
         "price": "$3000",
         "slug": "leggins",
@@ -2440,6 +2410,172 @@ all_products = [
             "Gray": {  
                 "image": "images/Gray-HWL.png",
                 "download_file": "Gray-HWL.zip",
+            },
+        },
+    },
+    {
+        "id": 70,
+        "category": "dollscraft",
+        "name": "Two-piece mini dress",
+        "price": "$5000",
+        "slug": "mini-dress",
+        "sku": "MD-100",
+        "color_variants": {
+            "Pink": {  
+                "image": "images/Pink-MD.png",
+                "download_file": "Pink-MD.zip",
+            },
+            "Black": {  
+                "image": "images/Black-MD.png",
+                "download_file": "Black-MD.zip",
+            },
+            "White": {  
+                "image": "images/White-MD.png",
+                "download_file": "White-MD.zip",
+            },
+            "Red": {  
+                "image": "images/Red-MD.png",
+                "download_file": "Red-MD.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-MD.png",
+                "download_file": "Blue-MD.zip",
+            },
+        },
+    },
+    {
+        "id": 71,
+        "category": "dollscraft",
+        "name": "High Boots",
+        "price": "$3500",
+        "slug": "high-boots",
+        "sku": "HB-100",
+        "color_variants": {
+            "White": {  
+                "image": "images/White-HB.png",
+                "download_file": "White-HB.zip",
+            },
+            "Black": {  
+                "image": "images/Black-HB.png",
+                "download_file": "Black-HB.zip",
+            },
+            "Gray": {  
+                "image": "images/Gray-HB.png",
+                "download_file": "Gray-HB.zip",
+            },
+            "Hot Pink": {  
+                "image": "images/Purple-HB.png",
+                "download_file": "Purple-HB.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-HB.png",
+                "download_file": "Pink-HB.zip",
+            },
+        },
+    },
+    {
+        "id": 72,
+        "category": "dollscraft",
+        "name": "Nike Sneaker",
+        "price": "$3000",
+        "slug": "nike-sneaker",
+        "sku": "NS-100",
+        "color_variants": {
+            "White": {  
+                "image": "images/Black-NS.png",
+                "download_file": "White-HB.zip",
+            },
+            "Black": {  
+                "image": "images/Black-HB.png",
+                "download_file": "Black-HB.zip",
+            },
+            "Gray": {  
+                "image": "images/Gray-HB.png",
+                "download_file": "Gray-HB.zip",
+            },
+            "Hot Pink": {  
+                "image": "images/Purple-HB.png",
+                "download_file": "Purple-HB.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-HB.png",
+                "download_file": "Pink-HB.zip",
+            },
+        },
+    },
+    {
+        "id": 73,
+        "category": "dollscraft",
+        "name": "Strapless Top",
+        "price": "$3000",
+        "slug": "strapless-top",
+        "sku": "ST-100",
+        "color_variants": {
+            "Red": {  
+                "image": "images/Red-ST.png",
+                "download_file": "Red-ST.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-ST.png",
+                "download_file": "Blue-ST.zip",
+            },
+            "Black": {  
+                "image": "images/Black-ST.png",
+                "download_file": "Black-ST.zip",
+            },
+            "Green": {  
+                "image": "images/Green-ST.png",
+                "download_file": "Green-ST.zip",
+            },
+            "White": {  
+                "image": "images/White-ST.png",
+                "download_file": "White-ST.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-ST.png",
+                "download_file": "Pink-ST.zip",
+            },
+            "Brown": {  
+                "image": "images/Brown-ST.png",
+                "download_file": "Brown-ST.zip",
+            },
+            "Purple": {  
+                "image": "images/Purple-ST.png",
+                "download_file": "Purple-ST.zip",
+            },
+        },
+    },
+    {
+        "id": 74,
+        "category": "shoes",
+        "name": "Retro Low-Top Sneakers (Unisex)",
+        "price": "$5000",
+        "slug": "retro-sneakes",
+        "sku": "RLS-100",
+        "color_variants": {
+            "Black & Blue": {  
+                "image": "images/B&B-RLS.png",
+                "download_file": "B&B-RLS.zip",
+            },
+            "Black & White": {  
+                "image": "images/B&W-RLS.png",
+                "download_file": "B&W-RLS.zip",
+            },
+            "Brown": {  
+                "image": "images/Brown-RLS.png",
+                "download_file": "Brown-RLS.zip",
+            },
+            "Yellow": {  
+                "image": "images/Yellow-RLS.png",
+                "download_file": "Yellow-RLS.zip",
+            },
+            "Dark Brown": {  
+                "image": "images/DarkBrown-RLS.png",
+                "download_file": "DarkBrown-RLS.zip",
+            },
+            "Black": {  
+                "image": "images/Black-RLS.png",
+                "download_file": "Black-RLS.zip",
             },
         },
     },
@@ -2651,7 +2787,7 @@ def home():
 
 @app.route("/<category_name>")
 def category_page(category_name):
-    if category_name not in ["voidcraft", "women", "men", "exclusive", "dollscraft","accessories"]:
+    if category_name not in ["voidcraft", "women", "men", "exclusive", "dollscraft","shoes","accessories"]:
         abort(404)
 
     # --- LÓGICA DE PAGINACIÓN ---

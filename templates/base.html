@@ -78,6 +78,8 @@
                                 class="{{ 'active' if active_page == 'dollscraft' }}">Dollscraft</a></li>
                         <li><a href="{{ url_for('category_page', category_name='exclusive') }}"
                                 class="{{ 'active' if active_page == 'exclusive' }}">Exclusive</a></li>
+                        <li><a href="{{ url_for('category_page', category_name='shoes') }}"
+                                class="{{ 'active' if active_page == 'shoes' }}">Shoes</a></li>
                         <li><a href="{{ url_for('category_page', category_name='accessories') }}"
                                 class="{{ 'active' if active_page == 'accessories' }}">Accesories</a></li>
                     </ul>
@@ -171,15 +173,16 @@
         </footer>
     </aside>
 
-<!-- ======================================================= -->
+    <!-- ======================================================= -->
     <!-- === POPUP PROMOCIONAL CON IDs CORREGIDOS === -->
     <!-- ======================================================= -->
     <div id="promo-popup-overlay" class="popup-hidden"></div>
     <div id="promo-popup" class="popup-hidden">
         <button id="close-promo-popup" class="close-popup-btn">&times;</button>
-        <img src="{{ url_for('static', filename='images/december-promo.png') }}" alt="December Savings: 30% Off Sitewide">
+        <img src="{{ url_for('static', filename='images/december-promo.png') }}"
+            alt="December Savings: 30% Off Sitewide">
     </div>
-    
+
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% block scripts %}{% endblock %}
 
