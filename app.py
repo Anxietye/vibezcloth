@@ -618,7 +618,7 @@ all_products = [
                 "download_file": "Split.zip",
             },
             "Zillakami": {  
-                "image": "images/Zillakami.png",
+                "image": "images/zillakami.png",
                 "download_file": "Zillakami.zip",
             },
         },

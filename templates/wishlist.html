@@ -41,8 +41,12 @@
                                 <button class="remove-wishlist-btn" data-product-id="{{ product.id }}">&times;</button>
                                 <img src="{{ url_for('static', filename=(product.color_variants.values()|first)['image']) }}"
                                     alt="{{ product.name }}">
-                                <span>{{ product.name }}</span>
+                                <a href="{{ url_for('product_detail', category_name=product.category, product_slug=product.slug) }}"
+                                    class="product-name-link">
+                                    {{ product.name }}
+                                </a>
                             </td>
+
                             <td class="product-price">{{ product.price }}</td>
                             <td class="product-stock">In Stock</td>
                             <td class="product-actions">
