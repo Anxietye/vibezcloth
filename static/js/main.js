@@ -11,7 +11,48 @@ document.addEventListener('DOMContentLoaded', () => {
             navCenterLinks.classList.toggle('active');
         });
     }
+// --- NUEVO BLOQUE: LÓGICA PARA EL EFECTO DE NIEVE (CON FECHA DE CADUCIDAD) ---
+    const snowContainer = document.getElementById('snow-container');
+    const expirationDate = new Date('2026-01-01T00:00:00'); // 1 de Enero de 2026
+    const currentDate = new Date();
 
+    // 1. Comprobamos si la promoción (y el efecto de nieve) está activa
+    if (currentDate < expirationDate && snowContainer) {
+        
+        const createSnowflake = () => {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+
+            // --- Hacemos que cada copo sea único ---
+
+            // Posición horizontal aleatoria
+            snowflake.style.left = `${Math.random() * 100}vw`;
+            
+            // Tamaño aleatorio
+            const size = Math.random() * 4 + 2; // Tamaño entre 2px y 6px
+            snowflake.style.width = `${size}px`;
+            snowflake.style.height = `${size}px`;
+            
+            // Duración de la caída aleatoria
+            const duration = Math.random() * 5 + 5; // Duración entre 5 y 10 segundos
+            snowflake.style.animationDuration = `${duration}s`;
+            
+            // Opacidad aleatoria
+            snowflake.style.opacity = Math.random() * 0.7 + 0.3; // Opacidad entre 0.3 y 1.0
+
+            // Retraso aleatorio para que no empiecen todos a la vez
+            const delay = Math.random() * 5; // Retraso de hasta 5 segundos
+            snowflake.style.animationDelay = `-${delay}s`; // Negativo para que empiecen a mitad de animación
+
+            snowContainer.appendChild(snowflake);
+        };
+
+        // 2. Creamos un número de copos de nieve (puedes ajustar este valor)
+        const numberOfSnowflakes = 100;
+        for (let i = 0; i < numberOfSnowflakes; i++) {
+            createSnowflake();
+        }
+    }
     // --- 1. MODO OSCURO / CLARO ---
     const themeToggleButton = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');

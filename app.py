@@ -137,8 +137,8 @@ all_products = [
     },
     {
         "id": 2,
-        "category": "women",
-        "name": "Grunge T-Shirt",
+        "category": "exclusive",
+        "name": "Grunge T-Shirt (Women)",
         "price": "$6000",
         "slug": "grunge-t-shirt",
         "sku": "TM-002",
@@ -195,7 +195,7 @@ all_products = [
     },
     {
         "id": 3,
-        "category": "women",
+        "category": "exclusive",
         "name": "Cropped Tank Top",
         "price": "$4500",
         "slug": "cropped-tank-top",
@@ -575,8 +575,8 @@ all_products = [
     },
     {
         "id": 12,
-        "category": "men",
-        "name": "Grunge T-Shirts",
+        "category": "exclusive",
+        "name": "Grunge T-Shirts (Men)",
         "price": "$6000",
         "slug": "grunge-tshirts-men",
         "sku": "GS-051",
@@ -667,8 +667,8 @@ all_products = [
     },
     {
         "id": 14,
-        "category": "men",
-        "name": "Oversized T-Shirts",
+        "category": "exclusive",
+        "name": "Oversized T-Shirts (Men)",
         "price": "$5000",
         "slug": "oversized-shirts",
         "sku": "OV-050",
@@ -1179,7 +1179,7 @@ all_products = [
     },
     {
         "id": 30,
-        "category": "dollscraft",
+        "category": "accessories",
         "name": "Heart & Star Earrings",
         "price": "$3700",
         "slug": "heart-earrings",
@@ -1371,7 +1371,7 @@ all_products = [
     },
     {
         "id": 36,
-        "category": "dollscraft",
+        "category": "accessories",
         "name": "Sweet Cherry Heart Earrings",
         "price": "$4700",
         "slug": "cherry-earrings",
@@ -1385,7 +1385,7 @@ all_products = [
     },
     {
         "id": 37,
-        "category": "dollscraft",
+        "category": "accessories",
         "name": "Delicate Triple Heart Earrings",
         "price": "$4700",
         "slug": "triple-heart",
@@ -2445,7 +2445,7 @@ all_products = [
     },
     {
         "id": 71,
-        "category": "dollscraft",
+        "category": "shoes",
         "name": "High Boots",
         "price": "$3500",
         "slug": "high-boots",
@@ -2475,36 +2475,6 @@ all_products = [
     },
     {
         "id": 72,
-        "category": "dollscraft",
-        "name": "Nike Sneaker",
-        "price": "$3000",
-        "slug": "nike-sneaker",
-        "sku": "NS-100",
-        "color_variants": {
-            "White": {  
-                "image": "images/Black-NS.png",
-                "download_file": "White-HB.zip",
-            },
-            "Black": {  
-                "image": "images/Black-HB.png",
-                "download_file": "Black-HB.zip",
-            },
-            "Gray": {  
-                "image": "images/Gray-HB.png",
-                "download_file": "Gray-HB.zip",
-            },
-            "Hot Pink": {  
-                "image": "images/Purple-HB.png",
-                "download_file": "Purple-HB.zip",
-            },
-            "Pink": {  
-                "image": "images/Pink-HB.png",
-                "download_file": "Pink-HB.zip",
-            },
-        },
-    },
-    {
-        "id": 73,
         "category": "dollscraft",
         "name": "Strapless Top",
         "price": "$3000",
@@ -2546,40 +2516,92 @@ all_products = [
         },
     },
     {
-        "id": 74,
-        "category": "shoes",
-        "name": "Retro Low-Top Sneakers (Unisex)",
-        "price": "$5000",
-        "slug": "retro-sneakes",
-        "sku": "RLS-100",
+        "id": 73,
+        "category": "dollscraft",
+        "name": "Schoolgirl Style Plaid Skirt",
+        "price": "$3000",
+        "slug": "schoolgirl-skirt",
+        "sku": "SS-101",
         "color_variants": {
-            "Black & Blue": {  
-                "image": "images/B&B-RLS.png",
-                "download_file": "B&B-RLS.zip",
-            },
-            "Black & White": {  
-                "image": "images/B&W-RLS.png",
-                "download_file": "B&W-RLS.zip",
-            },
-            "Brown": {  
-                "image": "images/Brown-RLS.png",
-                "download_file": "Brown-RLS.zip",
-            },
-            "Yellow": {  
-                "image": "images/Yellow-RLS.png",
-                "download_file": "Yellow-RLS.zip",
-            },
-            "Dark Brown": {  
-                "image": "images/DarkBrown-RLS.png",
-                "download_file": "DarkBrown-RLS.zip",
+            "Red & Gray": {  
+                "image": "images/R&G-SS.png",
+                "download_file": "R&G-SS.zip",
             },
             "Black": {  
-                "image": "images/Black-RLS.png",
-                "download_file": "Black-RLS.zip",
+                "image": "images/Black-SSS.png",
+                "download_file": "Black-SSS.zip",
+            },
+            "Sky": {  
+                "image": "images/Sky-SS.png",
+                "download_file": "Sky-SS.zip",
+            },
+            "Ligt Brown": {  
+                "image": "images/Brown-SSS.png",
+                "download_file": "Brown-SSS.zip",
+            },
+            "Solid Pink": {  
+                "image": "images/Pink-SSSS.png",
+                "download_file": "Pink-SSSS.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-SSS.png",
+                "download_file": "Pink-SSS.zip",
+            },
+            "Red": {  
+                "image": "images/Red-SS.png",
+                "download_file": "Red-SS.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-SS.png",
+                "download_file": "Blue-SS.zip",
+            },
+            "White": {  
+                "image": "images/White-SS.png",
+                "download_file": "White-SS.zip",
+            },
+            "Brown": {  
+                "image": "images/Brown-SS.png",
+                "download_file": "Brown-SS.zip",
+            },
+            "Gray": {  
+                "image": "images/Gray-SS.png",
+                "download_file": "Gray-SS.zip",
             },
         },
     },
+    {
+        "id": 74,
+        "category": "dollscraft",
+        "name": "Off-Shoulder Sweater Dress",
+        "price": "$4000",
+        "slug": "sweater-dress",
+        "sku": "SD-101",
+        "color_variants": {
+            "Black": {  
+                "image": "images/Black-SD.png",
+                "download_file": "Black-SD.zip",
+            },
+            "Red": {  
+                "image": "images/Red-SD.png",
+                "download_file": "Red-SD.zip",
+            },
+            "Purple": {  
+                "image": "images/Purple-SD.png",
+                "download_file": "Purple-SD.zip",
+            },
+            "Brown": {  
+                "image": "images/Brown-SD.png",
+                "download_file": "Brown-SD.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-SD.png",
+                "download_file": "Pink-SD.zip",
+            },
+        },
+    },
+    
 ]
+all_products.sort(key=lambda product: product['id'], reverse=True)
 # --- CUPONES
 VALID_COUPONS = {
     "VIBE5": {"type": "percent", "value": 5},  # 5% de descuento

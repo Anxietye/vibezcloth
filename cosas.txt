@@ -1,0 +1,34 @@
+{
+        "id": 74,
+        "category": "shoes",
+        "name": "Retro Low-Top Sneakers (Unisex)",
+        "price": "$5000",
+        "slug": "retro-sneakes",
+        "sku": "RLS-100",
+        "color_variants": {
+            "Black & Blue": {  
+                "image": "images/B&B-RLS.png",
+                "download_file": "B&B-RLS.zip",
+            },
+            "Black & White": {  
+                "image": "images/B&W-RLS.png",
+                "download_file": "B&W-RLS.zip",
+            },
+            "Brown": {  
+                "image": "images/Brown-RLS.png",
+                "download_file": "Brown-RLS.zip",
+            },
+            "Yellow": {  
+                "image": "images/Yellow-RLS.png",
+                "download_file": "Yellow-RLS.zip",
+            },
+            "Dark Brown": {  
+                "image": "images/DarkBrown-RLS.png",
+                "download_file": "DarkBrown-RLS.zip",
+            },
+            "Black": {  
+                "image": "images/Black-RLS.png",
+                "download_file": "Black-RLS.zip",
+            },
+        },
+    },

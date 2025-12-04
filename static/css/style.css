@@ -3156,3 +3156,43 @@ body::before {
         line-height: 32px;
     }
 }
+
+/* ======================================================= */
+/* === ESTILOS PARA EL EFECTO DE COPOS DE NIEVE === */
+/* ======================================================= */
+
+#snow-container {
+    position: fixed; /* Lo fijamos a la ventana */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* ¡La clave! Impide que podamos hacer clic en la capa de nieve */
+    pointer-events: none; 
+    
+    /* Lo ponemos por encima del contenido pero debajo de los popups/sidebars */
+    z-index: 990; 
+    overflow: hidden; /* Oculta los copos que se salen de la pantalla */
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px; /* Empiezan justo por encima de la pantalla */
+    
+    background-color: white;
+    border-radius: 50%;
+    
+    /* Animación que definiremos en los keyframes */
+    animation-name: snowfall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+/* --- La animación de la caída --- */
+@keyframes snowfall {
+    to {
+        /* Mueve el copo hasta el final de la pantalla y un poco más allá */
+        transform: translateY(105vh);
+    }
+}

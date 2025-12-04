@@ -11,6 +11,10 @@
 </head>
 
 <body class="{{ body_class or '' }}">
+    <!-- ============================================= -->
+    <!-- === CONTENEDOR PARA EL EFECTO DE NIEVE === -->
+    <!-- ============================================= -->
+    <div id="snow-container"></div>
 
     <!-- ======================================================= -->
     <!-- === SECCIÓN DE FEEDBACK EN EL LUGAR CORRECTO === -->
@@ -89,7 +93,7 @@
                         <li><a href="{{ url_for('category_page', category_name='shoes') }}"
                                 class="{{ 'active' if active_page == 'shoes' }}">Shoes</a></li>
                         <li><a href="{{ url_for('category_page', category_name='accessories') }}"
-                                class="{{ 'active' if active_page == 'accessories' }}">Accesories</a></li>
+                                class="{{ 'active' if active_page == 'accessories' }}">Accessories</a></li>
                         <li class="nav-social-link">
                             <a href="https://discord.gg/b3dFcwPnk4" target="_blank" rel="noopener noreferrer"
                                 aria-label="Join our Discord">
