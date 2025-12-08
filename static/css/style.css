@@ -2935,9 +2935,6 @@ footer {
 /* === ESTILOS PARA EL FONDO DECORATIVO CON EL LOGO === */
 /* ======================================================= */
 
-.order-success-page::before {
-    display: none; /* Desactiva el fondo de nieve en esta página */
-}
 
 body::before {
     /* 1. Contenido y Posicionamiento */
