@@ -3127,6 +3127,13 @@ def get_cart_data():
     return jsonify({"cart": cart_data, "isAuthenticated": is_authenticated})
 
 
+
+# ==============================================================================
+# === ¡NUEVA RUTA DE CORRECCIÓN PARA LA PASARELA DE PAGO! ===
+# ==============================================================================
+@app.route("/order/success<path:receipt_token>")
+def order_success_redirect(receipt_token):
+    return redirect(url_for('order_success', receipt_token=receipt_token), code=301)
 # ==============================================================================
 # === CONFIRMACIÓN DE PAGO    ==================================================
 # ==============================================================================
