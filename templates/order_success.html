@@ -3,7 +3,11 @@
 {% block content %}
 <div class="order-success-page">
     <div class="container">
-        <header class="thank-you-header">
+        
+        <!-- ============================================= -->
+        <!-- === ENCABEZADO DE LA PÁGINA DE AGRADECIMIENTO === -->
+        <!-- ============================================= -->
+        <div class="thank-you-header">
             <h1>Thank you</h1>
             <p>Your order has been received.</p>
             <div class="info-bar">
@@ -11,124 +15,112 @@
                 <span><i class="fa-solid fa-headset"></i> 24/7 support available</span>
                 <span><i class="fa-solid fa-credit-card"></i> Payment option</span>
             </div>
-        </header>
+        </div>
 
-        </header>
+        <!-- ============================================= -->
+        <!-- === CONTENEDOR PRINCIPAL DEL CONTENIDO === -->
+        <!-- ============================================= -->
         <div class="checkout-container">
+            
             <!-- BARRA DE PROGRESO -->
             <div class="progress-bar">
-                <!-- Paso 1: Carrito (Completado) -->
-                <div class="step checked">
-                    <div class="icon-wrapper"><i class="fa-solid fa-check"></i></div>
-                    <span>Cart</span>
-                </div>
-
-                <!-- Paso 2: Información (Activo) -->
-                <div class="step checked">
-                    <div class="icon-wrapper"><i class="fa-solid fa-check"></i></div>
-                    <span>Information</span>
-                </div>
-
-                <!-- Paso 3: Finalizar (Inactivo) -->
-                <div class="step checked">
-                    <div class="icon-wrapper"><i class="fa-solid fa-check"></i></div>
-                    <span>Finish</span>
-                </div>
+                <div class="step checked"><i class="fa-solid fa-check"></i> <span>Cart</span></div>
+                <div class="step checked"><i class="fa-solid fa-check"></i> <span>Information</span></div>
+                <div class="step checked"><i class="fa-solid fa-check"></i> <span>Finish</span></div>
             </div>
             <hr class="progress-divider">
-            <div class="order-confirmation-box">
-                <section class="order-meta-summary">
-                    <div class="meta-item">
-                        <span class="meta-label">Order number:</span>
-                        <strong>{{ order.order_number }}</strong>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Date:</span>
-                        <strong class="local-date" data-utc-date="{{ order.date.isoformat() }}Z">
-                            Loading date...
-                        </strong>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Address:</span>
-                        <span class="meta-value">
-                            {{ order.billing_address.firstname }} {{ order.billing_address.lastname }}, {{
-                            order.billing_address.apartment }}
-                        </span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Total:</span>
-                        <span class="meta-value">${{ order.total }}</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Payment method:</span>
-                        <span class="meta-value">{{ order.payment_method }}</span>
-                    </div>
-                </section>
-                <section class="downloads-section">
-                    <h2>Downloads</h2>
-                    <table class="downloads-table">
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Expires</th>
-                                <th>Download</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- El bucle debe ser sobre order.items -->
-                            {% for item in order.items %}
-                            <tr>
-                                <td>{{ item.product_name }}</td> <!-- Mostramos el nombre del producto -->
-                                <td>Never</td>
-                                <td>
-                                    <a href="{{ url_for('download_file', filename=item.download_file) }}"
-                                        class="download-btn">
-                                        {{ item.product_name.upper() }}
-                                    </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </section>
-                <!-- DETALLES DEL PEDIDO -->
-                <section class="order-details-section">
-                    <h2>Order details</h2>
-                    <div class="order-table">
-                        <div class="order-row header">
-                            <span>Product</span><span>Total</span>
-                        </div>
+            
+            <!-- RESUMEN DEL PEDIDO -->
+            <section class="order-meta-summary">
+                <div class="meta-item">
+                    <span class="meta-label">Order number:</span>
+                    <strong>{{ order.order_number }}</strong>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Date:</span>
+                    <strong class="local-date" data-utc-date="{{ order.date.isoformat() }}Z">Loading date...</strong>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Address:</span>
+                    <span class="meta-value">{{ order.billing_address.firstname }} {{ order.billing_address.lastname }}, {{ order.billing_address.apartment }}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Total:</span>
+                    <span class="meta-value">${{ "%.2f"|format(order.total) }}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Payment method:</span>
+                    <span class="meta-value">{{ order.payment_method }}</span>
+                </div>
+            </section>
+
+            <!-- SECCIÓN DE DESCARGAS -->
+            <section class="downloads-section">
+                <h2>Downloads</h2>
+                <table class="downloads-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Expires</th>
+                            <th>Download</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {% for item in order.items %}
-                        <div class="order-row">
-                            <span>{{ item.product_name }} &times; {{ item.quantity }}</span>
-                            <!-- Asumimos que el precio del item no está en la DB, lo calculamos si es necesario o mostramos el total -->
-                            <strong>${{ "%.2f"|format(order.total / order.items|length) }}</strong>
-                        </div>
+                        <tr>
+                            <td>{{ item.product_name }}</td>
+                            <td>Never</td>
+                            <td>
+                                <a href="{{ url_for('download_file', filename=item.download_file) }}" class="download-btn">
+                                    DOWNLOAD
+                                </a>
+                            </td>
+                        </tr>
                         {% endfor %}
-                        <div class="order-row subtotal">
-                            <span>Subtotal:</span>
-                            <!-- Usamos la variable 'order_extra' para el subtotal -->
-                            <span>${{ order_extra.subtotal }}</span>
-                        </div>
-                        {% if order_extra.discount_info %}
-                        <div class="order-row discount">
-                            <span>Discount ({{ order_extra.discount_info.code }}):</span>
-                            <span>-${{ "%.2f"|format(order_extra.discount_info.amount) }}</span>
-                        </div>
-                        {% endif %}
-                        <div class="order-row total">
-                            <span>Total:</span>
-                            <strong>${{ "%.2f"|format(order.total) }}</strong>
-                        </div>
-                        <div class="order-row">
-                            <span>Payment method:</span>
-                            <span>{{ order.payment_method }}</span>
-                        </div>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- DETALLES DEL PEDIDO -->
+            <section class="order-details-section">
+                <h2>Order details</h2>
+                <div class="order-table">
+                    <div class="order-row header">
+                        <span>Product</span>
+                        <span>Total</span>
                     </div>
-                    <a href="{{ url_for('home') }}" class="order-again-link">ORDER AGAIN</a>
-                </section>
-                <!-- DIRECCIÓN DE FACTURACIÓN -->
-            </div>
+                    {% for item in order.items %}
+                    <div class="order-row">
+                        <span>{{ item.product_name }} &times; {{ item.quantity }}</span>
+                        <!-- Asumimos que el precio del item no está en la DB, lo calculamos si es necesario o mostramos el total -->
+                        <strong>${{ "%.2f"|format(order.total / order.items|length) }}</strong>
+                    </div>
+                    {% endfor %}
+                    <div class="order-row subtotal">
+                        <span>Subtotal:</span>
+                        <!-- Usamos la variable 'order_extra' para el subtotal -->
+                        <span>${{ order_extra.subtotal }}</span>
+                    </div>
+                    {% if order_extra.discount_info %}
+                    <div class="order-row discount">
+                        <span>Discount ({{ order_extra.discount_info.code }}):</span>
+                        <span>-${{ "%.2f"|format(order_extra.discount_info.amount) }}</span>
+                    </div>
+                    {% endif %}
+                    <div class="order-row total">
+                        <span>Total:</span>
+                        <strong>${{ "%.2f"|format(order.total) }}</strong>
+                    </div>
+                    <div class="order-row">
+                        <span>Payment method:</span>
+                        <span>{{ order.payment_method }}</span>
+                    </div>
+                </div>
+                <div class="back-link-container"> <!-- Contenedor para alinear a la derecha -->
+                    <a href="{{ url_for('home') }}" class="back-to-list-btn">CONTINUE SHOPPING</a>
+                </div>
+            </section>
+
         </div>
     </div>
 </div>
