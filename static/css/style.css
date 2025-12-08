@@ -27,7 +27,7 @@ html {
 
 .thank-you-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .thank-you-header h1 {
@@ -1493,11 +1493,8 @@ footer {
 
 /* ORDER SUCCESS */
 .order-success-page {
-    /* NUEVO: Añadimos un padding superior para despegar el título del header */
-    padding-top: -3rem;
-
-    /* mentenemos el margen inferior para separar la caja del footer */
-    margin-bottom: 4rem;
+    padding-top: 3rem; /* Añade espacio entre el header principal y el "Thank you" */
+    padding-bottom: 4rem;
 }
 
 /* ==========================================================================
@@ -2937,6 +2934,10 @@ footer {
 /* ======================================================= */
 /* === ESTILOS PARA EL FONDO DECORATIVO CON EL LOGO === */
 /* ======================================================= */
+
+.order-success-page::before {
+    display: none; /* Desactiva el fondo de nieve en esta página */
+}
 
 body::before {
     /* 1. Contenido y Posicionamiento */
