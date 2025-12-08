@@ -17,6 +17,20 @@ from flask_migrate import Migrate
 from datetime import datetime
 
 app = Flask(__name__)
+
+# =======================================================
+# === BLOQUE DE REDIRECCIÓN DE DOMINIO A PRODUCCIÓN ===
+# =======================================================
+@app.before_request
+def redirect_to_custom_domain():
+    # El encabezado 'X-Forwarded-Proto' nos dice si la conexión original era http o https
+    scheme = request.headers.get('X-Forwarded-Proto')
+    if scheme and scheme == 'https' and "onrender.com" in request.host:
+        # Construye la nueva URL con tu dominio personalizado, manteniendo la ruta
+        new_url = request.url.replace(request.host, "www.voidcraft.shop")
+        # Devuelve una redirección permanente (código 301)
+        return redirect(new_url, code=301)
+        
 # --- CONFIGURACIÓN ---
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///voidcraft.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
