@@ -29,15 +29,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for item in downloads %}
+                    {% for download in downloads %}
                     <tr>
-                        <!-- CORRECCIÓN: La variable ahora es 'item.product_name' -->
-                        <td>{{ item.product_name }}</td>
-                        <td>Never</td>
-                        <td>
-                            <a href="{{ url_for('download_file', filename=item.download_file) }}" class="download-btn">
-                                {{ item.product_name.upper() }}
-                            </a>
+                        <!-- Añadimos los data-label a cada celda -->
+                        <td data-label="Product">{{ download.product_name }}</td>
+                        <td data-label="Expires">Never</td>
+                        <td data-label="Download">
+                            <a href="{{ url_for('download_file', filename=download.download_file) }}"
+                                class="download-btn">DOWNLOAD</a>
                         </td>
                     </tr>
                     {% else %}

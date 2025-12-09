@@ -38,13 +38,12 @@ def redirect_to_custom_domain():
 # --- CONFIGURACIÓN ---
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///voidcraft.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1447950660090859611/1Tr4XNl87X30NLEFEaSxUm9Y5ifDaZlP9KcHW0qmqL2fR3RULD7RnbOMJt5lxalmVqMd"
 DISCORD_SALES_WEBHOOK_URL = "https://discord.com/api/webhooks/1418062058213085204/jdNjaIGtNyjFNwyyIFi9gkarJIy-Gy8RTJXDfEtoIF3JEYBFF20IBRgGR0ftuM6patGg"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 FACEBROWSER_URL = "https://face.gta.world/pages/voidcraft"
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1447948589346062347/q0_F5US6ksPEBVdS2hBkWY7wkivqO4q0cHa9A7OMalWTEEOvrC7dcr2NvELqNSZDgeZM"
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1447961979347275897/MfYURuJLowly1ndXPiEVZ9WIwe3IXNAPXVFN7c4p-a_nwmCNSSx3OyBmOx-A26-UNw7F"
 LAST_POST_FILE = "last_post.txt" # Archivo para guardar la última publicación
 CHECK_INTERVAL_SECONDS = 300 # 300 segundos = 5 minutos
 
@@ -60,12 +59,22 @@ def save_last_seen_post(content):
     with open(LAST_POST_FILE, 'w', encoding='utf-8') as f:
         f.write(content)
 
-def send_discord_notification(post_text):
-    """Envía la notificación a Discord."""
-    message = f"**New Post on Facebrowser!**\n\n>>> {post_text[:1500]}...\n\nView post: {FACEBROWSER_URL}"
+def send_discord_notification(post_url):
+    """Envía la notificación a Discord con el enlace al post."""
     
+    # Creamos un mensaje "embed" más atractivo
     payload = {
-        "content": message
+        "embeds": [
+            {
+                "title": "New Post on Facebrowser!",
+                "description": f"A new post has been published on the Voidcraft page.\n\n[**Click here to view the post**]({post_url})",
+                "color": 10813440, # Color rojo oscuro de Voidcraft
+                "url": post_url,
+                "footer": {
+                    "text": "Voidcraft Social Bot"
+                }
+            }
+        ]
     }
     try:
         response = requests.post(DISCORD_WEBHOOK_URL, json=payload)
@@ -75,37 +84,43 @@ def send_discord_notification(post_text):
         print(f"Error al enviar la notificación a Discord: {e}")
 
 def check_for_new_post():
-    """La función principal que hace el scraping y la comparación."""
+    """La función principal que hace el scraping, busca el enlace y lo envía."""
     print("Buscando nuevas publicaciones...")
     try:
-        # 1. Obtiene el HTML de la página
         headers = {
-            # Simulamos ser un navegador normal para evitar bloqueos
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         }
         response = requests.get(FACEBROWSER_URL, headers=headers)
         response.raise_for_status()
         
-        # 2. Analiza el HTML
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        # 3. Encuentra la publicación más reciente usando el selector que encontraste
-        #    Usamos .find() para obtener solo el primer elemento que coincida
-        latest_post_element = soup.find('div', class_='post-body')
+        # 1. Encuentra el contenedor de la PRIMERA publicación en la página.
+        #    Facebrowser parece envolver cada post en un div con la clase 'post'.
+        latest_post_container = soup.find('div', class_='post')
         
-        if not latest_post_element:
-            print("No se pudo encontrar el elemento de la publicación (selector 'div.post-body').")
+        if not latest_post_container:
+            print("No se pudo encontrar el contenedor principal de la publicación (selector 'div.post').")
             return
 
-        # Extraemos el texto del post y lo limpiamos
-        latest_post_text = latest_post_element.get_text(separator='\n', strip=True)
-        last_seen_post = get_last_seen_post()
+        # 2. Dentro de ese contenedor, busca el enlace del timestamp.
+        #    Basado en tu imagen, está en 'a' dentro de 'div.post-time'.
+        permalink_element = latest_post_container.find('div', class_='post-time').find('a')
 
-        # 4. Compara y actúa
-        if latest_post_text and latest_post_text != last_seen_post:
-            print(f"¡Nueva publicación encontrada!: {latest_post_text[:50]}...")
-            send_discord_notification(latest_post_text)
-            save_last_seen_post(latest_post_text)
+        if not permalink_element or 'href' not in permalink_element.attrs:
+            print("No se pudo encontrar el enlace permanente (permalink) de la publicación.")
+            post_url = FACEBROWSER_URL # Usamos la URL general como fallback
+        else:
+            post_url = permalink_element['href']
+            # El href ya es una URL completa, no necesitamos añadirle el dominio.
+        
+        last_seen_post_url = get_last_seen_post()
+
+        # 3. Compara la URL y actúa
+        if post_url and post_url != last_seen_post_url:
+            print(f"¡Nueva publicación encontrada!: {post_url}")
+            send_discord_notification(post_url)
+            save_last_seen_post(post_url)
         else:
             print("No hay nuevas publicaciones.")
 
