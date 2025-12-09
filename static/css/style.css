@@ -3046,11 +3046,61 @@ body::before {
     }
 
     /* Tabla de Wishlist */
+    /* ============================================================= */
+    /* === AJUSTES ESPECÍFICOS PARA LA TABLA DE WISHLIST EN MÓVIL === */
+    /* ============================================================= */
+
+    /* Anulamos el estilo de tarjeta para la fila, ya que lo controlaremos en las celdas */
+    .wishlist-table tr {
+        border: none;
+        padding: 0;
+        margin-bottom: 1.5rem; /* Mantenemos la separación entre productos */
+    }
+
+    /* La celda del producto es la tarjeta principal ahora */
     .wishlist-table td[data-label="Product"] {
-        border-bottom: none; /* No necesita borde inferior */
+        display: grid; /* Usamos grid para un control preciso */
+        grid-template-columns: auto 1fr; /* Columna para imagen/botón, columna para texto */
+        gap: 1rem;
+        align-items: center;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1rem;
     }
     .wishlist-table td[data-label="Product"]::before {
         display: none; /* Ocultamos la etiqueta "Product:" */
+    }
+
+    /* El contenedor de info ahora es solo para el texto */
+    .product-info-wishlist {
+        display: contents; /* Le decimos que sus hijos actúen como hijos directos del grid */
+    }
+    
+    .product-info-wishlist .product-name-link {
+        text-align: left;
+    }
+
+    /* Ocultamos las columnas que no necesitamos en móvil */
+    .wishlist-table td[data-label="Price"],
+    .wishlist-table td[data-label="Stock Status"] {
+        display: none;
+    }
+    
+    /* La celda de acciones se convierte en un botón debajo */
+    .wishlist-table td[data-label="Actions"] {
+        display: block;
+        padding: 1rem;
+        border: 1px solid var(--border-color);
+        border-top: none; /* Unimos con la tarjeta de arriba */
+        border-radius: 0 0 8px 8px;
+        margin-top: -1.5rem; /* Solapamos ligeramente para un efecto visual */
+    }
+    .wishlist-table td[data-label="Actions"]::before {
+        display: none; /* Ocultamos la etiqueta "Actions:" */
+    }
+    .product-actions .wishlist-action-btn {
+        width: 100%;
+        text-align: center;
     }
 
     /* Mensajes de 'no hay contenido' */
