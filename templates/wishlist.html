@@ -2,11 +2,8 @@
 
 {% block content %}
 <div class="container">
-
-    <!-- Usamos el mismo layout que las otras páginas de la cuenta -->
     <div class="account-page-layout">
-
-        <!-- COLUMNA IZQUIERDA: NAVEGACIÓN DEL DASHBOARD -->
+        <!-- COLUMNA IZQUIERDA: NAVEGACIÓN -->
         <aside class="account-sidebar">
             <h2>MY ACCOUNT</h2>
             <nav class="account-nav">
@@ -20,10 +17,9 @@
             </nav>
         </aside>
 
-        <!-- COLUMNA DERECHA: CONTENIDO PRINCIPAL (Tu tabla de Wishlist) -->
+        <!-- COLUMNA DERECHA: CONTENIDO PRINCIPAL -->
         <main class="account-content">
             <h2>My wishlist</h2>
-
             <div class="wishlist-table-container">
                 <table class="wishlist-table">
                     <thead>
@@ -31,14 +27,14 @@
                             <th>Product</th>
                             <th>Price</th>
                             <th>Stock Status</th>
-                            <th>Actions</th>
+                            <!-- La columna "Actions" ha sido eliminada -->
                         </tr>
                     </thead>
                     <tbody>
                         {% for product in wishlist %}
                         <tr id="wishlist-item-{{ product.id }}">
                             <td data-label="Product" class="product-info-wishlist">
-                                <button class="remove-wishlist-btn" data-product-id="{{ product.id }}">×</button>
+                                <button class="remove-wishlist-btn" data-product-id="{{ product.id }}">&times;</button>
                                 <img src="{{ url_for('static', filename=(product.color_variants.values()|first).image) }}"
                                     alt="{{ product.name }}">
                                 <a href="{{ url_for('product_detail', category_name=product.category, product_slug=product.slug) }}"
@@ -48,14 +44,12 @@
                             </td>
                             <td data-label="Price" class="product-price">{{ product.price }}</td>
                             <td data-label="Stock Status" class="product-stock">In Stock</td>
-                            <td data-label="Actions" class="product-actions">
-                                <a href="{{ url_for('product_detail', category_name=product.category, product_slug=product.slug) }}"
-                                    class="wishlist-action-btn primary">Select options</a>
-                            </td>
+                            <!-- La celda de "Actions" ha sido eliminada -->
                         </tr>
                         {% else %}
                         <tr>
-                            <td colspan="4" class="empty-wishlist-msg">
+                            <!-- Colspan ahora es "3" en lugar de "4" -->
+                            <td colspan="3" class="empty-wishlist-msg">
                                 No products added to the wishlist yet.
                             </td>
                         </tr>
@@ -64,7 +58,6 @@
                 </table>
             </div>
         </main>
-
     </div>
 </div>
 {% endblock %}
