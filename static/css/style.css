@@ -27,7 +27,7 @@ html {
 
 .thank-you-header {
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-top: 1.5rem;
 }
 
 .thank-you-header h1 {
@@ -140,7 +140,6 @@ header>.container {
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 15px;
     box-sizing: border-box;
 }
 
@@ -170,15 +169,6 @@ body>header {
     /* ¡ESTA ES LA PROPIEDAD CLAVE! */
 }
 
-.nav-center ul {
-    display: flex;
-    flex-wrap: wrap;
-    /* Permitimos que los links también salten de línea */
-    justify-content: center;
-    /* Los centramos si se envuelven */
-    gap: 25px;
-    /* Un pequeño espacio entre ellos */
-}
 
 /* --- Logo --- */
 .header-logo {
@@ -1493,8 +1483,7 @@ footer {
 
 /* ORDER SUCCESS */
 .order-success-page {
-    padding-top: 3rem; /* Añade espacio entre el header principal y el "Thank you" */
-    padding-bottom: 4rem;
+    padding-bottom: 0.5rem;
 }
 
 /* ==========================================================================
@@ -1558,11 +1547,6 @@ footer {
     /* Asegura que el color sea el principal (blanco) */
 }
 
-/* PARA REDUCIR EL CONTAINER DE ORDER SUCCESS */
-.order-success-page .container {
-    max-width: 1100px;
-    /* Puedes ajustar este valor a tu gusto (ej. 800px, 1000px) */
-}
 
 .order-again-link:hover {
     transform: scale(1.03);
