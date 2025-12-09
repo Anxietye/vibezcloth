@@ -1844,6 +1844,7 @@ text-align: justify;
 .no-orders-msg {
     text-align: center;
     padding: 3rem;
+    color: var(--secondary-text-color); /* Usamos el color de texto secundario (gris) */
 }
 
 /* --- Estilos para la Tabla de Descargas en Mi Cuenta --- */
