@@ -47,7 +47,7 @@ def send_discord_notification(post_url):
         print(f"Error al enviar la notificación a Discord: {e}")
 
 def check_for_new_post():
-    """La función principal que hace el scraping, busca el enlace y lo envía."""
+    """La función principal, ahora más robusta contra fallos de scraping."""
     print("Buscando nuevas publicaciones...")
     try:
         headers = {
@@ -58,22 +58,30 @@ def check_for_new_post():
         
         soup = BeautifulSoup(response.text, 'html.parser')
         
+        # 1. Encontrar el primer contenedor de publicación
         latest_post_container = soup.find('div', class_='post')
         
         if not latest_post_container:
-            print("No se pudo encontrar el contenedor de la publicación.")
+            print("No se pudo encontrar el contenedor de la publicación (selector 'div.post').")
             return
 
-        permalink_element = latest_post_container.find('div', class_='post-time').find('a')
+        # 2. LA CORRECCIÓN CLAVE: Buscar el div.post-time y COMPROBAR si existe
+        post_time_div = latest_post_container.find('div', class_='post-time')
+        if not post_time_div:
+            print("La publicación encontrada no tiene un div 'post-time'. Saltando esta comprobación.")
+            return
 
+        # 3. Si existe, buscar el enlace <a> dentro de él
+        permalink_element = post_time_div.find('a')
         if not permalink_element or 'href' not in permalink_element.attrs:
-            print("No se pudo encontrar el enlace permanente de la publicación.")
+            print("No se pudo encontrar el enlace permanente (permalink) de la publicación.")
             post_url = FACEBROWSER_URL
         else:
             post_url = permalink_element['href']
         
         last_seen_post_url = get_last_seen_post()
 
+        # 4. Compara y actúa
         if post_url and post_url != last_seen_post_url:
             print(f"¡Nueva publicación encontrada!: {post_url}")
             send_discord_notification(post_url)
@@ -83,6 +91,10 @@ def check_for_new_post():
 
     except requests.exceptions.RequestException as e:
         print(f"Error al acceder a Facebrowser: {e}")
+    except AttributeError as e:
+        print(f"!!! AttributeError: Probablemente cambió la estructura de Facebrowser. Error: {e}")
+    except Exception as e:
+        print(f"!!! Ocurrió un error inesperado: {e}")
 
 # --- Bucle Principal ---
 if __name__ == "__main__":
