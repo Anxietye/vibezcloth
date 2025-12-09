@@ -5,7 +5,7 @@ import os
 
 # --- CONFIGURACIÓN ---
 FACEBROWSER_URL = "https://face.gta.world/pages/voidcraft"
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1447961979347275897/MfYURuJLowly1ndXPiEVZ9WIwe3IXNAPXVFN7c4p-a_nwmCNSSx3OyBmOx-A26-UNw7F"
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1447987628359291123/0aF3AmpaDkrLBjEWpdz2EOOFxrx35JAbX7-G08hjo62O2G1avn1ELu4qvK98aKHZ2QHX"
 # El archivo ahora se guarda en el disco persistente de Render
 LAST_POST_FILE = "/data/last_post.txt"
 CHECK_INTERVAL_SECONDS = 300  # 5 minutos
@@ -26,12 +26,16 @@ def save_last_seen_post(url):
 
 
 def send_discord_notification(post_url):
-    """Envía la notificación a Discord solo con el enlace."""
-    payload = {"content": post_url}
+    """Envía la notificación a Discord con una mención @here y el enlace al post."""
+    
+    # LA CLAVE: Añadimos "@here " antes de la URL.
+    payload = {
+        "content": f"@here {post_url}"
+    }
     try:
         response = requests.post(DISCORD_WEBHOOK_URL, json=payload)
         response.raise_for_status()
-        print(f"Enlace de la nueva publicación enviado a Discord: {post_url}")
+        print(f"Notificación con @here enviada a Discord: {post_url}")
     except requests.exceptions.RequestException as e:
         print(f"Error al enviar la notificación a Discord: {e}")
 

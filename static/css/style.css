@@ -1291,73 +1291,66 @@ text-align: justify;
 }
 
 /* ======================================================= */
-/* === ESTILOS FINALES PARA LA PÁGINA DE WISHLIST ======== */
+/* === ESTILOS FINALES Y CORREGIDOS PARA LA PÁGINA DE WISHLIST === */
 /* ======================================================= */
 
-.wishlist-page .page-title {
+/* --- TÍTULO DE LA PÁGINA --- */
+.wishlist-page .page-title,
+.account-content h2 { /* Aplicamos el mismo estilo al h2 de 'My wishlist' */
     font-size: 2rem;
     margin-bottom: 2rem;
     text-align: left;
 }
 
-/* --- Estructura de la Tabla con Grid --- */
+/* --- CONTENEDOR DE LA TABLA --- */
 .wishlist-table-container {
     border-top: 1px solid var(--border-color);
 }
 
+/* --- TABLA PRINCIPAL --- */
 .wishlist-table {
     width: 100%;
+    border-collapse: collapse; /* Asegura bordes limpios */
     text-align: left;
-    /* Usamos display: contents para que la <table> no interfiera con el grid */
-    display: contents;
 }
 
+/* --- FILAS DE LA TABLA --- */
+/* Devolvemos el comportamiento normal a las filas del encabezado y del cuerpo */
+.wishlist-table thead tr,
+.wishlist-table tbody tr {
+    display: table-row; /* Comportamiento de fila de tabla estándar */
+}
 
+/* --- CELDAS DEL ENCABEZADO (th) Y DEL CUERPO (td) --- */
+.wishlist-table th,
+.wishlist-table td {
+    padding: 1.5rem 1rem; /* Espaciado interno */
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle; /* Centra el contenido verticalmente */
+}
 
+/* Estilos específicos para el encabezado */
 .wishlist-table th {
-    padding: 1rem 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     text-transform: uppercase;
     font-size: 0.8rem;
     font-weight: bold;
     color: var(--secondary-text-color);
 }
 
-.wishlist-table th:first-child {
-    padding-left: 50px;
-    /* Espacio para el botón de eliminar */
-}
-
-/* Fila de cada producto */
-.wishlist-item {
-    display: grid;
-    /* Misma distribución de columnas que el encabezado */
-    grid-template-columns: 3fr 1fr 1fr 1.5fr;
-    align-items: center;
-    gap: 16rem;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid var(--border-color);
-}
-
-/* Encabezado de la tabla */
-.wishlist-table thead tr {
-    display: grid;
-    /* Definimos las 4 columnas principales y sus tamaños */
-    grid-template-columns: 3fr 1fr 1fr 1.5fr;
-    align-items: center;
-    width: 100%;
-    gap: 15.5rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.wishlist-table tbody tr:last-child {
+/* Anulamos el borde de la última fila para un acabado limpio */
+.wishlist-table tbody tr:last-child td {
     border-bottom: none;
 }
+
+/* --- CONTENIDO DE LAS CELDAS --- */
 
 /* Celda de la información del producto (X, imagen, nombre) */
 .product-info-wishlist {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .product-info-wishlist .remove-wishlist-btn {
@@ -1371,7 +1364,6 @@ text-align: justify;
     transition: all 0.2s;
     flex-shrink: 0;
 }
-
 .product-info-wishlist .remove-wishlist-btn:hover {
     background-color: var(--primary-text-color);
     color: var(--main-bg-color);
@@ -1384,10 +1376,22 @@ text-align: justify;
     border-radius: 4px;
 }
 
+/* Enlace del nombre del producto */
+.product-name-link {
+    font-weight: bold;
+    color: var(--primary-text-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.product-name-link:hover {
+    color: var(--accent-color);
+}
+
+
+/* Celdas de Precio y Stock */
 .product-price {
     font-weight: bold;
 }
-
 .product-stock {
     color: var(--accent-color);
     font-weight: bold;
@@ -1395,9 +1399,19 @@ text-align: justify;
 
 /* Celda de los botones de acción */
 .product-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    text-align: right; /* Alinea el botón a la derecha */
+}
+
+
+/* --- MENSAJE DE WISHLIST VACÍA --- */
+.empty-wishlist-msg {
+    text-align: center;
+    padding: 4rem;
+    color: var(--secondary-text-color);
+}
+/* Aseguramos que el mensaje ocupe todas las columnas */
+.empty-wishlist-msg[colspan="4"] {
+    width: 100%;
 }
 
 /* ======================================================= */
@@ -2976,146 +2990,129 @@ body::before {
 /* --- 2. ESTILOS SOLO PARA MÓVIL (pantallas de 900px o menos) --- */
 @media (max-width: 900px) {
 
-    /* ============================================================= */
-    /* === 5. ADAPTACIÓN DE TABLAS DE "MY ACCOUNT" PARA MÓVIL === */
-    /* ============================================================= */
-    
-    /* Regla general para ocultar los encabezados de todas las tablas */
-    .orders-table thead,
-    .downloads-table-account thead,
-    .wishlist-table thead {
-        display: none;
-    }
+    /* ======================================================= */
+/* === ESTILOS FINALES Y CORREGIDOS PARA LA PÁGINA DE WISHLIST === */
+/* ======================================================= */
 
-    /* Regla general para romper el layout de tabla y apilar las celdas */
-    .orders-table, .orders-table tbody, .orders-table tr, .orders-table td,
-    .downloads-table-account, .downloads-table-account tbody, .downloads-table-account tr, .downloads-table-account td,
-    .wishlist-table, .wishlist-table tbody, .wishlist-table tr, .wishlist-table td {
-        display: block;
-        width: 100%;
-        text-align: right; /* Alineamos el valor a la derecha */
-    }
+/* --- TÍTULO DE LA PÁGINA --- */
+.wishlist-page .page-title,
+.account-content h2 { /* Aplicamos el mismo estilo al h2 de 'My wishlist' */
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
 
-    /* Regla general para convertir cada fila en una tarjeta */
-    .orders-table tr,
-    .downloads-table-account tr,
-    .wishlist-table tr {
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-    }
+/* --- CONTENEDOR DE LA TABLA --- */
+.wishlist-table-container {
+    border-top: 1px solid var(--border-color);
+}
 
-    /* Regla general para las celdas y sus etiquetas */
-    .orders-table td,
-    .downloads-table-account td,
-    .wishlist-table td {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.75rem 0;
-        border-bottom: 1px dashed var(--border-color);
-    }
-    
-    .orders-table tr td:last-child,
-    .downloads-table-account tr td:last-child,
-    .wishlist-table tr td:last-child {
-        border-bottom: none;
-    }
+/* --- TABLA PRINCIPAL --- */
+.wishlist-table {
+    width: 100%;
+    border-collapse: collapse; /* Asegura bordes limpios */
+    text-align: left;
+}
 
-    /* Regla general para mostrar las etiquetas (labels) */
-    .orders-table td::before,
-    .downloads-table-account td::before,
-    .wishlist-table td::before {
-        content: attr(data-label);
-        color: var(--secondary-text-color);
-        font-weight: normal;
-        margin-right: 1rem;
-        text-align: left; /* Alineamos la etiqueta a la izquierda */
-    }
+/* --- FILAS DE LA TABLA --- */
+/* Devolvemos el comportamiento normal a las filas del encabezado y del cuerpo */
+.wishlist-table thead tr,
+.wishlist-table tbody tr {
+    display: table-row; /* Comportamiento de fila de tabla estándar */
+}
 
-    /* --- Ajustes específicos para cada tabla --- */
+/* --- CELDAS DEL ENCABEZADO (th) Y DEL CUERPO (td) --- */
+.wishlist-table th,
+.wishlist-table td {
+    padding: 1.5rem 1rem; /* Espaciado interno */
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle; /* Centra el contenido verticalmente */
+}
 
-    /* Tabla de Órdenes y Descargas (alinear botón a la derecha) */
-    .orders-table td[data-label="Actions"],
-    .downloads-table-account td[data-label="Download"] {
-        justify-content: flex-end;
-    }
-    .orders-table td[data-label="Actions"]::before,
-    .downloads-table-account td[data-label="Download"]::before {
-        display: none;
-    }
+/* Estilos específicos para el encabezado */
+.wishlist-table th {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--secondary-text-color);
+}
 
-    /* Tabla de Wishlist */
-    /* ============================================================= */
-    /* === AJUSTES ESPECÍFICOS PARA LA TABLA DE WISHLIST EN MÓVIL === */
-    /* ============================================================= */
+/* Anulamos el borde de la última fila para un acabado limpio */
+.wishlist-table tbody tr:last-child td {
+    border-bottom: none;
+}
 
-    /* Anulamos el estilo de tarjeta para la fila, ya que lo controlaremos en las celdas */
-    .wishlist-table tr {
-        border: none;
-        padding: 0;
-        margin-bottom: 1.5rem; /* Mantenemos la separación entre productos */
-    }
+/* --- CONTENIDO DE LAS CELDAS --- */
 
-    /* La celda del producto es la tarjeta principal ahora */
-    .wishlist-table td[data-label="Product"] {
-        display: grid; /* Usamos grid para un control preciso */
-        grid-template-columns: auto 1fr; /* Columna para imagen/botón, columna para texto */
-        gap: 1rem;
-        align-items: center;
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        padding: 1rem;
-    }
-    .wishlist-table td[data-label="Product"]::before {
-        display: none; /* Ocultamos la etiqueta "Product:" */
-    }
+/* Celda de la información del producto (X, imagen, nombre) */
+.product-info-wishlist {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
 
-    /* El contenedor de info ahora es solo para el texto */
-    .product-info-wishlist {
-        display: contents; /* Le decimos que sus hijos actúen como hijos directos del grid */
-    }
-    
-    .product-info-wishlist .product-name-link {
-        text-align: left;
-    }
+.product-info-wishlist .remove-wishlist-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: var(--secondary-text-color);
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+.product-info-wishlist .remove-wishlist-btn:hover {
+    background-color: var(--primary-text-color);
+    color: var(--main-bg-color);
+}
 
-    /* Ocultamos las columnas que no necesitamos en móvil */
-    .wishlist-table td[data-label="Price"],
-    .wishlist-table td[data-label="Stock Status"] {
-        display: none;
-    }
-    
-    /* La celda de acciones se convierte en un botón debajo */
-    .wishlist-table td[data-label="Actions"] {
-        display: block;
-        padding: 1rem;
-        border: 1px solid var(--border-color);
-        border-top: none; /* Unimos con la tarjeta de arriba */
-        border-radius: 0 0 8px 8px;
-        margin-top: -1.5rem; /* Solapamos ligeramente para un efecto visual */
-    }
-    .wishlist-table td[data-label="Actions"]::before {
-        display: none; /* Ocultamos la etiqueta "Actions:" */
-    }
-    .product-actions .wishlist-action-btn {
-        width: 100%;
-        text-align: center;
-    }
+.product-info-wishlist img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+}
 
-    /* Mensajes de 'no hay contenido' */
-    .no-orders-msg,
-    .empty-wishlist-msg {
-        border: none !important;
-        padding: 2rem 0 !important;
-        text-align: center !important;
-        justify-content: center !important;
-    }
-    .no-orders-msg::before,
-    .empty-wishlist-msg::before {
-        display: none !important;
-    }
+/* Enlace del nombre del producto */
+.product-name-link {
+    font-weight: bold;
+    color: var(--primary-text-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.product-name-link:hover {
+    color: var(--accent-color);
+}
+
+
+/* Celdas de Precio y Stock */
+.product-price {
+    font-weight: bold;
+}
+.product-stock {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* Celda de los botones de acción */
+.product-actions {
+    text-align: right; /* Alinea el botón a la derecha */
+}
+
+
+/* --- MENSAJE DE WISHLIST VACÍA --- */
+.empty-wishlist-msg {
+    text-align: center;
+    padding: 4rem;
+    color: var(--secondary-text-color);
+}
+/* Aseguramos que el mensaje ocupe todas las columnas */
+.empty-wishlist-msg[colspan="4"] {
+    width: 100%;
+}
 /* FIN */
 
     main,
