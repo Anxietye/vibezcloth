@@ -43,7 +43,10 @@ def send_discord_notification(post_url):
         print(f"Error al enviar la notificación a Discord: {e}", flush=True)
 
 def check_for_new_post():
-    """Función principal que hace el scraping."""
+    """
+    La función principal que ahora busca la sección "Recent Updates"
+    para encontrar la última publicación y evitar la publicación fijada.
+    """
     print("Buscando nuevas publicaciones...", flush=True)
     try:
         headers = {
@@ -54,15 +57,33 @@ def check_for_new_post():
         
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        latest_post_container = soup.find('div', class_='post')
+        # 1. LA CLAVE: Encontrar el título "Recent Updates"
+        #    Usamos una función lambda para encontrar el texto sin importar mayúsculas/minúsculas
+        recent_updates_header = soup.find(lambda tag: tag.name == 'h2' and 'recent updates' in tag.text.lower())
         
+        latest_post_container = None
+        if recent_updates_header:
+            # 2. Si encontramos el título, buscamos el primer 'div.post' que le sigue
+            latest_post_container = recent_updates_header.find_next('div', class_='post')
+            print("Sección 'Recent Updates' encontrada. Analizando la primera publicación.", flush=True)
+        else:
+            # 3. FALLBACK: Si no encontramos "Recent Updates", intentamos con el método antiguo
+            #    pero ahora ignorando el 'div' que contiene el texto "Pinned Post"
+            all_posts = soup.find_all('div', class_='post')
+            for post in all_posts:
+                if not post.find_previous('div', string='Pinned Post'):
+                    latest_post_container = post
+                    print("Sección 'Recent Updates' no encontrada. Usando fallback para encontrar la primera publicación no fijada.", flush=True)
+                    break
+
         if not latest_post_container:
-            print("No se pudo encontrar el contenedor de la publicación.", flush=True)
+            print("No se pudo encontrar un contenedor de publicación válido.", flush=True)
             return
 
+        # 4. El resto de la lógica para encontrar el enlace es la misma
         post_time_div = latest_post_container.find('div', class_='post-time')
         if not post_time_div:
-            print("La publicación encontrada no tiene un div 'post-time'. Saltando.", flush=True)
+            print("La publicación más reciente no tiene un 'post-time'. Saltando.", flush=True)
             return
 
         permalink_element = post_time_div.find('a')
