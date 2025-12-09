@@ -6,12 +6,11 @@ import os
 # --- CONFIGURACIÓN ---
 FACEBROWSER_URL = "https://face.gta.world/pages/voidcraft"
 DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1447987628359291123/0aF3AmpaDkrLBjEWpdz2EOOFxrx35JAbX7-G08hjo62O2G1avn1ELu4qvK98aKHZ2QHX"
-# El archivo ahora se guarda en el disco persistente de Render
-LAST_POST_FILE = "/data/last_post.txt" 
-CHECK_INTERVAL_SECONDS = 300 # 5 minutos
+LAST_POST_FILE = "/data/last_post.txt"
+CHECK_INTERVAL_SECONDS = 300
 
 def get_last_seen_post():
-    """Lee la URL de la última publicación guardada, con manejo de errores."""
+    """Lee la URL de la última publicación guardada."""
     try:
         if not os.path.exists(LAST_POST_FILE):
             print("Archivo 'last_post.txt' no encontrado, se creará uno nuevo.")
@@ -20,12 +19,11 @@ def get_last_seen_post():
             return f.read().strip()
     except Exception as e:
         print(f"!!! ERROR al leer el archivo '{LAST_POST_FILE}': {e}")
-        return "" # Devuelve vacío si no se puede leer
+        return ""
 
 def save_last_seen_post(url):
-    """Guarda la URL de la nueva publicación, con manejo de errores."""
+    """Guarda la URL de la nueva publicación."""
     try:
-        # Aseguramos que el directorio /data exista
         os.makedirs(os.path.dirname(LAST_POST_FILE), exist_ok=True)
         with open(LAST_POST_FILE, 'w', encoding='utf-8') as f:
             f.write(url)
@@ -33,21 +31,21 @@ def save_last_seen_post(url):
     except Exception as e:
         print(f"!!! ERROR al guardar en el archivo '{LAST_POST_FILE}': {e}")
 
-
 def send_discord_notification(post_url):
-    """Envía la notificación a Discord solo con el enlace."""
-    payload = {
-        "content": f"@here {post_url}"
-    }
+    """Envía la notificación a Discord."""
+    payload = {"content": f"@here {post_url}"}
     try:
         response = requests.post(DISCORD_WEBHOOK_URL, json=payload)
         response.raise_for_status()
-        print(f"Enlace de la nueva publicación enviado a Discord: {post_url}")
+        print(f"Notificación enviada a Discord: {post_url}")
     except requests.exceptions.RequestException as e:
         print(f"Error al enviar la notificación a Discord: {e}")
 
 def check_for_new_post():
-    """La función principal, ahora más robusta contra fallos de scraping."""
+    """
+    Función principal que hace el scraping. Ahora los errores son manejados
+    internamente para no detener el bucle principal.
+    """
     print("Buscando nuevas publicaciones...")
     try:
         headers = {
@@ -58,30 +56,25 @@ def check_for_new_post():
         
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        # 1. Encontrar el primer contenedor de publicación
         latest_post_container = soup.find('div', class_='post')
         
         if not latest_post_container:
-            print("No se pudo encontrar el contenedor de la publicación (selector 'div.post').")
+            print("No se pudo encontrar el contenedor de la publicación.")
             return
 
-        # 2. LA CORRECCIÓN CLAVE: Buscar el div.post-time y COMPROBAR si existe
         post_time_div = latest_post_container.find('div', class_='post-time')
         if not post_time_div:
             print("La publicación encontrada no tiene un div 'post-time'. Saltando esta comprobación.")
             return
 
-        # 3. Si existe, buscar el enlace <a> dentro de él
         permalink_element = post_time_div.find('a')
         if not permalink_element or 'href' not in permalink_element.attrs:
-            print("No se pudo encontrar el enlace permanente (permalink) de la publicación.")
-            post_url = FACEBROWSER_URL
-        else:
-            post_url = permalink_element['href']
+            print("No se pudo encontrar el enlace permanente de la publicación.")
+            return
         
+        post_url = permalink_element['href']
         last_seen_post_url = get_last_seen_post()
 
-        # 4. Compara y actúa
         if post_url and post_url != last_seen_post_url:
             print(f"¡Nueva publicación encontrada!: {post_url}")
             send_discord_notification(post_url)
@@ -92,13 +85,18 @@ def check_for_new_post():
     except requests.exceptions.RequestException as e:
         print(f"Error al acceder a Facebrowser: {e}")
     except AttributeError as e:
-        print(f"!!! AttributeError: Probablemente cambió la estructura de Facebrowser. Error: {e}")
+        print(f"!!! AttributeError: La estructura de Facebrowser pudo haber cambiado. Error: {e}")
     except Exception as e:
-        print(f"!!! Ocurrió un error inesperado: {e}")
+        print(f"!!! Ocurrió un error inesperado durante el scraping: {e}")
 
-# --- Bucle Principal ---
+# --- Bucle Principal (Ahora a prueba de fallos) ---
 if __name__ == "__main__":
     while True:
-        check_for_new_post()
+        # LA CLAVE: El try...except AHORA ESTÁ AQUÍ, envolviendo la llamada a la función
+        try:
+            check_for_new_post()
+        except Exception as e:
+            print(f"!!! ERROR CRÍTICO en el bucle principal, el bot se recuperará. Error: {e}")
+        
         print(f"Esperando {CHECK_INTERVAL_SECONDS} segundos para la próxima comprobación...")
         time.sleep(CHECK_INTERVAL_SECONDS)
