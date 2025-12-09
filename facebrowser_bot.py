@@ -7,9 +7,8 @@ import os
 FACEBROWSER_URL = "https://face.gta.world/pages/voidcraft"
 DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1447987628359291123/0aF3AmpaDkrLBjEWpdz2EOOFxrx35JAbX7-G08hjo62O2G1avn1ELu4qvK98aKHZ2QHX"
 # El archivo ahora se guarda en el disco persistente de Render
-LAST_POST_FILE = "/data/last_post.txt"
-CHECK_INTERVAL_SECONDS = 300  # 5 minutos
-
+LAST_POST_FILE = "/data/last_post.txt" 
+CHECK_INTERVAL_SECONDS = 300 # 5 minutos
 
 def get_last_seen_post():
     """Lee la URL de la última publicación guardada, con manejo de errores."""
@@ -36,48 +35,43 @@ def save_last_seen_post(url):
 
 
 def send_discord_notification(post_url):
-    """Envía la notificación a Discord con una mención @here y el enlace al post."""
-    
-    # LA CLAVE: Añadimos "@here " antes de la URL.
+    """Envía la notificación a Discord solo con el enlace."""
     payload = {
         "content": f"@here {post_url}"
     }
     try:
         response = requests.post(DISCORD_WEBHOOK_URL, json=payload)
         response.raise_for_status()
-        print(f"Notificación con @here enviada a Discord: {post_url}")
+        print(f"Enlace de la nueva publicación enviado a Discord: {post_url}")
     except requests.exceptions.RequestException as e:
         print(f"Error al enviar la notificación a Discord: {e}")
-
 
 def check_for_new_post():
     """La función principal que hace el scraping, busca el enlace y lo envía."""
     print("Buscando nuevas publicaciones...")
     try:
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         }
         response = requests.get(FACEBROWSER_URL, headers=headers)
         response.raise_for_status()
-
-        soup = BeautifulSoup(response.text, "html.parser")
-
-        latest_post_container = soup.find("div", class_="post")
-
+        
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        latest_post_container = soup.find('div', class_='post')
+        
         if not latest_post_container:
             print("No se pudo encontrar el contenedor de la publicación.")
             return
 
-        permalink_element = latest_post_container.find("div", class_="post-time").find(
-            "a"
-        )
+        permalink_element = latest_post_container.find('div', class_='post-time').find('a')
 
-        if not permalink_element or "href" not in permalink_element.attrs:
+        if not permalink_element or 'href' not in permalink_element.attrs:
             print("No se pudo encontrar el enlace permanente de la publicación.")
             post_url = FACEBROWSER_URL
         else:
-            post_url = permalink_element["href"]
-
+            post_url = permalink_element['href']
+        
         last_seen_post_url = get_last_seen_post()
 
         if post_url and post_url != last_seen_post_url:
@@ -90,12 +84,9 @@ def check_for_new_post():
     except requests.exceptions.RequestException as e:
         print(f"Error al acceder a Facebrowser: {e}")
 
-
 # --- Bucle Principal ---
 if __name__ == "__main__":
     while True:
         check_for_new_post()
-        print(
-            f"Esperando {CHECK_INTERVAL_SECONDS} segundos para la próxima comprobación..."
-        )
+        print(f"Esperando {CHECK_INTERVAL_SECONDS} segundos para la próxima comprobación...")
         time.sleep(CHECK_INTERVAL_SECONDS)
