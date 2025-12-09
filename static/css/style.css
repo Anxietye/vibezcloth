@@ -1167,8 +1167,10 @@ footer {
 }
 
 .static-page-container p {
-    line-height: 1.8;
-    color: var(--secondary-text-color);
+line-height: 1.8;
+color: var(--secondary-text-color);
+/* === AÑADE ESTA LÍNEA === */
+text-align: justify;
 }
 
 .static-page-container p strong {
@@ -2973,6 +2975,11 @@ body::before {
 /* --- 2. ESTILOS SOLO PARA MÓVIL (pantallas de 900px o menos) --- */
 @media (max-width: 900px) {
 
+    main,
+    footer {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
     /* --- HEADER (MENÚ HAMBURGUESA Y STICKY) --- */
     body > header {
         position: fixed;
@@ -3114,6 +3121,7 @@ body::before {
     
     .product-detail-page, .account-page-layout, .checkout-main-content {
         grid-template-columns: 1fr;
+        margn
     }
 
     /* --- FOOTER --- */
