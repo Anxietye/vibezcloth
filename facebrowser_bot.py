@@ -12,17 +12,27 @@ CHECK_INTERVAL_SECONDS = 300  # 5 minutos
 
 
 def get_last_seen_post():
-    """Lee la URL de la última publicación guardada."""
-    if not os.path.exists(LAST_POST_FILE):
-        return ""
-    with open(LAST_POST_FILE, "r", encoding="utf-8") as f:
-        return f.read().strip()
-
+    """Lee la URL de la última publicación guardada, con manejo de errores."""
+    try:
+        if not os.path.exists(LAST_POST_FILE):
+            print("Archivo 'last_post.txt' no encontrado, se creará uno nuevo.")
+            return ""
+        with open(LAST_POST_FILE, 'r', encoding='utf-8') as f:
+            return f.read().strip()
+    except Exception as e:
+        print(f"!!! ERROR al leer el archivo '{LAST_POST_FILE}': {e}")
+        return "" # Devuelve vacío si no se puede leer
 
 def save_last_seen_post(url):
-    """Guarda la URL de la nueva publicación."""
-    with open(LAST_POST_FILE, "w", encoding="utf-8") as f:
-        f.write(url)
+    """Guarda la URL de la nueva publicación, con manejo de errores."""
+    try:
+        # Aseguramos que el directorio /data exista
+        os.makedirs(os.path.dirname(LAST_POST_FILE), exist_ok=True)
+        with open(LAST_POST_FILE, 'w', encoding='utf-8') as f:
+            f.write(url)
+        print(f"URL guardada exitosamente en '{LAST_POST_FILE}'.")
+    except Exception as e:
+        print(f"!!! ERROR al guardar en el archivo '{LAST_POST_FILE}': {e}")
 
 
 def send_discord_notification(post_url):
