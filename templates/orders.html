@@ -33,23 +33,22 @@
                 <tbody>
                     {% for order in orders %}
                     <tr>
-                        <!-- CORRECCIÓN: Usamos los nombres de atributo del modelo -->
-                        <td>#{{ order.order_number }}</td>
-                        <td class="local-date" data-utc-date="{{ order.date.isoformat() }}Z">
-                            ...
-                        </td>
-                        <td>{{ order.status }}</td>
-                        <td>${{ "%.2f"|format(order.total) }} for {{ order.items|length }} item(s)</td>
-                        <td>
+                        <!-- Añadimos los data-label a cada celda -->
+                        <td data-label="Order">#{{ order.order_number }}</td>
+                        <td data-label="Date"><strong class="local-date"
+                                data-utc-date="{{ order.date.isoformat() }}Z">...</strong></td>
+                        <td data-label="Status"><span class="status-completed">{{ order.status }}</span></td>
+                        <td data-label="Total">${{ "%.2f"|format(order.total) }}</td>
+                        <td data-label="Actions">
                             <a href="{{ url_for('view_order_page', order_number=order.order_number) }}"
                                 class="orders-action-btn">View</a>
                         </td>
                     </tr>
                     {% else %}
+                    <!-- Mensaje para cuando no hay pedidos -->
                     <tr>
                         <td colspan="5" class="no-orders-msg">
-                            No order has been made yet. <a href="{{ url_for('home') }}" class="accent-link">Go
-                                shopping</a>
+                            No order has been made yet.
                         </td>
                     </tr>
                     {% endfor %}

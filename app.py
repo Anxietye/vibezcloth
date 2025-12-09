@@ -15,6 +15,10 @@ import requests, urllib.parse, random, secrets
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
+import requests
+from bs4 import BeautifulSoup
+import time
+import os
 
 app = Flask(__name__)
 
@@ -34,11 +38,87 @@ def redirect_to_custom_domain():
 # --- CONFIGURACIÓN ---
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///voidcraft.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-DISCORD_WEBHOOK_URL = "https://discord.com/api/v10/webhooks/1418050508081594531/SaOV_sU29IyJdLHCVkYmNWe50CQKCgK04LcgMDN4gcHl5roTRTLo5uxLfKRzH_L3WmIb"
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1447950660090859611/1Tr4XNl87X30NLEFEaSxUm9Y5ifDaZlP9KcHW0qmqL2fR3RULD7RnbOMJt5lxalmVqMd"
 DISCORD_SALES_WEBHOOK_URL = "https://discord.com/api/webhooks/1418062058213085204/jdNjaIGtNyjFNwyyIFi9gkarJIy-Gy8RTJXDfEtoIF3JEYBFF20IBRgGR0ftuM6patGg"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+FACEBROWSER_URL = "https://face.gta.world/pages/voidcraft"
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1447948589346062347/q0_F5US6ksPEBVdS2hBkWY7wkivqO4q0cHa9A7OMalWTEEOvrC7dcr2NvELqNSZDgeZM"
+LAST_POST_FILE = "last_post.txt" # Archivo para guardar la última publicación
+CHECK_INTERVAL_SECONDS = 300 # 300 segundos = 5 minutos
+
+def get_last_seen_post():
+    """Lee el contenido de la última publicación guardada."""
+    if not os.path.exists(LAST_POST_FILE):
+        return ""
+    with open(LAST_POST_FILE, 'r', encoding='utf-8') as f:
+        return f.read().strip()
+
+def save_last_seen_post(content):
+    """Guarda el contenido de la nueva publicación."""
+    with open(LAST_POST_FILE, 'w', encoding='utf-8') as f:
+        f.write(content)
+
+def send_discord_notification(post_text):
+    """Envía la notificación a Discord."""
+    message = f"**New Post on Facebrowser!**\n\n>>> {post_text[:1500]}...\n\nView post: {FACEBROWSER_URL}"
+    
+    payload = {
+        "content": message
+    }
+    try:
+        response = requests.post(DISCORD_WEBHOOK_URL, json=payload)
+        response.raise_for_status()
+        print("Notificación de Discord enviada con éxito.")
+    except requests.exceptions.RequestException as e:
+        print(f"Error al enviar la notificación a Discord: {e}")
+
+def check_for_new_post():
+    """La función principal que hace el scraping y la comparación."""
+    print("Buscando nuevas publicaciones...")
+    try:
+        # 1. Obtiene el HTML de la página
+        headers = {
+            # Simulamos ser un navegador normal para evitar bloqueos
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+        response = requests.get(FACEBROWSER_URL, headers=headers)
+        response.raise_for_status()
+        
+        # 2. Analiza el HTML
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        # 3. Encuentra la publicación más reciente usando el selector que encontraste
+        #    Usamos .find() para obtener solo el primer elemento que coincida
+        latest_post_element = soup.find('div', class_='post-body')
+        
+        if not latest_post_element:
+            print("No se pudo encontrar el elemento de la publicación (selector 'div.post-body').")
+            return
+
+        # Extraemos el texto del post y lo limpiamos
+        latest_post_text = latest_post_element.get_text(separator='\n', strip=True)
+        last_seen_post = get_last_seen_post()
+
+        # 4. Compara y actúa
+        if latest_post_text and latest_post_text != last_seen_post:
+            print(f"¡Nueva publicación encontrada!: {latest_post_text[:50]}...")
+            send_discord_notification(latest_post_text)
+            save_last_seen_post(latest_post_text)
+        else:
+            print("No hay nuevas publicaciones.")
+
+    except requests.exceptions.RequestException as e:
+        print(f"Error al acceder a Facebrowser: {e}")
+
+# --- Bucle Principal ---
+if __name__ == "__main__":
+    while True:
+        check_for_new_post()
+        print(f"Esperando {CHECK_INTERVAL_SECONDS} segundos para la próxima comprobación...")
+        time.sleep(CHECK_INTERVAL_SECONDS)
+        
 # ==============================================================================
 # === CONFIGURACIÓN Y DATOS ====================================================
 # ==============================================================================

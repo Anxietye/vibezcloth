@@ -2975,6 +2975,68 @@ body::before {
 /* --- 2. ESTILOS SOLO PARA MÓVIL (pantallas de 900px o menos) --- */
 @media (max-width: 900px) {
 
+    /* ============================================================= */
+    /* === 5. ADAPTACIÓN DE LA TABLA DE ÓRDENES PARA MÓVIL === */
+    /* ============================================================= */
+    
+    .orders-table thead {
+        display: none; /* Ocultamos el encabezado de la tabla en móvil */
+    }
+
+    .orders-table, .orders-table tbody, .orders-table tr, .orders-table td {
+        display: block; /* Rompemos el layout de tabla */
+        width: 100%;
+    }
+
+    /* Cada fila ahora es una tarjeta */
+    .orders-table tr {
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Las celdas se apilan y se muestran como 'etiqueta: valor' */
+    .orders-table td {
+        display: flex;
+        justify-content: space-between; /* Etiqueta a la izq, valor a la der */
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px dashed var(--border-color);
+    }
+    
+    .orders-table td:last-child {
+        border-bottom: none; /* Quitamos el borde de la última celda */
+        padding-top: 1.25rem;
+    }
+
+    /* Usamos el data-label para mostrar la etiqueta */
+    .orders-table td::before {
+        content: attr(data-label);
+        color: var(--secondary-text-color);
+        font-weight: normal;
+        margin-right: 1rem;
+    }
+
+    /* La celda de acciones solo muestra el botón a la derecha */
+    .orders-table td[data-label="Actions"] {
+        justify-content: flex-end;
+    }
+    .orders-table td[data-label="Actions"]::before {
+        display: none; /* Ocultamos la etiqueta "Actions:" */
+    }
+
+    /* Estilos para el mensaje de 'no hay pedidos' */
+    .orders-table .no-orders-msg {
+        border: none;
+        padding: 2rem 0;
+        text-align: center;
+        justify-content: center;
+    }
+    .orders-table .no-orders-msg::before {
+        display: none;
+    }
+    
     main,
     footer {
         padding-left: 1rem;
