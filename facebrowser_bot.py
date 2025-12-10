@@ -8,7 +8,7 @@ import sys # Importamos el módulo 'sys'
 FACEBROWSER_URL = "https://face.gta.world/pages/voidcraft"
 DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1447987628359291123/0aF3AmpaDkrLBjEWpdz2EOOFxrx35JAbX7-G08hjo62O2G1avn1ELu4qvK98aKHZ2QHX"
 LAST_POST_FILE = "/data/last_post.txt"
-CHECK_INTERVAL_SECONDS = 60  # CAMBIO: Ahora es 1 minuto para pruebas
+CHECK_INTERVAL_SECONDS = 18000  # CAMBIO: Ahora es 1 minuto para pruebas
 
 def get_last_seen_post():
     """Lee la URL de la última publicación guardada."""
