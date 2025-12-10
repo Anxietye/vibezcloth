@@ -44,8 +44,8 @@ def send_discord_notification(post_url):
 
 def check_for_new_post():
     """
-    La función principal que ahora busca el <span> "Recent Updates"
-    para encontrar la última publicación.
+    La función principal que ahora busca la sección "Recent Updates"
+    para encontrar la última publicación y evitar la publicación fijada.
     """
     print("Buscando nuevas publicaciones...", flush=True)
     try:
@@ -57,25 +57,24 @@ def check_for_new_post():
         
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        # 1. LA CLAVE: Encontrar el <span> que contiene "Recent Updates"
-        recent_updates_header = soup.find('span', string='Recent Updates')
+        # 1. LA CLAVE: Encontrar el título "Recent Updates"
+        #    Usamos una función lambda para encontrar el texto sin importar mayúsculas/minúsculas
+        recent_updates_header = soup.find(lambda tag: tag.name == 'h2' and 'recent updates' in tag.text.lower())
         
         latest_post_container = None
         if recent_updates_header:
-            # 2. A partir del <span>, buscamos su contenedor padre 'posts-filter'
-            #    y luego el primer 'div.post' que le sigue.
-            posts_filter_div = recent_updates_header.find_parent('div', class_='posts-filter')
-            if posts_filter_div:
-                latest_post_container = posts_filter_div.find_next_sibling('div', class_='post')
+            # 2. Si encontramos el título, buscamos el primer 'div.post' que le sigue
+            latest_post_container = recent_updates_header.find_next('div', class_='post')
             print("Sección 'Recent Updates' encontrada. Analizando la primera publicación.", flush=True)
-        
-        # Fallback si la lógica anterior falla
-        if not latest_post_container:
-            print("No se encontró la publicación a través de 'Recent Updates', usando método de fallback.", flush=True)
-            # Como fallback, cogemos el segundo div.post de la página
+        else:
+            # 3. FALLBACK: Si no encontramos "Recent Updates", intentamos con el método antiguo
+            #    pero ahora ignorando el 'div' que contiene el texto "Pinned Post"
             all_posts = soup.find_all('div', class_='post')
-            if len(all_posts) > 1:
-                latest_post_container = all_posts[1]
+            for post in all_posts:
+                if not post.find_previous('div', string='Pinned Post'):
+                    latest_post_container = post
+                    print("Sección 'Recent Updates' no encontrada. Usando fallback para encontrar la primera publicación no fijada.", flush=True)
+                    break
 
         if not latest_post_container:
             print("No se pudo encontrar un contenedor de publicación válido.", flush=True)
