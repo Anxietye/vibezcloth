@@ -1302,11 +1302,11 @@ text-align: justify;
     text-align: left;
 }
 
-/* --- CONTENEDOR DE LA TABLA --- */
+/* --- CONTENEDOR DE LA TABLA --- 
 .wishlist-table-container {
     border-top: 1px solid var(--border-color);
 }
-
+*/
 /* --- TABLA PRINCIPAL (ESCRITORIO) --- */
 .wishlist-table {
     width: 100%;

@@ -2617,7 +2617,70 @@ all_products = [
             },
         },
     },
-    
+    {
+        "id": 75,
+        "category": "dollscraft",
+        "name": "V-shaped leggings",
+        "price": "$4000",
+        "slug": "vleggings",
+        "sku": "VS-100",
+        "color_variants": {
+            "Brown": {  
+                "image": "images/Brown-VS.png",
+                "download_file": "Brown-VS.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-VS.png",
+                "download_file": "Pink-VS.zip",
+            },
+            "Red": {  
+                "image": "images/Red-VS.png",
+                "download_file": "Red-VS.zip",
+            },
+            "Black": {  
+                "image": "images/Black-VS.png",
+                "download_file": "Black-VS.zip",
+            },
+            "White": {  
+                "image": "images/White-VS.png",
+                "download_file": "White-VS.zip",
+            },
+        },
+    },
+    {
+        "id": 76,
+        "category": "dollscraft",
+        "name": "Casual Tracksuit Set",
+        "price": "$7500",
+        "slug": "tracksuit-set",
+        "sku": "TS-100",
+        "color_variants": {
+            "Light Blue": {  
+                "image": "images/LightBlue-TS.png",
+                "download_file": "LightBlue-TS.zip",
+            },
+            "Red": {  
+                "image": "images/Red-TS.png",
+                "download_file": "Red-TS.zip",
+            },
+            "White": {  
+                "image": "images/White-TS.png",
+                "download_file": "White-TS.zip",
+            },
+            "Black": {  
+                "image": "images/Black-TS.png",
+                "download_file": "Black-TS.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-TS.png",
+                "download_file": "Pink-TS.zip",
+            },
+            "Green": {  
+                "image": "images/Green-TS.png",
+                "download_file": "Green-TS.zip",
+            },
+        },
+    },
 ]
 all_products.sort(key=lambda product: product['id'], reverse=True)
 # --- CUPONES
