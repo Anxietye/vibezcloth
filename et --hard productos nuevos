@@ -1,0 +1,147 @@
+* [33m646f677[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m cambios
+* [33med1e467[m dashboard
+* [33m05e4371[m productos nuevos
+* [33m52229a4[m Bot funcional
+* [33m33ec5df[m bot funcional
+* [33mc0e8ffe[m Update facebrowser_bot.py
+* [33mf2741e7[m bot
+* [33mfe594f0[m bot
+* [33me7356c6[m bot
+* [33m7f736f5[m bot
+* [33m3dc5af1[m verifiacion de bot
+* [33mcf041d7[m bot
+* [33m61435ca[m bot
+* [33m5c08522[m Wishlist renovada
+* [33m163d01b[m arreglo de bot y vista de wishlist
+* [33me1c678a[m mejoras visuales en wishlist y bot
+* [33m3298b8d[m bot y correcciones de wishlist
+* [33mf5cebce[m Arreglos visuales en movil y bot automatico
+* [33mdfa9e4d[m req actualizado para el bot
+* [33m21ee4e4[m integracion de bot automatico y arreglo de orders
+* [33m69af068[m arreglos visuales
+* [33ma8ba687[m correcciones en orders
+* [33mb047d1f[m correcciones en order success
+* [33m9bb024d[m order_success
+* [33m8bd0d7e[m restauracio nde order_success
+* [33m6518723[m Update style.css
+* [33m888643c[m Update style.css
+* [33m5b8a1a5[m Update order_success.html
+* [33m74583d9[m Update app.py
+* [33m99db870[m Update app.py
+* [33mfa00bd2[m correcciones y actualizaciones navideñas
+* [33ma5f92f3[m Fix de camiseta y link de wishlist
+* [33md438819[m Vista de movil terminada
+* [33m24dc710[m modificacion de dominio y productos
+* [33m2eaba03[m banner eliminado
+* [33me1a8ebc[m cambios y producto
+* [33mab9b9b0[m pagina cambiada
+*   [33mbfdb8d9[m Merge branch 'main' of https://github.com/Anxietye/vibezp
+[32m|[m[33m\[m  
+[32m|[m * [33m46d5b92[m correcciones
+* [33m|[m [33m8335672[m producto final
+[33m|[m[33m/[m  
+* [33md29e5dc[m productos
+* [33m66bed44[m correcciones
+* [33mfdf9094[m Correcciones
+* [33m0592369[m descuento deshabilitado
+* [33mce56a15[m productos
+* [33m51a9b7e[m Productos
+* [33mbf68f90[m correcciones
+* [33md1da702[m cambios
+* [33mb248b46[m Productos faltantes
+* [33m5f98363[m Productos
+* [33mceafc36[m productos
+* [33m8ea03d2[m correcciones
+* [33mf9cea3b[m bots y arreglos
+* [33ma383021[m imagenes de banner y links
+* [33m727396c[m Imagenes de banner
+* [33mc17e8fc[m Feedback en contruccion + banners listos
+* [33m2db7ab0[m MOVIL
+* [33m5ede1ab[m productos
+* [33m2e40d93[m Productos
+* [33me3f08e3[m Descuento ISA
+* [33m60a6e15[m Productos
+* [33m823e433[m Cambios y productos
+* [33m5d90324[m Productos
+* [33meb68f9b[m finalizaciones TODO SIRVE
+* [33m066a770[m correcciones
+* [33md26c4ba[m Correcciones
+* [33m5c91fc7[m Correcciones YA SIRVE EL CONTADOR DE WISHLIST
+* [33m0e3807b[m contador de wishlist
+* [33m3550c8b[m contador de wishlist
+* [33m756cf22[m contador de wishlist YA BASE DE DATOS ARREGLADA
+* [33m160671a[m base de datos
+* [33m3702259[m base de datos
+* [33me4fd52c[m Base de datos
+* [33m4a926f3[m Base de datos
+* [33mb5fca5f[m base de dato
+* [33m8583228[m base de datos
+* [33mdc8df28[m Base de datos
+* [33m6887848[m Base de dato
+* [33me41f5d8[m Base de dato
+* [33m855287d[m base de datos
+* [33mfe0e1a8[m Base de datos
+* [33mf52d32f[m base de dato
+* [33m3db3a43[m base de  dato
+* [33m0f3f024[m base de datos
+* [33m2d8997e[m base de datos
+* [33mbcc3b74[m base de dato
+* [33m6ae3b37[m base de dato
+* [33m3c927fd[m lOGIN
+* [33m684c3e6[m Base de datos
+* [33m3d23ef5[m Productos
+* [33maeec96f[m pasarela y fix
+* [33mbbca1de[m pasarela
+* [33m09b320c[m pasa
+* [33m3a7691a[m pasarela
+* [33m8a72a17[m Pasarela puede que si
+* [33mb082b50[m Pasarela finalquiza
+* [33m2ed20fb[m Archivos skate y pasarela
+* [33m463d21d[m Skate
+* [33m9260525[m Skate y pasarela
+* [33m0501d36[m pasarela y seguridad
+* [33me489f5c[m api testing
+* [33m93c6d08[m Pasarela fix ahora?
+* [33mb46296c[m pasarela fix
+* [33mdbc8dd3[m Pasarela
+*   [33m15c6fdc[m Merge branch 'main' of https://github.com/Anxietye/vibezp
+[34m|[m[35m\[m  
+[34m|[m * [33md7abb49[m Rename All-white.png to All-White.png
+* [35m|[m [33m247ec0a[m API seteadas
+[35m|[m[35m/[m  
+* [33m3b6da8c[m correccion
+* [33md813f71[m Zapatos
+* [33m5d6fa00[m Nuevo articulo
+* [33m2781574[m retoques
+* [33m1be4297[m articulos
+*   [33mfd05323[m Merge branch 'main' of https://github.com/Anxietye/vibezp
+[36m|[m[1;31m\[m  
+[36m|[m * [33md791a95[m prueba de boton en proceed to checkout
+* [1;31m|[m [33m8e8e2f5[m Pantalons y funcion de carrusel funcionando
+[1;31m|[m[1;31m/[m  
+*   [33m917e8e7[m Merge branch 'main' of https://github.com/Anxietye/vibezp
+[1;32m|[m[1;33m\[m  
+[1;32m|[m * [33mc22d2ba[m pasarela
+[1;32m|[m * [33m462fe7e[m pasarela
+[1;32m|[m * [33m0f41cbe[m centrar texto
+[1;32m|[m * [33m6aaadfe[m correcciones en botones
+[1;32m|[m * [33m7de2763[m prueba
+[1;32m|[m * [33m4cac19d[m pago
+[1;32m|[m * [33mb8bc685[m VERIFICAR BOTON DE PROCEED TO CHECKOUT
+[1;32m|[m * [33m9603225[m Correcciones y boton de proceed to checkout
+[1;32m|[m * [33m0bea037[m Correcciones y seguridad
+[1;32m|[m * [33m73bac4c[m Uso del auth para funciones
+[1;32m|[m * [33mc971f6d[m guinicorn
+[1;32m|[m * [33mf8f1c08[m Funcion de login y vistas de dashboard
+* [1;33m|[m [33m2064f40[m Nuevos productos
+[1;33m|[m[1;33m/[m  
+* [33m9d384b7[m Artículos subidos
+* [33m9ad55a8[m Bugs arreglados y descarga de articulos implementados
+* [33m89398ca[m Cupones
+* [33m44ca010[m Visual  y  modificaciones
+* [33mc395ef3[m Modificación de estilos y paginas
+* [33m46ca1d8[m Estilos de botones y arreglos
+* [33m760bbb6[m Prueba de order_succes
+* [33md07f47e[m API banco callback
+* [33me870781[m URL de callback
+* [33mf05a090[m Pagina web python
