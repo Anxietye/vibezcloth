@@ -2639,7 +2639,7 @@ all_products = [
             },
             "Black": {  
                 "image": "images/Black-VS.png",
-                "download_file": "Black-VS.zip",
+                "download_file": "Black-VS.rar",
             },
             "White": {  
                 "image": "images/White-VS.png",
@@ -2678,6 +2678,226 @@ all_products = [
             "Green": {  
                 "image": "images/Green-TS.png",
                 "download_file": "Green-TS.zip",
+            },
+        },
+    },
+    {
+        "id": 77,
+        "category": "dollscraft",
+        "name": "Two-Piece Corset Mini Skirt Outfit",
+        "price": "$7000",
+        "slug": "corset-mso",
+        "sku": "MTD-100",
+        "color_variants": {
+            "Pink": {  
+                "image": "images/Pink-MTD.png",
+                "download_file": "Pink-MTD.zip",
+            },
+            "Red": {  
+                "image": "images/Red-MTD.png",
+                "download_file": "Red-MTD.zip",
+            },
+            "Animal Print": {  
+                "image": "images/AnimalPrint-MTD.png",
+                "download_file": "AnimalPrint-MTD.zip",
+            },
+            "Black": {  
+                "image": "images/Black-MTD.png",
+                "download_file": "Black-MTD.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-MTD.png",
+                "download_file": "Pink-MTD.zip",
+            },
+            "Green": {  
+                "image": "images/Green-MTD.png",
+                "download_file": "Green-MTD.zip",
+            },
+            "Light Blue": {  
+                "image": "images/LightBlue-MTD.png",
+                "download_file": "LightBlue-MTD.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-MTD.png",
+                "download_file": "Blue-MTD.zip",
+            },
+            "Black&Red": {  
+                "image": "images/Black&Red-MTD.png",
+                "download_file": "Black&Red-MTD.zip",
+            },
+        },
+    },
+    {
+        "id": 78,
+        "category": "winter-2025",
+        "name": "Padded Winter Overshirt Jacket",
+        "price": "$6000",
+        "slug": "jacket25",
+        "sku": "WJ-100",
+        "color_variants": {
+            "Black & Purple": {  
+                "image": "images/BlackP-WJ.png",
+                "download_file": "BlackP-WJ.zip",
+            },
+            "White": {  
+                "image": "images/White-WJ.png",
+                "download_file": "White-WJ.zip",
+            },
+            "Light Blue": {  
+                "image": "images/LightBlue-WJ.png",
+                "download_file": "LightBlue-WJ.zip",
+            },
+            "Beige": {  
+                "image": "images/Beige-WJ.png",
+                "download_file": "Beige-WJ.zip",
+            },
+            "Black": {  
+                "image": "images/Black-WJ.png",
+                "download_file": "Black-WJ.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-WJ.png",
+                "download_file": "Blue-WJ.zip",
+            },
+            "Yellow": {  
+                "image": "images/Yellow-WJ.png",
+                "download_file": "Yellow-WJ.zip",
+            },
+        },
+    },
+    {
+        "id": 79,
+        "category": "winter-2025",
+        "name": "Winter Coat",
+        "price": "$9000",
+        "slug": "coat25",
+        "sku": "WC-100",
+        "color_variants": {
+            "Purple": {  
+                "image": "images/Purple-WC.png",
+                "download_file": "Purple-WC.zip",
+            },
+            "White": {  
+                "image": "images/White-WC.png",
+                "download_file": "White-WC.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-WC.png",
+                "download_file": "Blue-WC.zip",
+            },
+            "Red": {  
+                "image": "images/Red-WC.png",
+                "download_file": "Red-WC.zip",
+            },
+            "Black": {  
+                "image": "images/Black-WC.png",
+                "download_file": "Black-WC.zip",
+            },
+            "Black 2": {  
+                "image": "images/BlackF-WC.png",
+                "download_file": "BlackF-WC.zip",
+            },
+        },
+    },
+    {
+        "id": 80,
+        "category": "winter-2025",
+        "name": "Winter Hooded Shirt Jacket",
+        "price": "$8000",
+        "slug": "hoodie25",
+        "sku": "WH-100",
+        "color_variants": {
+            "Pink": {  
+                "image": "images/Pink-WH.png",
+                "download_file": "Pink-WH.zip",
+            },
+            "Red": {  
+                "image": "images/Red-WH.png",
+                "download_file": "Red-WH.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-WH.png",
+                "download_file": "Blue-WH.zip",
+            },
+            "Beige": {  
+                "image": "images/Beige-WH.png",
+                "download_file": "Beige-WH.zip",
+            },
+            "Black": {  
+                "image": "images/Black-WH.png",
+                "download_file": "Black-WH.zip",
+            },
+            "Red 2": {  
+                "image": "images/Red2-WH.png",
+                "download_file": "Red2-WH.zip",
+            },
+             "Green": {  
+                "image": "images/Green-WH.png",
+                "download_file": "Green-WH.zip",
+            },
+              "Yellow": {  
+                "image": "images/Yellow-WH.png",
+                "download_file": "Yellow-WH.zip",
+            },
+        },
+    },
+    {
+        "id": 81,
+        "category": "dollscraft",
+        "name": "Mini schoolgirl dress",
+        "price": "$8000",
+        "slug": "schoolgirl",
+        "sku": "MS-100",
+        "color_variants": {
+            "Pink": {  
+                "image": "images/Pink-MS.png",
+                "download_file": "Pink-MS.zip",
+            },
+            "Red": {  
+                "image": "images/Red-MS.png",
+                "download_file": "Red-MS.zip",
+            },
+            "Cream": {  
+                "image": "images/Cream-MS.png",
+                "download_file": "Cream-MS.zip",
+            },
+            "Strawberry": {  
+                "image": "images/Strawberry-MS.png",
+                "download_file": "Strawberry-MS.zip",
+            },
+            "Black": {  
+                "image": "images/Black-MS.png",
+                "download_file": "Black-MS.zip",
+            },
+              "Yellow": {  
+                "image": "images/Yellow-MS.png",
+                "download_file": "Yellow-MS.zip",
+            },
+        },
+    },
+    {
+        "id": 82,
+        "category": "dollscraft",
+        "name": "Fitted Buttoned Crop Top",
+        "price": "$5000",
+        "slug": "buttoned",
+        "sku": "FB-100",
+        "color_variants": {
+            "White": {  
+                "image": "images/White-FB.png",
+                "download_file": "White-FB.zip",
+            },
+            "Red": {  
+                "image": "images/Red-FB.png",
+                "download_file": "Red-FB.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-FB.png",
+                "download_file": "Pink-FB.zip",
+            },
+            "Black": {  
+                "image": "images/Black-FB.png",
+                "download_file": "Black-FB.zip",
             },
         },
     },
@@ -2890,7 +3110,7 @@ def home():
 
 @app.route("/<category_name>")
 def category_page(category_name):
-    if category_name not in ["voidcraft", "women", "men", "exclusive", "dollscraft","shoes","accessories"]:
+    if category_name not in ["voidcraft", "women", "men", "exclusive", "dollscraft","shoes","accessories", "winter-2025"]:
         abort(404)
 
     # --- LÓGICA DE PAGINACIÓN ---

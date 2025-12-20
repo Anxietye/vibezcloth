@@ -3254,3 +3254,25 @@ body::before {
         transform: translateY(105vh);
     }
 }
+
+/* ======================================================= */
+/* === ESTILO ESPECIAL PARA EL ENLACE DE "WINTER 2025" === */
+/* ======================================================= */
+
+a.nav-winter {
+    color: #a0d2eb; /* Un color azul hielo */
+    /* Efecto de "escarcha" o brillo */
+    text-shadow: 0 0 8px rgba(173, 216, 230, 0.7); 
+}
+
+a.nav-winter:hover,
+a.nav-winter.active {
+    color: #ffffff; /* Blanco brillante al pasar el cursor o al estar activo */
+    text-shadow: 0 0 12px rgba(200, 225, 255, 1);
+}
+
+/* Espacio para el icono de copo de nieve */
+a.nav-winter i {
+    margin-right: 0.5rem;
+    font-size: 0.9em;
+}
