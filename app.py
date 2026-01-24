@@ -2901,6 +2901,388 @@ all_products = [
             },
         },
     },
+    {
+        "id": 83,
+        "category": "dollscraft",
+        "name": "Crisscross Front Top",
+        "price": "$5000",
+        "slug": "crisscrosstop",
+        "sku": "CFT-100",
+        "color_variants": {
+            "Beige": {  
+                "image": "images/Beige-CFT.png",
+                "download_file": "Beige-CFT.zip",
+            },
+            "Red": {  
+                "image": "images/Red-CFT.png",
+                "download_file": "Red-CFT.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-CFT.png",
+                "download_file": "Pink-CFT.zip",
+            },
+            "Green": {  
+                "image": "images/Green-CFT.png",
+                "download_file": "Green-CFT.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-CFT.png",
+                "download_file": "Blue-CFT.zip",
+            },
+            "Pink and Green": {  
+                "image": "images/P&G-CFT.png",
+                "download_file": "P&G-CFT.zip",
+            },
+            "White": {  
+                "image": "images/White-CFT.png",
+                "download_file": "White-CFT.zip",
+            },
+            "Pink and Purple": {  
+                "image": "images/P&P-CFT.png",
+                "download_file": "P&P-CFT.zip",
+            },
+            "Pink and White": {  
+                "image": "images/P&W-CFT.png",
+                "download_file": "P&W-CFT.zip",
+            },
+            "Black and White": {  
+                "image": "images/B&W-CFT.png",
+                "download_file": "B&W-CFT.zip",
+            },
+            "Olive": {  
+                "image": "images/Olive-CFT.png",
+                "download_file": "Olive-CFT.zip",
+            },
+        },
+    },
+    {
+        "id": 84,
+        "category": "dollscraft",
+        "name": "Mini dress",
+        "price": "$5500",
+        "slug": "minidress",
+        "sku": "MND-100",
+        "color_variants": {
+            "Black": {  
+                "image": "images/Black-MND.png",
+                "download_file": "Black-MND.zip",
+            },
+            "Red": {  
+                "image": "images/Red-MND.png",
+                "download_file": "Red-MND.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-MND.png",
+                "download_file": "Pink-MND.zip",
+            },
+            "White": {  
+                "image": "images/White-MND.png",
+                "download_file": "White-MND.zip",
+            },
+        },
+    },
+    {
+        "id": 85,
+        "category": "dollscraft",
+        "name": "Long cardigan & Turtleneck T-Shirt",
+        "price": "$6000",
+        "slug": "long-cardigan",
+        "sku": "LCT-100",
+        "color_variants": {
+            "Light Blue": {  
+                "image": "images/Lightblue-LCT.png",
+                "download_file": "Lightblue-LCT.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-LCT.png",
+                "download_file": "Blue-LCT.zip",
+            },
+            "Brown": {  
+                "image": "images/Brown-LCT.png",
+                "download_file": "Brown-LCT.zip",
+            },
+            "White": {  
+                "image": "images/White-LCT.png",
+                "download_file": "White-LCT.zip",
+            },
+            "Black & White": {  
+                "image": "images/B&W-LCT.png",
+                "download_file": "B&W-LCT.zip",
+            },
+            "Black": {  
+                "image": "images/Black-LCT.png",
+                "download_file": "Black-LCT.zip",
+            },
+            "Red": {  
+                "image": "images/Red-LCT.png",
+                "download_file": "Red-LCT.zip",
+            },
+        },
+    },
+    {
+        "id": 86,
+        "category": "dollscraft",
+        "name": "Strappy Crop Top",
+        "price": "$6000",
+        "slug": "strappy-croptop",
+        "sku": "SCT-101",
+        "color_variants": {
+            "Green": {  
+                "image": "images/Green-SCT.png",
+                "download_file": "Green-SCT.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-SCT.png",
+                "download_file": "Blue-SCT.zip",
+            },
+            "Light Blue": {  
+                "image": "images/Lightblue-SCT.png",
+                "download_file": "Lightblue-SCT.zip",
+            },
+            "White": {  
+                "image": "images/White-SCT.png",
+                "download_file": "White-SCT.zip",
+            },
+            "Black": {  
+                "image": "images/Black-SCT.png",
+                "download_file": "Black-SCT.zip",
+            },
+            "Red": {  
+                "image": "images/Red-SCT.png",
+                "download_file": "Red-SCT.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-SCT.png",
+                "download_file": "Pink-SCT.zip",
+            },
+        },
+    },
+    {
+        "id": 87,
+        "category": "accessories",
+        "name": "Heartbreak Necklace",
+        "price": "$4700",
+        "slug": "heartbreak-necklace",
+        "sku": "HBN-101",
+        "color_variants": {
+            "Silver": {  
+                "image": "images/Silver-HBN.png",
+                "download_file": "Silver-HBN.zip",
+            },
+            "Black": {  
+                "image": "images/Black-HBN.png",
+                "download_file": "Black-HBN.zip",
+            },
+            "Gold": {  
+                "image": "images/Gold-HBN.png",
+                "download_file": "Gold-HBN.zip",
+            },
+        },
+    },
+    {
+        "id": 88,
+        "category": "accessories",
+        "name": "Cross Earrings",
+        "price": "$3500",
+        "slug": "cross-earrings",
+        "sku": "CER-101",
+        "color_variants": {
+            "Silver": {  
+                "image": "images/Silver-CER.png",
+                "download_file": "Silver-CER.zip",
+            },
+            "Gold": {  
+                "image": "images/Gold-CER.png",
+                "download_file": "Gold-CER.zip",
+            },
+        },
+    },
+    {
+        "id": 89,
+        "category": "accessories",
+        "name": "Choker",
+        "price": "$3000",
+        "slug": "choker",
+        "sku": "C-101",
+        "color_variants": {
+            "Silver": {  
+                "image": "images/Silver-C.png",
+                "download_file": "Silver-C.zip",
+            },
+            "Gold": {  
+                "image": "images/Gold-C.png",
+                "download_file": "Gold-C.zip",
+            },
+        },
+    },
+    {
+        "id": 90,
+        "category": "accessories",
+        "name": "Complete Necklace Set",
+        "price": "$5000",
+        "slug": "complete-nset",
+        "sku": "CNS-101",
+        "color_variants": {
+            "Silver": {  
+                "image": "images/Silver-CNS.png",
+                "download_file": "Silver-CNS.zip",
+            },
+            "Gold": {  
+                "image": "images/Gold-CNS.png",
+                "download_file": "Gold-CNS.zip",
+            },
+        },
+    },
+    {
+        "id": 91,
+        "category": "lingerie",
+        "name": "Bodysuit",
+        "price": "$6000",
+        "slug": "bodysuit",
+        "sku": "BB-101",
+        "color_variants": {
+            "Yellow": {  
+                "image": "images/Yellow-BB.png",
+                "download_file": "Yellow-BB.zip",
+            },
+            "Olive": {  
+                "image": "images/Olive-BB.png",
+                "download_file": "Olive-BB.zip",
+            },
+            "Green": {  
+                "image": "images/Green-BB.png",
+                "download_file": "Green-BB.zip",
+            },
+            "Black": {  
+                "image": "images/Black-BB.png",
+                "download_file": "Black-BB.zip",
+            },
+            "White": {  
+                "image": "images/White-BB.png",
+                "download_file": "White-BB.zip",
+            },
+        },
+    },
+    {
+        "id": 92,
+        "category": "men",
+        "name": "Zip-Up Knit Jacket",
+        "price": "$6000",
+        "slug": "knit-jacket",
+        "sku": "KJ-101",
+        "color_variants": {
+            "Black": {  
+                "image": "images/Black-JH.png",
+                "download_file": "Black-JH.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-JH.png",
+                "download_file": "Blue-JH.zip",
+            },
+            "Gray": {  
+                "image": "images/Gray-JH.png",
+                "download_file": "Gray-JH.zip",
+            },
+        },
+    },
+    {
+        "id": 93,
+        "category": "men",
+        "name": "Classic Jean",
+        "price": "$4500",
+        "slug": "classic-jean",
+        "sku": "JC-101",
+        "color_variants": {
+            "Light Blue": {  
+                "image": "images/Lightblue-JC.png",
+                "download_file": "Lightblue-JC.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-JC.png",
+                "download_file": "Blue-JC.zip",
+            },
+            "Black": {  
+                "image": "images/Black-JC.png",
+                "download_file": "Black-JC.zip",
+            },
+            "White": {  
+                "image": "images/White-JC.png",
+                "download_file": "White-JC.zip",
+            },
+        },
+    },
+    {
+        "id": 94,
+        "category": "men",
+        "name": "Winter Coat & Sweater",
+        "price": "$7000",
+        "slug": "wintercoat-sweater",
+        "sku": "WCS-101",
+        "color_variants": {
+            "White": {  
+                "image": "images/White-WCS.png",
+                "download_file": "White-WCS.zip",
+            },
+            "Black": {  
+                "image": "images/Black-WCS.png",
+                "download_file": "Black-WCS.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-WCS.png",
+                "download_file": "Blue-WCS.zip",
+            },
+            "Brown": {  
+                "image": "images/Brown-WCS.png",
+                "download_file": "Brown-WCS.zip",
+            },
+            "Orange": {  
+                "image": "images/Orange-WCS.png",
+                "download_file": "Orange-WCS.zip",
+            },
+            "Gray": {  
+                "image": "images/Gray-WCS.png",
+                "download_file": "Gray-WCS.zip",
+            },
+            "King Blue": {  
+                "image": "images/Kingblue-WCS.png",
+                "download_file": "Kingblue-WCS.zip",
+            },
+            "Brown & White": {  
+                "image": "images/Brown2-WCS.png",
+                "download_file": "Brown2-WCS.zip",
+            },
+            "Jean": {  
+                "image": "images/Jean-WCS.png",
+                "download_file": "Jean-WCS.zip",
+            },
+        },
+    },
+    {
+        "id": 95,
+        "category": "dollscraft",
+        "name": "Short Jeans",
+        "price": "$4000",
+        "slug": "short-jeans",
+        "sku": "SJ-100",
+        "color_variants": {
+            "Light Blue": {  
+                "image": "images/Lightblue-SJ.png",
+                "download_file": "Lightblue-SJ.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-SJ.png",
+                "download_file": "Blue-SJ.zip",
+            },
+            "Black": {  
+                "image": "images/Black-SJ.png",
+                "download_file": "Black-SJ.zip",
+            },
+            "White": {  
+                "image": "images/White-SJ.png",
+                "download_file": "White-SJ.zip",
+            },
+        },
+    },
 ]
 all_products.sort(key=lambda product: product['id'], reverse=True)
 # --- CUPONES
@@ -3110,7 +3492,7 @@ def home():
 
 @app.route("/<category_name>")
 def category_page(category_name):
-    if category_name not in ["voidcraft", "women", "men", "exclusive", "dollscraft","shoes","accessories", "winter-2025"]:
+    if category_name not in ["voidcraft", "women", "men", "exclusive", "dollscraft","shoes","accessories","lingerie", "winter-2025"]:
         abort(404)
 
     # --- LÓGICA DE PAGINACIÓN ---
