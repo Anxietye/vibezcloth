@@ -3283,6 +3283,108 @@ all_products = [
             },
         },
     },
+    {
+        "id": 96,
+        "category": "women",
+        "name": "Leather Set",
+        "price": "$7000",
+        "slug": "leather-set",
+        "sku": "LS-100",
+        "color_variants": {
+            "Gray": {  
+                "image": "images/Gray-LS.png",
+                "download_file": "Gray-LS.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-LS.png",
+                "download_file": "Blue-LS.zip",
+            },
+            "Black": {  
+                "image": "images/Black-LS.png",
+                "download_file": "Black-LS.zip",
+            },
+            "Orange": {  
+                "image": "images/Orange-LS.png",
+                "download_file": "Orange-LS.zip",
+            },
+        },
+    },
+    {
+        "id": 96,
+        "category": "men",
+        "name": "NFL Jersey",
+        "price": "$5000",
+        "slug": "nfl-jersey",
+        "sku": "NS-100",
+        "color_variants": {
+            "Texans": {  
+                "image": "images/Texans-NS.png",
+                "download_file": "Texans-NS.zip",
+            },
+            "Rams": {  
+                "image": "images/Rams-NS.png",
+                "download_file": "Rams-NS.zip",
+            },
+            "Cowboys": {  
+                "image": "images/Cowboys-NS.png",
+                "download_file": "Cowboy-NS.zip",
+            },
+            "Jets": {  
+                "image": "images/Jets-NS.png",
+                "download_file": "Jets-NS.zip",
+            },
+            "Raiders": {  
+                "image": "images/Raiders-NS.png",
+                "download_file": "Raiders-NS.zip",
+            },
+            "Bears": {  
+                "image": "images/Bears-NS.png",
+                "download_file": "Bears-NS.zip",
+            },
+            "Packers": {  
+                "image": "images/Packers-NS.png",
+                "download_file": "Packers-NS.zip",
+            },
+            "Eagles": {  
+                "image": "images/Eagles-NS.png",
+                "download_file": "Eagles-NS.zip",
+            },
+            "Raiders 2": {  
+                "image": "images/Raidersblack-NS.png",
+                "download_file": "Raidersblack-NS.zip",
+            },
+        },
+    },
+    {
+        "id": 97,
+        "category": "women",
+        "name": "NFL Jersey",
+        "price": "$5000",
+        "slug": "nflw-jersey",
+        "sku": "NSW-100",
+        "color_variants": {
+            "Texans": {  
+                "image": "images/Texans-NSW.png",
+                "download_file": "Texans-NSW.zip",
+            },
+            "Rams": {  
+                "image": "images/Rams-NSW.png",
+                "download_file": "Rams-NSW.zip",
+            },
+            "Cowboys": {  
+                "image": "images/Cowboys-NSW.png",
+                "download_file": "Cowboy-NSW.zip",
+            },
+            "Jets": {  
+                "image": "images/Jets-NSW.png",
+                "download_file": "Jets-NSW.zip",
+            },
+            "Raiders": {  
+                "image": "images/Raidersblack-NSW.png",
+                "download_file": "Raidersblack-NSW.zip",
+            },
+        },
+    },
 ]
 all_products.sort(key=lambda product: product['id'], reverse=True)
 # --- CUPONES
