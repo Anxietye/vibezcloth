@@ -2912,7 +2912,7 @@ VALID_COUPONS = {
     "TAKE50": {"type": "percent", "value": 50},  # 50% de descuento fijo
     #"LAUNCH40": {"type": "percent", "value": 40},  # $40 de descuento fijo
     "YANE90": {"type": "percent", "value": 90},  # 100 de descuento fijo
-    "XMAS25": {"type": "percent", "value": 30},  # 100 de descuento fijo
+    #"XMAS25": {"type": "percent", "value": 30},  # 100 de descuento fijo
 }
 COUPONS_ENABLED = True
 
