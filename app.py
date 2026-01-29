@@ -3385,6 +3385,232 @@ all_products = [
             },
         },
     },
+    {
+        "id": 98,
+        "category": "shoes",
+        "name": "Retro Sneaker (Unisex)",
+        "price": "$5500",
+        "slug": "retro-sneaker",
+        "sku": "RS-100",
+        "color_variants": {
+            "Black": {  
+                "image": "images/Black-RS.png",
+                "download_file": "Black-RS.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-RS.png",
+                "download_file": "Pink-RS.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-RS.png",
+                "download_file": "Blue-RS.zip",
+            },
+            "White": {  
+                "image": "images/White-RS.png",
+                "download_file": "White-RS.zip",
+            },
+            "Rainbow": {  
+                "image": "images/Rainbow-RS.png",
+                "download_file": "Rainbow-RS.zip",
+            },
+            "Rainbow 2": {  
+                "image": "images/Rainbow2-RS.png",
+                "download_file": "Rainbow2-RS.zip",
+            },
+            "Rainbow 3": {  
+                "image": "images/Rainbow3-RS.png",
+                "download_file": "Rainbow3-RS.zip",
+            },
+        },
+    },
+    {
+        "id": 99,
+        "category": "lingerie",
+        "name": "Simple Bra",
+        "price": "$4000",
+        "slug": "simple-bra",
+        "sku": "Bra-100",
+        "color_variants": {
+            "Pink": {  
+                "image": "images/Pink-Bra.png",
+                "download_file": "Pink-Bra.zip",
+            },
+            "Green": {  
+                "image": "images/Green-Bra.png",
+                "download_file": "Green-Bra.zip",
+            },
+            "White": {  
+                "image": "images/White-Bra.png",
+                "download_file": "White-Bra.zip",
+            },
+            "Black": {  
+                "image": "images/Black-Bra.png",
+                "download_file": "Black-Bra.zip",
+            },
+            "Yellow": {  
+                "image": "images/Yellow-Bra.png",
+                "download_file": "Yellow-Bra.zip",
+            },
+            "Red": {  
+                "image": "images/Red-Bra.png",
+                "download_file": "Red-Bra.zip",
+            },
+            "Brown": {  
+                "image": "images/Brown-Bra.png",
+                "download_file": "Brown-Bra.zip",
+            },
+        },
+    },
+    {
+        "id": 100,
+        "category": "women",
+        "name": "Meme T-Shirt",
+        "price": "$4500",
+        "slug": "meme-tshirt",
+        "sku": "MMS-100",
+        "color_variants": {
+            "Pizza Slut": {  
+                "image": "images/Red-MMS.png",
+                "download_file": "Red-MMS.zip",
+            },
+            "Rage Consumes Me": {  
+                "image": "images/White-MMS.png",
+                "download_file": "White-MMS.zip",
+            },
+            "Benadryl": {  
+                "image": "images/Purple-MMS.png",
+                "download_file": "Purple-MMS.zip",
+            },
+            "Ratz": {  
+                "image": "images/Pink-MMS.png",
+                "download_file": "Pink-MMS.zip",
+            },
+        },
+    },
+    {
+        "id": 101,
+        "category": "shoes",
+        "name": "Leather Boots",
+        "price": "$6000",
+        "slug": "leather-boots",
+        "sku": "LB-100",
+        "color_variants": {
+            "Green": {  
+                "image": "images/Green-LB.png",
+                "download_file": "Green-LB.zip",
+            },
+            "White": {  
+                "image": "images/White-LB.png",
+                "download_file": "White-LB.zip",
+            },
+            "Brown": {  
+                "image": "images/Brown-LB.png",
+                "download_file": "Brown-LB.zip",
+            },
+            "Gray": {  
+                "image": "images/Gray-LB.png",
+                "download_file": "Gray-LB.zip",
+            },
+        },
+    },
+    {
+        "id": 102,
+        "category": "lingerie",
+        "name": "Pajama Set",
+        "price": "$6000",
+        "slug": "pajama-set",
+        "sku": "PJS-100",
+        "color_variants": {
+            "Blue": {  
+                "image": "images/Blue-PJS.png",
+                "download_file": "Blue-PJS.zip",
+            },
+            "Red": {  
+                "image": "images/Red-PJS.png",
+                "download_file": "Red-PJS.zip",
+            },
+            "White": {  
+                "image": "images/White-PJS.png",
+                "download_file": "White-PJS.zip",
+            },
+            "Burgundy": {  
+                "image": "images/Burgundy-PJS.png",
+                "download_file": "Burgundy-PJS.zip",
+            },
+        },
+    },
+    {
+        "id": 103,
+        "category": "lingerie",
+        "name": "Lingerie Set",
+        "price": "$6000",
+        "slug": "lingerie-set",
+        "sku": "LIN-100",
+        "color_variants": {
+            "Blue": {  
+                "image": "images/Blue-LIN.png",
+                "download_file": "Blue-LIN.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-LIN.png",
+                "download_file": "Pink-LIN.zip",
+            },
+            "White": {  
+                "image": "images/White-LIN.png",
+                "download_file": "White-LIN.zip",
+            },
+            "Burgundy": {  
+                "image": "images/Burgundy-LIN.png",
+                "download_file": "Burgundy-LIN.zip",
+            },
+        },
+    },
+    {
+        "id": 104,
+        "category": "women",
+        "name": "Jacket & Ribbed Crop Top Set",
+        "price": "$6000",
+        "slug": "jacket-croptop",
+        "sku": "JCT-100",
+        "color_variants": {
+            "Black": {  
+                "image": "images/Black-JCT.png",
+                "download_file": "Black-JCT.zip",
+            },
+            "White": {  
+                "image": "images/White-JCT.png",
+                "download_file": "White-JCT.zip",
+            },
+            "Red": {  
+                "image": "images/Red-JCT.png",
+                "download_file": "Red-JCT.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-JCT.png",
+                "download_file": "Pink-JCT.zip",
+            },
+            "Litmus": {  
+                "image": "images/Litmus-JCT.png",
+                "download_file": "Litmus-JCT.zip",
+            },
+            "Beige": {  
+                "image": "images/Beige-JCT.png",
+                "download_file": "Beige-JCT.zip",
+            },
+            "Green": {  
+                "image": "images/Green-JCT.png",
+                "download_file": "Green-JCT.zip",
+            },
+            "Gray": {  
+                "image": "images/Gray-JCT.png",
+                "download_file": "Gray-JCT.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-JCT.png",
+                "download_file": "Blue-JCT.zip",
+            },
+        },
+    },
 ]
 all_products.sort(key=lambda product: product['id'], reverse=True)
 # --- CUPONES
@@ -3392,7 +3618,7 @@ VALID_COUPONS = {
     "VIBE5": {"type": "percent", "value": 5},  # 5% de descuento
     "CLOTH1": {"type": "percent", "value": 10},  # 10% de descuento
     "VZ2604": {"type": "percent", "value": 15},  # $15 de descuento fijo
-    "SAVEBIG": {"type": "percent", "value": 25},  # 25% de descuento
+    "SAVEBIG": {"type": "percent", "value": 20},  # 25% de descuento
     "TAKE50": {"type": "percent", "value": 50},  # 50% de descuento fijo
     #"LAUNCH40": {"type": "percent", "value": 40},  # $40 de descuento fijo
     "YANE90": {"type": "percent", "value": 90},  # 100 de descuento fijo
