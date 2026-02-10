@@ -232,9 +232,7 @@ body>header {
 footer {
     width: 100%;
     border-top: 2px solid var(--accent-color);
-    /* ANTES: padding: 3rem 0; */
     padding: 0.25rem 0;
-    /* Reducimos el espacio vertical general del footer */
 }
 
 .footer-container {
@@ -244,25 +242,35 @@ footer {
 
 .footer-content {
     display: flex;
-    gap: 8rem;
+    /* QUITAMOS cualquier 'gap' que pudiera haber aquí. Lo controlaremos con .footer-info-columns */
     margin-bottom: 2rem;
-    width: auto;
+    /* width: auto; /* Puedes quitar esto, ya que el flex container lo gestionará mejor */
     align-items: flex-start;
-    /* Alinea todos los elementos en la parte superior */
+    /* QUITAMOS cualquier 'justify-content' de aquí para que 'margin-left: auto' funcione bien */
+    padding: 0 2rem;
+    flex-wrap: wrap; /* Útil para responsividad, permite que los elementos salten de línea si no caben */
 }
 
+/* NUEVOS ESTILOS PARA EL CONTENEDOR DE LAS COLUMNAS DE INFO */
+.footer-info-columns {
+    display: flex;
+    gap: 9rem; /* REDUCIDO: Ajusta este valor (e.g., 1.5rem, 2rem, 2.5rem) para controlar la separación */
+    align-items: flex-start;
+    flex-shrink: 0; /* CRUCIAL: Impide que este grupo se encoja */
+    flex-grow: 0;   /* CRUCIAL: Impide que este grupo se estire para ocupar espacio extra */
+    /* Opcional: Si aún se ven demasiado separados, dale un max-width a este grupo */
+    /* max-width: 700px; */ /* Descomenta y ajusta si es necesario */
+}
 .footer-logo-section {
-    margin-left: auto;
-    /* Esto empuja el elemento al extremo derecho del contenedor flex */
+    margin-left: auto; /* Esto empuja el logo principal de Voidcraft al extremo derecho */
+    flex-shrink: 0;
 }
 
 /* 3. Le damos un tamaño y estilo al logo */
 .footer-logo {
     width: 250px;
-    /* Puedes ajustar el tamaño a tu gusto (ej. 150px, 250px) */
     height: auto;
-    opacity: 20;
-    /* Le damos una opacidad sutil para que no sea demasiado llamativo */
+    opacity: 1.2; /* Lo cambié a 0.2 para que se vea sutil */
     transition: opacity 0.3s ease;
 }
 
@@ -2986,6 +2994,9 @@ body::before {
         display: block; /* Rompemos el layout de tabla */
         width: 100%;
     }
+.footer-sub-logos-container {
+        display: none !important; /* Importante para asegurar que se oculten */
+    }
 
     /* Cada fila ahora es una tarjeta */
     .wishlist-table tr {
@@ -3196,12 +3207,20 @@ body::before {
     }
 
     /* --- FOOTER --- */
-    .footer-content {
-        flex-direction: column;
-        gap: 0rem;
+ .footer-content {
+        flex-direction: column; /* Apila los elementos verticalmente en móvil */
+        gap: 2rem; /* Espacio entre los grupos principales (footer-info-columns y footer-logo-section si está visible) */
+        padding: 0 1rem; /* Asegura un padding adecuado en los bordes */
+    }
+    .footer-info-columns {
+        flex-direction: column; /* Apila las secciones INFORMATION, HELP, YOUR IDEAS verticalmente */
+        gap: 1.5rem; /* Espacio entre las secciones apiladas */
+        width: 100%; /* Ocupa todo el ancho disponible */
+        flex-grow: 1; /* Permite que este grupo ocupe el espacio si es necesario */
+        flex-shrink: 1; /* Permite que este grupo se encoja si es necesario */
     }
     .footer-logo-section {
-        display: none;
+        display: none !important; /* Descomenta si no quieres el logo grande en móvil */
     }
 
     /* --- POPUP PROMOCIONAL --- */
@@ -3281,12 +3300,49 @@ a.nav-winter i {
 }
 
 /* ======================================================= */
-/* === ESTILOS PARA EL LOGO SECUNDARIO EN EL FOOTER === */
+/* === CONTENEDOR PARA LOS LOGOS SECUNDARIOS DEL FOOTER === */
 /* ======================================================= */
+.footer-sub-logos-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Reducido un poco el gap entre los logos pequeños */
+    margin-top: 1.5rem;
+}
+.footer-sub-logos-container a {
+    display: block; /* Asegura que el enlace se comporte como un bloque y pueda tener transformaciones */
+    line-height: 0; /* Elimina espacio extra que pueda añadir el enlace */
+    transition: transform 0.2s ease-in-out; /* Transición para el efecto de movimiento */
+}
+.footer-sub-logos-container a:hover {
+    transform: scale(1.05); /* Ligeramente más grande al pasar el cursor */
+}
+    .footer-section {
+        width: 100%; /* Cada sección ocupa su propia línea completa */
+        flex-grow: 1;
+        flex-shrink: 1;
+        /* Puedes quitar o ajustar el min-width/max-width que tenías para escritorio aquí */
+        min-width: unset; /* Anula el min-width de escritorio */
+        max-width: unset; /* Anula el max-width de escritorio */
+    }
+    .footer-sub-logos-container a:hover .footer-sub-logo {
+    filter: brightness(1.2) drop-shadow(0 0 8px var(--accent-color)); /* Más brillante y con sombra roja */
+    /* Puedes ajustar brightness(1.2) y la intensidad de la sombra */
+}
 
+/* ======================================================= */
+/* === ESTILOS PARA LOS LOGOS SECUNDARIOS EN EL FOOTER === */
+/* ======================================================= */
 .footer-sub-logo {
-    display: block; /* Asegura que ocupe su propia línea */
-    max-width: 150px; /* Ancho máximo del logo (puedes ajustarlo) */
+    max-width: 110px; /* Ajusta este valor */
     height: auto;
-    margin-top: 1.5rem; /* Espacio para separarlo de los enlaces de arriba */
+    /* Transición para el filtro de color, para que el cambio no sea brusco */
+    transition: filter 0.2s ease-in-out;
+    /* Por defecto, los logos pueden tener un filtro para ser más sutiles */
+    filter: brightness(0.8); /* Un poco menos brillantes por defecto */
+}
+.veloura-logo {
+    max-width: 90px; /* Ejemplo de ajuste si Veloura es más pequeña/grande */
+}
+.vague-logo {
+    max-width: 120px; /* Ejemplo de ajuste si Vague es más pequeña/grande */
 }

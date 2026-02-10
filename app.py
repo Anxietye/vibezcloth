@@ -156,7 +156,7 @@ all_products = [
     {
         "id": 2,
         "category": "exclusive",
-        "name": "Grunge T-Shirt (Women)",
+        "name": "Grunge T-Shirt",
         "price": "$6000",
         "slug": "grunge-t-shirt",
         "sku": "TM-002",
@@ -594,7 +594,7 @@ all_products = [
     {
         "id": 12,
         "category": "exclusive",
-        "name": "Grunge T-Shirts (Men)",
+        "name": "Grunge T-Shirts",
         "price": "$6000",
         "slug": "grunge-tshirts-men",
         "sku": "GS-051",
@@ -686,7 +686,7 @@ all_products = [
     {
         "id": 14,
         "category": "exclusive",
-        "name": "Oversized T-Shirts (Men)",
+        "name": "Oversized T-Shirts",
         "price": "$5000",
         "slug": "oversized-shirts",
         "sku": "OV-050",
@@ -715,7 +715,7 @@ all_products = [
     },
     {
         "id": 15,
-        "category": "women",
+        "category": "accessories",
         "name": "Gothic Pearl Cross Choker",
         "price": "$3700",
         "slug": "cross-choker",
@@ -733,7 +733,7 @@ all_products = [
     },
     {
         "id": 16,
-        "category": "women",
+        "category": "accessories",
         "name": "Gothic Cascade Ear Cuff",
         "price": "$3700",
         "slug": "ear-cuff",
@@ -763,7 +763,7 @@ all_products = [
     },
     {
         "id": 17,
-        "category": "women",
+        "category": "accessories",
         "name": "Midnight Cross Earrings",
         "price": "$3700",
         "slug": "cross-earrings",
@@ -1223,7 +1223,7 @@ all_products = [
     },
     {
         "id": 31,
-        "category": "women",
+        "category": "accessories",
         "name": "Urban Cap",
         "price": "$3000",
         "slug": "urban-cap",
@@ -3381,7 +3381,7 @@ all_products = [
             },
             "Raiders": {  
                 "image": "images/Raidersblack-NSW.png",
-                "download_file": "Raidersblack-NSW.zip",
+                "download_file": "Raiders-NSW.zip",
             },
         },
     },
@@ -3611,14 +3611,180 @@ all_products = [
             },
         },
     },
+    {
+        "id": 105,
+        "category": "women",
+        "name": "Short sweater",
+        "price": "$4000",
+        "slug": "short-sweater",
+        "sku": "SSA-100",
+        "color_variants": {
+            "Gray": {  
+                "image": "images/Gray-SSA.png",
+                "download_file": "Gray-SSA.zip",
+            },
+            "Black": {  
+                "image": "images/Black-SSA.png",
+                "download_file": "Black-SSA.zip",
+            },
+            "White": {  
+                "image": "images/White-SSA.png",
+                "download_file": "White-SSA.zip",
+            },
+            "Gray2": {  
+                "image": "images/Gray2-SSA.png",
+                "download_file": "Gray2-SSA.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-SSA.png",
+                "download_file": "Pink-SSA.zip",
+            },
+            "White2": {  
+                "image": "images/White2-SSA.png",
+                "download_file": "White2-SSA.zip",
+            },
+            "Red": {  
+                "image": "images/Red-SSA.png",
+                "download_file": "Red-SSA.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-SSA.png",
+                "download_file": "Blue-SSA.zip",
+            },
+            "Black2": {  
+                "image": "images/Black2-SSA.png",
+                "download_file": "Black2-SSA.zip",
+            },
+        },
+    },
+    {
+        "id": 106,
+        "category": "exclusive",
+        "name": "Voidcraft T-Shirt",
+        "price": "$2000",
+        "slug": "voidcraft-tshirt",
+        "sku": "VTS-100",
+        "color_variants": {
+            "Voidcraft": {  
+                "image": "images/Voidcraft-VTS.png",
+                "download_file": "Voidcraft-VTS.zip",
+            },
+            "No Heaven No Hell": {  
+                "image": "images/NHNH-VTS.png",
+                "download_file": "NHNH-VTS.zip",
+            },
+            "Hellcat Club": {  
+                "image": "images/HCC-VTS.png",
+                "download_file": "HCC-VTS.zip",
+            },
+            "Witch": {  
+                "image": "images/Witch-VTS.png",
+                "download_file": "Witch-VTS.zip",
+            },
+            "Ghost": {  
+                "image": "images/Ghost-VTS.png",
+                "download_file": "Ghost-VTS.zip",
+            },
+        },
+    },
+    {
+        "id": 107,
+        "category": "women",
+        "name": "Fitted Minidress",
+        "price": "$4000",
+        "slug": "fitted-minidress",
+        "sku": "FMND-100",
+        "color_variants": {
+            "Red": {  
+                "image": "images/Red-FMND.png",
+                "download_file": "Red-FMND.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-FMND.png",
+                "download_file": "Pink-FMND.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-FMND.png",
+                "download_file": "Blue-FMND.zip",
+            },
+            "Black": {  
+                "image": "images/Black-FMND.png",
+                "download_file": "Black-FMND.zip",
+            },
+            "White": {  
+                "image": "images/White-FMND.png",
+                "download_file": "White-FMND.zip",
+            },
+        },
+    },
+    {
+        "id": 108,
+        "category": "dollscraft",
+        "name": "Layered Ruffle Mini Dress",
+        "price": "$4000",
+        "slug": "layered-minidress",
+        "sku": "LMD-100",
+        "color_variants": {
+            "Black": {  
+                "image": "images/Black-LMD.png",
+                "download_file": "Black-LMD.zip",
+            },
+            "Red": {  
+                "image": "images/Red-LMD.png",
+                "download_file": "Red-LMD.zip",
+            },
+            "Yellow": {  
+                "image": "images/Yellow-LMD.png",
+                "download_file": "Yellow-LMD.zip",
+            },
+            "Blue": {  
+                "image": "images/Blue-LMD.png",
+                "download_file": "Blue-LMD.zip",
+            },
+            "White": {  
+                "image": "images/White-LMD.png",
+                "download_file": "White-LMD.zip",
+            },
+        },
+    },
+    {
+        "id": 109,
+        "category": "dollscraft",
+        "name": "Short Cardigan",
+        "price": "$4000",
+        "slug": "short-cardigan",
+        "sku": "SCD-100",
+        "color_variants": {
+            "White": {  
+                "image": "images/White-SCD.png",
+                "download_file": "White-SCD.zip",
+            },
+            "Pink": {  
+                "image": "images/Pink-SCD.png",
+                "download_file": "Pink-SCD.zip",
+            },
+            "Hellcat Club": {  
+                "image": "images/HCC-SCD.png",
+                "download_file": "HCC-SCD.zip",
+            },
+            "Witch": {  
+                "image": "images/Witch-SCD.png",
+                "download_file": "Witch-SCD.zip",
+            },
+            "Ghost": {  
+                "image": "images/Ghost-SCD.png",
+                "download_file": "Ghost-SCD.zip",
+            },
+        },
+    },
 ]
 all_products.sort(key=lambda product: product['id'], reverse=True)
 # --- CUPONES
 VALID_COUPONS = {
     "VIBE5": {"type": "percent", "value": 5},  # 5% de descuento
     "CLOTH1": {"type": "percent", "value": 10},  # 10% de descuento
-    "VZ2604": {"type": "percent", "value": 15},  # $15 de descuento fijo
-    "SAVEBIG": {"type": "percent", "value": 20},  # 25% de descuento
+    "VOID15": {"type": "percent", "value": 15},  # $15 de descuento fijo
+    "SAVEBIG": {"type": "percent", "value": 20},  # 20% de descuento
     "TAKE50": {"type": "percent", "value": 50},  # 50% de descuento fijo
     #"LAUNCH40": {"type": "percent", "value": 40},  # $40 de descuento fijo
     "YANE90": {"type": "percent", "value": 90},  # 100 de descuento fijo

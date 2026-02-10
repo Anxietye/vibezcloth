@@ -142,44 +142,59 @@
     <footer>
         <div class="container footer-container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h4>INFORMATION</h4>
-                    <ul>
-                        <li><a href="https://discord.gg/b3dFcwPnk4" target="_blank" rel="noopener noreferrer">About
-                                us
-                                (( DISCORD ))</a></li>
-                        <li><a href="https://face.gta.world/pages/vibez" target="_blank"
-                                rel="noopener noreferrer">Facebrowser</a></li>
-                        <li><a href="{{ url_for('terms_page') }}">Terms and Conditions</a></li>
-                    </ul>
-                    <img src="{{ url_for('static', filename='images/savoir-society-logo.png') }}" alt="Savoir Society Logo" class="footer-sub-logo">
-                </div>
-                <div class="footer-section">
-                    <h4>HELP</h4>
-                    <ul>
-                        <li><a href="https://discord.com/channels/1348503275472945183/1348503275825004587"
-                                target="_blank" rel="noopener noreferrer">Report a Problem</a></li>
-                        <li><a href="{{ url_for('faq_page') }}">Frequent questions</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>YOUR IDEAS</h4>
-                    <ul>
-                        <li><a href="https://discord.com/channels/1348503275472945183/1348503275825004586"
-                                target="_blank" rel="noopener noreferrer">Make your own design</a></li>
-                        <li><a href="https://discord.com/channels/1348503275472945183/1348503275825004587"
-                                target="_blank" rel="noopener noreferrer">Suggestions</a></li>
-                    </ul>
-                </div> <!-- CIERRE CORRECTO DE LA TERCERA COLUMNA -->
+                <!-- NUEVO CONTENEDOR PARA LAS TRES COLUMNAS DE INFORMACIÓN -->
+                <div class="footer-info-columns">
+                    <div class="footer-section">
+                        <h4>INFORMATION</h4>
+                        <ul>
+                            <li><a href="https://discord.gg/b3dFcwPnk4" target="_blank" rel="noopener noreferrer">About
+                                    us
+                                    (( DISCORD ))</a></li>
+                            <li><a href="https://face.gta.world/pages/vibez" target="_blank"
+                                    rel="noopener noreferrer">Facebrowser</a></li>
+                            <li><a href="{{ url_for('terms_page') }}">Terms and Conditions</a></li>
+                        </ul>
+                        <div class="footer-sub-logos-container">
+                            <!-- LOGO SAVOIR SOCIETY (sin enlace, si no lo necesitas) -->
+                            <img src="{{ url_for('static', filename='images/savoir-society-logo.png') }}"
+                                alt="Savoir Society Logo" class="footer-sub-logo">
 
-                <!-- ============================================= -->
-                <!-- === BLOQUE DEL LOGO EN LA POSICIÓN CORRECTA === -->
-                <!-- ============================================= -->
+                            <!-- LOGO VELOURA CON ENLACE -->
+                            <a href="https://veloura.cv/" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ url_for('static', filename='images/Veloura_Inc_Logo_8.png') }}"
+                                    alt="Veloura Logo" class="footer-sub-logo veloura-logo">
+                            </a>
+
+                            <!-- LOGO VAGUE CON ENLACE -->
+                            <a href="https://veloura.cv/shop" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ url_for('static', filename='images/VAGUE_Logo_White.png') }}"
+                                    alt="Vague Logo" class="footer-sub-logo vague-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h4>HELP</h4>
+                        <ul>
+                            <li><a href="https://discord.com/channels/1348503275472945183/1348503275825004587"
+                                    target="_blank" rel="noopener noreferrer">Report a Problem</a></li>
+                            <li><a href="{{ url_for('faq_page') }}">Frequent questions</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>YOUR IDEAS</h4>
+                        <ul>
+                            <li><a href="https://discord.com/channels/1348503275472945183/1348503275825004586"
+                                    target="_blank" rel="noopener noreferrer">Make your own design</a></li>
+                            <li><a href="https://discord.com/channels/1348503275472945183/1348503275825004587"
+                                    target="_blank" rel="noopener noreferrer">Suggestions</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- BLOQUE DEL LOGO GRANDE DE VOIDCRAFT, FUERA DEL GRUPO DE COLUMNAS -->
                 <div class="footer-logo-section">
                     <img src="{{ url_for('static', filename='images/logo-voidcraft.png') }}" alt="Voidcraft Logo"
                         class="footer-logo">
                 </div>
-
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 VOIDCRAFT — All rights reserved.</p>
